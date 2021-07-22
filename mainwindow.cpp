@@ -173,7 +173,7 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Ubuntu\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionUbuntu->text()));
+        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionUbuntu->text()));
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionUbuntu->text()));
         if (ui->checkBoxSettingsPythonUbuntu->isChecked())
         {
@@ -217,7 +217,7 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Mac\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionMac->text()));
+        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionMac->text()));
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
         if (ui->checkBoxSettingsPythonMac->isChecked())
         {
@@ -259,11 +259,11 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Windows\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionWindows->text()));
-        thisYaml.append(QString("    MY_QT5_MINGW32: %1\n").arg(ui->lineEditSettingsMingW32Windows->text()));
-        thisYaml.append(QString("    MY_QT5_MINGW64: %1\n").arg(ui->lineEditSettingsMingW64Windows->text()));
-        thisYaml.append(QString("    MY_QT5_TOOLS_MINGW32: %1\n").arg(ui->lineEditSettingsQtToolsMingW32Windows->text()));
-        thisYaml.append(QString("    MY_QT5_TOOLS_MINGW64: %1\n").arg(ui->lineEditSettingsQtToolsMingW64Windows->text()));
+        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionWindows->text()));
+        thisYaml.append(QString("    MY_QT_MINGW32: %1\n").arg(ui->lineEditSettingsMingW32Windows->text()));
+        thisYaml.append(QString("    MY_QT_MINGW64: %1\n").arg(ui->lineEditSettingsMingW64Windows->text()));
+        thisYaml.append(QString("    MY_QT_TOOLS_MINGW32: %1\n").arg(ui->lineEditSettingsQtToolsMingW32Windows->text()));
+        thisYaml.append(QString("    MY_QT_TOOLS_MINGW64: %1\n").arg(ui->lineEditSettingsQtToolsMingW64Windows->text()));
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionWindows->text()));
         if (ui->checkBoxSettingsPythonWindows->isChecked())
         {

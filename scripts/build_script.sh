@@ -83,12 +83,12 @@ if [ -d "${REPO_ROOT}/qml" ]; then
 fi
 # x86 gcc_32? FIXME how to dox86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]]; then
-    export PATH="${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/include:$PATH";
-    if [ ! -d "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin" ]; then
-        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin";
-        ls "${HOME}/Qt/${MY_QT5_VERSION}/";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
+    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
+        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin";
+        ls "${HOME}/Qt/${MY_QT_VERSION}/";
     fi
-    if [ ! -f "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
@@ -99,10 +99,10 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]
 fi
 # x64
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x64" ]]; then
-    export PATH="${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/include:$PATH";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
     # Check Qt
-    if [ ! -d "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # Check Python
@@ -139,6 +139,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE = "${MY_OS}" ]]; then
     # env TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
     ./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
     chmod +x "${MY_BIN_PRO_RES_NAME}"*.AppImage*;
+    cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
     7z a -tzip -r "${MY_BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" AppDir;
     cp "${MY_BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" "${OLD_CWD}";
 fi
@@ -156,7 +157,7 @@ echo "Preparing for Qt Installer Framework";
 ls "${APPVEYOR_BUILD_FOLDER}";
 #
 # Copy both AppImages to where Qt Installer Framework needs them
-# MY_QIF_PACKAGE_URI='packages/com.lightwizzard.qtappveyor/data'
+# MY_QIF_PACKAGE_URI='packages/com.url.qtappveyor/data'
 if [ -f "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_APPIMAGE}" ]; then
     cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_APPIMAGE}" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
     #cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_ZSYNC}" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
@@ -167,11 +168,12 @@ fi
 cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.png" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.svg" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.ico" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
+cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 rsync -Ravr "${APPVEYOR_BUILD_FOLDER}/usr/share/icons" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/icons";
 ls "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 # 
 echo "Running Qt Installer Framework";
-QtInstallerFramework-linux.run -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
+"${APPVEYOR_BUILD_FOLDER}/scripts/QtInstallerFramework-linux.run/QtInstallerFramework-linux.run" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #
 echo -e "Completed build-script.sh";
 ################################ End of File ##################################

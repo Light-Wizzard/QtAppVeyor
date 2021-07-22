@@ -28,14 +28,14 @@ for:
   environment:
     RUNTIME_LINKAGE: static
     COVERITY_BUILD_CANDIDATE: True
+    MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Ubuntu
-    MY_QT5_VERSION: 5.15.2
+    MY_QT_VERSION: 5.15.2
     MY_PYTHON_VER: 3.9
     MY_PYTHON_REQUIRED: false
     MY_QT_IF_VERSION: '4.1.1'
-    MY_UPGRADE_OS: false # apt-get upgrade: true or false only
-    MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_QIF_PACKAGE_URI: 'packages/com.lightwizzard.qtappveyor/data'
+    MY_UPGRADE_OS: false # apt-get upgrade: true or false only
   install:
     # Create our AppVeyor version
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
@@ -55,17 +55,17 @@ for:
   environment:
     RUNTIME_LINKAGE: static
     COVERITY_BUILD_CANDIDATE: True
+    MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Windows # No Spaces
-    MY_QT5_VERSION: 5.15.2
-    MY_QT5_MINGW32: mingw81_32
-    MY_QT5_MINGW64: mingw81_64
-    MY_QT5_TOOLS_MINGW32: mingw810_32
-    MY_QT5_TOOLS_MINGW64: mingw810_64
+    MY_QT_VERSION: 5.15.2
+    MY_QT_MINGW32: mingw81_32
+    MY_QT_MINGW64: mingw81_64
+    MY_QT_TOOLS_MINGW32: mingw810_32
+    MY_QT_TOOLS_MINGW64: mingw810_64
+    MY_QT_IF_VERSION: '4.1.1'
+    MY_QIF_PACKAGE_URI: 'packages\com.lightwizzard.qtappveyor\data'
     MY_PYTHON_VER: 3.8 # Last version Windows 7 can run
     MY_PYTHON_REQUIRED: false
-    MY_QT_IF_VERSION: '4.1.1'
-    MY_BIN_PRO_RES_NAME: QtAppVeyor
-    MY_QIF_PACKAGE_URI: 'packages\com.lightwizzard.qtappveyor\data'
   install:
     # Create our AppVeyor version
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)

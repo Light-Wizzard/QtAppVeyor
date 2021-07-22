@@ -43,4 +43,40 @@ For more information see: [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wik
 
 This is a work in progress, please report any bugs, and comments.
 
+## Variables
+
+If you use this Application to make .appveyor.yml files, 
+you will need to know all these Variables,
+even if you make your own file, you will have know these,
+and manually maintain changes,
+where as this app lets you just change the Variables and make a new file.
+
+Unix
+```yaml
+MY_BIN_PRO_RES_NAME:  QtAppVeyor #
+MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
+MY_QT_VERSION:       5.15.2      # Qt Version
+MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
+MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
+MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
+MY_PYTHON_REQUIRED:   false      # if Python is required
+MY_UPGRADE_OS: false             # apt-get upgrade: true or false only
+```
+
+Windows 
+
+```yaml
+MY_BIN_PRO_RES_NAME:  QtAppVeyor #
+MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
+MY_QT_VERSION:       5.15.2      # Qt Version
+MY_QT_MINGW32:       mingw81_32  # Windows only Qt folder Variables
+MY_QT_MINGW64:       mingw81_64  # Windows only Qt folder Variables
+MY_QT_TOOLS_MINGW32: mingw810_32 # Windows only Qt folder Variables
+MY_QT_TOOLS_MINGW64: mingw810_64 # Windows only Qt folder Variables
+MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
+MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
+MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
+MY_PYTHON_REQUIRED:   false      # if Python is required
+```
+
 End of README.md
