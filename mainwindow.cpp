@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionExit,   &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionAbout,  &QAction::triggered, this, &MainWindow::onAbout);
     connect(ui->actionCreate, &QAction::triggered, this, &MainWindow::onCreate);
+    connect(ui->actionSave,   &QAction::triggered, this, &MainWindow::onSave);
 
 }
 /******************************************************************************
@@ -46,11 +47,27 @@ void MainWindow::onAbout()
     myAbout->show();
 } // end onAbout
 /******************************************************************************
+* \fn onSave
+*******************************************************************************/
+void MainWindow::onSave()
+{
+    if (isDebugMessage) qDebug() << "onSave";
+    if (!isLoaded) { onCreate(); }
+    QString qPath = QFileDialog::getSaveFileName(this, tr("Save File"), ".appveyor.yml", tr("Yaml (*.yml)"));
+    QFile qFile(qPath);
+    if (qFile.open(QIODevice::WriteOnly))
+    {
+      QTextStream out(&qFile); out << ui->textEditYml->toPlainText();
+      qFile.close();
+    }
+} // end onSave
+/******************************************************************************
 * \fn onCreate
 *******************************************************************************/
 void MainWindow::onCreate()
 {
     if (isDebugMessage) qDebug() << "onCreate";
+    isLoaded = true;
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabYml")));
     QString thisYaml;
     thisYaml.append("version: '{branch}-{build}'\n");

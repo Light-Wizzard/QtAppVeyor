@@ -1,4 +1,4 @@
-write-host "build_script Windows" 
+echo "build_script Windows"
 # 
 cd %APPVEYOR_BUILD_FOLDER% 
 mkdir build 
@@ -6,7 +6,7 @@ cd build
 mkdir AppDir 
 if %platform%==x86 qmake -v && qmake ..\%BIN_PRO_RES_NAME%.pro CONFIG+=%configuration% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir 
 if %platform%==x64 qmake -v && qmake ..\%BIN_PRO_RES_NAME%.pro CONFIG+=%configuration% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir 
-write-host "after_build Windows" 
+echo "after_build Windows"
 dir 
 copy "%APPVEYOR_BUILD_FOLDER%\build\%BIN_PRO_RES_NAME%.exe" "AppDir\%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%platform%.exe" 
 windeployqt "AppDir/%BIN_PRO_RES_NAME%.exe" --verbose=2 
@@ -23,4 +23,4 @@ copy *.exe %APPVEYOR_BUILD_FOLDER%
 cd %APPVEYOR_BUILD_FOLDER% 
 echo Current Path is %cd% 
 dir 
-write-host "Completed-Build Windows"
+echo "Completed-Build Windows"

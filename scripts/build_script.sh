@@ -79,35 +79,35 @@ pushd "$BUILD_DIR";
 if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
-# x86
+# x86 gcc_32? FIXME how to dox86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]]; then
-    export PATH="${HOME}/Qt/${QT5_VERSION}/gcc_32/bin:${HOME}/Qt/${QT5_VERSION}/gcc_32/lib:${HOME}/Qt/${QT5_VERSION}/gcc_32/include:$PATH";
-    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_32/bin" ]; then
-        echo "Qt not found: ${HOME}/Qt/${QT5_VERSION}/gcc_32/bin";
+    export PATH="${HOME}/Qt/${QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${QT5_VERSION}/gcc_64/include:$PATH";
+    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin" ]; then
+        echo "Qt x86 not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin";
         ls "${HOME}/Qt/${QT5_VERSION}/";
     fi
-    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_32/bin/qmake" ]; then echo "Qt qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_32/bin/qmake"; fi
+    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${PYTHON_VER}:/usr/include/python${PYTHON_VER}:$PATH";
         # source ${HOME}/venv${PYTHON_VER}/bin/activate
         # export PATH=${HOME}/venv${PYTHON_VER}:${HOME}/venv${PYTHON_VER}/bin:${HOME}/venv${PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then    echo "Python not found: /usr/lib/python${PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python include not found: /usr/lib/python${PYTHON_VER}"; fi
+        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then    echo "Python x86 not found: /usr/lib/python${PYTHON_VER}"; fi
+        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python x86 include not found: /usr/lib/python${PYTHON_VER}"; fi
     fi
 fi
 # x64
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x64" ]]; then
     export PATH="${HOME}/Qt/${QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${QT5_VERSION}/gcc_64/include:$PATH";
     # Check Qt
-    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin" ]; then echo "Qt not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin"; fi
+    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${PYTHON_VER}:/usr/include/python${PYTHON_VER}:$PATH";
         # Check Python
         # source ${HOME}/venv${PYTHON_VER}/bin/activate
         # export PATH=${HOME}/venv${PYTHON_VER}:${HOME}/venv${PYTHON_VER}/bin:${HOME}/venv${PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then     echo "Python not found: /usr/lib/python${PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python include not found: /usr/lib/python${PYTHON_VER}"; fi
+        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then     echo "Python x64 not found: /usr/lib/python${PYTHON_VER}"; fi
+        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python x64 include not found: /usr/lib/python${PYTHON_VER}"; fi
     fi
 fi
 #

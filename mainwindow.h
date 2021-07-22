@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QFile>
+#include <QFileDialog>
 #include "ui_mainwindow.h"
 #include "AboutDialog.h"
 //
@@ -29,9 +31,11 @@ class MainWindow : public QMainWindow
     public slots:
         void onAbout();                       //!< ui->actionAbout
         void onCreate();                      //!< ui->actionCreate
+        void onSave();                        //!< ui->actionSave
     private:
         Ui::MainWindow *ui = nullptr;         //!< \c ui \brief Pointer to mainwindow.ui
         bool            isDebugMessage=true;  //!< \c isDebugMessage \brief  true of false
+        bool            isLoaded=false;       //!< \c isLoaded \brief  true of false
 };
 #endif // MAINWINDOW_H
 /*** ************************* End of File ***********************************/

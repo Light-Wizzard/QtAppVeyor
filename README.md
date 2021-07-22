@@ -9,6 +9,8 @@ I was having issues getting an application to run, it has a lot of Library calls
 making it hard to figure out what is going on, so I needed a simple application,
 that can compile without the need of extra Library's.
 
+This is project is for AppVeyor if they want to move it to their account and take it over.
+
 This is a simple application written in Qt C++ using Widgets, 
 it is a simple app that has a settings page to enter in all the Variables needed to make an AppVeyor Yaml file,
 so with a click of a bottom you can automate the creation of .appveyor.yml file.

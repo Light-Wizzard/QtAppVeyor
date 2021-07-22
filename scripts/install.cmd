@@ -1,4 +1,4 @@
-write-host "install Windows"
+echo "install Windows"
 # 
 if %platform%==x64
 {
