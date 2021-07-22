@@ -125,8 +125,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE = "${MY_OS}" ]]; then
     #
     # now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
     # download linuxdeploy and its Qt plugin
-    wget -c -nv  https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage; 
-    wget -c -nv  https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage; 
+    wget -c -nv https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage;
+    wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
     # make them executable
     chmod +x linuxdeploy*.AppImage; 
     export LD_LIBRARY_PATH="${REPO_ROOT}/build/AppDir/usr/lib/";
@@ -142,12 +142,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE = "${MY_OS}" ]]; then
     # $QT5_64/Tools/QtInstallerFramework/binarycreator.exe --offline-only -c "$APPVEYOR_BUILD_FOLDER/config/config.xml" -p "$APPVEYOR_BUILD_FOLDER\packages" "$BIN_PRO_RES_NAME-Windows-Installer.exe"
 fi
 # 
-# 
-# AppImage update informatoin
-# 
-# 
+# AppImage move to Artifacts
 mv "${BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
-# Pop Directory for Qt Installer Framework
 #
 # Pop Directory for Qt Installer Framework
 popd;
@@ -180,7 +176,7 @@ rsync -Ravr "${APPVEYOR_BUILD_FOLDER}/usr/share/icons" "${APPVEYOR_BUILD_FOLDER}
 ls "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
 # 
 echo "Running Qt Installer Framework";
-#./qtinstallerframework/binarycreator -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
+../QtInstallerFramework-linux-x64-4.1.1.run -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #
 echo -e "Completed build-script.sh";
 ################################ End of File ##################################
