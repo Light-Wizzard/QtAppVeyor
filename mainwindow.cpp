@@ -107,6 +107,14 @@ void MainWindow::onCreate()
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append(QString("    QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersion->text()));
         thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
+        if (ui->checkBoxSettingsPython->isChecked())
+        {
+            thisYaml.append("    PYTHON_REQUIRED: true\n");
+        }
+        else
+        {
+            thisYaml.append("    PYTHON_REQUIRED: false\n");
+        }
         thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
         if (ui->checkBoxSettingsUpgrade->isChecked())
         {
@@ -142,6 +150,14 @@ void MainWindow::onCreate()
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append(QString("    QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersion->text()));
         thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
+        if (ui->checkBoxSettingsPython->isChecked())
+        {
+            thisYaml.append("    PYTHON_REQUIRED: true\n");
+        }
+        else
+        {
+            thisYaml.append("    PYTHON_REQUIRED: false\n");
+        }
         thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
         if (ui->checkBoxSettingsUpgrade->isChecked())
         {
@@ -181,6 +197,14 @@ void MainWindow::onCreate()
         thisYaml.append(QString("    QT5_TOOLS_MINGW32: %1\n").arg(ui->lineEditSettingsQtToolsMingW32->text()));
         thisYaml.append(QString("    QT5_TOOLS_MINGW64: %1\n").arg(ui->lineEditSettingsQtToolsMingW64->text()));
         thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
+        if (ui->checkBoxSettingsPython->isChecked())
+        {
+            thisYaml.append("    PYTHON_REQUIRED: true\n");
+        }
+        else
+        {
+            thisYaml.append("    PYTHON_REQUIRED: false\n");
+        }
         thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
         thisYaml.append("    PRJLIBS: VCRUNTIME140.dll MSVCP140.dll\n");
         thisYaml.append(QString("    BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));

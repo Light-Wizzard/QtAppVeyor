@@ -13,11 +13,11 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     sudo apt-get update -qq && sudo apt-get install -qq;
     if [[ "$UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
     # Developer tools and libsqlite3
-    sudo apt install -qqy build-essential libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev;
+    sudo apt install -qqy build-essential cmake software-properties-common libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev;
     # common
-    sudo apt install -qqy libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev libffi-dev mesa-common-dev flex bison;
+    sudo apt install -qqy libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev libffi-dev mesa-common-dev flex bison checkinstall libglu1-mesa-dev freeglut3-dev;
     # Python
-    sudo apt-get install -qqy cmake software-properties-common python3.9-dev python3-venv checkinstall libglu1-mesa-dev freeglut3-dev;
+    if [[ "$PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
     # Required by LinuxDeploy
     sudo apt-get install -qqy libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb-dev libxkbcommon-x11-0 libgtk2.0-dev;
 fi
