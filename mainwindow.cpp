@@ -5,25 +5,38 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Ubuntu
+    ui->lineEditSettingsQtVersionUbuntu->setText("5.15.2");
+    ui->lineEditSettingsQtInstallerVersionUbuntu->setText("3.1.1");
+    ui->lineEditSettingsQtInstallerPackageUbuntu->setText("packages/com.lightwizzard.qtappveyor/data");
+    ui->checkBoxSettingsUpgradeUbuntu->setCheckState(Qt::CheckState::Checked);
+    ui->lineEditSettingsPythonVersionUbuntu->setText("3.8");
+    // Mac
+    ui->lineEditSettingsQtVersionMac->setText("5.15.2");
+    ui->lineEditSettingsQtInstallerVersionMac->setText("3.1.1");
+    ui->lineEditSettingsQtInstallerPackageMac->setText("packages/com.lightwizzard.qtappveyor/data");
+    ui->checkBoxSettingsUpgradeMac->setCheckState(Qt::CheckState::Checked);
+    ui->lineEditSettingsPythonVersionMac->setText("3.8");
+    // Windows
+    ui->lineEditSettingsQtVersionWindows->setText("5.15.2");
+    ui->lineEditSettingsQtInstallerVersionWindows->setText("3.1.1");
+    ui->lineEditSettingsQtInstallerPackageWindows->setText("packages/com.lightwizzard.qtappveyor/data");
+    ui->lineEditSettingsMingW32Windows->setText("mingw81_32");
+    ui->lineEditSettingsMingW64Windows->setText("mingw81_64");
+    ui->lineEditSettingsQtToolsMingW32Windows->setText("mingw810_32");
+    ui->lineEditSettingsQtToolsMingW64Windows->setText("mingw810_64");
+    ui->lineEditSettingsVisualStudioWindows->setText("Visual Studio 2019");
+    ui->lineEditSettingsPythonVersionWindows->setText("3.8");
+    // Common
     ui->lineEditSettingsProjectBin->setText("QtAppVeyor");
-    ui->lineEditSettingsQtVersion->setText("5.15.2");
-    ui->lineEditSettingsQtInstallerVersion->setText("3.1.1");
-    ui->lineEditSettingsQtInstallerPackage->setText("packages/com.lightwizzard.qtappveyor/data");
-    ui->lineEditSettingsMingW32->setText("mingw81_32");
-    ui->lineEditSettingsMingW64->setText("mingw81_64");
-    ui->lineEditSettingsQtToolsMingW32->setText("mingw810_32");
-    ui->lineEditSettingsQtToolsMingW64->setText("mingw810_64");
     ui->checkBoxSettingsUbuntu->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsMac->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsWindows->setCheckState(Qt::CheckState::Checked);
-    ui->checkBoxSettingsUpgrade->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsConfigurationDebug->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsConfigurationRelease->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsPlatformX64->setCheckState(Qt::CheckState::Checked);
     ui->checkBoxSettingsPlatformX86->setCheckState(Qt::CheckState::Checked);
-    ui->lineEditSettingsVisualStudio->setText("Visual Studio 2019");
-    ui->lineEditSettingsPythonVersion->setText("3.8");
-
+    // Triggers
     connect(ui->actionExit,   &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionAbout,  &QAction::triggered, this, &MainWindow::onAbout);
     connect(ui->actionCreate, &QAction::triggered, this, &MainWindow::onCreate);
@@ -63,6 +76,10 @@ void MainWindow::onSave()
 } // end onSave
 /******************************************************************************
 * \fn onCreate
+* QtAppVeyor appveyor configuration files
+* https://ci.appveyor.com/tools/validate-yaml
+* https://www.appveyor.com/docs/build-environment/#qt
+* https://download.qt.io/snapshots/ifw/installer-framework/30/
 *******************************************************************************/
 void MainWindow::onCreate()
 {
@@ -105,12 +122,46 @@ void MainWindow::onCreate()
     }
     if (ui->checkBoxSettingsWindows->isChecked())
     {
-        thisYaml.append(QString("  - %1\n").arg(ui->lineEditSettingsVisualStudio->text()));
+        thisYaml.append(QString("  - %1\n").arg(ui->lineEditSettingsVisualStudioWindows->text()));
     }
-    if (ui->checkBoxSettingsPython->isChecked())
+    // Python
+    bool theAppendPython = false;
+    if (ui->checkBoxSettingsPythonUbuntu->isChecked() || ui->checkBoxSettingsPythonMac->isChecked() || ui->checkBoxSettingsPythonWindows->isChecked())
     {
-        thisYaml.append(QString("stack: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
+        thisYaml.append("stack: ");
     }
+    // Ubuntu
+    if (ui->checkBoxSettingsPythonUbuntu->isChecked())
+    {
+        thisYaml.append(QString("%1\n").arg(ui->lineEditSettingsPythonVersionUbuntu->text()));
+        theAppendPython = true;
+    }
+    // Mac
+    if (ui->checkBoxSettingsPythonMac->isChecked())
+    {
+        if (theAppendPython)
+        {
+            thisYaml.append(QString(", %1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
+        }
+        else
+        {
+            thisYaml.append(QString("%1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
+            theAppendPython = true;
+        }
+    }
+    // Windows
+    if (ui->checkBoxSettingsPythonWindows->isChecked())
+    {
+        if (theAppendPython)
+        {
+            thisYaml.append(QString(", %1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
+        }
+        else
+        {
+            thisYaml.append(QString("%1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
+        }
+    }
+    // Begin for Matrix
     thisYaml.append("for:\n");
     if (ui->checkBoxSettingsUbuntu->isChecked())
     {
@@ -119,31 +170,32 @@ void MainWindow::onCreate()
         thisYaml.append("    only:\n");
         thisYaml.append("      - image: Ubuntu\n");
         thisYaml.append("  environment:\n");
-        thisYaml.append("    MY_OS: Ubuntu\n");
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
-        thisYaml.append(QString("    QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersion->text()));
-        thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
-        if (ui->checkBoxSettingsPython->isChecked())
+        thisYaml.append("    MY_OS: Ubuntu\n"); // Used in Zip and Exe Name: name-os-configuration-platform
+        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionUbuntu->text()));
+        thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionUbuntu->text()));
+        if (ui->checkBoxSettingsPythonUbuntu->isChecked())
         {
-            thisYaml.append("    PYTHON_REQUIRED: true\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: true\n");
         }
         else
         {
-            thisYaml.append("    PYTHON_REQUIRED: false\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: false\n");
         }
-        thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
-        if (ui->checkBoxSettingsUpgrade->isChecked())
+        // Qt Installer Framework version
+        thisYaml.append(QString("    MY_QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersionUbuntu->text()));
+        // Update OS
+        if (ui->checkBoxSettingsUpgradeUbuntu->isChecked())
         {
-            thisYaml.append("    UPGRADE_UBUNTU: true\n");
+            thisYaml.append("    MY_UPGRADE_OS: true\n");
         }
         else
         {
-            thisYaml.append("    UPGRADE_UBUNTU: false\n");
+            thisYaml.append("    MY_UPGRADE_OS: false\n");
         }
-        thisYaml.append("    PRJLIBS: VCRUNTIME140.dll MSVCP140.dll\n");
-        thisYaml.append(QString("    BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
-        thisYaml.append(QString("    QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackage->text()));
+        thisYaml.append(QString("    MY_BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
+        thisYaml.append(QString("    MY_QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackageUbuntu->text()));
         thisYaml.append("  install:\n");
         thisYaml.append("    - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)\n");
         thisYaml.append("    - ps: $env:package_version = ('$(git describe --tags --always --long)').trim()\n");
@@ -162,31 +214,30 @@ void MainWindow::onCreate()
         thisYaml.append("    only:\n");
         thisYaml.append("      - image: macos\n");
         thisYaml.append("  environment:\n");
-        thisYaml.append("    MY_OS: Mac\n");
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
-        thisYaml.append(QString("    QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersion->text()));
-        thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
-        if (ui->checkBoxSettingsPython->isChecked())
+        thisYaml.append("    MY_OS: Mac\n"); // Used in Zip and Exe Name: name-os-configuration-platform
+        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionMac->text()));
+        thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionMac->text()));
+        if (ui->checkBoxSettingsPythonMac->isChecked())
         {
-            thisYaml.append("    PYTHON_REQUIRED: true\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: true\n");
         }
         else
         {
-            thisYaml.append("    PYTHON_REQUIRED: false\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: false\n");
         }
-        thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
-        if (ui->checkBoxSettingsUpgrade->isChecked())
+        thisYaml.append(QString("    MY_QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersionMac->text()));
+        if (ui->checkBoxSettingsUpgradeMac->isChecked())
         {
-            thisYaml.append("    UPGRADE_UBUNTU: true\n");
+            thisYaml.append("    MY_UPGRADE_OS: true\n");
         }
         else
         {
-            thisYaml.append("    UPGRADE_UBUNTU: false\n");
+            thisYaml.append("    MY_UPGRADE_OS: false\n");
         }
-        thisYaml.append("    PRJLIBS: VCRUNTIME140.dll MSVCP140.dll\n");
-        thisYaml.append(QString("    BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
-        thisYaml.append(QString("    QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackage->text()));
+        thisYaml.append(QString("    MY_BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
+        thisYaml.append(QString("    MY_QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackageMac->text()));
         thisYaml.append("  install:\n");
         thisYaml.append("    - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)\n");
         thisYaml.append("    - ps: $env:package_version = ('$(git describe --tags --always --long)').trim()\n");
@@ -203,29 +254,28 @@ void MainWindow::onCreate()
         thisYaml.append("-\n");
         thisYaml.append("  matrix:\n");
         thisYaml.append("    only:\n");
-        thisYaml.append(QString("      - image: %1\n").arg(ui->lineEditSettingsVisualStudio->text()));
+        thisYaml.append(QString("      - image: %1\n").arg(ui->lineEditSettingsVisualStudioWindows->text()));
         thisYaml.append("  environment:\n");
-        thisYaml.append("    MY_OS: Windows\n");
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
-        thisYaml.append(QString("    QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersion->text()));
-        thisYaml.append(QString("    QT5_MINGW32: %1\n").arg(ui->lineEditSettingsMingW32->text()));
-        thisYaml.append(QString("    QT5_MINGW64: %1\n").arg(ui->lineEditSettingsMingW64->text()));
-        thisYaml.append(QString("    QT5_TOOLS_MINGW32: %1\n").arg(ui->lineEditSettingsQtToolsMingW32->text()));
-        thisYaml.append(QString("    QT5_TOOLS_MINGW64: %1\n").arg(ui->lineEditSettingsQtToolsMingW64->text()));
-        thisYaml.append(QString("    PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersion->text()));
-        if (ui->checkBoxSettingsPython->isChecked())
+        thisYaml.append("    MY_OS: Windows\n"); // Used in Zip and Exe Name: name-os-configuration-platform
+        thisYaml.append(QString("    MY_QT5_VERSION: %1\n").arg(ui->lineEditSettingsQtVersionWindows->text()));
+        thisYaml.append(QString("    MY_QT5_MINGW32: %1\n").arg(ui->lineEditSettingsMingW32Windows->text()));
+        thisYaml.append(QString("    MY_QT5_MINGW64: %1\n").arg(ui->lineEditSettingsMingW64Windows->text()));
+        thisYaml.append(QString("    MY_QT5_TOOLS_MINGW32: %1\n").arg(ui->lineEditSettingsQtToolsMingW32Windows->text()));
+        thisYaml.append(QString("    MY_QT5_TOOLS_MINGW64: %1\n").arg(ui->lineEditSettingsQtToolsMingW64Windows->text()));
+        thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditSettingsPythonVersionWindows->text()));
+        if (ui->checkBoxSettingsPythonWindows->isChecked())
         {
-            thisYaml.append("    PYTHON_REQUIRED: true\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: true\n");
         }
         else
         {
-            thisYaml.append("    PYTHON_REQUIRED: false\n");
+            thisYaml.append("    MY_PYTHON_REQUIRED: false\n");
         }
-        thisYaml.append(QString("    QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersion->text()));
-        thisYaml.append("    PRJLIBS: VCRUNTIME140.dll MSVCP140.dll\n");
-        thisYaml.append(QString("    BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
-        thisYaml.append(QString("    QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackage->text()));
+        thisYaml.append(QString("    MY_QT_IF_VERSION: %1\n").arg(ui->lineEditSettingsQtInstallerVersionWindows->text()));
+        thisYaml.append(QString("    MY_BIN_PRO_RES_NAME: %1\n").arg(ui->lineEditSettingsProjectBin->text()));
+        thisYaml.append(QString("    MY_QIF_PACKAGE_URI: %1\n").arg(ui->lineEditSettingsQtInstallerPackageWindows->text()));
         thisYaml.append("  install:\n");
         thisYaml.append("    - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)\n");
         thisYaml.append("    - ps: $env:package_version = ('$(git describe --tags --always --long)').trim()\n");

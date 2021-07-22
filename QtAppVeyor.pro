@@ -37,8 +37,10 @@ DISTFILES += \
     .appveyor.yml \
     README.md \
     scripts/build_script.cmd \
+    scripts/build_script.ps1 \
     scripts/build_script.sh \
     scripts/install.cmd \
+    scripts/install.ps1 \
     scripts/install.sh \
     scripts/upload.sh
 ###############################################################################

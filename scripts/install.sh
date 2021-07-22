@@ -17,18 +17,18 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     # common
     sudo apt install -qqy libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev libffi-dev mesa-common-dev flex bison checkinstall libglu1-mesa-dev freeglut3-dev;
     # Python
-    if [[ "$PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
+    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
     # Required by LinuxDeploy
     sudo apt-get install -qqy libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb-dev libxkbcommon-x11-0 libgtk2.0-dev;
     #
-    wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/4.1.1/QtInstallerFramework-linux-x64-4.1.1.run
+    wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-linux-x64-$MY_QT_IF_VERSION.run -O QtInstallerFramework-linux.run
     # make it executable
-    chmod +x QtInstallerFramework-linux-x64-4.1.1.run;
+    chmod +x QtInstallerFramework-linux.run;
 fi
 #
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "macos" ]]; then
     #
-    wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/4.1.1/QtInstallerFramework-macOS-x86_64-4.1.1.dmg
+    wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-macOS-x86_64-$MY_QT_IF_VERSION.dmg -O QtInstallerFramework-macOS.dmg
     # make it executable
-    chmod +x QtInstallerFramework-macOS-x86_64-4.1.1.dmg;
+    chmod +x QtInstallerFramework-macOS.dmg;
 fi

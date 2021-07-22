@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1071</width>
-    <height>828</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,11 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -48,327 +53,6 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="labelSettingsQtInstallerPackage">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt Installer Package</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsQtInstallerPackage">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="0">
-           <widget class="QLabel" name="labelSettingsOS">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>OS</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsUbuntu">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Ubuntu</string>
-            </property>
-           </widget>
-          </item>
-          <item row="13" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsMac">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Mac</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsWindows">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Windows</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelSettingsQtVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt Version</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsQtVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsMingW32">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="labelSettingsMingW32">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt MingW32</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="labelSettingsQtInstallerVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt Installer Version</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsQtInstallerVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="labelSettingsMingW64">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt MingW64</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsMingW64">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="labelSettingsQtToolsMingW32">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt Tools MingW32</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsQtToolsMingW32">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="labelSettingsQtToolsMingW64">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Qt Tools MingW64</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsQtToolsMingW64">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="labelSettingsPythonVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Python Version</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsPythonVersion">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item row="17" column="0">
-           <widget class="QLabel" name="labelSettingsUpgradeUbuntu">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Apt-Get Upgrade</string>
-            </property>
-           </widget>
-          </item>
-          <item row="17" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsUpgrade">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Upgrade OS</string>
-            </property>
-           </widget>
-          </item>
-          <item row="19" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsConfigurationDebug">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Debug</string>
-            </property>
-           </widget>
-          </item>
-          <item row="18" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsConfigurationRelease">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Release</string>
-            </property>
-           </widget>
-          </item>
-          <item row="15" column="0">
-           <widget class="QLabel" name="labelSettingsPlatform">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Platform</string>
-            </property>
-           </widget>
-          </item>
-          <item row="16" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsPlatformX86">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>x86</string>
-            </property>
-           </widget>
-          </item>
-          <item row="15" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsPlatformX64">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>x64</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="0">
-           <widget class="QLabel" name="labelSettingsVisualStudio">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Visual Studio</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="1">
-           <widget class="QLineEdit" name="lineEditSettingsVisualStudio">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelSettingsSecret">
             <property name="font">
@@ -390,19 +74,91 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="1">
-           <widget class="QCheckBox" name="checkBoxSettingsPython">
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsOS">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Require Python</string>
+             <string>OS</string>
             </property>
            </widget>
           </item>
-          <item row="18" column="0">
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsUbuntu">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Ubuntu</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsMac">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Mac</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsWindows">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Windows</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsPlatform">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Platform</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsPlatformX64">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>x64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsPlatformX86">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>x86</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSettingsConfiguration">
             <property name="font">
              <font>
@@ -411,6 +167,303 @@
             </property>
             <property name="text">
              <string>Configuration</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsConfigurationRelease">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Release</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsConfigurationDebug">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Debug</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabUbuntu">
+       <attribute name="title">
+        <string>Ubnutu</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QFormLayout" name="formLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionUbuntu">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtVersionUbuntu"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionUbuntu">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerVersionUbuntu"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageUbuntu">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerPackageUbuntu"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionUbuntu">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsPythonVersionUbuntu"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsPythonUbuntu">
+            <property name="text">
+             <string>Python Required</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeUbuntu">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsUpgradeUbuntu">
+            <property name="text">
+             <string>Ubuntu Upgrade</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabMac">
+       <attribute name="title">
+        <string>Mac</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionMac">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtVersionMac"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionMac">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerVersionMac"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageMac">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerPackageMac"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionMac">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsPythonVersionMac"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsPythonMac">
+            <property name="text">
+             <string>Python Required</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeMac">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsUpgradeMac">
+            <property name="text">
+             <string>Mac Upgrade</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabWindows">
+       <attribute name="title">
+        <string>Windows</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QFormLayout" name="formLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionWindows">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtVersionWindows"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionWindows">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerVersionWindows"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageWindows">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtInstallerPackageWindows"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsMingW32Windows">
+            <property name="text">
+             <string>Qt MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsMingW32Windows"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsMingW64Windows">
+            <property name="text">
+             <string>Qt MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsMingW64Windows"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW32Wndows">
+            <property name="text">
+             <string>Qt Tools MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtToolsMingW32Windows"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW64Windows">
+            <property name="text">
+             <string>Qt Tools MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsQtToolsMingW64Windows"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionWindows">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsPythonVersionWindows"/>
+          </item>
+          <item row="8" column="1">
+           <widget class="QCheckBox" name="checkBoxSettingsPythonWindows">
+            <property name="text">
+             <string>Python Required</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="labelSettingsVisualStudioWindows">
+            <property name="text">
+             <string>Visual Studio Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsVisualStudioWindows"/>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>

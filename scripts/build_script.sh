@@ -22,6 +22,8 @@
 #
 # I will not minimize this code, but if I did, you would understand why I put ";" to terminate all lines requiring them.
 # 
+# https://download.qt.io/official_releases/qt-installer-framework/4.1.1/
+#
 echo build_script Unix
 #
 # Debug Information, not always a good idea when not debugging, and thanks to the TheAssassin, this is now working.
@@ -35,8 +37,8 @@ if [ "${DEBUGGING}" -eq 1 ]; then set -x; fi
 set -e;
 #
 # If not defined it will use this as a default
-if [ -z "${BIN_PRO_RES_NAME+x}" ]; then
-    echo -e "Add BIN_PRO_RES_NAME to your Appveyor Settings Environment Variable with a value from Github value for Binary, pro, and resource Name ";
+if [ -z "${MY_BIN_PRO_RES_NAME+x}" ]; then
+    echo -e "Add MY_BIN_PRO_RES_NAME to your Appveyor Settings Environment Variable with a value from Github value for Binary, pro, and resource Name ";
     if [ "${EXIT_ON_UNDEFINED}" -eq 1 ]; then exit 1; fi    
 fi
 # APPVEYOR_REPO_NAME should always have your GITHUB_USERNAME as the first part / GITHUB_PROJECT, so I split them to use later.
@@ -47,9 +49,9 @@ if [ -z "${GITHUB_USERNAME+x}" ] || [ -z "${GITHUB_PROJECT}" ]; then
 fi
 # Set our Artifacts for later
 #
-export ARTIFACT_APPIMAGE="${BIN_PRO_RES_NAME}-x86_64.AppImage";
-#export ARTIFACT_ZSYNC="${BIN_PRO_RES_NAME}-x86_64.AppImage.zsync";
-export ARTIFACT_QIF="${BIN_PRO_RES_NAME}-Linux-Installer";
+export ARTIFACT_APPIMAGE="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage";
+#export ARTIFACT_ZSYNC="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage.zsync";
+export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 # 
 # use RAM disk if possible (as in: not building on CI system like Appveyor, and RAM disk is available)
 declare TEMP_BASE;
@@ -58,7 +60,7 @@ if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BA
 echo "Make Temp Foler";
 #
 # building in temporary directory to keep system clean
-BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${BIN_PRO_RES_NAME}-build-XXXXXX")";
+BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 # 
 # make sure to clean up build dir, even if errors occur
 function cleanup()
@@ -81,33 +83,33 @@ if [ -d "${REPO_ROOT}/qml" ]; then
 fi
 # x86 gcc_32? FIXME how to dox86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]]; then
-    export PATH="${HOME}/Qt/${QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${QT5_VERSION}/gcc_64/include:$PATH";
-    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin" ]; then
-        echo "Qt x86 not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin";
-        ls "${HOME}/Qt/${QT5_VERSION}/";
+    export PATH="${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/include:$PATH";
+    if [ ! -d "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin" ]; then
+        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin";
+        ls "${HOME}/Qt/${MY_QT5_VERSION}/";
     fi
-    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$PYTHON_REQUIRED" = "true" ]]; then
-        export PATH="/usr/lib/python${PYTHON_VER}:/usr/include/python${PYTHON_VER}:$PATH";
-        # source ${HOME}/venv${PYTHON_VER}/bin/activate
-        # export PATH=${HOME}/venv${PYTHON_VER}:${HOME}/venv${PYTHON_VER}/bin:${HOME}/venv${PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then    echo "Python x86 not found: /usr/lib/python${PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python x86 include not found: /usr/lib/python${PYTHON_VER}"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake"; fi
+    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
+        export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
+        # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
+        # export PATH=${HOME}/venv${MY_PYTHON_VER}:${HOME}/venv${MY_PYTHON_VER}/bin:${HOME}/venv${MY_PYTHON_VER}/lib:$PATH
+        if [ ! -d "/usr/lib/python${MY_PYTHON_VER}" ]; then    echo "Python x86 not found: /usr/lib/python${MY_PYTHON_VER}"; fi
+        if [ ! -d "/usr/include/python${MY_PYTHON_VER}" ]; then echo "Python x86 include not found: /usr/lib/python${MY_PYTHON_VER}"; fi
     fi
 fi
 # x64
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x64" ]]; then
-    export PATH="${HOME}/Qt/${QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${QT5_VERSION}/gcc_64/include:$PATH";
+    export PATH="${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/include:$PATH";
     # Check Qt
-    if [ ! -d "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${QT5_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$PYTHON_REQUIRED" = "true" ]]; then
-        export PATH="/usr/lib/python${PYTHON_VER}:/usr/include/python${PYTHON_VER}:$PATH";
+    if [ ! -d "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT5_VERSION}/gcc_64/bin/qmake"; fi
+    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
+        export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # Check Python
-        # source ${HOME}/venv${PYTHON_VER}/bin/activate
-        # export PATH=${HOME}/venv${PYTHON_VER}:${HOME}/venv${PYTHON_VER}/bin:${HOME}/venv${PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${PYTHON_VER}" ]; then     echo "Python x64 not found: /usr/lib/python${PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${PYTHON_VER}" ]; then echo "Python x64 include not found: /usr/lib/python${PYTHON_VER}"; fi
+        # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
+        # export PATH=${HOME}/venv${MY_PYTHON_VER}:${HOME}/venv${MY_PYTHON_VER}/bin:${HOME}/venv${MY_PYTHON_VER}/lib:$PATH
+        if [ ! -d "/usr/lib/python${MY_PYTHON_VER}" ]; then     echo "Python x64 not found: /usr/lib/python${MY_PYTHON_VER}"; fi
+        if [ ! -d "/usr/include/python${MY_PYTHON_VER}" ]; then echo "Python x64 include not found: /usr/lib/python${MY_PYTHON_VER}"; fi
     fi
 fi
 #
@@ -130,53 +132,46 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE = "${MY_OS}" ]]; then
     # make them executable
     chmod +x linuxdeploy*.AppImage; 
     export LD_LIBRARY_PATH="${REPO_ROOT}/build/AppDir/usr/lib/";
-    # ${BIN_PRO_RES_NAME}-$PLATFORM.AppImage
-    #export TARGET_APPIMAGE="${BIN_PRO_RES_NAME}-$PLATFORM.AppImage";
+    # ${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage
+    #export TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage";
     # QtQuickApp does support "make install", but we don't use it because we want to show the manual packaging approach in this example
     # initialize AppDir, bundle shared libraries, add desktop file and icon, use Qt plugin to bundle additional resources, and build AppImage, all in one command
-    # env TARGET_APPIMAGE="${BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
-    ./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
-    chmod +x "${BIN_PRO_RES_NAME}"*.AppImage*;
-    7z a -tzip -r "${BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" AppDir;
-    cp "${BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" "${OLD_CWD}";
-    # $QT5_64/Tools/QtInstallerFramework/binarycreator.exe --offline-only -c "$APPVEYOR_BUILD_FOLDER/config/config.xml" -p "$APPVEYOR_BUILD_FOLDER\packages" "$BIN_PRO_RES_NAME-Windows-Installer.exe"
+    # env TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
+    ./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
+    chmod +x "${MY_BIN_PRO_RES_NAME}"*.AppImage*;
+    7z a -tzip -r "${MY_BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" AppDir;
+    cp "${MY_BIN_PRO_RES_NAME}-$MY_OS-$CONFIGURATION-$PLATFORM.zip" "${OLD_CWD}";
 fi
 # 
 # AppImage move to Artifacts
-mv "${BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
+mv "${MY_BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
 #
 # Pop Directory for Qt Installer Framework
 popd;
 # 
 echo "Preparing for Qt Installer Framework";
 # 
-# Instead of trying to install Qt Installer Framework, I use 7zip to compress the bin folder
-# I will use a relative path from APPVEYOR_BUILD_FOLDER
-# I hard code the path
-#mkdir -pv qtinstallerframework;
-#7z e "${QIF_ARCHIVE}" -o./qtinstallerframework;
-#chmod -R +x ./qtinstallerframework;
 # 
 # Copy all the files that Qt Installer Framework needs
 ls "${APPVEYOR_BUILD_FOLDER}";
 #
 # Copy both AppImages to where Qt Installer Framework needs them
-# QIF_PACKAGE_URI='packages/com.lightwizzard.qtappveyor/data'
+# MY_QIF_PACKAGE_URI='packages/com.lightwizzard.qtappveyor/data'
 if [ -f "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_APPIMAGE}" ]; then
-    cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_APPIMAGE}" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
-    #cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_ZSYNC}" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
+    cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_APPIMAGE}" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
+    #cp -pv "${APPVEYOR_BUILD_FOLDER}/${ARTIFACT_ZSYNC}" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 else
     echo -e "Missing ${BUILD_DIR}/${ARTIFACT_APPIMAGE} ";
 fi
-# The packages/${QIF_PACKAGE_URI}/meta/installscript.qs creates this: cp -v "desktop/${BIN_PRO_RES_NAME}.desktop" "${QIF_PACKAGE_URI}";
-cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${BIN_PRO_RES_NAME}.png" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
-cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${BIN_PRO_RES_NAME}.svg" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
-cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${BIN_PRO_RES_NAME}.ico" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
-rsync -Ravr "${APPVEYOR_BUILD_FOLDER}/usr/share/icons" "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/icons";
-ls "${APPVEYOR_BUILD_FOLDER}/${QIF_PACKAGE_URI}/data";
+# The packages/${MY_QIF_PACKAGE_URI}/meta/installscript.qs creates this: cp -v "desktop/${MY_BIN_PRO_RES_NAME}.desktop" "${MY_QIF_PACKAGE_URI}";
+cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.png" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
+cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.svg" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
+cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.ico" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
+rsync -Ravr "${APPVEYOR_BUILD_FOLDER}/usr/share/icons" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/icons";
+ls "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 # 
 echo "Running Qt Installer Framework";
-../QtInstallerFramework-linux-x64-4.1.1.run -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
+QtInstallerFramework-linux.run -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #
 echo -e "Completed build-script.sh";
 ################################ End of File ##################################
