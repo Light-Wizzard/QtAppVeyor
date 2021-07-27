@@ -8,7 +8,8 @@ MyOrgSettings::MyOrgSettings(QObject *parent) : QObject(parent)
 {
     // Fixed random number, change it before using it, then leave it,
     // all data stored with this key will only work with this key.
-    myCrypto = new SimpleCrypt(Q_UINT64_C(0x0c6add66acdcf066));
+    // Defined in QtAppVeyorConstants.h
+    myCrypto = new SimpleCrypt(MY_CRYPTO_SEED);
     // Constants
     myConstants = new MyConstants();
     // Run after GUI loads

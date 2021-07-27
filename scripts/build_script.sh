@@ -163,7 +163,7 @@ ls "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 # https://download.qt.io/official_releases/qt-installer-framework
 #
 echo "Running Qt Installer Framework";
-"${APPVEYOR_BUILD_FOLDER}/scripts/QtInstallerFramework-linux.run/QtInstallerFramework-linux.run" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
+"${APPVEYOR_BUILD_FOLDER}/scripts/QtInstallerFramework-linux.run" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #
 echo -e "Completed build-script.sh";
 ################################ End of File ##################################

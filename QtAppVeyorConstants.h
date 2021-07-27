@@ -2,10 +2,13 @@
 #define QTAPPVEYORCONSTANTS_H
 // Includes
 #include <QObject>
+#include <QtGlobal>
 //
 // Debugging Aid, sets all fields to a default value
 //#define TEST_BUILD
 //
+#define MY_CRYPTO_SEED (Q_UINT64_C(0x0c6add66acdcf066)) //!< \c MY_CRYPTO_SEED      \brief Ini File Name
+
 /******************************************************************************
 * \class MyConstants
 * Constants are defined as const QString, starting with MY_ all capps
@@ -14,6 +17,7 @@ class MyConstants
 {
     public:
         // Constants
+        const QString MY_INI_FILE         = "QtAppVeyor.ini";   //!< \c MY_INI_FILE      \brief Ini File Name
         const QString MY_SQL_DEFAULT      = "QSQLITE";          //!< \c SQL_DEFAULT     \brief Default Sql Driver QSQLITE
         const QString MY_SQL_COMBO_INDEX  = "SqlComboBoxIndex"; //!< \c SQL_COMBO_INDEX \brief Field Name for Sql ComboBox Index
         const QString MY_SQL_COMBO_VALUE  = "SqlComboBoxValue"; //!< \c SQL_COMBO_VALUE \brief Field Name for Sql ComboBox Value
@@ -25,7 +29,6 @@ class MyConstants
         const QString MY_SQL_DB_HOST   = "SqlDatabaseHost";  //!< \c MY_SQL_DB_HOST   \brief SQL Ini Storage Field Name
         const QString MY_SQL_DB_USER   = "SqlDatabaseUser";  //!< \c MY_SQL_DB_USER   \brief SQL Ini Storage Field Name
         const QString MY_SQL_DB_PASS   = "SqlDatabasePass";  //!< \c MY_SQL_DB_PASS   \brief SQL Ini Storage Field Name
-        const QString MY_INI_FILE      = "QtAppVeyor.ini";   //!< \c MY_INI_FILE      \brief Ini File Name
         // Used in tr
         const char *MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1 = "Record not found in Database";
         const char *MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2 = "Record not found in Database for %1.\nClick Cancel to exit.";
