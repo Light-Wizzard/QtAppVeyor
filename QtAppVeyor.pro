@@ -2,8 +2,9 @@
 # Specifies the name of the template to use when generating the project.
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
 TEMPLATE = "app"
-QT      += core gui
+QT      += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+qtHaveModule(printsupport):       QT *= printsupport
 CONFIG += c++11
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -13,11 +14,25 @@ CONFIG += c++11
 # This pro(ject) file is based on a pattern
 TARGET = "QtAppVeyor"
 
-SOURCES += AboutDialog.cpp main.cpp mainwindow.cpp
+SOURCES += main.cpp \
+    AboutDialog.cpp \
+    HelpDialog.cpp \
+    MainWindow.cpp \
+    MyOrgSettings.cpp \
+    MySqlDbtModel.cpp \
+    SimpleCrypt.cpp
 
-HEADERS += AboutDialog.h mainwindow.h
+HEADERS += \
+    AboutDialog.h \
+    HelpDialog.h \
+    MainWindow.h \
+    MyOrgSettings.h \
+    MySqlDbtModel.h \
+    QtAppVeyorConstants.h \
+    SimpleCrypt.h
 
-FORMS += mainwindow.ui AboutDialog.ui
+FORMS += AboutDialog.ui MainWindow.ui \
+    HelpDialog.ui
 
 # Resources
 RESOURCES   += QtAppVeyor.qrc
@@ -36,6 +51,8 @@ DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
 DISTFILES += \
     .appveyor.yml \
     README.md \
+    help/About-en.html \
+    help/Help-en.html \
     scripts/build_script.cmd \
     scripts/build_script.ps1 \
     scripts/build_script.sh \
@@ -43,6 +60,7 @@ DISTFILES += \
     scripts/install.ps1 \
     scripts/install.sh \
     scripts/upload.sh
+
 ###############################################################################
 #
 # The following define makes your compiler emit warnings if you use

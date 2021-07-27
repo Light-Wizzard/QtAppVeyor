@@ -1,5 +1,5 @@
 /******************************************************************************
-* WeBook: Pronounced Web Book, is a Book Content Management System  (BCMS)   *
+* Qt AppVeyor
 *******************************************************************************/
 #pragma once
 #ifndef ABOUTDIALOG_H
@@ -7,10 +7,11 @@
 
 #include <QDialog>
 #include "ui_AboutDialog.h"
+#include "MyOrgSettings.h"
 
 namespace Ui { class AboutDialog; }
 /******************************************************************************
-* class AboutDialog : public QDialog                                          *
+* \class  AboutDialog : public QDialog
 *******************************************************************************/
 class AboutDialog : public QDialog
 {
@@ -20,8 +21,13 @@ class AboutDialog : public QDialog
         explicit AboutDialog(QWidget *parent = nullptr);
         ~AboutDialog();
 
+    private slots:
+        void on_buttonBox_accepted();
+
     private:
-        Ui::AboutDialog *ui; //!< \c ui \brief Pointer to AboutDialog.ui
+        Ui::AboutDialog *ui;           //!< \c ui \brief Pointer to AboutDialog.ui
+        MyOrgSettings   *myMySettings; //!< \c myMySettings \brief
+
 }; // end class AboutDialog
 #endif // ABOUTDIALOG_H
 /******************************* End of File *********************************/

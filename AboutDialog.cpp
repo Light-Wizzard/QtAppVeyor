@@ -1,10 +1,9 @@
 /******************************************************************************
-* WeBook: Pronounced Web-Book, is a Book Content Management System  (BCMS)   *
-* About Dialog                                                               *
+ * Qt AppVeyor
 *******************************************************************************/
 #include "AboutDialog.h"
 /******************************************************************************
-* AboutDialog Constructor                                                    *
+* \class AboutDialog Constructor
 *******************************************************************************/
 /*!
    \class AboutDialog
@@ -13,15 +12,24 @@
  */
 AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDialog)
 {
+    myMySettings = new MyOrgSettings(parent);
+    QString thisHelp = myMySettings->readFile(":help/About-en.html");
     ui->setupUi(this);
-    connect(ui->buttonBoxOk, &QPushButton::clicked,  this, &QDialog::close);
+    ui->textEditAbout->setHtml(thisHelp);
 } // end AboutDialog
 /******************************************************************************
-* AboutDialog Destructor                                                     *
+* \fn AboutDialog Destructor
 *******************************************************************************/
 AboutDialog::~AboutDialog()
 {
     delete ui;
 } // end ~AboutDialog
+/******************************************************************************
+* \fn on_buttonBox_accepted
+*******************************************************************************/
+void AboutDialog::on_buttonBox_accepted()
+{
+    AboutDialog::close();
+}
 /******************************* End of File *********************************/
 

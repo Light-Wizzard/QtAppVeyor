@@ -16,7 +16,7 @@ else
     call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 }
 
-curl -fsS -o QtInstallerFramework-windows.exe https://download.qt.io/official_releases/qt-installer-framework/$Env:MY_UPGRADE_OS/QtInstallerFramework-windows-x86-$Env:MY_UPGRADE_OS.exe
+curl -fsS -o QtInstallerFramework-windows.exe https://download.qt.io/official_releases/qt-installer-framework/$Env:MY_QT_IF_VERSION/QtInstallerFramework-windows-x86-$Env:MY_QT_IF_VERSION.exe
 
 Write-Host "install Windows Completed" -ForegroundColor DarkGreen
 

@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -6,7 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 /******************************************************************************
-* myMessageHandler                                                            *
+* \fn myMessageHandler
+* I use a special Message Handler to format the output of Error
 *******************************************************************************/
 void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -33,7 +34,7 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
     }
 }
 /******************************************************************************
-* main                                                                        *
+* \fn main
 *******************************************************************************/
 int main(int argc, char *argv[])
 {

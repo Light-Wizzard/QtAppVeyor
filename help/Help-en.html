@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Qt AppVeyor Help</title>
+</head>
+<body>
+
+
+<h1>Qt AppVeyor Help</h1>
+
+<p>
+    This Application has Tabs for every section,
+    the Settings Tab is where you define what OS's you will be using,
+    what Platform, and what Configuration. <br />
+    The Defaults Tab is where you can overwrite all versions at once with the "Defauls" button,
+    or individually with the "Reset" button on each Tab,
+    note that blank fields should be ignorned.
+</p>
+
+<p>
+    There is a Tab for each OS,
+    you can set up each with different specifications,
+    if you want to add another OS,
+    just copy the code for one like it,
+    and rename it,
+    I made it so each database entery is an OS in a project,
+    so each Tab has its own record in the Database. <br />
+    OS means what OS you are Targetting,
+    and not the one you are running on,
+    unless you are Targetting it,
+    as such, WebAssembly runs on Ubuntu,
+    and iOS runs on Mac.
+</p>
+
+<p>
+    This application is written to teach anyone interested in Deploying Qt Applications,
+    the concept is to give an example of a running application,
+    with most of the features you would want in a Database driven Application,
+    I save the SQL setting in Qt Settings, in INI Format,
+    I set the folder to QStandardPaths::AppConfigLocation,
+    and keep most of the functions in the file MyOrgSettings,
+    which you can access via myOrgDomainSetting.
+    I store the Password for SQL Encrypted using SimpleCrypt,
+    the Key is in MyOrgSettings: myCrypto = new SimpleCrypt(Q_UINT64_C(KEY));,
+    and should be changed for secrurity reasons,
+    not that this key can be used to hack the Password,
+    it does make it so it only works with this key.
+</p>
+
+<p>
+    I try to use Constants for any variable,
+    so I have them in their own Class called QtAppVeyorConstants.h,
+    you can access it through MyOrgSettings via myConstants,
+    I use Qt Settings to save SQL Info to an Ini file,
+    I use SQL to store the Configurations.
+</p>
+
+<p>
+    There is an option to save the file.
+</p>
+
+<p>
+    Below is a list of supported Databases, Sqlite is the easiest to use,
+    and the only one I have test so far,
+    I do plan on testing MySQL and PostgreSQL,
+    but as long as all the fields are set,
+    it should work in all of them.
+</p>
+
+<ul>
+    <li>QSQLITE or QSQLITE2, SQLite version 3 SQLite version 2 Note: obsolete since Qt 5.14</li>
+    <li>QMYSQL or MARIADB is MySQL or MariaDB (version 5.0 and above)</li>
+    <li>QPSQL is PostgreSQL (versions 7.3 and above)</li>
+    <li>QDB2 is IBM DB2 (version 7.1 and above)</li>
+    <li>QIBASE is Borland InterBase</li>
+    <li>QOCI Oracle Call Interface Driver</li>
+    <li>QTDS is Sybase Adaptive Server - Note: obsolete since Qt 4.7</li>
+</ul>
+
+<p>
+    The URLs you need to use at AppVeyor are listed below,
+    you should always validate your .appveyor.yml file,
+    and always use the encrypt tool to get your Encrypted Secret.
+</p>
+
+
+<ul>
+    <li>https://ci.appveyor.com/tools/validate-yaml</li>
+    <li>https://ci.appveyor.com/account/Github-Account/tools/encrypt</li>
+</ul>
+
+
+<p>
+
+</p>
+
+<hr>
+
+<p>
+    My Name is Jeffrey Scott Flesher, I am a Medically Retired U.S. Air Force Computer programmer,
+    and Helicopter Crew Cheif for the 66<sup>th</sup> RQS Air Rescue,
+    and 31<sup>st</sup> Special Operations Squadron,
+    and I am the Light Wizzard in the Flesh.
+</p>
+
+
+<p>
+</p>
+
+</body>
+</html>

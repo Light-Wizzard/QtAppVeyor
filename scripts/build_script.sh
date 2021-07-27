@@ -3,26 +3,13 @@
 # 
 # Last Update: 20 July 2021
 #
+# I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build-script.sh
 #
 # Original Code is from: https://github.com/linuxdeploy/QtQuickApp TheAssassin
 #
-# This file is Open Source and I tried my best to make it cut and paste, so I am adding the Environment Variables here
-# as well as the OS installer.
-# I got some of my concepts and code from this project https://github.com/patrickelectric/mini-qml I use his upload.sh
-#
-# I run Shell Check, it requires strict Bash Standards, so the extra code is to pass the test. 
-# replace the ? in shell check
-# In my Environment I define DEV_CURRENT_PROJECT="path to root of this project"; 
-# and I define Shell Check DEV_SHELL_CHECK="shell?check"; again remove the "?", 
-# you can not use that word in any doc you check, it is a Key Word used only by it, you define exceptions to your code.
-# cd "${DEV_CURRENT_PROJECT}/tools"; "$DEV_SHELL_CHECK" -x build-with-qmake.sh
-# If you see no output, you have no warnings or errors.
-# You can automate the checking of your scripts this way.
-#
-# I will not minimize this code, but if I did, you would understand why I put ";" to terminate all lines requiring them.
-# 
-# https://download.qt.io/official_releases/qt-installer-framework/4.1.1/
+# This file is Open Source and I tried my best to make it cut and paste,
+# so I am adding the Environment Variables here as well as the OS installer.
 #
 echo build_script Unix
 #
@@ -57,7 +44,7 @@ export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 declare TEMP_BASE;
 if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BASE="/tmp"; fi
 #
-echo "Make Temp Foler";
+echo -e "Make Temp Foler";
 #
 # building in temporary directory to keep system clean
 BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
@@ -171,7 +158,10 @@ cp -v "${APPVEYOR_BUILD_FOLDER}/desktop/${MY_BIN_PRO_RES_NAME}.ico" "${APPVEYOR_
 cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 rsync -Ravr "${APPVEYOR_BUILD_FOLDER}/usr/share/icons" "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/icons";
 ls "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
-# 
+#
+# I use Qt Installer Framework
+# https://download.qt.io/official_releases/qt-installer-framework
+#
 echo "Running Qt Installer Framework";
 "${APPVEYOR_BUILD_FOLDER}/scripts/QtInstallerFramework-linux.run/QtInstallerFramework-linux.run" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #

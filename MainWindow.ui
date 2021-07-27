@@ -1,0 +1,1686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1071</width>
+    <height>648</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>13</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="QtAppVeyor.qrc">
+    <normaloff>:/images/logo32.png</normaloff>:/images/logo32.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabSettings">
+       <attribute name="title">
+        <string>Settings</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSettingsProjectBinLine">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Qt Project</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettingsProject">
+            <item>
+             <widget class="QComboBox" name="comboBoxSettingsProjects">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="currentText">
+               <string/>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditSettingsQtProject"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelSettingProjectIDSign">
+              <property name="text">
+               <string>#</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelRecordIdSettings">
+              <property name="text">
+               <string>ProjectID</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsSecret">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Encrpyted Secret</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditSettingsSecret">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsOS">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>OS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QGridLayout" name="gridLayoutSettingsOS">
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="checkBoxSettingsiOS">
+              <property name="text">
+               <string>iOS</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="checkBoxSettingsWindows">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Windows</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="checkBoxSettingsUbuntu">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Ubuntu</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="checkBoxSettingsWebAssembly">
+              <property name="text">
+               <string>Web Assembly</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="checkBoxSettingsAndroid">
+              <property name="text">
+               <string>Android</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="checkBoxSettingsMac">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Mac</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <spacer name="horizontalSpacerSettingsOS">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsPlatform">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Platform</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettingsPlatform">
+            <item>
+             <widget class="QCheckBox" name="checkBoxSettingsPlatformX64">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>x64</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxSettingsPlatformX86">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>x86</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsConfiguration">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Configuration</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettingsConfiguration">
+            <item>
+             <widget class="QCheckBox" name="checkBoxSettingsConfigurationRelease">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Release</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxSettingsConfigurationDebug">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Debug</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerSettingsConfiguration">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsOptions">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettings">
+            <item>
+             <widget class="QPushButton" name="pushButtonSettingsAdd">
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSettingsSave">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSettingsDelete">
+              <property name="text">
+               <string>Delete</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerSettingsOptions">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSQL">
+       <attribute name="title">
+        <string>SQL</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <layout class="QFormLayout" name="formLayoutSql">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSqlDatabaseName">
+            <property name="text">
+             <string>Database Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSqlMemory">
+            <property name="text">
+             <string>SQL Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSql">
+            <item>
+             <widget class="QComboBox" name="comboBoxSqlDatabaseType"/>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSqlHostName">
+            <property name="text">
+             <string>Host Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditSqlHostName"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSqlUserName">
+            <property name="text">
+             <string>User Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditSqlUserName"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSqlPassword">
+            <property name="text">
+             <string>Password</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSqlPassword">
+            <item>
+             <widget class="QLineEdit" name="lineEditSqlPassword">
+              <property name="accessibleName">
+               <string>HidePassword</string>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::PasswordEchoOnEdit</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSqlPasswordShowHide">
+              <property name="accessibleName">
+               <string>ShowPassword</string>
+              </property>
+              <property name="text">
+               <string>Show Password</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSqlDbName">
+            <item>
+             <widget class="QLineEdit" name="lineEditSqlDatabaseName"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSqlFileBrowswer">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSqlOptions">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSqlSave">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveSql">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerSqlSave">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabUbuntu">
+       <attribute name="title">
+        <string>Ubnutu</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QFormLayout" name="formLayoutUbuntu">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionUbuntu">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionUbuntu"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionUbuntu">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionUbuntu"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageUbuntu">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriUbuntu"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionUbuntu">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutUbuntuPython">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionUbuntu"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonUbuntu">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeUbuntu">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeUbuntu">
+            <property name="text">
+             <string>Ubuntu Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSetDefaultsUbuntu">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutUbunto">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveUbuntu">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerUbunto">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsUbuntu">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableUbuntu">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdUbuntu">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabMac">
+       <attribute name="title">
+        <string>Mac</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QFormLayout" name="formLayoutMac">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionMac">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionMac"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionMac">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionMac"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageMac">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriMac"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionMac">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutMacPython">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionMac"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonMac">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeMac">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeMac">
+            <property name="text">
+             <string>Mac Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSetDefaultsMac">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutMac">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveMac">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerMac">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsMac">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableMac">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdMac">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabAndroid">
+       <attribute name="title">
+        <string>Android</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QFormLayout" name="formLayoutAndroid">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionAndroid">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionAndroid"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionAndroid">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionAndroid"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageAndroid">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriAndroid"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionAndroid">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutAndroidPhython">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionAndroid"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonAndroid">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeAndroid">
+            <property name="text">
+             <string>Upgrade OS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeAndroid">
+            <property name="text">
+             <string>Android Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSetDefaultsAndroid">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutAndrod">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveAndroid">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerAndrod">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsAndroid">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableAndroid">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdAndroid">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabWebAssembly">
+       <attribute name="title">
+        <string>WebAssembly</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <layout class="QFormLayout" name="formLayoutWebAssembly">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionWebAssembly">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionWebAssembly"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionWebAssembly">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionWebAssembly"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageWebAssembly">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriWebAssembly"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionWebAssembly">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutPythonWebAssembly">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionWebAssembly"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonWebAssembly">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeWebAssembly">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeWebAssembly">
+            <property name="text">
+             <string>Web Assembly Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSetDefaultsWebAssembly">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutWebAssembly">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveWebAssembly">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerWebAssembly">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsWebAssembly">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableWebAssembly">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdWebAssembly">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabIOS">
+       <attribute name="title">
+        <string>iOS</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QFormLayout" name="formLayoutIOS">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionIOS">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionIOS"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionIOS">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionIOS"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageIOS">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriIOS"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionIOS">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutPythonIOS">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionIOS"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonIOS">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsUpgradeIOS">
+            <property name="text">
+             <string>OS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeIOS">
+            <property name="text">
+             <string>iOS Upgrade</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSetDefaultsIOS">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutIOS">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveIOS">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerIOS">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsIOS">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableIOS">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdIOS">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabWindows">
+       <attribute name="title">
+        <string>Windows</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QFormLayout" name="formLayoutWindows">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionWindows">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionWindows"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionWindows">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionWindows"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageWindows">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriWindows"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsMingW32Windows">
+            <property name="text">
+             <string>Qt MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditQtMingW32Windows"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsMingW64Windows">
+            <property name="text">
+             <string>Qt MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEditQtMingW64Windows"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW32Wndows">
+            <property name="text">
+             <string>Qt Tools MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="lineEditQtToolsMingW32Windows"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW64Windows">
+            <property name="text">
+             <string>Qt Tools MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="lineEditQtToolsMingW64Windows"/>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionWindows">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutWindowsPython">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionWindows"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonWindows">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="labelSettingsVisualStudioWindows">
+            <property name="text">
+             <string>Visual Studio Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="lineEditVisualStudioWindows"/>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="labelSetDefaultsWindows">
+            <property name="text">
+             <string>Options</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutWindows">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveWindows">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerWindows">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaultsWindows">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableWindows">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdWindows">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabDefaults">
+       <attribute name="title">
+        <string>Defaults</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <layout class="QFormLayout" name="formLayoutWindowsDefaults">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelSettingsQtVersionWindowsDefaults">
+            <property name="text">
+             <string>Qt Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQtVersionDefaults"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionWindowsDefaults">
+            <property name="text">
+             <string>Qt Installer Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfVersionDefaults"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageWindowsDefaults">
+            <property name="text">
+             <string>Qt Installer Package</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriDefaults"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsMingW32WindowsDefaults">
+            <property name="text">
+             <string>Qt MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditQtMingW32Defaults"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsMingW64WindowsDefaults">
+            <property name="text">
+             <string>Qt MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="lineEditQtMingW64Defaults"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW32WndowsDefaults">
+            <property name="text">
+             <string>Qt Tools MingW32</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="lineEditQtToolsMingW32Defaults"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW64WindowsDefaults">
+            <property name="text">
+             <string>Qt Tools MingW64</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="lineEditQtToolsMingW64Defaults"/>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionWindowsDefaults">
+            <property name="text">
+             <string>Python Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutDefaults">
+            <item>
+             <widget class="QLineEdit" name="lineEditPythonVersionDefaults"/>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxPythonDefaults">
+              <property name="text">
+               <string>Python Required</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="labelSettingsVisualStudioWindowsDefaults">
+            <property name="text">
+             <string>Visual Studio Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="lineEditVisualStudioDefaults"/>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="labelDefaultsOsUpgrade">
+            <property name="text">
+             <string>OS Upgrades</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="1">
+           <widget class="QCheckBox" name="checkBoxUpgradeDefaults">
+            <property name="text">
+             <string>Upgrade OS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLabel" name="labelDefaults">
+            <property name="text">
+             <string>Set all OS's to Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutResetAllDefaults">
+            <item>
+             <spacer name="horizontalSpacerResetAll">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonDefaults">
+              <property name="text">
+               <string>Set Defaults</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerResetAllRight">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="12" column="0">
+           <widget class="QLabel" name="labelResetDefaults">
+            <property name="text">
+             <string>Reset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutResetDefaults">
+            <item>
+             <spacer name="horizontalSpacerResetDefaults">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonResetDefaults">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="13" column="0">
+           <widget class="QLabel" name="labelSettingsSaveDefaults">
+            <property name="text">
+             <string>Save Defaults</string>
+            </property>
+           </widget>
+          </item>
+          <item row="13" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QPushButton" name="pushButtonSaveDefaults">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerDefaults">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableDefaults">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdDefaults">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabYml">
+       <attribute name="title">
+        <string>YML</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTextEdit" name="textEditYml">
+          <property name="font">
+           <font>
+            <pointsize>13</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1071</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionCreate"/>
+    <addaction name="separator"/>
+    <addaction name="actionClipboard"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCreate"/>
+   <addaction name="separator"/>
+   <addaction name="actionClipboard"/>
+   <addaction name="separator"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionPrint"/>
+   <addaction name="separator"/>
+   <addaction name="actionAbout"/>
+   <addaction name="separator"/>
+   <addaction name="actionHelp"/>
+   <addaction name="separator"/>
+   <addaction name="actionExit"/>
+  </widget>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/exit_button.png</normaloff>:/images/exit_button.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/gear.png</normaloff>:/images/gear.png</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionCreate">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/thumbsup.png</normaloff>:/images/thumbsup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/fileprint.png</normaloff>:/images/fileprint.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actionClipboard">
+   <property name="icon">
+    <iconset resource="QtAppVeyor.qrc">
+     <normaloff>:/images/clipboard.png</normaloff>:/images/clipboard.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clipboard</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="QtAppVeyor.qrc"/>
+ </resources>
+ <connections/>
+</ui>

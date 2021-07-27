@@ -27,8 +27,8 @@ Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j
 ## :package: **Downloads:**
  - :penguin: [Linux](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-x86_64.AppImage)
  - :penguin: :outbox_tray: [Linux Installer in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Linux-Installer)
- - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/GalaxyCalculator2-Windows.zip)
- - :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/GalaxyCalculator2.exe)
+ - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows.zip)
+ - :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.exe)
  - :apple: [Apple](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.dmg)
 
 
@@ -51,7 +51,23 @@ even if you make your own file, you will have know these,
 and manually maintain changes,
 where as this app lets you just change the Variables and make a new file.
 
+Each Variable is used in scripts to set up the application for deployment.
+
+* MY_BIN_PRO_RES_NAME: Qt Projects name, ie. QtAppVeyor.pro, assumes exe name is the same.
+* MY_OS: This is used to make package names, so no spaces
+* MY_QT_VERSION: Qt Version
+* MY_QT_IF_VERSION: Qt Installer Framework (QIF) Version
+* MY_QIF_PACKAGE_URI: Folder for QIF Packages
+* MY_PYTHON_VER: Python Version, note that Windows 7 stops at 3.8
+* MY_PYTHON_REQUIRED: Is Python required
+* MY_UPGRADE_OS: Unix system Upgrade
+* MY_QT_MINGW32: MingW Paths
+* MY_QT_MINGW32: MingW Paths
+* MY_QT_TOOLS_MINGW32: MingW Paths
+* MY_QT_TOOLS_MINGW64: MingW Paths
+
 Unix
+
 ```yaml
 MY_BIN_PRO_RES_NAME:  QtAppVeyor #
 MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
@@ -78,5 +94,48 @@ MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
 MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
 MY_PYTHON_REQUIRED:   false      # if Python is required
 ```
+## Database
+
+```sql
+Projects: id, QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWebAssembly, IsOSiOS, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
+
+CREATE TABLE Projects(id integer PRIMARY KEY autoincrement, 
+                      QtProject varchar, 
+                      Secret varchar, 
+                      IsOsUbuntu varchar, 
+                      IsOsMac varchar, 
+                      IsOsWebAssembly varchar, 
+                      IsOSiOS varchar, 
+                      IsOsWindows varchar, 
+                      IsOsAndroid varchar, 
+                      IsX64 varchar, 
+                      IsX86 varchar, 
+                      IsDebug varchar, 
+                      IsRelease varchar
+
+Configuration: id, ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
+
+ProjectsID is Projects id
+
+CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement, 
+                           ProjectsID varchar, 
+                           OS varchar, 
+                           QtVersion varchar, 
+                           QtIfVersion varchar, 
+                           QtIfPackageUri varchar, 
+                           PythonVersion varchar, 
+                           PythonRequired varchar, 
+                           QtMingW32 varchar, 
+                           QtMingW64 varchar, 
+                           QtToolsMingW32 varchar, 
+                           QtToolsMingW64 varchar, 
+                           VisualStudio varchar, 
+                           OsUpgrade varchar
+
+```
+
+## More Help
+This Application has built in Help on the app itself.
+
 
 End of README.md

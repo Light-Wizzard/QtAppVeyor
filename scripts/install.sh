@@ -21,9 +21,14 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     # Required by LinuxDeploy
     sudo apt-get install -qqy libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb-dev libxkbcommon-x11-0 libgtk2.0-dev;
     #
-    wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-linux-x64-$MY_QT_IF_VERSION.run -O scripts/QtInstallerFramework-linux.run
-    # make it executable
-    chmod +x scripts/QtInstallerFramework-linux.run;
+    #wget -c -nv https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-linux-x64-$MY_QT_IF_VERSION.run -O scripts/QtInstallerFramework-linux.run
+    curl -fsS -o scripts/QtInstallerFramework-linux.run https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-linux-x64-$MY_QT_IF_VERSION.run
+    if [ -f scripts/QtInstallerFramework-linux.run ]; then
+        # make it executable
+        chmod +x scripts/QtInstallerFramework-linux.run;
+    else
+        echo -e "Error downloading QtInstallerFramework-linux";
+    fi
 fi
 #
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "macos" ]]; then

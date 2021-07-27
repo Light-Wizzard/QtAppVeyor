@@ -31,10 +31,10 @@ for:
     MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Ubuntu
     MY_QT_VERSION: 5.15.2
-    MY_PYTHON_VER: 3.9
-    MY_PYTHON_REQUIRED: false
     MY_QT_IF_VERSION: '4.1.1'
     MY_QIF_PACKAGE_URI: 'packages/com.lightwizzard.qtappveyor/data'
+    MY_PYTHON_VER: 3.9
+    MY_PYTHON_REQUIRED: false
     MY_UPGRADE_OS: false # apt-get upgrade: true or false only
   install:
     # Create our AppVeyor version
@@ -71,9 +71,11 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
-    - ps: scripts\install.ps1
+    - cmd: scripts\install.cmd
+    #- ps: scripts\install.ps1
   build_script:
-    - ps: scripts\build_script.ps1
+    - cmd: scripts\build_script.cmd
+    #- ps: scripts\build_script.ps1
   artifacts:
     - path: '%BIN%*.zip'
       name: 'ZipInstaller'
