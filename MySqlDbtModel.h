@@ -16,14 +16,18 @@
 *******************************************************************************/
 class MyProjectClass
 {
-        QString myID, myQtProject, mySecret, myIsOsUbuntu, myIsOsMac, myIsOsWebAssembly, myIsOSiOS, myIsOsWindows, myIsOsAndroid, myIsX64, myIsX86, myIsDebug, myIsRelease;
+        QString myID, myQtProject, mySecret, myEnvironment, myIsOsUbuntu, myIsOsMac, myIsOsWebAssembly, myIsOSiOS, myIsOsWindows, myIsOsAndroid, myIsX64, myIsX86, myIsDebug, myIsRelease;
     public:
-        MyProjectClass(const QString &thisID, const QString &thisQtProject, const QString &thisSecret, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease)
-            : myID{thisID}, myQtProject{thisQtProject}, mySecret{thisSecret}, myIsOsUbuntu{thisIsOsUbuntu}, myIsOsMac{thisIsOsMac}, myIsOsWebAssembly{thisIsOsWebAssembly}, myIsOSiOS{thisIsOSiOS}, myIsOsWindows{thisIsOsWindows}, myIsOsAndroid{thisIsOsAndroid}, myIsX64{thisIsX64}, myIsX86{thisIsX86}, myIsDebug{thisIsDebug}, myIsRelease{thisIsRelease} {}
+        MyProjectClass(const QString &thisID, const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease)
+            : myID{thisID}, myQtProject{thisQtProject}, mySecret{thisSecret}, myEnvironment{thisEnvironment}, myIsOsUbuntu{thisIsOsUbuntu}, myIsOsMac{thisIsOsMac}, myIsOsWebAssembly{thisIsOsWebAssembly}, myIsOSiOS{thisIsOSiOS}, myIsOsWindows{thisIsOsWindows}, myIsOsAndroid{thisIsOsAndroid}, myIsX64{thisIsX64}, myIsX86{thisIsX86}, myIsDebug{thisIsDebug}, myIsRelease{thisIsRelease} {}
         // Getters
         QString getID()              const { return myID;              }
         QString getQtProject()       const { return myQtProject;       }
         QString getSecret()          const { return mySecret;          }
+        QString getEnvironment()     const
+        {
+            return myEnvironment;
+        }
         QString getIsOsUbuntu()      const { return myIsOsUbuntu;      }
         QString getIsOsMac()         const { return myIsOsMac;         }
         QString getIsOsWebAssembly() const { return myIsOsWebAssembly; }
@@ -38,6 +42,10 @@ class MyProjectClass
         void setID(const QString &s)              { myID = s;              }
         void setQtProject(const QString &s)       { myQtProject = s;       }
         void setSecret(const QString &s)          { mySecret = s;          }
+        void setEnvironment(const QString &s)
+        {
+            myEnvironment = s;
+        }
         void setIsOsUbuntu(const QString &s)      { myIsOsUbuntu = s;      }
         void setIsOsMac(const QString &s)         { myIsOsMac = s;         }
         void setIsOsWebAssembly(const QString &s) { myIsOsWebAssembly = s; }
@@ -143,7 +151,7 @@ class MySqlDbtModel : public QObject
         bool insertProjects();                                      //!< insertConfigurations
         //
         void setConfiguration(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade);
-        void setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease);
+        void setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease);
         //
         QString getConfigurationSelectQuery(const QString &thisWhereID); //!< getConfigurationSelectQuery
         QString getConfigurationProjectIdOsSelectQuery(const QString &thisWhereID, const QString &thisOS); //!< getConfigurationProjectIdOsSelectQuery

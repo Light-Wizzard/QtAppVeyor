@@ -27,6 +27,12 @@ on Linux, Mac, Windows, and maybe WebAssembly and iOS, as well as Android,
 and how to use the Qt Installer Framework to make Installable applications,
 that are also updateable.
 
+This project is not just geared for Qt Software developers,
+it should be able to handle many different Envirnoments,
+but currently Qt is the only Envirnoment I have been working on,
+but I did add a button for different Envirnoments,
+this way this tool will be usefull to every Software developer.
+
 Index
 1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
@@ -42,10 +48,10 @@ Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7ht
 Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
 ### :package: **Downloads:**
- - :penguin: [Linux](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-x86_64.AppImage)
+ - :penguin: [Linux](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
  - :penguin: :outbox_tray: [Linux Installer in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Linux-Installer)
- - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows.zip)
- - :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.exe)
+ - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
+ - :office: :outbox_tray: [Windows Installer exe in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.exe)
  - :apple: [Apple](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.dmg)
 
 Windows (Tested on 7 and 10 let me know if 8 works): Download zip and extract it, 
@@ -66,6 +72,7 @@ This is a work in progress, please report any bugs, and comments.
 * Android
 * WebAssembly
 * iOS
+* MSVS build of Qt Project
 
 ## Variables
 
@@ -159,7 +166,10 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 ```
 
 ## Help
-This Application has built in Help on the app itself.
+This Application has built in Help on the app itself, 
+but I will try to expand on the Help sections,
+and add Wiki Content,
+that might help.
 
 ## Screen-Shots
 ![Settings](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)

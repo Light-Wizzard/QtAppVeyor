@@ -144,7 +144,11 @@ void MainWindow::onCreate()
     thisYaml.append("  only:\n");
     thisYaml.append("    - master\n");
     thisYaml.append("\n");
-    thisYaml.append("build: off\n");
+    if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        thisYaml.append("build: off\n");
+    if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        thisYaml.append("build: on\n");
+
     thisYaml.append("configuration:\n");
     if (ui->checkBoxSettingsConfigurationDebug->isChecked())
     {
@@ -821,6 +825,25 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
 
             ui->lineEditSettingsQtProject->setText(query.value("QtProject").toString());
             ui->lineEditSettingsSecret->setText(query.value("Secret").toString());
+            // Environment Qt
+            if (query.value("Environment").toString() == "Qt")
+            {
+                ui->radioButtonSettingsEnvironmentQt->setChecked(true);
+            }
+            else
+            {
+                ui->radioButtonSettingsEnvironmentQt->setChecked(false);
+            }
+            // Environment VS
+            if (query.value("Environment").toString() == "MSVS")
+            {
+                ui->radioButtonSettingsEnvironmentVs->setChecked(true);
+            }
+            else
+            {
+                ui->radioButtonSettingsEnvironmentVs->setChecked(false);
+            }
+            //
             theIsOsUbuntu = query.value("IsOsUbuntu").toBool();
             theIsOsMac = query.value("IsOsMac").toBool();
             theIsOsWindows = query.value("IsOsWindows").toBool();
@@ -1448,6 +1471,12 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
                 myAccessSqlDbtModel->myProjectVariables->setIsX86("true");
             else
                 myAccessSqlDbtModel->myProjectVariables->setIsX86("false");
+            // Environment Qt
+            if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+                myAccessSqlDbtModel->myProjectVariables->setEnvironment("Qt");
+            // Environment MSVS
+            if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+                myAccessSqlDbtModel->myProjectVariables->setEnvironment("MSVS");
             //
             myAccessSqlDbtModel->myProjectVariables->setID(ui->labelRecordIdSettings->text());
             myAccessSqlDbtModel->myProjectVariables->setQtProject(ui->lineEditSettingsQtProject->text());

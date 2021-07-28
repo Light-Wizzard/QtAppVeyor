@@ -44,6 +44,7 @@ class MyConstants
         // TabSettings Project
         const QString MY_PROJECT_QT = "QtAppVeyor";
         const QString MY_PROJECT_SECRET = "Secret";
+        const QString MY_PROJECT_ENVIRONMENT  = "Qt";
         const QString MY_PROJECT_UBUNTU = "true";
         const QString MY_PROJECT_MAC = "true";
         const QString MY_PROJECT_WINDOWS = "true";
@@ -142,6 +143,7 @@ class MyConstants
         // TabSettings Project
         const QString MY_PROJECT_QT           = "QtAppVeyor";
         const QString MY_PROJECT_SECRET       = "";
+        const QString MY_PROJECT_ENVIRONMENT  = "Qt";
         const QString MY_PROJECT_UBUNTU       = "true";
         const QString MY_PROJECT_MAC          = "true";
         const QString MY_PROJECT_WINDOWS      = "true";

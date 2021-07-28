@@ -117,7 +117,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsOS">
             <property name="font">
              <font>
@@ -129,7 +129,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <layout class="QGridLayout" name="gridLayoutSettingsOS">
             <item row="4" column="2">
              <widget class="QCheckBox" name="checkBoxSettingsiOS">
@@ -203,7 +203,7 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsPlatform">
             <property name="font">
              <font>
@@ -215,7 +215,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettingsPlatform">
             <item>
              <widget class="QCheckBox" name="checkBoxSettingsPlatformX64">
@@ -256,7 +256,7 @@
             </item>
            </layout>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsConfiguration">
             <property name="font">
              <font>
@@ -268,7 +268,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettingsConfiguration">
             <item>
              <widget class="QCheckBox" name="checkBoxSettingsConfigurationRelease">
@@ -309,14 +309,14 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsOptions">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettings">
             <item>
              <widget class="QPushButton" name="pushButtonSettingsAdd">
@@ -353,6 +353,49 @@
              </spacer>
             </item>
            </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsEnvironment">
+            <property name="text">
+             <string>Environment</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QGroupBox" name="groupBoxSettingsEnvironment">
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QRadioButton" name="radioButtonSettingsEnvironmentQt">
+               <property name="text">
+                <string>Qt</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButtonSettingsEnvironmentVs">
+               <property name="text">
+                <string>MSVS</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacerSettingsEnvironment">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </item>

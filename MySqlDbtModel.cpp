@@ -8,7 +8,7 @@ MySqlDbtModel::MySqlDbtModel(QObject *parent)
     myOrgDomainSetting = new MyOrgSettings(parent);
     // Create Variable Trackers and Set to Empty
     myConfigurationVariables = new MyConfigurationClass("", "", "", "", "", "", "", "", "", "", "", "", "", "");
-    myProjectVariables = new MyProjectClass("", "", "", "", "", "", "", "", "", "", "", "", "");
+    myProjectVariables = new MyProjectClass("", "", "", "", "", "", "", "", "", "", "", "", "", "");
 }
 /******************************************************************************
 * \fn ~QtAppVeyorDataTable
@@ -369,9 +369,9 @@ bool MySqlDbtModel::checkDatabase()
          * IsDebug varchar,
          * IsRelease varchar
         */
-        if (runQuery(QLatin1String(R"(CREATE TABLE Projects(id integer PRIMARY KEY autoincrement, QtProject varchar, Secret varchar, IsOsUbuntu varchar, IsOsMac varchar, IsOsWebAssembly varchar, IsOSiOS varchar, IsOsWindows varchar, IsOsAndroid varchar, IsX64 varchar, IsX86 varchar, IsDebug varchar, IsRelease varchar))")))
+        if (runQuery(QLatin1String(R"(CREATE TABLE Projects(id integer PRIMARY KEY autoincrement, QtProject varchar, Secret varchar, Environment varchar, IsOsUbuntu varchar, IsOsMac varchar, IsOsWebAssembly varchar, IsOSiOS varchar, IsOsWindows varchar, IsOsAndroid varchar, IsX64 varchar, IsX86 varchar, IsDebug varchar, IsRelease varchar))")))
         {
-            setProject(myOrgDomainSetting->myConstants->MY_PROJECT_QT, myOrgDomainSetting->myConstants->MY_PROJECT_SECRET, myOrgDomainSetting->myConstants->MY_PROJECT_UBUNTU, myOrgDomainSetting->myConstants->MY_PROJECT_MAC, myOrgDomainSetting->myConstants->MY_PROJECT_WINDOWS, myOrgDomainSetting->myConstants->MY_PROJECT_ANDROID, myOrgDomainSetting->myConstants->MY_PROJECT_WEB_ASSEMBLY, myOrgDomainSetting->myConstants->MY_PROJECT_IOS, myOrgDomainSetting->myConstants->MY_PROJECT_X64, myOrgDomainSetting->myConstants->MY_PROJECT_X86, myOrgDomainSetting->myConstants->MY_PROJECT_DEBUG, myOrgDomainSetting->myConstants->MY_PROJECT_RELEASE);
+            setProject(myOrgDomainSetting->myConstants->MY_PROJECT_QT, myOrgDomainSetting->myConstants->MY_PROJECT_SECRET, myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT, myOrgDomainSetting->myConstants->MY_PROJECT_UBUNTU, myOrgDomainSetting->myConstants->MY_PROJECT_MAC, myOrgDomainSetting->myConstants->MY_PROJECT_WINDOWS, myOrgDomainSetting->myConstants->MY_PROJECT_ANDROID, myOrgDomainSetting->myConstants->MY_PROJECT_WEB_ASSEMBLY, myOrgDomainSetting->myConstants->MY_PROJECT_IOS, myOrgDomainSetting->myConstants->MY_PROJECT_X64, myOrgDomainSetting->myConstants->MY_PROJECT_X86, myOrgDomainSetting->myConstants->MY_PROJECT_DEBUG, myOrgDomainSetting->myConstants->MY_PROJECT_RELEASE);
             if (insertProjects())
             {
                 myProjectID = myInsertID;
@@ -478,7 +478,7 @@ bool MySqlDbtModel::insertProjects()
 {
     if (isDebugMessage) { qDebug() << "insertProjects"; }
     // QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
-    QString theQuery = QLatin1String(R"(INSERT INTO Projects (QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsOsWebAssembly, IsOSiOS, IsX64, IsX86, IsDebug, IsRelease) values('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12'))").arg(myProjectVariables->getQtProject(), myProjectVariables->getSecret(), myProjectVariables->getIsOsUbuntu(), myProjectVariables->getIsOsMac(), myProjectVariables->getIsOsWindows(), myProjectVariables->getIsOsAndroid(), myProjectVariables->getIsOsWebAssembly(), myProjectVariables->getIsOSiOS(), myProjectVariables->getIsX64(), myProjectVariables->getIsX86(), myProjectVariables->getIsDebug(), myProjectVariables->getIsRelease());
+    QString theQuery = QLatin1String(R"(INSERT INTO Projects (QtProject, Secret, Environment, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsOsWebAssembly, IsOSiOS, IsX64, IsX86, IsDebug, IsRelease) values('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12', '%13'))").arg(myProjectVariables->getQtProject(), myProjectVariables->getSecret(), myProjectVariables->getEnvironment(), myProjectVariables->getIsOsUbuntu(), myProjectVariables->getIsOsMac(), myProjectVariables->getIsOsWindows(), myProjectVariables->getIsOsAndroid(), myProjectVariables->getIsOsWebAssembly(), myProjectVariables->getIsOSiOS(), myProjectVariables->getIsX64(), myProjectVariables->getIsX86(), myProjectVariables->getIsDebug(), myProjectVariables->getIsRelease());
     if (isDebugMessage) { qDebug() << "insertProjects: " << theQuery; }
     //
     if (!runQuery(theQuery))
@@ -667,8 +667,8 @@ void MySqlDbtModel::saveProject()
 {
     if (isDebugMessage) qDebug() << "saveProject";
     QSqlQuery theQuery; //!< SQL Query
-    QString theQueryString = QString("UPDATE Projects set QtProject = '%1', Secret = '%2', IsOsUbuntu = '%3', IsOsMac = '%4', IsOsWebAssembly = '%5', IsOSiOS = '%6', IsOsWindows = '%7', IsOsAndroid = '%8', IsX64 ='%9', IsX86 = '%10', IsDebug = '%11', IsRelease = '%12' WHERE id = %12").arg(myProjectVariables->getQtProject(), myProjectVariables->getSecret(), myProjectVariables->getIsOsUbuntu(), myProjectVariables->getIsOsMac(), myProjectVariables->getIsOsWebAssembly(), myProjectVariables->getIsOSiOS(), myProjectVariables->getIsOsWindows(), myProjectVariables->getIsOsAndroid(), myProjectVariables->getIsX64(), myProjectVariables->getIsX86(), myProjectVariables->getIsDebug(), myProjectVariables->getIsRelease(), myProjectVariables->getID());
-    if (isDebugMessage) qDebug() << "thisQuery: |" << theQueryString << "|  QtProject = " << myProjectVariables->getQtProject() << "| Secret=" << myProjectVariables->getSecret() << "| IsOsUbuntu=" << myProjectVariables->getIsOsUbuntu() << "| IsOsMac=" << myProjectVariables->getIsOsMac() << "| IsOsWebAssembly=" << myProjectVariables->getIsOsWebAssembly() << "| IsOSiOS=" << myProjectVariables->getIsOSiOS() << "| IsOsWindows=" << myProjectVariables->getIsOsWindows() << "| IsOsAndroid=" << myProjectVariables->getIsOsAndroid() << "| IsX64=" << myProjectVariables->getIsX64() << "| IsX86=" << myProjectVariables->getIsX86() << "| IsDebug=" << myProjectVariables->getIsDebug() << "| IsRelease=" << myProjectVariables->getIsRelease() << "| ID=" << myProjectVariables->getID() << "|";
+    QString theQueryString = QString("UPDATE Projects set QtProject = '%1', Secret = '%2', Environment = '%3', IsOsUbuntu = '%4', IsOsMac = '%5', IsOsWebAssembly = '%6', IsOSiOS = '%7', IsOsWindows = '%8', IsOsAndroid = '%9', IsX64 ='%10', IsX86 = '%11', IsDebug = '%12', IsRelease = '%13' WHERE id = %14").arg(myProjectVariables->getQtProject(), myProjectVariables->getSecret(), myProjectVariables->getEnvironment(), myProjectVariables->getIsOsUbuntu(), myProjectVariables->getIsOsMac(), myProjectVariables->getIsOsWebAssembly(), myProjectVariables->getIsOSiOS(), myProjectVariables->getIsOsWindows(), myProjectVariables->getIsOsAndroid(), myProjectVariables->getIsX64(), myProjectVariables->getIsX86(), myProjectVariables->getIsDebug(), myProjectVariables->getIsRelease(), myProjectVariables->getID());
+    if (isDebugMessage) qDebug() << "thisQuery: |" << theQueryString << "|  QtProject = " << myProjectVariables->getQtProject() << "| Secret=" << myProjectVariables->getSecret() << "| Environment=" << myProjectVariables->getEnvironment() << "| IsOsUbuntu=" << myProjectVariables->getIsOsUbuntu() << "| IsOsMac=" << myProjectVariables->getIsOsMac() << "| IsOsWebAssembly=" << myProjectVariables->getIsOsWebAssembly() << "| IsOSiOS=" << myProjectVariables->getIsOSiOS() << "| IsOsWindows=" << myProjectVariables->getIsOsWindows() << "| IsOsAndroid=" << myProjectVariables->getIsOsAndroid() << "| IsX64=" << myProjectVariables->getIsX64() << "| IsX86=" << myProjectVariables->getIsX86() << "| IsDebug=" << myProjectVariables->getIsDebug() << "| IsRelease=" << myProjectVariables->getIsRelease() << "| ID=" << myProjectVariables->getID() << "|";
     if (!theQuery.exec(theQueryString))
     {
         qDebug() << "SqLite error saveProject:" << theQuery.lastError().text() << ", SqLite error code:" << theQuery.lastError();
@@ -721,11 +721,12 @@ void MySqlDbtModel::setConfiguration(const QString &thisID,const QString &thisPr
 * \fn setProject
 * Sets all Variables used in the Configuarion Database in one Place
 *******************************************************************************/
-void MySqlDbtModel::setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease)
+void MySqlDbtModel::setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease)
 {
     if (isDebugMessage) qDebug() << "setProject";
     myProjectVariables->setQtProject(thisQtProject);
     myProjectVariables->setSecret(thisSecret);
+    myProjectVariables->setEnvironment(thisEnvironment);
     myProjectVariables->setIsOsUbuntu(thisIsOsUbuntu);
     myProjectVariables->setIsOsMac(thisIsOsMac);
     myProjectVariables->setIsOsWindows(thisIsOsWindows);
