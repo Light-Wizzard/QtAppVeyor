@@ -99,8 +99,8 @@ for:
     - cmd: dir AppDir
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" AppDir
     - cmd: windeployqt "AppDir\%MY_BIN_PRO_RES_NAME%.exe" --verbose=2
-    - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x64.exe"
-    - cmd: if %PLATFORM%==x86 export ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x86.exe"
+    - cmd: if %PLATFORM%==x64 set ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x64.exe"
+    - cmd: if %PLATFORM%==x86 set ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x86.exe"
     - cmd: set ARTIFACT_QIF="%MY_BIN_PRO_RES_NAME%-Linux-Installer";
     - cmd: 7z a -tzip "%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" AppDir -r
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" "%APPVEYOR_BUILD_FOLDER%\
