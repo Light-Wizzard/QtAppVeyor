@@ -90,8 +90,8 @@ for:
     - cmd: mkdir build
     - cmd: cd build
     - cmd: mkdir AppDir
-    - cmd: export INSTALL_ROOT=AppDir
-    - cmd: export BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
+    - cmd: set INSTALL_ROOT=AppDir
+    - cmd: set BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
     - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install
     - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install
     - cmd: echo "after_build Windows"
