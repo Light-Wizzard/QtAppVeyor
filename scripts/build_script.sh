@@ -167,22 +167,19 @@ echo "Running Qt Installer Framework";
 declare -i BINARY_CREATOR_INSTALLED; BINARY_CREATOR_INSTALLED=0;
 declare MyQtInstallerFramework; MyQtInstallerFramework="binarycreator";
 #
-echo "First Check";
-if command -v "$MyQtInstallerFramework" &> /dev/null; then
-    BINARY_CREATOR_INSTALLED=1;
-    echo "MyQtInstallerFramework=$MyQtInstallerFramework";
-fi
+#echo "First Check fails for find it";
+#if command -v "$MyQtInstallerFramework" &> /dev/null; then BINARY_CREATOR_INSTALLED=1; echo "MyQtInstallerFramework=$MyQtInstallerFramework"; fi
 #
-echo "Second Check";
-if [ "$BINARY_CREATOR_INSTALLED" -eq 0 ]; then
-    MyQtInstallerFramework="$(type -p binarycreator)";
-    if [ -n "$MyQtInstallerFramework" ]; then
-        if command -v "$MyQtInstallerFramework" &> /dev/null; then
-            BINARY_CREATOR_INSTALLED=1;
-            echo "MyQtInstallerFramework=$MyQtInstallerFramework";
-        fi
-    fi
-fi
+#echo "Second Check fails with error code";
+#if [ "$BINARY_CREATOR_INSTALLED" -eq 0 ]; then
+#    MyQtInstallerFramework="$(type -p binarycreator)";
+#    if [ -n "$MyQtInstallerFramework" ]; then
+#        if command -v "$MyQtInstallerFramework" &> /dev/null; then
+#            BINARY_CREATOR_INSTALLED=1;
+#            echo "MyQtInstallerFramework=$MyQtInstallerFramework";
+#        fi
+#    fi
+#fi
 #
 #if [ "$BINARY_CREATOR_INSTALLED" -eq 1 ]; then
 #    "$MyQtInstallerFramework" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
