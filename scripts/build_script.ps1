@@ -50,7 +50,7 @@ else
 #
 export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer"
 #
-7z a -tzip "$MY_BIN_PRO_RES_NAME-$MY_OS-$CONFIGURATION-$PLATFORM.zip" AppDir -r
+#7z a -tzip "$MY_BIN_PRO_RES_NAME-$MY_OS-$CONFIGURATION-$PLATFORM.zip" AppDir -r
 
 Copy-Item -Path "$APPVEYOR_BUILD_FOLDER\build\$MY_BIN_PRO_RES_NAME-$MY_OS-$CONFIGURATION-$PLATFORM.zip" -Destination "$APPVEYOR_BUILD_FOLDER" -recurse -Force
 #copy "$APPVEYOR_BUILD_FOLDER\build\$MY_BIN_PRO_RES_NAME-$MY_OS-$CONFIGURATION-$PLATFORM.zip" "$APPVEYOR_BUILD_FOLDER"
@@ -59,8 +59,8 @@ Write-Host APPVEYOR_BUILD_FOLDER=$APPVEYOR_BUILD_FOLDER -ForegroundColor Cyan
 #
 Copy-Item -Path "$APPVEYOR_BUILD_FOLDER\build\AppDir" -Destination "$APPVEYOR_BUILD_FOLDER\$MY_QIF_PACKAGE_URI" -recurse -Force
 #xcopy /s /e /f "$APPVEYOR_BUILD_FOLDER\build\AppDir" "$APPVEYOR_BUILD_FOLDER\$MY_QIF_PACKAGE_URI"
-C:\Qt\Tools\QtInstallerFramework\3.2\bin\binarycreator.exe --offline-only -c "$APPVEYOR_BUILD_FOLDER\config\config.xml" -p "$APPVEYOR_BUILD_FOLDER\packages" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
-7z a -tzip "$MY_BIN_PRO_RES_NAME-Windows-$PLATFORM-Installer.zip" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
+#C:\Qt\Tools\QtInstallerFramework\3.2\bin\binarycreator.exe --offline-only -c "$APPVEYOR_BUILD_FOLDER\config\config.xml" -p "$APPVEYOR_BUILD_FOLDER\packages" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
+#7z a -tzip "$MY_BIN_PRO_RES_NAME-Windows-$PLATFORM-Installer.zip" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
 
 
 #

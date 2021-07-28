@@ -32,7 +32,7 @@ for:
     MY_OS: Ubuntu
     MY_QT_VERSION: 5.15.2
     MY_QT_IF_VERSION: '4.1.1'
-    MY_QIF_PACKAGE_URI: 'packages/com.lightwizzard.qtappveyor/data'
+    MY_QIF_PACKAGE_URI: 'packages/com.appveyor.qtappveyor/data'
     MY_PYTHON_VER: 3.9
     MY_PYTHON_REQUIRED: false
     MY_UPGRADE_OS: false # apt-get upgrade: true or false only
@@ -63,7 +63,7 @@ for:
     MY_QT_TOOLS_MINGW32: mingw810_32
     MY_QT_TOOLS_MINGW64: mingw810_64
     MY_QT_IF_VERSION: '4.1.1'
-    MY_QIF_PACKAGE_URI: 'packages\com.lightwizzard.qtappveyor\data'
+    MY_QIF_PACKAGE_URI: 'packages\com.appveyor.qtappveyor\data'
     MY_PYTHON_VER: 3.8 # Last version Windows 7 can run
     MY_PYTHON_REQUIRED: false
   install:
