@@ -1,4 +1,3 @@
-
 #
 version: '{branch}-{build}'
 
@@ -17,7 +16,7 @@ platform:
 #  - x86
 
 image:
-#  - Ubuntu
+  - Ubuntu
   - Visual Studio 2019
 
 for:
@@ -96,14 +95,14 @@ for:
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%BIN_PRO_RES_NAME%.exe" "AppDir\%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.exe"
     - cmd: windeployqt "AppDir/%BIN_PRO_RES_NAME%.exe" --verbose=2
     - cmd: mv %BIN_PRO_RES_NAME%.exe %BIN_PRO_RES_NAME%-%PLATFORM%.exe
-    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.png" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
-    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.svg" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
-    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.ico" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
-    - cmd: rsync -Ravr "%APPVEYOR_BUILD_FOLDER%/usr/share/icons" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/icons";
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.png" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data"
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.svg" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data"
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.ico" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data"
+    - cmd: rsync -Ravr "%APPVEYOR_BUILD_FOLDER%/usr/share/icons" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/icons"
     - cmd: ls "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
     - cmd: echo "Running Qt Installer Framework";
-    - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x64.exe";
-    - cmd: if %PLATFORM%==x86 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x86.exe";
+    - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x64.exe"
+    - cmd: if %PLATFORM%==x86 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x86.exe"
     - cmd: export ARTIFACT_QIF="%BIN_PRO_RES_NAME%-Linux-Installer";
     - cmd: 7z a -tzip "%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" AppDir -r
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" "%APPVEYOR_BUILD_FOLDER%\
@@ -117,7 +116,6 @@ for:
     - cmd: echo Current Path is %cd%
     - cmd: dir
     - cmd: echo -e "Completed-Build Windows"
-
   artifacts:
     - path: '%BIN%*.zip'
       name: 'ZipInstaller'
