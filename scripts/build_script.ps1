@@ -61,8 +61,6 @@ Copy-Item -Path "$APPVEYOR_BUILD_FOLDER\build\AppDir" -Destination "$APPVEYOR_BU
 #xcopy /s /e /f "$APPVEYOR_BUILD_FOLDER\build\AppDir" "$APPVEYOR_BUILD_FOLDER\$MY_QIF_PACKAGE_URI"
 #C:\Qt\Tools\QtInstallerFramework\3.2\bin\binarycreator.exe --offline-only -c "$APPVEYOR_BUILD_FOLDER\config\config.xml" -p "$APPVEYOR_BUILD_FOLDER\packages" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
 #7z a -tzip "$MY_BIN_PRO_RES_NAME-Windows-$PLATFORM-Installer.zip" "$MY_BIN_PRO_RES_NAME-Windows-Installer.exe"
-
-
 #
 
 Copy-Item -Path "$MY_BIN_PRO_RES_NAME-Windows-$PLATFORM-Installer.zip" -Destination "$APPVEYOR_BUILD_FOLDER" -Force

@@ -71,11 +71,19 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
+    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\$MINGW_64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\;$PATH
+    - cmd: if %platform%==x64 set PATH=C:\Python$PYTHON_VER-x64;$PATH
+    - cmd: if %platform%==x64 call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin\qtenv2.bat"
+    - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\$MINGW_32\bin;C:\Qt\$MY_QT_VERSION\bin;$PATH
+    - cmd: if %platform%==x86 set PATH=C:\Python$PYTHON_VER;$PATH
+    - cmd: if %platform%==x86 call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW32\bin\qtenv2.bat"
+    - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
     #- cmd: scripts\install.cmd
-    - ps: scripts\install.ps1
+    #- ps: scripts\install.ps1
   build_script:
-    #- cmd: scripts\build_script.cmd
-    - ps: scripts\build_script.ps1
+    - cmd: scripts\build_script.cmd
+    #- ps: scripts\build_script.ps1
   artifacts:
     - path: '%BIN%*.zip'
       name: 'ZipInstaller'
