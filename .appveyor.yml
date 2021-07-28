@@ -78,6 +78,8 @@ for:
     - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER;%PATH%
     - cmd: if %platform%==x86 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
     - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+    - cmd: set PATH=C:\MINGW\bin\;%PATH%
+    # C:\mingw-w64\ missing from 2019 matrix
     #- cmd: scripts\install.cmd
     #- ps: scripts\install.ps1
   build_script:
