@@ -12,15 +12,20 @@ but at the same time it was only to test my AppVeyor Scripts,
 it was then I decided why not make an AppVeyor Script Automation Tool,
 and now my concept is to use the Yaml Script this Application puts out to deploy this Application.
 
-This is project is for AppVeyor if they want to move it to their account and take it over.
+This is project is for AppVeyor if they want to fork it and take it over as a community project,
+to make it a better application, and give developers something that works,
+so they can base their projects on this project,
+and have it cross-complile into as many plateforms as possible.
 
-This is a simple application written in Qt C++ using Widgets, 
+This is a simple application written in Qt C++ using Widgets,
+it uses SQL to store projects,
 it is a simple app that has a settings page to enter in all the Variables needed to make an AppVeyor Yaml file,
-so with a click of a bottom you can automate the creation of .appveyor.yml file.
+so with a click of a bottom you can automate the creation of an .appveyor.yml file.
 
 This App is basically just to show you how to deploy Qt C++ QtCreator Projects,
-on Linux, Mac, and Windows,
-and how to use the Qt Installer Framework to make Installable applications.
+on Linux, Mac, Windows, and maybe WebAssembly and iOS, as well as Android,
+and how to use the Qt Installer Framework to make Installable applications,
+that are also updateable.
 
 ## Status
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
@@ -45,9 +50,12 @@ This is a work in progress, please report any bugs, and comments.
 ## Things in work
 
 * Qt Installer Framework
+* Updateable AppImage 
 * Windows scripts instead of inline
 * Mac
-
+* Android
+* WebAssembly
+* iOS
 
 ## Variables
 
