@@ -42,6 +42,13 @@ For more information see: [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wik
 
 This is a work in progress, please report any bugs, and comments.
 
+## Things in work
+
+* Qt Installer Framework
+* Windows scripts instead of inline
+* Mac
+
+
 ## Variables
 
 If you use this Application to make .appveyor.yml files, 
