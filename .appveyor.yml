@@ -97,11 +97,11 @@ for:
     - cmd: dir AppDir
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" AppDir
     - cmd: windeployqt "AppDir\%MY_BIN_PRO_RES_NAME%.exe" --verbose=2
-    - cmd: mv %MY_BIN_PRO_RES_NAME%.exe %MY_BIN_PRO_RES_NAME%-%PLATFORM%.exe
+    - cmd: copy %MY_BIN_PRO_RES_NAME%.exe %MY_BIN_PRO_RES_NAME%-%PLATFORM%.exe
     - cmd: copy -v "%APPVEYOR_BUILD_FOLDER%/desktop/%MY_BIN_PRO_RES_NAME%.png" "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/data"
     - cmd: copy -v "%APPVEYOR_BUILD_FOLDER%/desktop/%MY_BIN_PRO_RES_NAME%.svg" "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/data"
     - cmd: copy -v "%APPVEYOR_BUILD_FOLDER%/desktop/%MY_BIN_PRO_RES_NAME%.ico" "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/data"
-    - cmd: xcopy "%APPVEYOR_BUILD_FOLDER%/usr/share/icons" "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/icons"
+    - cmd: #xcopy "%APPVEYOR_BUILD_FOLDER%/usr/share/icons" "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/icons" /E
     - cmd: ls "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/data";
     - cmd: echo "Running Qt Installer Framework";
     - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x64.exe"
