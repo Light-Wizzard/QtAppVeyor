@@ -12,8 +12,8 @@ build: off
 configuration: Release
 
 platform:
-  - x64
-#  - x86
+  #- x64
+  - x86
 
 image:
   - Ubuntu
@@ -60,7 +60,7 @@ for:
     MY_QT_MINGW32: mingw81_32
     MY_QT_MINGW64: mingw81_64
     MY_QT_TOOLS_MINGW32: mingw810_32
-    MY_QT_TOOLS_MINGW64: mingw810_64
+    MY_QT_TOOLS_MINGW64: mingw810_32 # mingw810_64?
     MY_QT_IF_VERSION: '4.1.1'
     MY_QIF_PACKAGE_URI: 'packages\com.appveyor.qtappveyor\data'
     MY_PYTHON_VER: 3.8 # Last version Windows 7 can run
@@ -70,12 +70,12 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
-    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\%MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\;%PATH%
+    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\%MY_MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\;%PATH%
     - cmd: if %platform%==x64 set PATH=C:\Python%MY_PYTHON_VER-x64%;%PATH%
     - cmd: if %platform%==x64 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat"
     - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\%MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
-    - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER;%PATH%
+    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
+    - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER%;%PATH%
     - cmd: if %platform%==x86 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
     - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
     - cmd: set PATH=C:\MINGW\bin\;%PATH%
@@ -90,8 +90,8 @@ for:
     - cmd: mkdir build
     - cmd: cd build
     - cmd: mkdir AppDir
-    - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec linux-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
-    - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec linux-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
+    - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
+    - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
     - cmd: echo "after_build Windows"
     - cmd: dir
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" "AppDir\%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.exe"
@@ -119,7 +119,7 @@ for:
     - cmd: dir
     - cmd: echo -e "Completed-Build Windows"
   artifacts:
-    - path: '%BIN%*.zip'
+    - path: *.zip
       name: 'ZipInstaller'
 
 deploy:
