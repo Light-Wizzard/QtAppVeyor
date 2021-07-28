@@ -14,10 +14,10 @@ configuration: Release
 
 platform:
   - x64
-  - x86
+#  - x86
 
 image:
-  - Ubuntu
+#  - Ubuntu
   - Visual Studio 2019
 
 for:
@@ -71,19 +71,53 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
-    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\$MINGW_64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\;$PATH
-    - cmd: if %platform%==x64 set PATH=C:\Python$PYTHON_VER-x64;$PATH
-    - cmd: if %platform%==x64 call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin\qtenv2.bat"
+    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\%MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\;%PATH%
+    - cmd: if %platform%==x64 set PATH=C:\Python%PYTHON_VER-x64%;%PATH%
+    - cmd: if %platform%==x64 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat"
     - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\$MINGW_32\bin;C:\Qt\$MY_QT_VERSION\bin;$PATH
-    - cmd: if %platform%==x86 set PATH=C:\Python$PYTHON_VER;$PATH
-    - cmd: if %platform%==x86 call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW32\bin\qtenv2.bat"
+    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\%MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
+    - cmd: if %platform%==x86 set PATH=C:\Python%PYTHON_VER;%PATH%
+    - cmd: if %platform%==x86 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
     - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
     #- cmd: scripts\install.cmd
     #- ps: scripts\install.ps1
   build_script:
-    - cmd: scripts\build_script.cmd
+    #- cmd: scripts\build_script.cmd
     #- ps: scripts\build_script.ps1
+    - cmd: echo "build_script Windows"
+    - cmd: cd %APPVEYOR_BUILD_FOLDER%
+    - cmd: mkdir build
+    - cmd: cd build
+    - cmd: mkdir AppDir
+    - cmd: if %PLATFORM%==x86 qmake -v && qmake ..\%BIN_PRO_RES_NAME%.pro CONFIG+=%configuration% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
+    - cmd: if %PLATFORM%==x64 qmake -v && qmake ..\%BIN_PRO_RES_NAME%.pro CONFIG+=%configuration% CONFIG+=c++11 DESTDIR=%cd% && mingw32-make && mingw32-make install INSTALL_ROOT=AppDir
+    - cmd: echo "after_build Windows"
+    - cmd: dir
+    - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%BIN_PRO_RES_NAME%.exe" "AppDir\%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.exe"
+    - cmd: windeployqt "AppDir/%BIN_PRO_RES_NAME%.exe" --verbose=2
+    - cmd: mv %BIN_PRO_RES_NAME%.exe %BIN_PRO_RES_NAME%-%PLATFORM%.exe
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.png" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.svg" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
+    - cmd: cp -v "%APPVEYOR_BUILD_FOLDER%/desktop/%BIN_PRO_RES_NAME%.ico" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
+    - cmd: rsync -Ravr "%APPVEYOR_BUILD_FOLDER%/usr/share/icons" "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/icons";
+    - cmd: ls "%APPVEYOR_BUILD_FOLDER%/%QIF_PACKAGE_URI%/data";
+    - cmd: echo "Running Qt Installer Framework";
+    - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x64.exe";
+    - cmd: if %PLATFORM%==x86 export ARTIFACT_APPIMAGE="%BIN_PRO_RES_NAME%-x86.exe";
+    - cmd: export ARTIFACT_QIF="%BIN_PRO_RES_NAME%-Linux-Installer";
+    - cmd: 7z a -tzip "%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" AppDir -r
+    - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" "%APPVEYOR_BUILD_FOLDER%\
+    - cmd: echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
+    - cmd: echo ../QtInstallerFramework-windows-x86-%MY_QT_IF_VERSION%.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN_PRO_RES_NAME%-Windows-Installer.exe"
+    - cmd: echo 7z a -tzip "%BIN_PRO_RES_NAME%-Windows-Installer.zip" "%BIN_PRO_RES_NAME%-Windows-Installer.exe"
+    - cmd: echo C:\Qt\Tools\QtInstallerFramework\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%BIN_PRO_RES_NAME%-Windows-Installer.exe"
+    - cmd: copy *.zip %APPVEYOR_BUILD_FOLDER%
+    - cmd: copy *.exe %APPVEYOR_BUILD_FOLDER%
+    - cmd: cd %APPVEYOR_BUILD_FOLDER%
+    - cmd: echo Current Path is %cd%
+    - cmd: dir
+    - cmd: echo -e "Completed-Build Windows"
+
   artifacts:
     - path: '%BIN%*.zip'
       name: 'ZipInstaller'
