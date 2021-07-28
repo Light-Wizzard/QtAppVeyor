@@ -27,11 +27,21 @@ on Linux, Mac, Windows, and maybe WebAssembly and iOS, as well as Android,
 and how to use the Qt Installer Framework to make Installable applications,
 that are also updateable.
 
+Index
+1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
+2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
+3. [Working-On](https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
+4. [Variables](https://github.com/Light-Wizzard/QtAppVeyor#Variables)
+5. [Database](https://github.com/Light-Wizzard/QtAppVeyor#Database)
+6. [Help](https://github.com/Light-Wizzard/QtAppVeyor#Help)
+7. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
+8. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
+
 ## Status
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
-## :package: **Downloads:**
+### :package: **Downloads:**
  - :penguin: [Linux](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-x86_64.AppImage)
  - :penguin: :outbox_tray: [Linux Installer in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Linux-Installer)
  - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows.zip)
@@ -41,13 +51,13 @@ Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j
 Windows (Tested on 7 and 10 let me know if 8 works): Download zip and extract it, 
 and run the file QtAppVeyor.exe inside of the deploy folder.
 
-## Development Progress
+## Development-Progress
 
 For more information see: [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 
 This is a work in progress, please report any bugs, and comments.
 
-## Things in work
+## Working-On
 
 * Qt Installer Framework
 * Updateable AppImage 
@@ -148,8 +158,15 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 ```
 
-## More Help
+## Help
 This Application has built in Help on the app itself.
 
+## Screen-Shots
+![Settings](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
+![SQL](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
+![Ubuntu](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/ubuntu.png)
+![Windows](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/windows.png)
+![Defaults](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/defaults.png)
+![YML](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
-End of README.md
+## End-of-README.md
