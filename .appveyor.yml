@@ -119,7 +119,7 @@ for:
     - cmd: dir
     - cmd: echo -e "Completed-Build Windows"
   artifacts:
-    - path: *.zip
+    - path: '*.zip'
       name: 'ZipInstaller'
 
 deploy:
