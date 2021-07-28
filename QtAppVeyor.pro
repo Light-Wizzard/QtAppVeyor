@@ -14,6 +14,9 @@ CONFIG += c++11
 # This pro(ject) file is based on a pattern
 TARGET = "QtAppVeyor"
 
+win32:QMAKE_CC = gcc
+win32:QMAKE_CXX = g++
+
 SOURCES += main.cpp \
     AboutDialog.cpp \
     HelpDialog.cpp \
