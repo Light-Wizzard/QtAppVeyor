@@ -99,7 +99,7 @@ for:
     - cmd: dir AppDir
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" AppDir
     - cmd: windeployqt "AppDir\%MY_BIN_PRO_RES_NAME%.exe" --verbose=2
-    - cmd: ls "%APPVEYOR_BUILD_FOLDER%/%MY_QIF_PACKAGE_URI%/data";
+    - cmd: ls "%APPVEYOR_BUILD_FOLDER%\%MY_QIF_PACKAGE_URI%\data";
     - cmd: echo "Running Qt Installer Framework";
     - cmd: if %PLATFORM%==x64 export ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x64.exe"
     - cmd: if %PLATFORM%==x86 export ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x86.exe"
@@ -107,7 +107,7 @@ for:
     - cmd: 7z a -tzip "%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" AppDir -r
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" "%APPVEYOR_BUILD_FOLDER%\
     - cmd: echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
-    - cmd: echo ../QtInstallerFramework-windows-x86-%MY_QT_IF_VERSION%.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
+    - cmd: echo ..\QtInstallerFramework-windows-x86-%MY_QT_IF_VERSION%.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: echo 7z a -tzip "%MY_BIN_PRO_RES_NAME%-Windows-Installer.zip" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: echo C:\Qt\Tools\QtInstallerFramework\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: copy *.zip %APPVEYOR_BUILD_FOLDER%
