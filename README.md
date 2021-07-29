@@ -33,6 +33,11 @@ but currently Qt is the only Envirnoment I have been working on,
 but I did add a button for different Envirnoments,
 this way this tool will be usefull to every Software developer.
 
+My biggest issue is lack of Windows Scripting experience, 
+I have not used Windows in Decades, and only recently bought Windows 10 Pro,
+just to use Word, and I do not do Mac, so Linux is really all I can get to work,
+so I can really use some help writing the Scripts.
+
 Index
 1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)

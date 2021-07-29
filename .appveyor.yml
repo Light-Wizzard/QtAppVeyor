@@ -74,11 +74,15 @@ for:
     - cmd: if %platform%==x64 set PATH=C:\Python%MY_PYTHON_VER-x64%;%PATH%
     - cmd: if %platform%==x64 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat"
     - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+    #
     - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
     - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER%;%PATH%
     - cmd: if %platform%==x86 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
     - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+    #
     - cmd: set PATH=C:\MINGW\bin\;%PATH%
+    #- cmd: "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+    - cmd: "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /Release /x64
     # C:\mingw-w64\ missing from 2019 matrix
     #- cmd: scripts\install.cmd
     #- ps: scripts\install.ps1
