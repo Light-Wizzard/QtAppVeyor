@@ -175,6 +175,27 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 ```
 
+## MXE
+
+MXE (M cross environment) is a GNU Makefile that compiles a cross compiler and cross compiles many free libraries such as SDL and Qt.
+
+[https://mxe.cc/](https://mxe.cc/)
+
+```
+git clone https://github.com/mxe/mxe.git
+
+x86 use
+make qt5
+
+x64 use
+make MXE_TARGETS=x86_64-w64-mingw32.static qt5
+
+cd to project folder root and run
+path/mxe/usr/i686-w64-mingw32.static/bin/qmake
+make
+
+```
+
 ## Help
 This Application has built in Help on the app itself, 
 but I will try to expand on the Help sections,
