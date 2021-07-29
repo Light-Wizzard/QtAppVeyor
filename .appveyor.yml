@@ -114,7 +114,6 @@ for:
     - cmd: echo ..\QtInstallerFramework-windows-x86-%MY_QT_IF_VERSION%.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: echo 7z a -tzip "%MY_BIN_PRO_RES_NAME%-Windows-Installer.zip" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: copy *.zip %APPVEYOR_BUILD_FOLDER%
-    - cmd: copy *.exe %APPVEYOR_BUILD_FOLDER%
     - cmd: cd %APPVEYOR_BUILD_FOLDER%
     - cmd: echo Current Path is %cd%
     - cmd: dir
