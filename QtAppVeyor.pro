@@ -3,8 +3,8 @@
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
 TEMPLATE = "app"
 QT      += core gui sql
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-qtHaveModule(printsupport):       QT *= printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+#qtHaveModule(printsupport):       QT *= printsupport
 CONFIG += c++11
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
