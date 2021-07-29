@@ -82,8 +82,6 @@ for:
     #
     - cmd: set PATH=C:\MINGW\bin\;%PATH%
     #
-    - dir "C:\Program Files\Microsoft SDKs\Windows\"
-    #- cmd: call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" x64
     # C:\mingw-w64\ missing from 2019 matrix
     #- cmd: scripts\install.cmd
     #- ps: scripts\install.ps1
@@ -111,7 +109,6 @@ for:
     - cmd: 7z a -tzip "%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" AppDir -r
     - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%-%MY_OS%-%CONFIGURATION%-%PLATFORM%.zip" "%APPVEYOR_BUILD_FOLDER%\
     - cmd: echo "Running Qt Installer Framework";
-    #- cmd: ls "%APPVEYOR_BUILD_FOLDER%\%MY_QIF_PACKAGE_URI%";
     - cmd: echo APPVEYOR_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%
     - cmd: echo C:\Qt\Tools\QtInstallerFramework\binarycreator.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"
     - cmd: echo ..\QtInstallerFramework-windows-x86-%MY_QT_IF_VERSION%.exe --offline-only -c "%APPVEYOR_BUILD_FOLDER%\config\config.xml" -p "%APPVEYOR_BUILD_FOLDER%\packages" "%MY_BIN_PRO_RES_NAME%-Windows-Installer.exe"

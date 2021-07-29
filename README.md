@@ -38,6 +38,11 @@ I have not used Windows in Decades, and only recently bought Windows 10 Pro,
 just to use Word, and I do not do Mac, so Linux is really all I can get to work,
 so I can really use some help writing the Scripts.
 
+Qt is moving to cmake in version 6, so I have no choice but to move away from qmake.
+
+For Windows I am not sure if MingW is the right tool, or if VS is,
+or if I should use MSYS, or Cygwin.
+
 Index
 1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
