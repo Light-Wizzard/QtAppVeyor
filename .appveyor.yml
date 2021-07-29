@@ -82,7 +82,7 @@ for:
     #
     - cmd: set PATH=C:\MINGW\bin\;%PATH%
     # did not like this at all
-    - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" x64
+    #- cmd: call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" x64
     #- cmd: call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" Release x64
     # C:\mingw-w64\ missing from 2019 matrix
     #- cmd: scripts\install.cmd
@@ -97,8 +97,9 @@ for:
     - cmd: mkdir AppDir
     - cmd: set INSTALL_ROOT=AppDir
     - cmd: set BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
-    - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x32 DESTDIR=%cd% && mingw32-make && mingw32-make install
-    - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=%cd% && mingw32-make && mingw32-make install
+    # DESTDIR=%cd%
+    - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x32 DESTDIR=AppDir && mingw32-make && mingw32-make install
+    - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && mingw32-make && mingw32-make install
     - cmd: echo "after_build Windows"
     - cmd: dir
     - cmd: dir AppDir
