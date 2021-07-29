@@ -101,7 +101,7 @@ for:
     - cmd: echo "after_build Windows"
     - cmd: dir
     - cmd: dir AppDir
-    - cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" AppDir
+    #- cmd: copy "%APPVEYOR_BUILD_FOLDER%\build\%MY_BIN_PRO_RES_NAME%.exe" AppDir
     - cmd: windeployqt "AppDir\%MY_BIN_PRO_RES_NAME%.exe" --verbose=2
     - cmd: if %PLATFORM%==x64 set ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x64.exe"
     - cmd: if %PLATFORM%==x86 set ARTIFACT_APPIMAGE="%MY_BIN_PRO_RES_NAME%-x86.exe"

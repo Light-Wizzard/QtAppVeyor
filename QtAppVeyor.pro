@@ -53,6 +53,7 @@ DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
 
 DISTFILES += \
     .appveyor.yml \
+    CMakeLists.txt \
     README.md \
     help/About-en.html \
     help/Help-en.html \
