@@ -52,6 +52,9 @@ QSettings *MyOrgSettings::getSettings()
     QCoreApplication::setApplicationName(getAppName());
     //QCoreApplication::setApplicationDisplayName(getAppName());
     // see *.pro file where it is: DEFINES *= APP_VERSION=$${VERSION}
+#ifndef APP_VERSION
+#define APP_VERSION ("1.0.0")
+#endif
     QCoreApplication::setApplicationVersion(QObject::tr(APP_VERSION));
     QString myIni = QString("%1%2%3").arg(getAppDataLocation(), QDir::separator(), myConstants->MY_INI_FILE);
     if (!isFileMake(getAppDataLocation(), myConstants->MY_INI_FILE))

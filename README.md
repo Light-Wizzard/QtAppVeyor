@@ -1,7 +1,7 @@
 # QtAppVeyor
 
 Every program needs a reason to exist,
-this one exist becasue I was working on a project to update my [Galaxy Calculator](https://github.com/Light-Wizzard/galaxy-calculator) from QML,
+this one exist because I was working on a project to update my [Galaxy Calculator](https://github.com/Light-Wizzard/galaxy-calculator) from QML,
 to C++, so this Qt Application I want to work on as many Platforms as possible,
 having had Galaxy Calculator program on [AppVeyor](https://appveyor.com) for a while,
 I decided to give it a try,
@@ -15,7 +15,7 @@ and now my concept is to use the Yaml Script this Application puts out to deploy
 This is project is for AppVeyor if they want to fork it and take it over as a community project,
 to make it a better application, and give developers something that works,
 so they can base their projects on this project,
-and have it cross-complile into as many plateforms as possible.
+and have it cross-complile into as many platforms as possible.
 
 This is a simple application written in Qt C++ using Widgets,
 it uses SQL to store projects,
@@ -25,13 +25,13 @@ so with a click of a bottom you can automate the creation of an .appveyor.yml fi
 This App is basically just to show you how to deploy Qt C++ QtCreator Projects,
 on Linux, Mac, Windows, and maybe WebAssembly and iOS, as well as Android,
 and how to use the Qt Installer Framework to make Installable applications,
-that are also updateable.
+that are also update-able.
 
 This project is not just geared for Qt Software developers,
-it should be able to handle many different Envirnoments,
-but currently Qt is the only Envirnoment I have been working on,
-but I did add a button for different Envirnoments,
-this way this tool will be usefull to every Software developer.
+it should be able to handle many different Environments,
+but currently Qt is the only Environment I have been working on,
+but I did add a button for different Environments,
+this way this tool will be useful to every Software developer.
 
 My biggest issue is lack of Windows Scripting experience, 
 I have not used Windows in Decades, and only recently bought Windows 10 Pro,
@@ -52,6 +52,7 @@ Index
 6. [Help](https://github.com/Light-Wizzard/QtAppVeyor#Help)
 7. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
 8. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
+9. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
 
 ## Status
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
@@ -175,26 +176,6 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 ```
 
-## MXE
-
-MXE (M cross environment) is a GNU Makefile that compiles a cross compiler and cross compiles many free libraries such as SDL and Qt.
-
-[https://mxe.cc/](https://mxe.cc/)
-
-```
-git clone https://github.com/mxe/mxe.git
-
-x86 use
-make qt5
-
-x64 use
-make MXE_TARGETS=x86_64-w64-mingw32.static qt5
-
-cd to project folder root and run
-path/mxe/usr/i686-w64-mingw32.static/bin/qmake
-make
-
-```
 
 ## Help
 This Application has built in Help on the app itself, 
