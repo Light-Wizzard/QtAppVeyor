@@ -76,13 +76,13 @@ Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j
  - :apple: [Apple](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.dmg)
 
 Windows (Tested on 7 and 10 let me know if 8 works): Download zip and extract it, 
-and run the file QtAppVeyor.exe inside of the deploy folder.
+and run the file QtAppVeyor.exe inside of the deploy AppDir folder.
 
 ## Development-Progress
 
 For more information see: [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 
-This is a work in progress, please report any bugs, and comments.
+This is a work in progress, please report any bugs, and leave comments.
 
 ## Working-On
 
@@ -123,9 +123,9 @@ Unix
 ```yaml
 MY_BIN_PRO_RES_NAME:  QtAppVeyor #
 MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
-MY_VS_VERSION:       5.15.2      # Qt Version
+MY_QT_VERSION:        5.15.2     # Qt Version
 MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
-MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
+MY_QIF_PACKAGE_URI:   'com.appveyor.qtappveyor\data' #
 MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
 MY_PYTHON_REQUIRED:   false      # if Python is required
 MY_UPGRADE_OS: false             # apt-get upgrade: true or false only
@@ -134,17 +134,18 @@ MY_UPGRADE_OS: false             # apt-get upgrade: true or false only
 Windows 
 
 ```yaml
-MY_BIN_PRO_RES_NAME:  QtAppVeyor #
-MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
-MY_VS_VERSION:       5.15.2      # Qt Version
-MY_QT_MINGW32:       mingw81_32  # Windows only Qt folder Variables
-MY_QT_MINGW64:       mingw81_64  # Windows only Qt folder Variables
-MY_QT_TOOLS_MINGW32: mingw810_32 # Windows only Qt folder Variables
-MY_QT_TOOLS_MINGW64: mingw810_64 # Windows only Qt folder Variables
-MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
-MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
-MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
-MY_PYTHON_REQUIRED:   false      # if Python is required
+MY_BIN_PRO_RES_NAME:  QtAppVeyor  #
+MY_OS:                Windows     # No Spaces, this shows up the file name, project-os-configuration-plateform format
+MY_QT_VERSION:        5.15.2      # Qt Version
+MY_VS_VERSION:        2019        # Vs Version
+MY_QT_MINGW32:        mingw81_32  # Windows only Qt folder Variables
+MY_QT_MINGW64:        mingw81_64  # Windows only Qt folder Variables
+MY_QT_TOOLS_MINGW32:  mingw810_32 # Windows only Qt folder Variables
+MY_QT_TOOLS_MINGW64:  mingw810_64 # Windows only Qt folder Variables
+MY_QT_IF_VERSION:     '4.1.1'     # QT Installer Framework Version
+MY_QIF_PACKAGE_URI:   'com.appveyor.qtappveyor\data' #
+MY_PYTHON_VER:        3.8         # Last version Windows 7 can run is 3.8.x
+MY_PYTHON_REQUIRED:   false       # if Python is required
 ```
 ## Database
 
@@ -190,7 +191,7 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 ## Help
 This Application has built in Help on the app itself, 
 but I will try to expand on the Help sections,
-and add Wiki Content,
+and add more [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki) Content,
 that might help.
 
 ## Screen-Shots
@@ -201,4 +202,4 @@ that might help.
 ![Defaults](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/defaults.png)
 ![YML](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
-## End-of-README.md
+### End-of-README.md
