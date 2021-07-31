@@ -98,12 +98,12 @@ for:
     # Qt x86
     - ps: |
           If ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
-             $env:Path += ";C:\Qt\Tools\$env:MY_MINGW_32\bin"
-             $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32$env:\bin"
+             $env:Path += ";C:\Qt\Tools\$env:MY_QT_MINGW32\bin"
+             $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32"
              cmd.exe /c C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32\bin\qtenv2.bat"
           }
-    #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Qt; then set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH% fi"
+    #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Qt; then set PATH=C:\Qt\Tools\%MY_QT_MINGW32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH% fi"
     #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Qt; then call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat" fi"
     # Vs x86
     - ps: |
@@ -113,7 +113,7 @@ for:
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32"
              cmd.exe /c C:\Qt\$env:MY_QT_VERSION\msvc$($env:MY_VS_VERSION)\bin\qtenv2.bat"
           }
-    #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Vs; then set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%\bin;%PATH% fi"
+    #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Vs; then set PATH=C:\Qt\Tools\%MY_QT_MINGW32%\bin;C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%\bin;%PATH% fi"
     #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Vs; then call C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%\bin\qtenv2.bat" fi"
     # Python x86
     - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER%;%PATH%
