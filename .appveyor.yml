@@ -75,8 +75,7 @@ for:
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
     # Qt x64
-    - ps: If ($env:PLATFORM -eq "x64" -And [int]$env:MY_COMPILER -eq "Qt")
-          {
+    - ps: If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
              $env:Path += ";C:\Qt\Tools\$env:MY_QT_MINGW64\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64"
@@ -85,8 +84,7 @@ for:
     - cmd: bash -lc "if %platform%==x64 && %MY_COMPILER%==Qt; then call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat fi"
 
     # Vs x64
-    - ps: If ($env:PLATFORM -eq "x64" -And [int]$env:MY_COMPILER -eq "Vs")
-          {
+    - ps: If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
              $env:Path += ";C:\Qt\Tools\$env:MY_QT_MINGW64\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\msvc$($env:MY_VS_VERSION)_64\bin"
           }
@@ -96,8 +94,7 @@ for:
     - cmd: if %platform%==x64 set PATH=C:\Python%MY_PYTHON_VER-x64%;%PATH%
     - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\%MY_VS_VERSION%\Community\VC\Auxiliary\Build\vcvars64.bat"
     # Qt x86
-    - ps: If ($env:PLATFORM -eq "x86" -And [int]$env:MY_COMPILER -eq "Qt")
-          {
+    - ps: If ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
              $env:Path += ";C:\Qt\Tools\$env:MY_MINGW_32\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32$env:\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32"
@@ -106,8 +103,7 @@ for:
     #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Qt; then set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH% fi"
     #- cmd: bash -lc "if %platform%==x86 && %MY_COMPILER%==Qt; then call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat" fi"
     # Vs x86
-    - ps: If ($env:PLATFORM -eq "x86" -And [int]$env:MY_COMPILER -eq "Vs")
-          {
+    - ps: If ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Vs") {
              $env:Path += ";C:\Qt\Tools\$env:MY_QT_MINGW32\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32\bin"
              $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32"
@@ -136,23 +132,19 @@ for:
     - cmd: set BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
     # Qt
     # DESTDIR=%cd%
-    - ps: If ($env:PLATFORM -eq "x86" -And [int]$env:MY_COMPILER -eq "Qt")
-          {
+    - ps: If ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
             cmd.exe /c qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && cmd.exe /c mingw32-make && cmd.exe /c mingw32-make install
           }
-    - ps: If ($env:PLATFORM -eq "x64" -And [int]$env:MY_COMPILER -eq "Qt")
-          {
+    - ps: If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
             cmd.exe /c qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && cmd.exe /c mingw32-make && cmd.exe /c mingw32-make install
           }
     #- cmd: bash -lc "if %PLATFORM%==x86 && %MY_COMPILER%==Qt; then qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && mingw32-make && mingw32-make install fi"
     #- cmd: bash -lc "if %PLATFORM%==x64 && %MY_COMPILER%==Qt; then qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && mingw32-make && mingw32-make install fi"
     # Vs
-    - ps: If ($env:PLATFORM -eq "x86" -And [int]$env:MY_COMPILER -eq "Vs")
-          {
+    - ps: If ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Vs") {
             cmd.exe /c qmake -r -spec win32-g++ $env:APPVEYOR_BUILD_FOLDER\$($env:MY_BIN_PRO_RES_NAME).pro CONFIG+=$env:CONFIGURATION CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && cmd.exe /c mmake && cmd.exe /c mmake install
           }
-    - ps: If ($env:PLATFORM -eq "x64" -And [int]$env:MY_COMPILER -eq "Vs")
-          {
+    - ps: If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
             cmd.exe /c qmake -r -spec win32-g++ $env:APPVEYOR_BUILD_FOLDER%\$($env:MY_BIN_PRO_RES_NAME).pro CONFIG+=$env:CONFIGURATION CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && cmd.exe /c mmake && cmd.exe /c mmake install
           }
     #- cmd: bash -lc "if %PLATFORM%==x86 && %MY_COMPILER%==Vs; then qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && mmake && mmake install fi"
