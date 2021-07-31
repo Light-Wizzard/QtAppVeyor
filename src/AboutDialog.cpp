@@ -31,5 +31,13 @@ void AboutDialog::on_buttonBox_accepted()
 {
     AboutDialog::close();
 }
+/******************************************************************************
+* \fn on_pushButtonAboutAuthor_clicked
+*******************************************************************************/
+void AboutDialog::on_pushButtonAboutAuthor_clicked()
+{
+    QString thisHelp = myMySettings->readFile(":help/About-Author-en.html");
+    ui->textEditAbout->setHtml(thisHelp);
+}
 /******************************* End of File *********************************/
 

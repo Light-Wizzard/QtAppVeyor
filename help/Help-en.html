@@ -9,9 +9,35 @@
 <h1>Qt AppVeyor Help</h1>
 
 <p>
+    This Application is writen to make a basic template for your AppVeyor Yaml file,
+    you need to validate it first at your "Validate YAML" button under your AppVeyor Account.
+    This is called a concept application,
+    the concept is that it runs,
+    and has a purpose,
+    which in this case is to make your .appveyor.yml template file,
+    template implies you will need to make changes to it,
+    if you want it to do more that it does,
+    which is to use its own YAML output to deploy this project,
+    thus the "Concept Application" proof.
+</p>
+
+<p>
+    This Project is designed to Fork,
+    and was written in hope AppVeyor would Fork,
+    and move delopment to that site as the Offical Version.
+</p>
+
+<p>
+    I tried to use as many features as most Qt Applications will require,
+    so you can use this program as a Templete for new projects that might be like this,
+    meaning it has tabs that have forms you need to fill out,
+    and save, print, and save as PDF, all the features built into this application.
+</p>
+
+<p>
     This Application has Tabs for every section,
     the Settings Tab is where you define what OS's you will be using,
-    what Platform, and what Configuration. <br />
+    what Platform, what Build Environment, and what Configuration. <br />
     The Defaults Tab is where you can overwrite all versions at once with the "Defauls" button,
     or individually with the "Reset" button on each Tab,
     note that blank fields should be ignorned.
@@ -34,7 +60,7 @@
 
 <p>
     This application is written to teach anyone interested in Deploying Qt Applications,
-    the concept is to give an example of a running application,
+    the concept by example of a running application,
     with most of the features you would want in a Database driven Application,
     I save the SQL setting in Qt Settings, in INI Format,
     I set the folder to QStandardPaths::AppConfigLocation,
@@ -44,7 +70,11 @@
     the Key is in MyOrgSettings: myCrypto = new SimpleCrypt(Q_UINT64_C(KEY));,
     and should be changed for secrurity reasons,
     not that this key can be used to hack the Password,
-    it does make it so it only works with this key.
+    it does make it so it only works with this key,
+    so if you alter it will running it,
+    you will get locked out,
+    but you can update the INI file by hand,
+    and why it is encrypt to begin with.
 </p>
 
 <p>
@@ -56,15 +86,21 @@
 </p>
 
 <p>
-    There is an option to save the file.
+    There is an option to save the file,
+    this can be used to deploy your own project.
 </p>
 
 <p>
     Below is a list of supported Databases, Sqlite is the easiest to use,
-    and the only one I have test so far,
+    and the only one I have tested so far,
     I do plan on testing MySQL and PostgreSQL,
     but as long as all the fields are set,
-    it should work in all of them.
+    it should work in all of them without testing them,
+    and why I did not test them,
+    I wrote some of this code years ago,
+    and it worked back then,
+    and so I did test it at some point,
+    but if you have an issue just file an issue.
 </p>
 
 <ul>
@@ -86,21 +122,12 @@
 
 <ul>
     <li>https://ci.appveyor.com/tools/validate-yaml</li>
-    <li>https://ci.appveyor.com/account/Github-Account/tools/encrypt</li>
+    <li>https://ci.appveyor.com/account/Your-Github-Account/tools/encrypt</li>
 </ul>
 
 
 <p>
 
-</p>
-
-<hr>
-
-<p>
-    My Name is Jeffrey Scott Flesher, I am a Medically Retired U.S. Air Force Computer programmer,
-    and Helicopter Crew Cheif for the 66<sup>th</sup> RQS Air Rescue,
-    and 31<sup>st</sup> Special Operations Squadron,
-    and I am the Light Wizzard in the Flesh.
 </p>
 
 

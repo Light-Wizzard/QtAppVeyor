@@ -19,6 +19,8 @@ class HelpDialog : public QDialog
     private slots:
         void on_pushButtonClose_clicked();
 
+        void on_pushButtonHelpAuthor_clicked();
+
     private:
         Ui::HelpDialog *ui;            //!< \c ui \brief ui
         MyOrgSettings   *myMySettings; //!< \c myMySettings \brief Used for Path

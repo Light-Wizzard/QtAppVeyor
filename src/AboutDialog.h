@@ -24,6 +24,8 @@ class AboutDialog : public QDialog
     private slots:
         void on_buttonBox_accepted();
 
+        void on_pushButtonAboutAuthor_clicked();
+
     private:
         Ui::AboutDialog *ui;           //!< \c ui \brief Pointer to AboutDialog.ui
         MyOrgSettings   *myMySettings; //!< \c myMySettings \brief

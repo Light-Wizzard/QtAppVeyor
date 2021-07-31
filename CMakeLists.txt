@@ -20,19 +20,19 @@ set(QT5_LIBRARIES Qt5::Widgets Qt5::PrintSupport Qt5::Sql)
 set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
 set(SOURCES
-    main.cpp
-    AboutDialog.cpp
-    HelpDialog.cpp
-    MainWindow.cpp
-    MyOrgSettings.cpp
-    MySqlDbtModel.cpp
-    SimpleCrypt.cpp
+    src/main.cpp
+    src/AboutDialog.cpp
+    src/HelpDialog.cpp
+    src/MainWindow.cpp
+    src/MyOrgSettings.cpp
+    src/MySqlDbtModel.cpp
+    src/SimpleCrypt.cpp
 )
 # UI
 set(UI_SOURCES
-    MainWindow.ui
-    AboutDialog.ui
-    HelpDialog.ui
+    src/MainWindow.ui
+    src/AboutDialog.ui
+    src/HelpDialog.ui
 )
 #
 qt5_add_resources(QT_RESOURCES QtAppVeyor.qrc)

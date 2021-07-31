@@ -64,19 +64,53 @@ these are the things I need help with.
 3. Mac, WebAssembly, iOS, and Android.
 4. cmake, the future of Qt 6.
 
+Issues: Windows complies but does not run due to dll's that are in the same folder, this is a qmake project, 
+and I have created a working cmake file, and I really do need to switch over to cmake for all the whole project,
+and that is what I am currently working on, but my lack of Windows scripting, PowerShell or Command,
+I understand the languge somewhat, having had to write some over the years,
+my goal is to put all the scripts into two files, one for Install, the other for the Build,
+I want to make a Qt Installer Framework package with [Qt Auto Updates](https://github.com/Skycoder42/QtAutoUpdater),
+this GitHub project is geared to Qt Installer Framework,
+as such, I want to only make one zip file with the Qt Installer package.
+
+If I can get all these things working, I would like to see if AppVeyor would fork it,
+and we can work on it there, I wrote this for them to give to others, 
+to help them get their Applications published with ease,
+the concept is simple, this application use most of the features most people want, 
+Qt Settings to store variables, and SQL,
+so if you can get this to work for all the OS's that Qt Supports,
+it will make it much easier for peopel to copy how this was done,
+so this project needs a lot of work to make it a best practist example,
+so you can see that I have only added a minimal number of features that are easy to expand on.
+
+I need feedback on what you think about the concept,
+than the Application, what features you would want to see in it,
+and really I need to know what scripts to run to make this all work,
+I am good at bash, but not so much PowerShell or CMD,
+and not much into Mac, iOS, but I do have an Android.
+
+I want to see this Application become the Standard for AppVeyor to recommend using,
+and why they need to fork it, and make it theirs,
+I am just trying to give them something worth taking over,
+and why I have branded it QtAppVeyor, and tried to make all the documention easy to clean,
+and Doxygen ready, the Translation needs to be done,
+but I always wait to till the end to start on it.
+
 ## Status
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
 ### :package: **Downloads:**
- - :penguin: [Linux](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
- - :penguin: :outbox_tray: [Linux Installer in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Linux-Installer)
+ - :penguin: [Linux zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
  - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
- - :office: :outbox_tray: [Windows Installer exe in work](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.exe)
- - :apple: [Apple](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.dmg)
+ - :apple: Currenty unavalible [Apple zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
+
+Currenty, Windows is not working, if it was, it would say something like this:
 
 Windows (Tested on 7 and 10 let me know if 8 works): Download zip and extract it, 
 and run the file QtAppVeyor.exe inside of the deploy AppDir folder.
+
+When completed, it will only have one Artifact, the Qt Installer Framework with Qt Auto Update in a zip file.
 
 ## Development-Progress
 
@@ -189,8 +223,10 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 
 ## Help
-This Application has built in Help on the app itself, 
-but I will try to expand on the Help sections,
+This Application has built in [Help](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/Help-en.html) on the app itself,
+and an [About](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-en.html),
+as well as an [Author](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-Author-en.html) button on both Dialog boxes,
+and I will try to expand on the Help sections,
 and add more [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki) Content,
 that might help.
 

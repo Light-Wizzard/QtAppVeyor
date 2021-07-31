@@ -54,8 +54,10 @@ DISTFILES += \
     .appveyor.yml \
     CMakeLists.txt \
     README.md \
+    help/About-Author-en.html \
     help/About-en.html \
     help/Help-en.html \
+    help/ReadMe.md \
     scripts/build_script.cmd \
     scripts/build_script.ps1 \
     scripts/build_script.sh \
