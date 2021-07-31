@@ -17,25 +17,24 @@ TARGET = "QtAppVeyor"
 win32:QMAKE_CC = gcc
 win32:QMAKE_CXX = g++
 
-SOURCES += main.cpp \
-    AboutDialog.cpp \
-    HelpDialog.cpp \
-    MainWindow.cpp \
-    MyOrgSettings.cpp \
-    MySqlDbtModel.cpp \
-    SimpleCrypt.cpp
+SOURCES += src/main.cpp \
+    src/AboutDialog.cpp \
+    src/HelpDialog.cpp \
+    src/MainWindow.cpp \
+    src/MyOrgSettings.cpp \
+    src/MySqlDbtModel.cpp \
+    src/SimpleCrypt.cpp
 
 HEADERS += \
-    AboutDialog.h \
-    HelpDialog.h \
-    MainWindow.h \
-    MyOrgSettings.h \
-    MySqlDbtModel.h \
-    QtAppVeyorConstants.h \
-    SimpleCrypt.h
+    src/AboutDialog.h \
+    src/HelpDialog.h \
+    src/MainWindow.h \
+    src/MyOrgSettings.h \
+    src/MySqlDbtModel.h \
+    src/QtAppVeyorConstants.h \
+    src/SimpleCrypt.h
 
-FORMS += AboutDialog.ui MainWindow.ui \
-    HelpDialog.ui
+FORMS += src/AboutDialog.ui src/MainWindow.ui src/HelpDialog.ui
 
 # Resources
 RESOURCES   += QtAppVeyor.qrc
