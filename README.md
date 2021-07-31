@@ -44,6 +44,7 @@ For Windows I am not sure if MingW is the right tool, or if VS is,
 or if I should use MSYS, or Cygwin.
 
 Index
+0. [Broken](https://github.com/Light-Wizzard/QtAppVeyor#Broken)
 1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
 3. [Working-On](https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
@@ -53,6 +54,15 @@ Index
 7. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
 8. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 9. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
+
+## Broken
+Things that are Broken need to be worked on first, 
+these are the things I need help with.
+
+1. Windows x86 and x64 builds are not working, I am using windeploy, all the dll's are there, but it will not run.
+2. Qt installer Framework.
+3. Mac, WebAssembly, iOS, and Android.
+4. cmake, the future of Qt 6.
 
 ## Status
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)

@@ -24,7 +24,10 @@ Thumbs.db
 /.qmake.stash
 
 # qtcreator generated files
+*.pro.user
 *.pro.user*
+*.txt.user
+*.txt.user*
 
 # xemacs temporary files
 *.flc
@@ -46,8 +49,7 @@ Thumbs.db
 *.opensdf
 *.vcxproj
 *vcxproj.*
-*.pro.user
-*.pro.user*
+
 
 # MinGW generated files
 *.Debug
