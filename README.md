@@ -44,16 +44,16 @@ For Windows I am not sure if MingW is the right tool, or if VS is,
 or if I should use MSYS, or Cygwin.
 
 Index
-0. [Broken](https://github.com/Light-Wizzard/QtAppVeyor#Broken)
-1. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
-2. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
-3. [Working-On](https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
-4. [Variables](https://github.com/Light-Wizzard/QtAppVeyor#Variables)
-5. [Database](https://github.com/Light-Wizzard/QtAppVeyor#Database)
-6. [Help](https://github.com/Light-Wizzard/QtAppVeyor#Help)
-7. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
-8. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
-9. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
+1. [Broken](https://github.com/Light-Wizzard/QtAppVeyor#Broken)
+2. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
+3. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
+4. [Working-On](https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
+5. [Variables](https://github.com/Light-Wizzard/QtAppVeyor#Variables)
+6. [Database](https://github.com/Light-Wizzard/QtAppVeyor#Database)
+7. [Help](https://github.com/Light-Wizzard/QtAppVeyor#Help)
+8. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
+9. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
+10. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
 
 ## Broken
 Things that are Broken need to be worked on first, 
