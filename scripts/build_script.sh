@@ -4,7 +4,7 @@
 # Last Update: 20 July 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
-# shell?check -x scripts/build-script.sh
+# shell?check -x scripts/build_script.sh
 #
 # Original Code is from: https://github.com/linuxdeploy/QtQuickApp TheAssassin
 #
@@ -70,12 +70,12 @@ if [ -d "${REPO_ROOT}/qml" ]; then
 fi
 # x86 gcc_32? FIXME how to dox86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
-    export PATH="${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/include:$PATH";
-    if [ ! -d "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin" ]; then
-        echo "Qt x86 not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin";
-        ls "${HOME}/Qt/${MY_VS_VERSION}/";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
+    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
+        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin";
+        ls "${HOME}/Qt/${MY_QT_VERSION}/";
     fi
-    if [ ! -f "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$MY_PYTHON_REQUIRED" == "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
@@ -86,10 +86,10 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86"
 fi
 # x64
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64" ]]; then
-    export PATH="${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/include:$PATH";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
     # Check Qt
-    if [ ! -d "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
+    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # Check Python
@@ -164,8 +164,8 @@ ls "${APPVEYOR_BUILD_FOLDER}/${MY_QIF_PACKAGE_URI}/data";
 #
 echo "Running Qt Installer Framework";
 #"${APPVEYOR_BUILD_FOLDER}/scripts/QtInstallerFramework-linux.run" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
-declare -i BINARY_CREATOR_INSTALLED; BINARY_CREATOR_INSTALLED=0;
-declare MyQtInstallerFramework; MyQtInstallerFramework="binarycreator";
+#declare -i BINARY_CREATOR_INSTALLED; BINARY_CREATOR_INSTALLED=0;
+#declare MyQtInstallerFramework; MyQtInstallerFramework="binarycreator";
 #
 #echo "First Check fails for find it";
 #if command -v "$MyQtInstallerFramework" &> /dev/null; then BINARY_CREATOR_INSTALLED=1; echo "MyQtInstallerFramework=$MyQtInstallerFramework"; fi
