@@ -134,6 +134,7 @@ for:
     - cmd: mkdir AppDir
     - cmd: set INSTALL_ROOT=AppDir
     - cmd: set BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
+    - dir C:\Qt\5.15.2\mingw81_64
     # Qt
     # DESTDIR=%cd%
     - ps: |
