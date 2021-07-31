@@ -58,7 +58,7 @@ for:
     COVERITY_BUILD_CANDIDATE: True
     MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Windows # No Spaces
-    MY_COMPILER: "Vs"
+    MY_COMPILER: "Qt"
     MY_QT_VERSION: 5.15.2
     MY_VS_VERSION: 2019
     MY_QT_MINGW32: mingw81_32
