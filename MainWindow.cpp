@@ -289,7 +289,16 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Ubuntu\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionUbuntu->text()));
+        if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionUbuntu->text()));
+        }
+        if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionUbuntu->text()));
+        }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionUbuntu->text()));
         if (ui->checkBoxPythonUbuntu->isChecked())
         {
@@ -334,7 +343,16 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Mac\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionMac->text()));
+        if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionMac->text()));
+        }
+        if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionMac->text()));
+        }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionMac->text()));
         if (ui->checkBoxPythonMac->isChecked())
         {
@@ -377,7 +395,16 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: WebAssembly\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionWebAssembly->text()));
+        if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionWebAssembly->text()));
+        }
+        if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionWebAssembly->text()));
+        }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionWebAssembly->text()));
         if (ui->checkBoxPythonWebAssembly->isChecked())
         {
@@ -422,7 +449,16 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: IOS\n"); // Used in Zip and Exe Name: name-os-configuration-platform
-        thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionIOS->text()));
+        if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionIOS->text()));
+        }
+        if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionIOS->text()));
+        }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionIOS->text()));
         if (ui->checkBoxPythonIOS->isChecked())
         {
@@ -467,7 +503,16 @@ void MainWindow::onCreate()
         thisYaml.append("    RUNTIME_LINKAGE: static\n");
         thisYaml.append("    COVERITY_BUILD_CANDIDATE: True\n");
         thisYaml.append("    MY_OS: Windows\n"); // Used in Zip and Exe Name: name-os-configuration-platform
+        if (ui->radioButtonSettingsEnvironmentQt->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+        }
         thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionWindows->text()));
+        if (ui->radioButtonSettingsEnvironmentVs->isChecked())
+        {
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionWindows->text()));
+        }
         thisYaml.append(QString("    MY_QT_MINGW32: %1\n").arg(ui->lineEditQtMingW32Windows->text()));
         thisYaml.append(QString("    MY_QT_MINGW64: %1\n").arg(ui->lineEditQtMingW64Windows->text()));
         thisYaml.append(QString("    MY_QT_TOOLS_MINGW32: %1\n").arg(ui->lineEditQtToolsMingW32Windows->text()));
@@ -573,6 +618,7 @@ void MainWindow::clearTabUbuntu()
     // Ubuntu
     ui->labelRecordIdUbuntu->setText("0");
     ui->lineEditQtVersionUbuntu->setText("");
+    ui->lineEditVsVersionUbuntu->setText("");
     ui->lineEditQtIfVersionUbuntu->setText("");
     ui->lineEditQtIfPackageUriUbuntu->setText("");
     ui->lineEditPythonVersionUbuntu->setText("");
@@ -587,6 +633,7 @@ void MainWindow::clearTabMac()
     // Mac
     ui->labelRecordIdMac->setText("0");
     ui->lineEditQtVersionMac->setText("");
+    ui->lineEditVsVersionMac->setText("");
     ui->lineEditQtIfVersionMac->setText("");
     ui->lineEditQtIfPackageUriMac->setText("");
     ui->lineEditPythonVersionMac->setText("");
@@ -601,6 +648,7 @@ void MainWindow::clearTabAndroid()
     // Android
     ui->labelRecordIdAndroid->setText("0");
     ui->lineEditQtVersionAndroid->setText("");
+    ui->lineEditVsVersionAndroid->setText("");
     ui->lineEditQtIfVersionAndroid->setText("");
     ui->lineEditQtIfPackageUriAndroid->setText("");
     ui->lineEditPythonVersionAndroid->setText("");
@@ -615,6 +663,7 @@ void MainWindow::clearTabWebAssembly()
     // WebAssembly
     ui->labelRecordIdWebAssembly->setText("0");
     ui->lineEditQtVersionWebAssembly->setText("");
+    ui->lineEditVsVersionWebAssembly->setText("");
     ui->lineEditQtIfVersionWebAssembly->setText("");
     ui->lineEditQtIfPackageUriWebAssembly->setText("");
     ui->lineEditPythonVersionWebAssembly->setText("");
@@ -629,6 +678,7 @@ void MainWindow::clearTabIOS()
     // IOS
     ui->labelRecordIdIOS->setText("0");
     ui->lineEditQtVersionIOS->setText("");
+    ui->lineEditVsVersionIOS->setText("");
     ui->lineEditQtIfVersionIOS->setText("");
     ui->lineEditQtIfPackageUriIOS->setText("");
     ui->lineEditPythonVersionIOS->setText("");
@@ -643,6 +693,7 @@ void MainWindow::clearTabWindows()
     // Windows
     ui->labelRecordIdWindows->setText("0");
     ui->lineEditQtVersionWindows->setText("");
+    ui->lineEditVsVersionWindows->setText("");
     ui->lineEditQtIfVersionWindows->setText("");
     ui->lineEditQtIfPackageUriWindows->setText("");
     ui->lineEditPythonVersionWindows->setText("");
@@ -662,6 +713,7 @@ void MainWindow::clearTabDefaults()
     // Defaults
     ui->labelRecordIdDefaults->setText("0");
     ui->lineEditQtVersionDefaults->setText("");
+    ui->lineEditVsVersionDefaults->setText("");
     ui->lineEditQtIfVersionDefaults->setText("");
     ui->lineEditQtIfPackageUriDefaults->setText("");
     ui->lineEditPythonVersionDefaults->setText("");
@@ -803,6 +855,7 @@ void MainWindow::fillForms(const QString &thisProjectID)
     ProjectsID
     OS
     QtVersion
+    VsVersion
     QtIfVersion
     QtIfPackageUri
     PythonVersion
@@ -813,7 +866,7 @@ void MainWindow::fillForms(const QString &thisProjectID)
     QtToolsMingW64
     VisualStudio
     OsUpgrade
-SELECT id, ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired,
+SELECT id, ProjectsID, OS, QtVersion, VsVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired,
 QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FROM Configuration WHERE ProjectsID = 1
     */
     if (query.exec(myConfigurationSelectQuery))
@@ -924,6 +977,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdUbuntu->setText(query.value("id").toString());
                 ui->lineEditQtVersionUbuntu->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionUbuntu->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionUbuntu->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriUbuntu->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionUbuntu->setText(query.value("PythonVersion").toString());
@@ -954,6 +1008,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdMac->setText(query.value("id").toString());
                 ui->lineEditQtVersionMac->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionMac->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionMac->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriMac->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionMac->setText(query.value("PythonVersion").toString());
@@ -984,6 +1039,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdAndroid->setText(query.value("id").toString());
                 ui->lineEditQtVersionAndroid->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionAndroid->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionAndroid->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriAndroid->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionAndroid->setText(query.value("PythonVersion").toString());
@@ -1015,6 +1071,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdWebAssembly->setText(query.value("id").toString());
                 ui->lineEditQtVersionWebAssembly->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionWebAssembly->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionWebAssembly->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriWebAssembly->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionWebAssembly->setText(query.value("PythonVersion").toString());
@@ -1046,6 +1103,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdIOS->setText(query.value("id").toString());
                 ui->lineEditQtVersionIOS->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionIOS->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionIOS->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriIOS->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionIOS->setText(query.value("PythonVersion").toString());
@@ -1076,6 +1134,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
                 // Set Record ID
                 ui->labelRecordIdWindows->setText(query.value("id").toString());
                 ui->lineEditQtVersionWindows->setText(query.value("QtVersion").toString());
+                ui->lineEditVsVersionWindows->setText(query.value("VsVersion").toString());
                 ui->lineEditQtIfVersionWindows->setText(query.value("QtIfVersion").toString());
                 ui->lineEditQtIfPackageUriWindows->setText(query.value("QtIfPackageUri").toString());
                 ui->lineEditPythonVersionWindows->setText(query.value("PythonVersion").toString());
@@ -1106,6 +1165,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             // Set Record ID
             ui->labelRecordIdDefaults->setText(query.value("id").toString());
             ui->lineEditQtVersionDefaults->setText(query.value("QtVersion").toString());
+            ui->lineEditVsVersionDefaults->setText(query.value("VsVersion").toString());
             ui->lineEditQtIfVersionDefaults->setText(query.value("QtIfVersion").toString());
             ui->lineEditQtIfPackageUriDefaults->setText(query.value("QtIfPackageUri").toString());
             ui->lineEditPythonVersionDefaults->setText(query.value("PythonVersion").toString());
@@ -1138,6 +1198,8 @@ void MainWindow::on_pushButtonResetDefaultsUbuntu_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionUbuntu->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionUbuntu->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
         ui->lineEditQtIfVersionUbuntu->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
@@ -1153,6 +1215,8 @@ void MainWindow::on_pushButtonResetDefaultsMac_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionMac->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionMac->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
         ui->lineEditQtIfVersionMac->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
@@ -1169,6 +1233,8 @@ void MainWindow::on_pushButtonResetDefaultsAndroid_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionAndroid->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionAndroid->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
         ui->lineEditQtIfVersionAndroid->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
@@ -1185,6 +1251,8 @@ void MainWindow::on_pushButtonResetDefaultsWebAssembly_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionWebAssembly->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionWebAssembly->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
         ui->lineEditQtIfVersionWebAssembly->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
@@ -1201,6 +1269,8 @@ void MainWindow::on_pushButtonResetDefaultsIOS_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionIOS->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionIOS->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
         ui->lineEditQtIfVersionIOS->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
@@ -1217,6 +1287,8 @@ void MainWindow::on_pushButtonResetDefaultsWindows_clicked()
 {
     if (!ui->lineEditQtVersionDefaults->text().isEmpty())
         ui->lineEditQtVersionWindows->setText(ui->lineEditQtVersionDefaults->text());
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+        ui->lineEditVsVersionWindows->setText(ui->lineEditVsVersionDefaults->text());
     if (!ui->lineEditQtIfVersionDefaults->text().isEmpty())
         ui->lineEditQtIfVersionWindows->setText(ui->lineEditQtIfVersionDefaults->text());
     if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
@@ -1244,6 +1316,7 @@ void MainWindow::on_pushButtonResetDefaults_clicked()
     if (myOrgDomainSetting->isSetting(ui->lineEditQtVersionDefaults->objectName()))
     {
         ui->lineEditQtVersionDefaults->setText(myOrgDomainSetting->readSettings(ui->lineEditQtVersionDefaults->objectName(), myOrgDomainSetting->myConstants->MY_DEFAULTS_QT_VERSION));
+        ui->lineEditVsVersionDefaults->setText(myOrgDomainSetting->readSettings(ui->lineEditVsVersionDefaults->objectName(), myOrgDomainSetting->myConstants->MY_DEFAULTS_VS_VERSION));
         ui->lineEditQtIfVersionDefaults->setText(myOrgDomainSetting->readSettings(ui->lineEditQtIfVersionDefaults->objectName(), myOrgDomainSetting->myConstants->MY_DEFAULTS_QTIF_VERSION));
         ui->lineEditQtIfPackageUriDefaults->setText(myOrgDomainSetting->readSettings(ui->lineEditQtIfPackageUriDefaults->objectName(), myOrgDomainSetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER));
         ui->lineEditPythonVersionDefaults->setText(myOrgDomainSetting->readSettings(ui->lineEditPythonVersionDefaults->objectName(), myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_VERSION));
@@ -1262,6 +1335,7 @@ void MainWindow::on_pushButtonResetDefaults_clicked()
     else
     {
         ui->lineEditQtVersionDefaults->setText(myOrgDomainSetting->myConstants->MY_DEFAULTS_QT_VERSION);
+        ui->lineEditVsVersionDefaults->setText(myOrgDomainSetting->myConstants->MY_DEFAULTS_VS_VERSION);
         ui->lineEditQtIfVersionDefaults->setText(myOrgDomainSetting->myConstants->MY_DEFAULTS_QTIF_VERSION);
         ui->lineEditQtIfPackageUriDefaults->setText(myOrgDomainSetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER);
         ui->lineEditPythonVersionDefaults->setText(myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_VERSION);
@@ -1408,8 +1482,6 @@ void MainWindow::on_pushButtonSqlFileBrowswer_clicked()
 *******************************************************************************/
 void MainWindow::setMyProjectConfigurationClass(int tabNumber)
 {
-    //                  Configuration: id, ProjectsID,    OS,    QtVersion,      QtIfVersion,     QtIfPackageUri,     PythonVersion,     PythonRequired,     QtMingW32,     QtMingW64,     QtToolsMingW32,     QtToolsMingW64,     VisualStudio,     OsUpgrade
-    //MyConfigurationClass theConfiguration( thisProjectsID, thisOS, thisQtVersion, thisQtIfVersion, thisQtIfPackageUri, thisPythonVersion, thisPythonRequired, thisQtMingW32, thisQtMingW64, thisQtToolsMingW32, thisQtToolsMingW64, thisVisualStudio, thisOsUpgrade);
     //MyProjectClass theProject();
     // Common to all records
     myAccessSqlDbtModel->myConfigurationVariables->setProjectsID(ui->labelRecordIdSettings->text());
@@ -1474,10 +1546,10 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
                 myAccessSqlDbtModel->myProjectVariables->setIsX86("false");
             // Environment Qt
             if (ui->radioButtonSettingsEnvironmentQt->isChecked())
-                myAccessSqlDbtModel->myProjectVariables->setEnvironment("Qt");
+                myAccessSqlDbtModel->myProjectVariables->setEnvironment(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_QT);
             // Environment MSVS
             if (ui->radioButtonSettingsEnvironmentVs->isChecked())
-                myAccessSqlDbtModel->myProjectVariables->setEnvironment("MSVS");
+                myAccessSqlDbtModel->myProjectVariables->setEnvironment(myOrgDomainSetting->myConstants->MY_PROJECT_ENVIRONMENT_VS);
             //
             myAccessSqlDbtModel->myProjectVariables->setID(ui->labelRecordIdSettings->text());
             myAccessSqlDbtModel->myProjectVariables->setQtProject(ui->lineEditSettingsQtProject->text());
@@ -1498,6 +1570,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_UBUNTU);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionUbuntu->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionUbuntu->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionUbuntu->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriUbuntu->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionUbuntu->text());
@@ -1525,6 +1598,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_MAC);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionMac->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionMac->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionMac->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriMac->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionMac->text());
@@ -1551,6 +1625,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_ANDROID);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionAndroid->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionAndroid->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionAndroid->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriAndroid->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionAndroid->text());
@@ -1577,6 +1652,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWebAssembly->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWebAssembly->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWebAssembly->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWebAssembly->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWebAssembly->text());
@@ -1603,6 +1679,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_IOS);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionIOS->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionIOS->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionIOS->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriIOS->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionIOS->text());
@@ -1623,6 +1700,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_WINDOWS);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWindows->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWindows->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWindows->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWindows->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWindows->text());
@@ -1644,6 +1722,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
             // Common
             myAccessSqlDbtModel->myConfigurationVariables->setOS(myOrgDomainSetting->myConstants->MY_OS_NAME_DEFAULTS);
             myAccessSqlDbtModel->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionDefaults->text());
+            myAccessSqlDbtModel->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionDefaults->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionDefaults->text());
             myAccessSqlDbtModel->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriDefaults->text());
             myAccessSqlDbtModel->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionDefaults->text());

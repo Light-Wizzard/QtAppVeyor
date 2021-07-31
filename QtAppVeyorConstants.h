@@ -57,6 +57,7 @@ class MyConstants
         const QString MY_PROJECT_RELEASE = "true";
         // Ubuntu TabUbuntu
         const QString MY_UBUNTU_QT_VERSION = "Ubuntu-QT_VERSION";
+        const QString MY_UBUNTU_VS_VERSION = "Ubuntu-VS_VERSION";
         const QString MY_UBUNTU_QTIF_VERSION = "Ubuntu-QTIF_VERSION";
         const QString MY_UBUNTU_PACKAGE_FOLDER = "Ubuntu-PACKAGE_FOLDER";
         const QString MY_UBUNTU_PYTHON_VERSION = "Ubuntu-PYTHON_VERSION";
@@ -69,6 +70,7 @@ class MyConstants
         const QString MY_UBUNTU_UPGRADE_OS = "true";
         // TabMac Mac
         const QString MY_MAC_QT_VERSION = "Mac-QT_VERSION";
+        const QString MY_MAC_VS_VERSION = "Mac-VS_VERSION";
         const QString MY_MAC_QTIF_VERSION = "Mac-QTIF_VERSION";
         const QString MY_MAC_PACKAGE_FOLDER = "Mac-PACKAGE_FOLDER";
         const QString MY_MAC_PYTHON_VERSION = "Mac-PYTHON_VERSION";
@@ -81,6 +83,7 @@ class MyConstants
         const QString MY_MAC_UPGRADE_OS = "true";
         // TabAndroid Android
         const QString MY_ANDROID_QT_VERSION = "Android-QT_VERSION";
+        const QString MY_ANDROID_VS_VERSION = "Android-VS_VERSION";
         const QString MY_ANDROID_QTIF_VERSION = "Android-QTIF_VERSION";
         const QString MY_ANDROID_PACKAGE_FOLDER = "Android-PACKAGE_FOLDER";
         const QString MY_ANDROID_PYTHON_VERSION = "Android-PYTHON_VERSION";
@@ -93,6 +96,7 @@ class MyConstants
         const QString MY_ANDROID_UPGRADE_OS = "true";
         // TabWebAssembly WEBASSEMBLY
         const QString MY_WEBASSEMBLY_QT_VERSION = "WEBASSEMBLY-QT_VERSION";
+        const QString MY_WEBASSEMBLY_VS_VERSION = "WEBASSEMBLY-VS_VERSION";
         const QString MY_WEBASSEMBLY_QTIF_VERSION = "WEBASSEMBLY-QTIF_VERSION";
         const QString MY_WEBASSEMBLY_PACKAGE_FOLDER = "WEBASSEMBLY-PACKAGE_FOLDER";
         const QString MY_WEBASSEMBLY_PYTHON_VERSION = "WEBASSEMBLY-PYTHON_VERSION";
@@ -105,6 +109,7 @@ class MyConstants
         const QString MY_WEBASSEMBLY_UPGRADE_OS = "true";
         // TabIOS IOS
         const QString MY_IOS_QT_VERSION = "IOS-QT_VERSION";
+        const QString MY_IOS_VS_VERSION = "IOS-VS_VERSION";
         const QString MY_IOS_QTIF_VERSION = "IOS-QTIF_VERSION";
         const QString MY_IOS_PACKAGE_FOLDER = "IOS-PACKAGE_FOLDER";
         const QString MY_IOS_PYTHON_VERSION = "IOS-PYTHON_VERSION";
@@ -117,6 +122,7 @@ class MyConstants
         const QString MY_IOS_UPGRADE_OS = "true";
         // TabWindows Windows
         const QString MY_WINDOWS_QT_VERSION = "Windows-QT_VERSION";
+        const QString MY_WINDOWS_VS_VERSION = "Windows-VS_VERSION";
         const QString MY_WINDOWS_QTIF_VERSION = "Windows-QTIF_VERSION";
         const QString MY_WINDOWS_PACKAGE_FOLDER = "Windows-PACKAGE_FOLDER";
         const QString MY_WINDOWS_PYTHON_VERSION = "Windows-PYTHON_VERSION";
@@ -129,6 +135,7 @@ class MyConstants
         const QString MY_WINDOWS_UPGRADE_OS = "true";
         // TabDefaults Defaults
         const QString MY_DEFAULTS_QT_VERSION = "Defaults-QT_VERSION";
+        const QString MY_DEFAULTS_VS_VERSION = "Defaults-VS_VERSION";
         const QString MY_DEFAULTS_QTIF_VERSION = "Defaults-QTIF_VERSION";
         const QString MY_DEFAULTS_PACKAGE_FOLDER = "Defaults-PACKAGE_FOLDER";
         const QString MY_DEFAULTS_PYTHON_VERSION = "Defaults-PYTHON_VERSION";
@@ -141,21 +148,24 @@ class MyConstants
         const QString MY_DEFAULTS_UPGRADE_OS = "true";
         #else
         // TabSettings Project
-        const QString MY_PROJECT_QT           = "QtAppVeyor";
-        const QString MY_PROJECT_SECRET       = "";
-        const QString MY_PROJECT_ENVIRONMENT  = "Qt";
-        const QString MY_PROJECT_UBUNTU       = "true";
-        const QString MY_PROJECT_MAC          = "true";
-        const QString MY_PROJECT_WINDOWS      = "true";
-        const QString MY_PROJECT_ANDROID      = "false";
-        const QString MY_PROJECT_WEB_ASSEMBLY = "false";
-        const QString MY_PROJECT_IOS          = "false";
-        const QString MY_PROJECT_X64          = "true";
-        const QString MY_PROJECT_X86          = "true";
-        const QString MY_PROJECT_DEBUG        = "false";
-        const QString MY_PROJECT_RELEASE      = "true";
+        const QString MY_PROJECT_QT             = "QtAppVeyor";
+        const QString MY_PROJECT_SECRET         = "";
+        const QString MY_PROJECT_ENVIRONMENT    = "Qt";
+        const QString MY_PROJECT_ENVIRONMENT_QT = "Qt";
+        const QString MY_PROJECT_ENVIRONMENT_VS = "VS";
+        const QString MY_PROJECT_UBUNTU         = "true";
+        const QString MY_PROJECT_MAC            = "true";
+        const QString MY_PROJECT_WINDOWS        = "true";
+        const QString MY_PROJECT_ANDROID        = "false";
+        const QString MY_PROJECT_WEB_ASSEMBLY   = "false";
+        const QString MY_PROJECT_IOS            = "false";
+        const QString MY_PROJECT_X64            = "true";
+        const QString MY_PROJECT_X86            = "true";
+        const QString MY_PROJECT_DEBUG          = "false";
+        const QString MY_PROJECT_RELEASE        = "true";
         // TabUbuntu Ubuntu
         const QString MY_UBUNTU_QT_VERSION = "5.15.2";
+        const QString MY_UBUNTU_VS_VERSION = "2019";
         const QString MY_UBUNTU_QTIF_VERSION = "4.1.1";
         const QString MY_UBUNTU_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_UBUNTU_PYTHON_VERSION = "3.8";
@@ -168,6 +178,7 @@ class MyConstants
         const QString MY_UBUNTU_UPGRADE_OS = "false";
         // TabMac Mac
         const QString MY_MAC_QT_VERSION = "5.15.2";
+        const QString MY_MAC_VS_VERSION = "2019";
         const QString MY_MAC_QTIF_VERSION = "4.1.1";
         const QString MY_MAC_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_MAC_PYTHON_VERSION = "3.8";
@@ -180,6 +191,7 @@ class MyConstants
         const QString MY_MAC_UPGRADE_OS = "false";
         // TabAndroid Android
         const QString MY_ANDROID_QT_VERSION = "5.15.2";
+        const QString MY_ANDROID_VS_VERSION = "2019";
         const QString MY_ANDROID_QTIF_VERSION = "4.1.1";
         const QString MY_ANDROID_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_ANDROID_PYTHON_VERSION = "3.8";
@@ -192,6 +204,7 @@ class MyConstants
         const QString MY_ANDROID_UPGRADE_OS = "false";
         // TabWebAssembly WEBASSEMBLY
         const QString MY_WEBASSEMBLY_QT_VERSION = "5.15.2";
+        const QString MY_WEBASSEMBLY_VS_VERSION = "2019";
         const QString MY_WEBASSEMBLY_QTIF_VERSION = "4.1.1";
         const QString MY_WEBASSEMBLY_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_WEBASSEMBLY_PYTHON_VERSION = "3.8";
@@ -204,6 +217,7 @@ class MyConstants
         const QString MY_WEBASSEMBLY_UPGRADE_OS = "false";
         // TabIOS IOS
         const QString MY_IOS_QT_VERSION = "5.15.2";
+        const QString MY_IOS_VS_VERSION = "2019";
         const QString MY_IOS_QTIF_VERSION = "4.1.1";
         const QString MY_IOS_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_IOS_PYTHON_VERSION = "3.8";
@@ -216,6 +230,7 @@ class MyConstants
         const QString MY_IOS_UPGRADE_OS = "false";
         // TabWindows Windows
         const QString MY_WINDOWS_QT_VERSION = "5.15.2";
+        const QString MY_WINDOWS_VS_VERSION = "2019";
         const QString MY_WINDOWS_QTIF_VERSION = "4.1.1";
         const QString MY_WINDOWS_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_WINDOWS_PYTHON_VERSION = "3.8";
@@ -228,6 +243,7 @@ class MyConstants
         const QString MY_WINDOWS_UPGRADE_OS = "false";
         // TabDefaults Defaults
         const QString MY_DEFAULTS_QT_VERSION = "5.15.2";
+        const QString MY_DEFAULTS_VS_VERSION = "2019";
         const QString MY_DEFAULTS_QTIF_VERSION = "4.1.1";
         const QString MY_DEFAULTS_PACKAGE_FOLDER = "packages/com.appveyor.qtappveyor/data";
         const QString MY_DEFAULTS_PYTHON_VERSION = "3.8";

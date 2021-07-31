@@ -7,7 +7,7 @@ MySqlDbtModel::MySqlDbtModel(QObject *parent)
     // MySettings Settings
     myOrgDomainSetting = new MyOrgSettings(parent);
     // Create Variable Trackers and Set to Empty
-    myConfigurationVariables = new MyConfigurationClass("", "", "", "", "", "", "", "", "", "", "", "", "", "");
+    myConfigurationVariables = new MyConfigurationClass("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
     myProjectVariables = new MyProjectClass("", "", "", "", "", "", "", "", "", "", "", "", "", "");
 }
 /******************************************************************************
@@ -377,7 +377,7 @@ bool MySqlDbtModel::checkDatabase()
                 myProjectID = myInsertID;
                 myOrgDomainSetting->writeSettings(myOrgDomainSetting->myConstants->MY_SQL_PROJECT_ID, myProjectID);
                 //
-                if (runQuery(QLatin1String(R"(CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement, ProjectsID varchar, OS varchar, QtVersion varchar, QtIfVersion varchar, QtIfPackageUri varchar, PythonVersion varchar, PythonRequired varchar, QtMingW32 varchar, QtMingW64 varchar, QtToolsMingW32 varchar, QtToolsMingW64 varchar, VisualStudio varchar, OsUpgrade varchar))")))
+                if (runQuery(QLatin1String(R"(CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement, ProjectsID varchar, OS varchar, QtVersion varchar, VsVersion varchar, QtIfVersion varchar, QtIfPackageUri varchar, PythonVersion varchar, PythonRequired varchar, QtMingW32 varchar, QtMingW64 varchar, QtToolsMingW32 varchar, QtToolsMingW64 varchar, VisualStudio varchar, OsUpgrade varchar))")))
                 {
                     //
                     /*
@@ -385,6 +385,7 @@ bool MySqlDbtModel::checkDatabase()
                      * ProjectsID varchar,
                      * OS varchar,
                      * QtVersion varchar,
+                     * VsVersion varchar,
                      * QtIfVersion varchar,
                      * QtIfPackageUri varchar,
                      * PythonVersion varchar,
@@ -397,43 +398,43 @@ bool MySqlDbtModel::checkDatabase()
                      * OsUpgrade varchar
                      */
                     // Ubuntu
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_UBUNTU, myOrgDomainSetting->myConstants->MY_UBUNTU_QT_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_UBUNTU_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW32, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW64, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_UBUNTU_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_UBUNTU_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_UBUNTU, myOrgDomainSetting->myConstants->MY_UBUNTU_QT_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_VS_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_UBUNTU_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_UBUNTU_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW32, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW64, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_UBUNTU_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_UBUNTU_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_UBUNTU_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // Mac
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_MAC, myOrgDomainSetting->myConstants->MY_MAC_QT_VERSION, myOrgDomainSetting->myConstants->MY_MAC_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_MAC_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_MAC_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_MAC_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_MAC_MINGW32, myOrgDomainSetting->myConstants->MY_MAC_MINGW64, myOrgDomainSetting->myConstants->MY_MAC_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_MAC_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_MAC_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_MAC_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_MAC, myOrgDomainSetting->myConstants->MY_MAC_QT_VERSION, myOrgDomainSetting->myConstants->MY_MAC_VS_VERSION, myOrgDomainSetting->myConstants->MY_MAC_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_MAC_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_MAC_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_MAC_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_MAC_MINGW32, myOrgDomainSetting->myConstants->MY_MAC_MINGW64, myOrgDomainSetting->myConstants->MY_MAC_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_MAC_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_MAC_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_MAC_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // Android
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_ANDROID, myOrgDomainSetting->myConstants->MY_ANDROID_QT_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_ANDROID_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW32, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW64, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_ANDROID_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_ANDROID_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_ANDROID, myOrgDomainSetting->myConstants->MY_ANDROID_QT_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_VS_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_ANDROID_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_ANDROID_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW32, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW64, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_ANDROID_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_ANDROID_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_ANDROID_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // WEBASSEMBLY
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_WEBASSEMBLY, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_QT_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW32, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW64, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_WEBASSEMBLY, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_QT_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_VS_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW32, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW64, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_WEBASSEMBLY_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // IOS
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_IOS, myOrgDomainSetting->myConstants->MY_IOS_QT_VERSION, myOrgDomainSetting->myConstants->MY_IOS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_IOS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_IOS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_IOS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_IOS_MINGW32, myOrgDomainSetting->myConstants->MY_IOS_MINGW64, myOrgDomainSetting->myConstants->MY_IOS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_IOS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_IOS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_IOS_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_IOS, myOrgDomainSetting->myConstants->MY_IOS_QT_VERSION, myOrgDomainSetting->myConstants->MY_IOS_VS_VERSION, myOrgDomainSetting->myConstants->MY_IOS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_IOS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_IOS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_IOS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_IOS_MINGW32, myOrgDomainSetting->myConstants->MY_IOS_MINGW64, myOrgDomainSetting->myConstants->MY_IOS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_IOS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_IOS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_IOS_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // Windows
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_WINDOWS, myOrgDomainSetting->myConstants->MY_WINDOWS_QT_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_WINDOWS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW32, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW64, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_WINDOWS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_WINDOWS_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_WINDOWS, myOrgDomainSetting->myConstants->MY_WINDOWS_QT_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_VS_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_WINDOWS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_WINDOWS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW32, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW64, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_WINDOWS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_WINDOWS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_WINDOWS_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
                     }
                     // Defaults
-                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_DEFAULTS, myOrgDomainSetting->myConstants->MY_DEFAULTS_QT_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW32, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW64, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_DEFAULTS_UPGRADE_OS);
+                    setConfiguration("", myProjectID, myOrgDomainSetting->myConstants->MY_OS_NAME_DEFAULTS, myOrgDomainSetting->myConstants->MY_DEFAULTS_QT_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_VS_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_QTIF_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER, myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_VERSION, myOrgDomainSetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW32, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW64, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS, myOrgDomainSetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS, myOrgDomainSetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO, myOrgDomainSetting->myConstants->MY_DEFAULTS_UPGRADE_OS);
                     if (!insertConfiguration())
                     {
                         qDebug() << "Error INSERT Configuration";
@@ -493,13 +494,12 @@ bool MySqlDbtModel::insertProjects()
 /******************************************************************************
 * \fn insertConfiguration
 * INSERT INTO Configuration
-* ProjectsID varchar, OS varchar, QtVersion varchar, QtIfVersion varchar, QtIfPackageUri varchar, PythonVersion varchar, PythonRequired varchar, QtMingW32 varchar, QtMingW64 varchar, QtToolsMingW32 varchar, QtToolsMingW64 varchar
+* ProjectsID varchar, OS varchar, QtVersion varchar, VsVersion varchar, QtIfVersion varchar, QtIfPackageUri varchar, PythonVersion varchar, PythonRequired varchar, QtMingW32 varchar, QtMingW64 varchar, QtToolsMingW32 varchar, QtToolsMingW64 varchar
 *******************************************************************************/
 bool MySqlDbtModel::insertConfiguration()
 {
     if (isDebugMessage) { qDebug() << "insertConfiguration"; }
-    //QString tsQuery = QString("INSERT INTO Configuration (ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade) VALUES('").append(myConfigurationVariables->getProjectsID()).append("', '").append(myConfigurationVariables->getOS()).append("', '").append(myConfigurationVariables->getQtVersion()).append("', '").append(myConfigurationVariables->getQtIfVersion()).append("', '").append(myConfigurationVariables->getQtIfPackageUri()).append("', '").append(myConfigurationVariables->getPythonVersion()).append("', '").append(myConfigurationVariables->getPythonRequired()).append("', '").append(myConfigurationVariables->getQtMingW32()).append("', '").append(myConfigurationVariables->getQtMingW64()).append("', '").append(myConfigurationVariables->getQtToolsMingW32()).append("', '").append(myConfigurationVariables->getQtToolsMingW64()).append("', '").append(myConfigurationVariables->getVisualStudio()).append("', '").append(myConfigurationVariables->getOsUpgrade()).append("')");
-    QString myQuery = QString("INSERT INTO Configuration (ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade) VALUES('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12', '%13')").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade());
+    QString myQuery = QString("INSERT INTO Configuration (ProjectsID, OS, QtVersion, VsVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade) VALUES('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12', '%13', '%14')").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getVsVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade());
     if (isDebugMessage) { qDebug() << "insertConfiguration: " << myQuery; }
     //
     if (!runQuery(myQuery))
@@ -513,7 +513,7 @@ bool MySqlDbtModel::insertConfiguration()
 * \fn addProject
 * Assumes you have ran setProject
 * Projects: QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
-* Configuration: ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
+* Configuration: ProjectsID, OS, QtVersion, VsVersion varchar, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
 *******************************************************************************/
 bool MySqlDbtModel::addProject()
 {
@@ -530,7 +530,7 @@ bool MySqlDbtModel::addProject()
 * \fn addConfiguration
 * Assumes you have ran setMyConfigurationClass
 * Projects: QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
-* Configuration: ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
+* Configuration: ProjectsID, OS, QtVersion, VsVersion varchar, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
 *******************************************************************************/
 void MySqlDbtModel::addConfiguration()
 {
@@ -677,15 +677,14 @@ void MySqlDbtModel::saveProject()
 }
 /******************************************************************************
 * \fn saveConfiguration
-* Configuration: ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
+* Configuration: ProjectsID, OS, QtVersion, VsVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
 *******************************************************************************/
 void MySqlDbtModel::saveConfiguration()
 {
     if (isDebugMessage) qDebug() << "saveConfiguration";
     QSqlQuery theQuery; //!< SQL Query
     //                                                                                                                                                                                                                                       , , , , , ,
-    QString theQueryString = QString("UPDATE Configuration set ProjectsID = '%1', OS = '%2', QtVersion = '%3', QtIfVersion = '%4', QtIfPackageUri = '%5', PythonVersion = '%6', PythonRequired = '%7', QtMingW32 = '%8', QtMingW64 ='%9', QtToolsMingW32 = '%10', QtToolsMingW64 = '%11', VisualStudio = '%12', OsUpgrade = '%13' WHERE id = %14").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade(), myConfigurationVariables->getID());
-    //QString theQueryString = QString("UPDATE Configuration set ProjectsID = '").append(myConfigurationVariables->getProjectsID()).append("', OS = '").append(myConfigurationVariables->getOS()).append("', QtVersion = '").append(myConfigurationVariables->getQtVersion()).append("', QtIfVersion = '").append(myConfigurationVariables->getQtIfVersion()).append("', QtIfPackageUri = '").append(myConfigurationVariables->getQtIfPackageUri()).append("', PythonVersion = '").append(myConfigurationVariables->getPythonVersion()).append("', PythonRequired = '").append(myConfigurationVariables->getPythonRequired()).append("', QtMingW32 = '").append(myConfigurationVariables->getQtMingW32()).append("', QtMingW64 = '").append(myConfigurationVariables->getQtMingW64()).append("', QtToolsMingW32 = '").append(myConfigurationVariables->getQtToolsMingW32()).append("', QtToolsMingW64 = '").append(myConfigurationVariables->getQtToolsMingW64()).append("', VisualStudio = '").append(myConfigurationVariables->getVisualStudio()).append("', OsUpgrade = '").append(myConfigurationVariables->getOsUpgrade()).append("' WHERE id = ").append(myConfigurationVariables->getID());
+    QString theQueryString = QString("UPDATE Configuration set ProjectsID = '%1', OS = '%2', QtVersion = '%3', VsVersion = '%4', QtIfVersion = '%5', QtIfPackageUri = '%6', PythonVersion = '%7', PythonRequired = '%8', QtMingW32 = '%9', QtMingW64 ='%10', QtToolsMingW32 = '%11', QtToolsMingW64 = '%12', VisualStudio = '%13', OsUpgrade = '%14' WHERE id = %15").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getVsVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade(), myConfigurationVariables->getID());
     if (isDebugMessage) qDebug() << "thisQuery: " << theQueryString;
     if (!theQuery.exec(theQueryString))
     {
@@ -697,7 +696,7 @@ void MySqlDbtModel::saveConfiguration()
 * \fn setConfiguration
 * Sets all Variables used in the Configuarion Database in one Place
 *******************************************************************************/
-void MySqlDbtModel::setConfiguration(const QString &thisID,const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade)
+void MySqlDbtModel::setConfiguration(const QString &thisID,const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade)
 {
     if (isDebugMessage) qDebug() << "setConfiguration";
     // Common
@@ -705,6 +704,7 @@ void MySqlDbtModel::setConfiguration(const QString &thisID,const QString &thisPr
     myConfigurationVariables->setProjectsID(thisProjectsID);          // ProjectID is per Project id
     myConfigurationVariables->setOS(thisOS);                          // OS: Ubuntu, Android, WebAssembly, Mac, iOs, Windows, and Default
     myConfigurationVariables->setQtVersion(thisQtVersion);
+    myConfigurationVariables->setVsVersion(thisVsVersion);
     myConfigurationVariables->setQtIfVersion(thisQtIfVersion);
     myConfigurationVariables->setQtIfPackageUri(thisQtIfPackageUri);
     myConfigurationVariables->setPythonVersion(thisPythonVersion);

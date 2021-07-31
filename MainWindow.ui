@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1071</width>
-    <height>648</height>
+    <height>683</height>
    </rect>
   </property>
   <property name="font">
@@ -546,34 +546,34 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionUbuntu"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionUbuntu">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionUbuntu"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageUbuntu">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriUbuntu"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionUbuntu">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutUbuntuPython">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionUbuntu"/>
@@ -587,28 +587,28 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsUpgradeUbuntu">
             <property name="text">
              <string>OS Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeUbuntu">
             <property name="text">
              <string>Ubuntu Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSetDefaultsUbuntu">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutUbunto">
             <item>
              <widget class="QPushButton" name="pushButtonSaveUbuntu">
@@ -653,6 +653,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionUbuntu">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionUbuntu"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -674,34 +684,34 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionMac"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionMac">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionMac"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageMac">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriMac"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionMac">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutMacPython">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionMac"/>
@@ -715,28 +725,28 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsUpgradeMac">
             <property name="text">
              <string>OS Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeMac">
             <property name="text">
              <string>Mac Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSetDefaultsMac">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutMac">
             <item>
              <widget class="QPushButton" name="pushButtonSaveMac">
@@ -781,6 +791,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionMac">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionMac"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -802,34 +822,34 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionAndroid"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionAndroid">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionAndroid"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageAndroid">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriAndroid"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionAndroid">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutAndroidPhython">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionAndroid"/>
@@ -843,28 +863,28 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsUpgradeAndroid">
             <property name="text">
              <string>Upgrade OS</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeAndroid">
             <property name="text">
              <string>Android Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSetDefaultsAndroid">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutAndrod">
             <item>
              <widget class="QPushButton" name="pushButtonSaveAndroid">
@@ -909,6 +929,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionAndroid">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionAndroid"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -930,34 +960,34 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionWebAssembly"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionWebAssembly">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionWebAssembly"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageWebAssembly">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriWebAssembly"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionWebAssembly">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutPythonWebAssembly">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionWebAssembly"/>
@@ -971,28 +1001,28 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsUpgradeWebAssembly">
             <property name="text">
              <string>OS Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeWebAssembly">
             <property name="text">
              <string>Web Assembly Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSetDefaultsWebAssembly">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutWebAssembly">
             <item>
              <widget class="QPushButton" name="pushButtonSaveWebAssembly">
@@ -1037,6 +1067,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionWebAssembly">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionWebAssembly"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -1058,34 +1098,34 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionIOS"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionIOS">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionIOS"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageIOS">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriIOS"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionIOS">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutPythonIOS">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionIOS"/>
@@ -1099,28 +1139,28 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsUpgradeIOS">
             <property name="text">
              <string>OS Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeIOS">
             <property name="text">
              <string>iOS Upgrade</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSetDefaultsIOS">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutIOS">
             <item>
              <widget class="QPushButton" name="pushButtonSaveIOS">
@@ -1165,6 +1205,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionIOS">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionIOS"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -1186,74 +1236,74 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionWindows"/>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionWindows">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionWindows"/>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageWindows">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriWindows"/>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsMingW32Windows">
             <property name="text">
              <string>Qt MingW32</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QLineEdit" name="lineEditQtMingW32Windows"/>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsMingW64Windows">
             <property name="text">
              <string>Qt MingW64</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QLineEdit" name="lineEditQtMingW64Windows"/>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW32Wndows">
             <property name="text">
              <string>Qt Tools MingW32</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <widget class="QLineEdit" name="lineEditQtToolsMingW32Windows"/>
           </item>
-          <item row="7" column="0">
+          <item row="8" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW64Windows">
             <property name="text">
              <string>Qt Tools MingW64</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
+          <item row="8" column="1">
            <widget class="QLineEdit" name="lineEditQtToolsMingW64Windows"/>
           </item>
-          <item row="8" column="0">
+          <item row="9" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionWindows">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="1">
+          <item row="9" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutWindowsPython">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionWindows"/>
@@ -1267,24 +1317,24 @@
             </item>
            </layout>
           </item>
-          <item row="9" column="0">
+          <item row="10" column="0">
            <widget class="QLabel" name="labelSettingsVisualStudioWindows">
             <property name="text">
              <string>Visual Studio Version</string>
             </property>
            </widget>
           </item>
-          <item row="9" column="1">
+          <item row="10" column="1">
            <widget class="QLineEdit" name="lineEditVisualStudioWindows"/>
           </item>
-          <item row="10" column="0">
+          <item row="11" column="0">
            <widget class="QLabel" name="labelSetDefaultsWindows">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="1">
+          <item row="11" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutWindows">
             <item>
              <widget class="QPushButton" name="pushButtonSaveWindows">
@@ -1329,6 +1379,16 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionWindows">
+            <property name="text">
+             <string>Vs Version</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionWindows"/>
+          </item>
          </layout>
         </item>
        </layout>
@@ -1340,8 +1400,22 @@
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <layout class="QFormLayout" name="formLayoutWindowsDefaults">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRecordIdLableDefaults">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelRecordIdDefaults">
+            <property name="text">
+             <string>Record ID</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="labelSettingsQtVersionWindowsDefaults">
+           <widget class="QLabel" name="labelSettingsQtVersionDefaults">
             <property name="text">
              <string>Qt Version</string>
             </property>
@@ -1350,74 +1424,74 @@
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQtVersionDefaults"/>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelSettingsQtInstallerVersionWindowsDefaults">
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerVersionDefaults">
             <property name="text">
              <string>Qt Installer Version</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditQtIfVersionDefaults"/>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="labelSettingsQtInstallerPackageWindowsDefaults">
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelSettingsQtInstallerPackageDefaults">
             <property name="text">
              <string>Qt Installer Package</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="lineEditQtIfPackageUriDefaults"/>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="labelSettingsMingW32WindowsDefaults">
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSettingsMingW32Defaults">
             <property name="text">
              <string>Qt MingW32</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QLineEdit" name="lineEditQtMingW32Defaults"/>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="labelSettingsMingW64WindowsDefaults">
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSettingsMingW64Defaults">
             <property name="text">
              <string>Qt MingW64</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QLineEdit" name="lineEditQtMingW64Defaults"/>
           </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="labelSettingsQtToolsMingW32WndowsDefaults">
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW32Defaults">
             <property name="text">
              <string>Qt Tools MingW32</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <widget class="QLineEdit" name="lineEditQtToolsMingW32Defaults"/>
           </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="labelSettingsQtToolsMingW64WindowsDefaults">
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelSettingsQtToolsMingW64Defaults">
             <property name="text">
              <string>Qt Tools MingW64</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
+          <item row="8" column="1">
            <widget class="QLineEdit" name="lineEditQtToolsMingW64Defaults"/>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="labelSettingsPythonVersionWindowsDefaults">
+          <item row="9" column="0">
+           <widget class="QLabel" name="labelSettingsPythonVersionDefaults">
             <property name="text">
              <string>Python Version</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="1">
+          <item row="9" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutDefaults">
             <item>
              <widget class="QLineEdit" name="lineEditPythonVersionDefaults"/>
@@ -1431,38 +1505,38 @@
             </item>
            </layout>
           </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="labelSettingsVisualStudioWindowsDefaults">
+          <item row="10" column="0">
+           <widget class="QLabel" name="labelSettingsVisualStudioDefaults">
             <property name="text">
              <string>Visual Studio Version</string>
             </property>
            </widget>
           </item>
-          <item row="9" column="1">
+          <item row="10" column="1">
            <widget class="QLineEdit" name="lineEditVisualStudioDefaults"/>
           </item>
-          <item row="10" column="0">
+          <item row="11" column="0">
            <widget class="QLabel" name="labelDefaultsOsUpgrade">
             <property name="text">
              <string>OS Upgrades</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="1">
+          <item row="11" column="1">
            <widget class="QCheckBox" name="checkBoxUpgradeDefaults">
             <property name="text">
              <string>Upgrade OS</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="0">
+          <item row="12" column="0">
            <widget class="QLabel" name="labelDefaults">
             <property name="text">
              <string>Set all OS's to Default</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="1">
+          <item row="12" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutResetAllDefaults">
             <item>
              <spacer name="horizontalSpacerResetAll">
@@ -1499,14 +1573,14 @@
             </item>
            </layout>
           </item>
-          <item row="12" column="0">
+          <item row="13" column="0">
            <widget class="QLabel" name="labelResetDefaults">
             <property name="text">
              <string>Reset</string>
             </property>
            </widget>
           </item>
-          <item row="12" column="1">
+          <item row="13" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutResetDefaults">
             <item>
              <spacer name="horizontalSpacerResetDefaults">
@@ -1530,14 +1604,14 @@
             </item>
            </layout>
           </item>
-          <item row="13" column="0">
+          <item row="14" column="0">
            <widget class="QLabel" name="labelSettingsSaveDefaults">
             <property name="text">
              <string>Save Defaults</string>
             </property>
            </widget>
           </item>
-          <item row="13" column="1">
+          <item row="14" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QPushButton" name="pushButtonSaveDefaults">
@@ -1561,19 +1635,15 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelRecordIdLableDefaults">
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelSettingsVsVersionDefaults">
             <property name="text">
-             <string>Record ID</string>
+             <string>Vs Version</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="labelRecordIdDefaults">
-            <property name="text">
-             <string>Record ID</string>
-            </property>
-           </widget>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditVsVersionDefaults"/>
           </item>
          </layout>
         </item>

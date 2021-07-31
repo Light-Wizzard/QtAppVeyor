@@ -52,6 +52,7 @@ QSettings *MyOrgSettings::getSettings()
     QCoreApplication::setApplicationName(getAppName());
     //QCoreApplication::setApplicationDisplayName(getAppName());
     // see *.pro file where it is: DEFINES *= APP_VERSION=$${VERSION}
+    // cmake does not have this yet, this is a hack till I FIXME
 #ifndef APP_VERSION
 #define APP_VERSION ("1.0.0")
 #endif

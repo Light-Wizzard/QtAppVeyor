@@ -29,7 +29,9 @@ for:
     COVERITY_BUILD_CANDIDATE: True
     MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Ubuntu
+    MY_COMPILER: "Qt"
     MY_QT_VERSION: 5.15.2
+    MY_VS_VERSION: 2019
     MY_QT_IF_VERSION: '4.1.1'
     MY_QIF_PACKAGE_URI: 'packages/com.appveyor.qtappveyor/data'
     MY_PYTHON_VER: 3.9
@@ -56,7 +58,9 @@ for:
     COVERITY_BUILD_CANDIDATE: True
     MY_BIN_PRO_RES_NAME: QtAppVeyor
     MY_OS: Windows # No Spaces
+    MY_COMPILER: "Vs"
     MY_QT_VERSION: 5.15.2
+    MY_VS_VERSION: 2019
     MY_QT_MINGW32: mingw81_32
     MY_QT_MINGW64: mingw81_64
     MY_QT_TOOLS_MINGW32: mingw810_32
@@ -70,15 +74,24 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
-    - cmd: if %platform%==x64 set PATH=C:\Qt\Tools\%MY_MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\;%PATH%
+    # Qt x64
+    - cmd: if %platform%==x64 && %MY_COMPILER%=="Qt" set PATH=C:\Qt\Tools\%MY_MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin;C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\;%PATH%
+    - cmd: if %platform%==x64 && %MY_COMPILER%=="Qt" call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat"
+    # Vs x64
+    - cmd: if %platform%==x64 && %MY_COMPILER%=="Vs" set PATH=C:\Qt\Tools\%MY_MINGW_64%\bin;C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%_64\bin;%PATH%
+    - cmd: if %platform%==x64 && %MY_COMPILER%=="Vs" call C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%_64\bin\qtenv2.bat"
+    # Python x64
     - cmd: if %platform%==x64 set PATH=C:\Python%MY_PYTHON_VER-x64%;%PATH%
-    - cmd: if %platform%==x64 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW64%\bin\qtenv2.bat"
-    - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-    #
-    - cmd: if %platform%==x86 set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
+    - cmd: if %platform%==x64 call "C:\Program Files (x86)\Microsoft Visual Studio\%MY_VS_VERSION%\Community\VC\Auxiliary\Build\vcvars64.bat"
+    # Qt x86
+    - cmd: if %platform%==x86 && %MY_COMPILER%=="Qt" set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\bin;%PATH%
+    - cmd: if %platform%==x86 && %MY_COMPILER%=="Qt" call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
+    # Vs x86
+    - cmd: if %platform%==x86 && %MY_COMPILER%=="Vs" set PATH=C:\Qt\Tools\%MY_MINGW_32%\bin;C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%\bin;%PATH%
+    - cmd: if %platform%==x86 && %MY_COMPILER%=="Vs" call C:\Qt\%MY_QT_VERSION%\msvc%MY_VS_VERSION%\bin\qtenv2.bat"
+    # Python x86
     - cmd: if %platform%==x86 set PATH=C:\Python%MY_PYTHON_VER%;%PATH%
-    - cmd: if %platform%==x86 call C:\Qt\%MY_QT_VERSION%\%MY_QT_MINGW32%\bin\qtenv2.bat"
-    - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+    - cmd: if %platform%==x86 call "C:\Program Files (x86)\Microsoft Visual Studio\%MY_VS_VERSION%\Community\VC\Auxiliary\Build\vcvars32.bat"
     #
     - cmd: set PATH=C:\MINGW\bin\;%PATH%
     #
@@ -95,9 +108,14 @@ for:
     - cmd: mkdir AppDir
     - cmd: set INSTALL_ROOT=AppDir
     - cmd: set BUILD_ROOT=%APPVEYOR_BUILD_FOLDER%\build
+    # Qt
     # DESTDIR=%cd%
-    - cmd: if %PLATFORM%==x86 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x32 DESTDIR=AppDir && mingw32-make && mingw32-make install
-    - cmd: if %PLATFORM%==x64 qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && mingw32-make && mingw32-make install
+    - cmd: if %PLATFORM%==x86 && %MY_COMPILER%=="Qt" qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && mingw32-make && mingw32-make install
+    - cmd: if %PLATFORM%==x64 && %MY_COMPILER%=="Qt" qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && mingw32-make && mingw32-make install
+    # Vs
+    - cmd: if %PLATFORM%==x86 && %MY_COMPILER%=="Vs" qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x86 DESTDIR=AppDir && mmake && mmake install
+    - cmd: if %PLATFORM%==x64 && %MY_COMPILER%=="Vs" qmake -v && qmake -r -spec win32-g++ %APPVEYOR_BUILD_FOLDER%\%MY_BIN_PRO_RES_NAME%.pro CONFIG+=%CONFIGURATION% CONFIG+=c++11 CONFIG+=x64 DESTDIR=AppDir && mmake && mmake install
+    #
     - cmd: echo "after_build Windows"
     - cmd: dir
     - cmd: dir AppDir

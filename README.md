@@ -97,7 +97,7 @@ Each Variable is used in scripts to set up the application for deployment.
 
 * MY_BIN_PRO_RES_NAME: Qt Projects name, ie. QtAppVeyor.pro, assumes exe name is the same.
 * MY_OS: This is used to make package names, so no spaces
-* MY_QT_VERSION: Qt Version
+* MY_VS_VERSION: Qt Version
 * MY_QT_IF_VERSION: Qt Installer Framework (QIF) Version
 * MY_QIF_PACKAGE_URI: Folder for QIF Packages
 * MY_PYTHON_VER: Python Version, note that Windows 7 stops at 3.8
@@ -113,7 +113,7 @@ Unix
 ```yaml
 MY_BIN_PRO_RES_NAME:  QtAppVeyor #
 MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
-MY_QT_VERSION:       5.15.2      # Qt Version
+MY_VS_VERSION:       5.15.2      # Qt Version
 MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
 MY_QIF_PACKAGE_URI:   'packages\com.url.qtappveyor\data' #
 MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
@@ -126,7 +126,7 @@ Windows
 ```yaml
 MY_BIN_PRO_RES_NAME:  QtAppVeyor #
 MY_OS:                Windows    # No Spaces, this shows up the file name, project-os-configuration-plateform format
-MY_QT_VERSION:       5.15.2      # Qt Version
+MY_VS_VERSION:       5.15.2      # Qt Version
 MY_QT_MINGW32:       mingw81_32  # Windows only Qt folder Variables
 MY_QT_MINGW64:       mingw81_64  # Windows only Qt folder Variables
 MY_QT_TOOLS_MINGW32: mingw810_32 # Windows only Qt folder Variables

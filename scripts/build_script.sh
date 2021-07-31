@@ -69,14 +69,14 @@ if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
 # x86 gcc_32? FIXME how to dox86
-if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]]; then
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
-    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
-        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin";
-        ls "${HOME}/Qt/${MY_QT_VERSION}/";
+if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
+    export PATH="${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/include:$PATH";
+    if [ ! -d "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin" ]; then
+        echo "Qt x86 not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin";
+        ls "${HOME}/Qt/${MY_VS_VERSION}/";
     fi
-    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
+    if [ ! -f "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake"; fi
+    if [[ "$MY_PYTHON_REQUIRED" == "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
         # export PATH=${HOME}/venv${MY_PYTHON_VER}:${HOME}/venv${MY_PYTHON_VER}/bin:${HOME}/venv${MY_PYTHON_VER}/lib:$PATH
@@ -85,11 +85,11 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x86" ]
     fi
 fi
 # x64
-if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x64" ]]; then
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
+if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64" ]]; then
+    export PATH="${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_VS_VERSION}/gcc_64/include:$PATH";
     # Check Qt
-    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
+    if [ ! -d "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin"; fi
+    if [ ! -f "${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_VS_VERSION}/gcc_64/bin/qmake"; fi
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
         export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
         # Check Python
@@ -100,7 +100,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "${MY_OS}" ]] && [[ "$PLATFORM" = "x64" ]
     fi
 fi
 #
-if [[ $APPVEYOR_BUILD_WORKER_IMAGE = "${MY_OS}" ]]; then
+if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     echo "PATH=$PATH";
     # 
     # configure build files with qmake

@@ -3,16 +3,16 @@ Write-Host "install Windows" -ForegroundColor DarkGreen
 #
 if ($Env:PLATFORM -eq "x64")
 {
-    set PATH=C:\Qt\Tools\$MINGW_64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin;C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\;$PATH
+    set PATH=C:\Qt\Tools\$MINGW_64\bin;C:\Qt\$MY_VS_VERSION\$MY_QT_MINGW64\bin;C:\Qt\$MY_VS_VERSION\$MY_QT_MINGW64\;$PATH
     set PATH=C:\Python$PYTHON_VER-x64;$PATH
-    call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW64\bin\qtenv2.bat"
+    call C:\Qt\$MY_VS_VERSION\$MY_QT_MINGW64\bin\qtenv2.bat"
     call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 }
 else
 {
-    set PATH=C:\Qt\Tools\$MINGW_32\bin;C:\Qt\$MY_QT_VERSION\bin;$PATH
+    set PATH=C:\Qt\Tools\$MINGW_32\bin;C:\Qt\$MY_VS_VERSION\bin;$PATH
     set PATH=C:\Python$PYTHON_VER;$PATH
-    call C:\Qt\$MY_QT_VERSION\$MY_QT_MINGW32\bin\qtenv2.bat"
+    call C:\Qt\$MY_VS_VERSION\$MY_QT_MINGW32\bin\qtenv2.bat"
     call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 }
 

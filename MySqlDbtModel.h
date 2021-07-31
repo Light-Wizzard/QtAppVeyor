@@ -63,15 +63,16 @@ class MyProjectClass
 *******************************************************************************/
 class MyConfigurationClass
 {
-        QString myID, myProjectsID, myOS, myQtVersion, myQtIfVersion, myQtIfPackageUri, myPythonVersion, myPythonRequired, myQtMingW32, myQtMingW64, myQtToolsMingW32, myQtToolsMingW64, myVisualStudio, myOsUpgrade;
+        QString myID, myProjectsID, myOS, myQtVersion, myVsVersion, myQtIfVersion, myQtIfPackageUri, myPythonVersion, myPythonRequired, myQtMingW32, myQtMingW64, myQtToolsMingW32, myQtToolsMingW64, myVisualStudio, myOsUpgrade;
     public:
-        MyConfigurationClass(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade)
-            : myID{thisID}, myProjectsID{thisProjectsID}, myOS{thisOS}, myQtVersion{thisQtVersion}, myQtIfVersion{thisQtIfVersion}, myQtIfPackageUri{thisQtIfPackageUri}, myPythonVersion{thisPythonVersion}, myPythonRequired{thisPythonRequired}, myQtMingW32{thisQtMingW32}, myQtMingW64{thisQtMingW64}, myQtToolsMingW32{thisQtToolsMingW32}, myQtToolsMingW64{thisQtToolsMingW64}, myVisualStudio{thisVisualStudio}, myOsUpgrade{thisOsUpgrade} {}
+        MyConfigurationClass(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade)
+            : myID{thisID}, myProjectsID{thisProjectsID}, myOS{thisOS}, myQtVersion{thisQtVersion}, myVsVersion{thisVsVersion}, myQtIfVersion{thisQtIfVersion}, myQtIfPackageUri{thisQtIfPackageUri}, myPythonVersion{thisPythonVersion}, myPythonRequired{thisPythonRequired}, myQtMingW32{thisQtMingW32}, myQtMingW64{thisQtMingW64}, myQtToolsMingW32{thisQtToolsMingW32}, myQtToolsMingW64{thisQtToolsMingW64}, myVisualStudio{thisVisualStudio}, myOsUpgrade{thisOsUpgrade} {}
         // Getters
         QString getID()             const { return myID;             }
         QString getProjectsID()     const { return myProjectsID;     }
         QString getOS()             const { return myOS;             }
         QString getQtVersion()      const { return myQtVersion;      }
+        QString getVsVersion()      const { return myVsVersion;      }
         QString getQtIfVersion()    const { return myQtIfVersion;    }
         QString getQtIfPackageUri() const { return myQtIfPackageUri; }
         QString getPythonVersion()  const { return myPythonVersion;  }
@@ -87,6 +88,7 @@ class MyConfigurationClass
         void setProjectsID(const QString &s)     { myProjectsID = s;     }
         void setOS(const QString &s)             { myOS = s;             }
         void setQtVersion(const QString &s)      { myQtVersion = s;      }
+        void setVsVersion(const QString &s)      { myVsVersion = s;      }
         void setQtIfVersion(const QString &s)    { myQtIfVersion = s;    }
         void setQtIfPackageUri(const QString &s) { myQtIfPackageUri = s; }
         void setPythonVersion(const QString &s)  { myPythonVersion = s;  }
@@ -150,7 +152,7 @@ class MySqlDbtModel : public QObject
         bool insertConfiguration();                                 //!< insertConfiguration
         bool insertProjects();                                      //!< insertConfigurations
         //
-        void setConfiguration(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade);
+        void setConfiguration(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade);
         void setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease);
         //
         QString getConfigurationSelectQuery(const QString &thisWhereID); //!< getConfigurationSelectQuery
