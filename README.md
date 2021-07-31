@@ -43,7 +43,7 @@ Qt is moving to cmake in version 6, so I have no choice but to move away from qm
 For Windows I am not sure if MingW is the right tool, or if VS is,
 or if I should use MSYS, or Cygwin.
 
-Index
+## Table of Content
 1. [Broken](https://github.com/Light-Wizzard/QtAppVeyor#Broken)
 2. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 3. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
