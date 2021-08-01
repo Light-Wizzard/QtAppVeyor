@@ -228,8 +228,8 @@ and an [About](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-
 as well as an [Author](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-Author-en.html) button on both Dialog boxes,
 that you can remove easily by just removing the button from the two forms, and removing the file itself,
 this button and content is about me the Orginal Author, but is not required,
-nor are any Licenses, this project has an [Unlicnsed](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/unlicense.txt) license,
-this is to make it easier for anyone to use a template,
+nor are any Licenses, this project has an [Unlicnsed](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/unlicense.txt) License,
+this is to make it easier for anyone to Fork and use as a template,
 and I will try to expand on the Help sections,
 and add more [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki) Content,
 that might help.
