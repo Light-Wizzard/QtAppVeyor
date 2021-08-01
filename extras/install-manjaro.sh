@@ -13,11 +13,11 @@ declare -x TheScriptName; TheScriptName="install-manjaro";
 # Table of Content Index
 # checkArgs
 # #############################################################################
-declare ThisRoofFolder; ThisRoofFolder="/mnt/qnap-light-wizzard";    
+declare -x ThisRoofFolder; ThisRoofFolder="${HOME}";
 if [ ! -d "${ThisRoofFolder}" ]; then
-    ThisRoofFolder="${HOME}";    
+    mkdir -p "${ThisRoofFolder}";    
 fi
-declare TheWorkSpace; TheWorkSpace="${ThisRoofFolder}/workspace/";    
+declare -x TheWorkSpace; TheWorkSpace="${ThisRoofFolder}/workspace/";    
 declare TheSambaPublicFolder; TheSambaPublicFolder="${ThisRoofFolder}/samba/public";
 declare TheWindowsFolder; TheWindowsFolder="${ThisRoofFolder}/Windows";
 declare -x TheWizardPath; TheWizardPath="${HOME}/Scripts"; export TheWizardPath;
@@ -25,10 +25,9 @@ declare ThisUnrealEngineGitFolder;         ThisUnrealEngineGitFolder="${ThisRoof
 declare ThisUnrealEngineLauncherGitFolder; ThisUnrealEngineLauncherGitFolder="${ThisRoofFolder}/workspace/UE4Launcher";
 
 declare TheCOW; TheCOW="${TheWindowsFolder}/COW" 
-declare ThisComputer; # FIXME command line
-#ThisComputer="Ripper"; 
-ThisComputer="Xeon";
-declare ThisOwner; ThisOwner="$(whoami)";
+declare -i ThisComputerNvidia; # FIXME command line
+ThisComputerNvidia=1; # 1 = yes
+#declare ThisOwner; ThisOwner="$(whoami)";
 declare -ix ThisClearOk; ThisClearOk=1; export ThisClearOk;
 # KVM
 declare TheKvmImageFolder; TheKvmImageFolder="/var/lib/libvirt/images";
@@ -47,12 +46,13 @@ declare -i ThisCowBackUp; ThisCowBackUp=0;
 # chmod +x "${HOME}"/Scripts/install-manjaro.sh
 # dos2unix "${HOME}"/Scripts/install-manjaro.sh
 # clear; echo "Shell Check..."; shell?check "${HOME}"/Scripts/install-manjaro.sh
-# shell?check "${HOME}"/Scripts/0-install-manjaro.sh && { shell?check -x /mnt/qnap-light-wizzard/Light-Wizzard-Web-Data-Books/0-Source-Code/wizard.sh; }
+# shell?check -x .${TheWorkSpace}/install-manjaro.sh
+# shell?check -x ".${TheWorkSpace}/install-manjaro.sh && { shell?check -x ".${TheWorkSpace}/wizard.sh"; }  && { shell?check -x ".${TheWorkSpace}/wizard-common.sh"; }
 
-# "${HOME}"/Scripts/0-install-manjaro.sh -w "/mnt/qnap-light-wizzard/workspace/"
+# "${HOME}"/Scripts/install-manjaro.sh -w "${TheWorkSpace}/workspace/"
 # KVM Backup
-# "${HOME}"/Scripts/0-install-manjaro.sh -w "/mnt/qnap-light-wizzard/workspace/" -k
-# "${HOME}"/Scripts/0-install-manjaro.sh -w "/mnt/qnap-light-wizzard/workspace/" -m 2
+# "${HOME}"/Scripts/install-manjaro.sh -w "${TheWorkSpace}/workspace/" -k
+# "${HOME}"/Scripts/install-manjaro.sh -w "${TheWorkSpace}/workspace/" -m 2
 # #############################################################################
 #
 declare ThisRunPacmanFast; ThisRunPacmanFast=0;
@@ -401,6 +401,7 @@ pacmanFast()
 }
 # END pacmanFast
 # #############################################################################
+# I tried to make this AMD or Nvidia, AMD will ignore modprobe
 installGraphicCard()
 {
     # Install NVIDIA Drivers
@@ -413,13 +414,6 @@ installGraphicCard()
         fi
     fi
     mhwd -li
-    #sudo nvidia-settings
-    #sudo chown ${USER}:${USER} ~/.xinitrc
-    # Hit the 'Save to X Configuration File' button and save to /etc/X11/mhwd.d/nvidia.conf
-    #sudo mhwd-gpu --setmod nvidia --setxorg /etc/X11/mhwd.d/nvidia.conf
-    #sudo gedit ~/.xinitrc
-    #nvidia-settings --load-config-only
-    #exec $(get_session)
 
     #sudo gedit /etc/mkinitcpio.conf 
     # delete the word nouveau from the following line:
@@ -428,13 +422,20 @@ installGraphicCard()
     #sudo mkinitcpio -p [linux kernel version]
     #sudo mkinitcpio -p linux310
 
-    # Remove the NVIDIA driver
-    #sudo mhwd -r pci video-nvidia 
-    #sudo mhwd -r pci video-nvidia 
-    print_caution "Software Updates" "nvidia-modprobe" "@ ${FUNCNAME[0]}() : ${LINENO[0]}";
-    nvidia-modprobe;
-    #if [ "$ThisComputer" == "Xeon" ]; then
-    #fi
+    if [ "$ThisComputerNvidia" == "Xeon" ]; then
+        #sudo chown ${USER}:${USER} ~/.xinitrc
+        # Hit the 'Save to X Configuration File' button and save to /etc/X11/mhwd.d/nvidia.conf
+        #sudo mhwd-gpu --setmod nvidia --setxorg /etc/X11/mhwd.d/nvidia.conf
+        #sudo gedit ~/.xinitrc
+        #nvidia-settings --load-config-only
+        #exec $(get_session)
+        #sudo nvidia-settings
+        # Remove the NVIDIA driver
+        #sudo mhwd -r pci video-nvidia 
+        #sudo mhwd -r pci video-nvidia 
+        print_caution "Software Updates" "nvidia-modprobe" "@ ${FUNCNAME[0]}() : ${LINENO[0]}";
+        nvidia-modprobe;
+    fi
 }
 # #############################################################################
 # FIXME
@@ -876,7 +877,7 @@ modifyKVM()
     virsh net-start default;
     isDMAR;
     # virtualbox vde2 virtualbox-guest-utils virtualbox-guest-dkms virtualbox-ext-vnc virtualbox-host-dkms virtualbox-guest-iso linux318-virtualbox-host-modules linux318-virtualbox-guest-modules
-    sudo cp -rv /etc/libvirt/libvirt.conf ~/.config/libvirt/ && sudo chown ${USER}:kvm ~/.config/libvirt/libvirt.conf
+    sudo cp -rv /etc/libvirt/libvirt.conf ~/.config/libvirt/ && sudo chown "${USER}":kvm ~/.config/libvirt/libvirt.conf
 }
 # #############################################################################
 declare MY_KVM_NAME; MY_KVM_NAME="Ubuntu-Mate-Cinnamon-Hirsute-21_04";

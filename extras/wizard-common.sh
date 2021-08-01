@@ -1,6 +1,11 @@
 #!/bin/bash
 #
+# Copyleft and Written by Jeffrey Scott Flesher
+# No Copyrights or Licenses
+# 31 July 2021
 #
+# shell?check -x .${TheWorkSpace}/wizard-common.sh
+# 
 # XXX
 # Check to see if set
 #if [ -z ${XXX+x} ]; then declare -ix XXX; XXX=0; export XXX; fi
@@ -75,7 +80,7 @@ read_input_yn_c()
             YN_OPTION="$TheAnswer";
             thisOption=1;
         else
-            printLocalized "LOCALIZE_WK_READ_INPUT" "${thisAN}";
+            printLocalized "LOCALIZE_WK_READ_INPUT" "${TheAnswer}"; # FIXME not sure what this is suppose to be
         fi
     done
 }

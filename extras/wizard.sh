@@ -1,14 +1,20 @@
 #!/bin/bash
 #
-# Written by Jeffrey Scott Flesher
+# Copyleft and Written by Jeffrey Scott Flesher
+# No Copyrights or Licenses
 #
-# shell?check -x /mnt/qnap-light-wizzard/Light-Wizzard-Web-Data-Books/0-Source-Code/wizard.sh
+# shell?check -x .${TheWorkSpace}/wizard.sh
 #
-declare -x TheLastUpdate;       TheLastUpdate="31 March 2021 13:03";
-declare -x TheScriptVersion;    TheScriptVersion="1.0.2.A";
+declare -x TheLastUpdate;       TheLastUpdate="31 July 2021 13:03";
+declare -x TheScriptVersion;    TheScriptVersion="1.0.3.A";
 declare -x TheWizardScriptName; TheWizardScriptName="wizard.sh";
 declare -x TheWizardScriptName; TheWizardScriptName="Wizard Script";
 #
+declare -x ThisRoofFolder; ThisRoofFolder="${HOME}";
+if [ ! -d "${ThisRoofFolder}" ]; then
+    mkdir -p "${ThisRoofFolder}";    
+fi
+declare -x TheWorkSpace; TheWorkSpace="${ThisRoofFolder}/workspace/";    
 # TheFullScriptPath
 # Check to see if set
 if [ -z ${TheFullScriptPath+x} ]; then declare -x TheFullScriptPath; TheFullScriptPath="$(dirname "$(readlink -f "${0}")")"; export TheFullScriptPath; fi
@@ -2019,18 +2025,20 @@ function get_stack()
 {
     if [ $# -ne 1 ]; then echo "LOCALIZE_WRONG_ARGS_PASSED_TO ${FUNCNAME[0]}() @ $(basename "${BASH_SOURCE[0]}") : Line # ${LINENO[0]}"; exit 1; fi
     STACK="";
-    local i message; message="${1:-""}"
+    local message; message="${1:-""}"
     local stack_size; stack_size=${#FUNCNAME[@]};
     local func;
     local linen;
     local src;
+    local i;
     # to avoid noise we start with 1 to skip the get_stack function
+    # FIXME Replace all gone bad
     for (( i=1; i<stack_size; i++ )); do
         func="${FUNCNAME[$i]}"
-        [ x"$func" = x ] && func=MAIN;
+        [ "$func" != "" ] && func=MAIN;
         linen="${BASH_LINENO[$(( i - 1 ))]}"
         src="${BASH_SOURCE[$i]}"
-        [ x"$src" = x ] && src=non_file_source;
+        [ "$src" != "" ] && src=non_file_source;
         STACK+=$'\n\t'"at: ${func} ${src} ${linen}"
     done
     STACK="${message}${STACK}";
@@ -11593,7 +11601,7 @@ getImageHeight()
     [[ $# -ne 1 ]]      && { print_error "LOCALIZE_WRONG_ARGS_PASSED_TO" "Usage: ${FUNCNAME[0]}() MyImage @ $(basename "${BASH_SOURCE[0]}") : ${LINENO[0]}"; pause_function "${FUNCNAME[0]} @ $(basename "${BASH_SOURCE[0]}") : ${LINENO[0]} "; exit 1; }
     local MyImage; MyImage="${1}";   # Image Link
     [[ -z ${MyImage} ]] && { print_error "LOCALIZE_NAME_NOT_SPECIFIED"  "${FUNCNAME[0]}(): MyImage @ $(basename "${BASH_SOURCE[0]}") : ${LINENO[0]}"; pause_function "${FUNCNAME[0]} @ $(basename "${BASH_SOURCE[0]}") : ${LINENO[0]} "; exit 1; }
-    # MyImage="/mnt/qnap-light-wizzard/Light-Wizzard-Web-Data-Books/0-Source-Code/Support/Test/Source/imageNoAlpha.png"
+    # MyImage="${TheWorkSpace}/Support/Test/Source/imageNoAlpha.png"
     if [ -f "${MyImage}" ]; then
         #echo "$(identify -ping -format '%h' "${MyImage}")";
         identify -ping -format '%h' "${MyImage}"
@@ -11871,7 +11879,7 @@ test_compare_versions()
 # END test_compare_versions
 ###############################################################################
 #
-# ls -i "/mnt/qnap-light-wizzard/Light-Wizzard-Web-Data-Books/0-Source-Code/Support/Test/Source/README.md" | cut -d " " -f1;
+# ls -i "${TheWorkSpace}/Support/Test/Source/README.md" | cut -d " " -f1;
 get_File_Inode()
 {
     if [ $# -ne 1 ] ; then print_error "1->(Full-Path)" "@ $(basename "${BASH_SOURCE[0]}") -> ${FUNCNAME[0]}() : ${LINENO[0]}"; exit 1; fi
@@ -12025,7 +12033,7 @@ test_fix_LineType()
     ((TestCounter += 1));
     #
     local thisTest; thisTest="This";
-    if [ "$(fix_LineType "$thisTest" 0)" ] == "$thisTest"; then
+    if [ "$(fix_LineType "$thisTest" 0)" == "$thisTest" ]; then
         print_test "LOCALIZE_TEST_FUNCTION_PASSED" "$(sub_string "${FUNCNAME[0]}" "test_" 2)() : ${LINENO[0]}";
     else
         print_error "LOCALIZE_TEST_FUNCTION_FAILED" "$(sub_string "${FUNCNAME[0]}" "test_" 2)() : ${LINENO[0]}";
