@@ -30,6 +30,9 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
     # Required by LinuxDeploy
     sudo apt-get install -qqy libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb-dev libxkbcommon-x11-0 libgtk2.0-dev;
+    if [ "$MY_RUN_DOXYFILE" == "true" ]; then
+        sudo apt install -qqy libhdf5-dev doxygen doxygen-latex texlive-full libssl1.0.0 libopenexr-dev libpcl-dev lmodern;
+    fi
 fi
 #
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "macos" ]]; then

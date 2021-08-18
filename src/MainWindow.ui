@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1071</width>
-    <height>683</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="font">
@@ -19,7 +19,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="QtAppVeyor.qrc">
+   <iconset resource="../QtAppVeyor.qrc">
     <normaloff>:/images/logo32.png</normaloff>:/images/logo32.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -41,7 +41,7 @@
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="labelSettingsProjectBinLine">
             <property name="font">
              <font>
@@ -53,7 +53,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettingsProject">
             <item>
              <widget class="QComboBox" name="comboBoxSettingsProjects">
@@ -78,7 +78,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditSettingsQtProject"/>
+             <widget class="QLineEdit" name="lineEditSettingsQtProject">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="labelSettingProjectIDSign">
@@ -90,13 +100,13 @@
             <item>
              <widget class="QLabel" name="labelRecordIdSettings">
               <property name="text">
-               <string>ProjectID</string>
+               <string notr="true">ProjectID</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="labelSettingsSecret">
             <property name="font">
              <font>
@@ -108,16 +118,25 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="lineEditSettingsSecret">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
              </font>
             </property>
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsOS">
             <property name="font">
              <font>
@@ -129,7 +148,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <layout class="QGridLayout" name="gridLayoutSettingsOS">
             <item row="4" column="2">
              <widget class="QCheckBox" name="checkBoxSettingsiOS">
@@ -203,7 +222,7 @@
             </item>
            </layout>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPlatform">
             <property name="font">
              <font>
@@ -215,7 +234,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettingsPlatform">
             <item>
              <widget class="QCheckBox" name="checkBoxSettingsPlatformX64">
@@ -256,7 +275,7 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsConfiguration">
             <property name="font">
              <font>
@@ -268,7 +287,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettingsConfiguration">
             <item>
              <widget class="QCheckBox" name="checkBoxSettingsConfigurationRelease">
@@ -309,14 +328,14 @@
             </item>
            </layout>
           </item>
-          <item row="6" column="0">
+          <item row="8" column="0">
            <widget class="QLabel" name="labelSettingsOptions">
             <property name="text">
              <string>Options</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="8" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSettings">
             <item>
              <widget class="QPushButton" name="pushButtonSettingsAdd">
@@ -354,14 +373,14 @@
             </item>
            </layout>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsEnvironment">
             <property name="text">
              <string>Environment</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QGroupBox" name="groupBoxSettingsEnvironment">
             <property name="title">
              <string/>
@@ -396,6 +415,64 @@
              </item>
             </layout>
            </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelSettingsMessaging">
+            <property name="text">
+             <string>Messaging</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettingsMessaging">
+            <item>
+             <widget class="QCheckBox" name="checkBoxSettignsMessaging">
+              <property name="text">
+               <string>Log Debugging Messages</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerSettingsMessaging">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSettingsLanguage">
+            <property name="text">
+             <string>Language</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayoutSettingsLanguage">
+            <item>
+             <widget class="QComboBox" name="comboBoxSettingsLanguage"/>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerSettingsLanguage">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -437,7 +514,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditSqlHostName"/>
+           <widget class="QLineEdit" name="lineEditSqlHostName">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSqlUserName">
@@ -447,7 +534,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditSqlUserName"/>
+           <widget class="QLineEdit" name="lineEditSqlUserName">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSqlPassword">
@@ -461,17 +558,26 @@
             <item>
              <widget class="QLineEdit" name="lineEditSqlPassword">
               <property name="accessibleName">
-               <string>HidePassword</string>
+               <string/>
+              </property>
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
               </property>
               <property name="echoMode">
                <enum>QLineEdit::PasswordEchoOnEdit</enum>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonSqlPasswordShowHide">
               <property name="accessibleName">
-               <string>ShowPassword</string>
+               <string/>
               </property>
               <property name="text">
                <string>Show Password</string>
@@ -483,7 +589,17 @@
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutSqlDbName">
             <item>
-             <widget class="QLineEdit" name="lineEditSqlDatabaseName"/>
+             <widget class="QLineEdit" name="lineEditSqlDatabaseName">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonSqlFileBrowswer">
@@ -544,7 +660,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionUbuntu"/>
+           <widget class="QLineEdit" name="lineEditQtVersionUbuntu">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionUbuntu">
@@ -554,7 +680,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionUbuntu"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionUbuntu">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageUbuntu">
@@ -564,7 +700,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriUbuntu"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriUbuntu">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionUbuntu">
@@ -576,7 +722,17 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutUbuntuPython">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionUbuntu"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionUbuntu">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonUbuntu">
@@ -649,7 +805,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdUbuntu">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -661,7 +817,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionUbuntu"/>
+           <widget class="QLineEdit" name="lineEditVsVersionUbuntu">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -682,7 +848,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionMac"/>
+           <widget class="QLineEdit" name="lineEditQtVersionMac">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionMac">
@@ -692,7 +868,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionMac"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionMac">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageMac">
@@ -702,7 +888,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriMac"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriMac">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionMac">
@@ -714,7 +910,17 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutMacPython">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionMac"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionMac">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonMac">
@@ -787,7 +993,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdMac">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -799,7 +1005,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionMac"/>
+           <widget class="QLineEdit" name="lineEditVsVersionMac">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -820,7 +1036,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionAndroid"/>
+           <widget class="QLineEdit" name="lineEditQtVersionAndroid">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionAndroid">
@@ -830,7 +1056,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionAndroid"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionAndroid">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageAndroid">
@@ -840,7 +1076,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriAndroid"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriAndroid">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionAndroid">
@@ -852,7 +1098,17 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutAndroidPhython">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionAndroid"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionAndroid">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonAndroid">
@@ -925,7 +1181,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdAndroid">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -937,7 +1193,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionAndroid"/>
+           <widget class="QLineEdit" name="lineEditVsVersionAndroid">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -958,7 +1224,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionWebAssembly"/>
+           <widget class="QLineEdit" name="lineEditQtVersionWebAssembly">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionWebAssembly">
@@ -968,7 +1244,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionWebAssembly"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionWebAssembly">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageWebAssembly">
@@ -978,7 +1264,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriWebAssembly"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriWebAssembly">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionWebAssembly">
@@ -990,7 +1286,17 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutPythonWebAssembly">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionWebAssembly"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionWebAssembly">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonWebAssembly">
@@ -1063,7 +1369,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdWebAssembly">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -1075,7 +1381,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionWebAssembly"/>
+           <widget class="QLineEdit" name="lineEditVsVersionWebAssembly">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1096,7 +1412,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionIOS"/>
+           <widget class="QLineEdit" name="lineEditQtVersionIOS">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionIOS">
@@ -1106,7 +1432,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionIOS"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionIOS">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageIOS">
@@ -1116,7 +1452,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriIOS"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriIOS">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionIOS">
@@ -1128,7 +1474,17 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutPythonIOS">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionIOS"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionIOS">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonIOS">
@@ -1201,7 +1557,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdIOS">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -1213,7 +1569,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionIOS"/>
+           <widget class="QLineEdit" name="lineEditVsVersionIOS">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1234,7 +1600,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionWindows"/>
+           <widget class="QLineEdit" name="lineEditQtVersionWindows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionWindows">
@@ -1244,7 +1620,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionWindows"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionWindows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageWindows">
@@ -1254,7 +1640,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriWindows"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriWindows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsMingW32Windows">
@@ -1264,7 +1660,17 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEditQtMingW32Windows"/>
+           <widget class="QLineEdit" name="lineEditQtMingW32Windows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsMingW64Windows">
@@ -1274,7 +1680,17 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEditQtMingW64Windows"/>
+           <widget class="QLineEdit" name="lineEditQtMingW64Windows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="7" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW32Wndows">
@@ -1284,7 +1700,17 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEditQtToolsMingW32Windows"/>
+           <widget class="QLineEdit" name="lineEditQtToolsMingW32Windows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="8" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW64Windows">
@@ -1294,7 +1720,17 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QLineEdit" name="lineEditQtToolsMingW64Windows"/>
+           <widget class="QLineEdit" name="lineEditQtToolsMingW64Windows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="9" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionWindows">
@@ -1306,7 +1742,17 @@
           <item row="9" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutWindowsPython">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionWindows"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionWindows">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonWindows">
@@ -1325,7 +1771,17 @@
            </widget>
           </item>
           <item row="10" column="1">
-           <widget class="QLineEdit" name="lineEditVisualStudioWindows"/>
+           <widget class="QLineEdit" name="lineEditVisualStudioWindows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="11" column="0">
            <widget class="QLabel" name="labelSetDefaultsWindows">
@@ -1375,7 +1831,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdWindows">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -1387,7 +1843,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionWindows"/>
+           <widget class="QLineEdit" name="lineEditVsVersionWindows">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1410,7 +1876,7 @@
           <item row="0" column="1">
            <widget class="QLabel" name="labelRecordIdDefaults">
             <property name="text">
-             <string>Record ID</string>
+             <string notr="true">Record ID</string>
             </property>
            </widget>
           </item>
@@ -1422,7 +1888,17 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQtVersionDefaults"/>
+           <widget class="QLineEdit" name="lineEditQtVersionDefaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerVersionDefaults">
@@ -1432,7 +1908,17 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfVersionDefaults"/>
+           <widget class="QLineEdit" name="lineEditQtIfVersionDefaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="labelSettingsQtInstallerPackageDefaults">
@@ -1442,7 +1928,17 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditQtIfPackageUriDefaults"/>
+           <widget class="QLineEdit" name="lineEditQtIfPackageUriDefaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="labelSettingsMingW32Defaults">
@@ -1452,7 +1948,17 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEditQtMingW32Defaults"/>
+           <widget class="QLineEdit" name="lineEditQtMingW32Defaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="labelSettingsMingW64Defaults">
@@ -1462,7 +1968,17 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEditQtMingW64Defaults"/>
+           <widget class="QLineEdit" name="lineEditQtMingW64Defaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="7" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW32Defaults">
@@ -1472,7 +1988,17 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEditQtToolsMingW32Defaults"/>
+           <widget class="QLineEdit" name="lineEditQtToolsMingW32Defaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="8" column="0">
            <widget class="QLabel" name="labelSettingsQtToolsMingW64Defaults">
@@ -1482,7 +2008,17 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QLineEdit" name="lineEditQtToolsMingW64Defaults"/>
+           <widget class="QLineEdit" name="lineEditQtToolsMingW64Defaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="9" column="0">
            <widget class="QLabel" name="labelSettingsPythonVersionDefaults">
@@ -1494,7 +2030,17 @@
           <item row="9" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutDefaults">
             <item>
-             <widget class="QLineEdit" name="lineEditPythonVersionDefaults"/>
+             <widget class="QLineEdit" name="lineEditPythonVersionDefaults">
+              <property name="inputMask">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="placeholderText">
+               <string notr="true"/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="checkBoxPythonDefaults">
@@ -1513,7 +2059,17 @@
            </widget>
           </item>
           <item row="10" column="1">
-           <widget class="QLineEdit" name="lineEditVisualStudioDefaults"/>
+           <widget class="QLineEdit" name="lineEditVisualStudioDefaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
           <item row="11" column="0">
            <widget class="QLabel" name="labelDefaultsOsUpgrade">
@@ -1643,7 +2199,17 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditVsVersionDefaults"/>
+           <widget class="QLineEdit" name="lineEditVsVersionDefaults">
+            <property name="inputMask">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="placeholderText">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1662,6 +2228,16 @@
            </font>
           </property>
          </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabHelp">
+       <attribute name="title">
+        <string>Help</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QTextEdit" name="textEditHelp"/>
         </item>
        </layout>
       </widget>
@@ -1699,6 +2275,8 @@
     <addaction name="actionHelp"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
+    <addaction name="actionAuthor"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
@@ -1724,13 +2302,14 @@
    <addaction name="separator"/>
    <addaction name="actionAbout"/>
    <addaction name="separator"/>
+   <addaction name="actionAuthor"/>
    <addaction name="actionHelp"/>
    <addaction name="separator"/>
    <addaction name="actionExit"/>
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/exit_button.png</normaloff>:/images/exit_button.png</iconset>
    </property>
    <property name="text">
@@ -1739,7 +2318,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/gear.png</normaloff>:/images/gear.png</iconset>
    </property>
    <property name="text">
@@ -1748,7 +2327,7 @@
   </action>
   <action name="actionCreate">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/thumbsup.png</normaloff>:/images/thumbsup.png</iconset>
    </property>
    <property name="text">
@@ -1757,7 +2336,7 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
    </property>
    <property name="text">
@@ -1766,7 +2345,7 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
    </property>
    <property name="text">
@@ -1775,7 +2354,7 @@
   </action>
   <action name="actionPrint">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/fileprint.png</normaloff>:/images/fileprint.png</iconset>
    </property>
    <property name="text">
@@ -1784,16 +2363,25 @@
   </action>
   <action name="actionClipboard">
    <property name="icon">
-    <iconset resource="QtAppVeyor.qrc">
+    <iconset resource="../QtAppVeyor.qrc">
      <normaloff>:/images/clipboard.png</normaloff>:/images/clipboard.png</iconset>
    </property>
    <property name="text">
     <string>Clipboard</string>
    </property>
   </action>
+  <action name="actionAuthor">
+   <property name="icon">
+    <iconset resource="../QtAppVeyor.qrc">
+     <normaloff>:/images/handshake.png</normaloff>:/images/handshake.png</iconset>
+   </property>
+   <property name="text">
+    <string>Author</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="QtAppVeyor.qrc"/>
+  <include location="../QtAppVeyor.qrc"/>
  </resources>
  <connections/>
 </ui>

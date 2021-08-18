@@ -5,7 +5,7 @@ TEMPLATE = "app"
 QT      += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 #qtHaveModule(printsupport):       QT *= printsupport
-CONFIG += c++11
+CONFIG += c++17
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -13,51 +13,69 @@ CONFIG += c++11
 # Do not use Spaces in Target Name
 # This pro(ject) file is based on a pattern
 TARGET = "QtAppVeyor"
-
-win32:QMAKE_CC = gcc
-win32:QMAKE_CXX = g++
-
+##-------------------------------------------------------------------------------------
+INCLUDEPATH     += .
+INCLUDEPATH     += src
+INCLUDEPATH     += "${QT_INSTALL_LIBS}/qt"
+##-------------------------------------------------------------------------------------
+#
+win32:QMAKE_CC     += gcc
+win32:QMAKE_CXX    += g++
+#
+win32:CONFIG       += static
+win32:DEFINES      += STATIC
+win32:QMAKE_LFLAGS += -static
+#
+win32:CONFIG       *= windeployqt
+win32:CONFIG       *= windows
+# Source
 SOURCES += src/main.cpp \
-    src/AboutDialog.cpp \
-    src/HelpDialog.cpp \
     src/MainWindow.cpp \
+    src/MyDatatables.cpp \
+    src/MyLocalization.cpp \
     src/MyOrgSettings.cpp \
     src/MySqlDbtModel.cpp \
     src/SimpleCrypt.cpp
-
+# Headers
 HEADERS += \
-    src/AboutDialog.h \
-    src/HelpDialog.h \
     src/MainWindow.h \
+    src/MyConstants.h \
+    src/MyDatatables.h \
+    src/MyLocalization.h \
     src/MyOrgSettings.h \
     src/MySqlDbtModel.h \
-    src/QtAppVeyorConstants.h \
     src/SimpleCrypt.h
-
-FORMS += src/AboutDialog.ui src/MainWindow.ui src/HelpDialog.ui
-
+# Forms
+FORMS += src/MainWindow.ui
 # Resources
 RESOURCES   += QtAppVeyor.qrc
-#
-TRANSLATIONS += QtAppVeyor_en_US.ts
+# Translations
+CONFIG += localize_deployment
+SYMBIAN_SUPPORTED_LANGUAGES += zh_CN
+SYMBIAN_LANG.zh_CN = 31
 CONFIG += lrelease
 CONFIG += embed_translations
-
-win32:CONFIG   *= windeployqt
-win32:CONFIG   *= windows
-# Version Numver Controls
-win32:VERSION   = 0.1.0.0 # major.minor.patch.build
-else:VERSION    = 0.1.0   # major.minor.patch
-DEFINES         = APP_VERSION=\\\"$${VERSION}\\\"
-
+LRELEASE_DIR=./translations
+QM_FILES_RESOURCE_PREFIX=./translations
+# ar,de,en,fr,it,ja,no,ru,sv,zh-CN
+TRANSLATIONS += translations/QtAppVeyor_ar.ts \
+                translations/QtAppVeyor_de.ts \
+                translations/QtAppVeyor_en.ts \
+                translations/QtAppVeyor_fr.ts \
+                translations/QtAppVeyor_it.ts \
+                translations/QtAppVeyor_ja.ts \
+                translations/QtAppVeyor_no.ts \
+                translations/QtAppVeyor_ru.ts \
+                translations/QtAppVeyor_sv.ts \
+                translations/QtAppVeyor_zh-CN.ts
+# Distrobution Files
 DISTFILES += \
     .appveyor.yml \
     CMakeLists.txt \
     README.md \
-    help/About-Author-en.html \
-    help/About-en.html \
-    help/Help-en.html \
-    help/ReadMe.md \
+    help/About-Author_en.md \
+    help/About_en.md \
+    help/Help_en.md \
     scripts/build_script.cmd \
     scripts/build_script.ps1 \
     scripts/build_script.sh \
@@ -91,6 +109,22 @@ ios:QMAKE_INFO_PLIST   = ios/Info.plist
 #MOC_DIR     = "$${DESTDIR}/moc"
 #RCC_DIR     = "$${DESTDIR}/qrc"
 #UI_DIR      = "$${DESTDIR}/ui"
+win32-g++{
+    contains(QMAKE_HOST.arch, x86_64) { #x64
+        DEFINES += MINGW_X64
+    } else { #x32
+        DEFINES += MINGW_X32
+    }
+    CONFIG(release, debug|release) {
+        #release
+        QMAKE_CXXFLAGS += -std=c++0x -O2 -Os -msse2 -ffp-contract=fast -fpic
+    }
+    else {
+        #debug
+        DEFINES += _DEBUG
+        QMAKE_CXXFLAGS += -std=c++0x -O0 -g3 -msse2 -fpic
+    }
+}
 #
 unix {
     isEmpty(PREFIX) {
@@ -120,4 +154,31 @@ unix {
     INSTALLS           += data
     INSTALLS           += target
 }
+###############################################################################
+message("*******************************************************************************")
+message(Qt version: $$[QT_VERSION])
+message(Qt is installed in $$[QT_INSTALL_PREFIX])
+message(Qt resources can be found in the following locations:)
+message(Documentation: $$[QT_INSTALL_DOCS])
+message(Header files: $$[QT_INSTALL_HEADERS])
+message(Libraries: $$[QT_INSTALL_LIBS])
+message(Binary files (executables): $$[QT_INSTALL_BINS])
+message(Plugins: $$[QT_INSTALL_PLUGINS])
+message(Data files: $$[QT_INSTALL_DATA])
+message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
+message(Settings: $$[QT_INSTALL_SETTINGS])
+message(Examples: $$[QT_INSTALL_EXAMPLES])
+message(Demonstrations: $$[QT_INSTALL_DEMOS])
+message(Demonstrations: $$[QT_INSTALL_DEMOS])
+message(OUT_PWD: $${OUT_PWD})
+message(DESTDIR: $${DESTDIR})
+message(OBJECTS_DIR: $${OBJECTS_DIR})
+message(MOC_DIR: $${MOC_DIR})
+message(UI_DIR: $${UI_DIR})
+message(RCC_DIR: $${RCC_DIR})
+message(INSTALLS: $${INSTALLS})
+message(RC_FILE: $${RC_FILE})
+message(DEFINES: $${DEFINES})
+message(QMAKE_CXXFLAGS: $${QMAKE_CXXFLAGS})
+message("*******************************************************************************")
 ################################ End of File ##################################

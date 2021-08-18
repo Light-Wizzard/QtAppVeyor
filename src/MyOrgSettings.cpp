@@ -1,50 +1,67 @@
 #include "MyOrgSettings.h"
 
-/**************************************************************************
-* \class MySettings
-* Creates QSettings for organizationName, organizationDomain, applicationName
-***************************************************************************/
+/************************************************
+ * @brief Creates QSettings for organizationName, organizationDomain, applicationName.
+ * MyOrgSettings
+ ***********************************************/
 MyOrgSettings::MyOrgSettings(QObject *parent) : QObject(parent)
 {
     // Fixed random number, change it before using it, then leave it,
     // all data stored with this key will only work with this key.
-    // Defined in QtAppVeyorConstants.h
+    // Defined in MyConstants.h
     myCrypto = new SimpleCrypt(MY_CRYPTO_SEED);
     // Constants
     myConstants = new MyConstants();
     // Run after GUI loads
     QTimer::singleShot(200, this, &MyOrgSettings::onRunOnStartup);
 }
-/**************************************************************************
-* \fn class ~MySettings
-* Creates QSettings for organizationName, organizationDomain, applicationName
-***************************************************************************/
+/************************************************
+ * @brief Deconstructor.
+ * ~MyOrgSettings
+ ***********************************************/
 MyOrgSettings::~MyOrgSettings()
 {
 
 }
-/******************************************************************************
-* \fn onRunOnStartup
-*******************************************************************************/
+/************************************************
+ * @brief set Debug Message.
+ * setDebugMessage
+ ***********************************************/
+void MyOrgSettings::setDebugMessage(bool thisState)
+{
+    isDebugMessage = thisState;
+    if (isDebugMessage) { qDebug() << "setDebugMessage"; }
+}
+/************************************************
+ * @brief get Debug Message.
+ * getDebugMessage
+ ***********************************************/
+bool MyOrgSettings::getDebugMessage()
+{
+    if (isDebugMessage) { qDebug() << "getDebugMessage"; }
+    return isDebugMessage;
+}
+/************************************************
+ * @brief Run On Start up.
+ * onRunOnStartup
+ ***********************************************/
 void MyOrgSettings::onRunOnStartup()
 {
     if (isDebugMessage)
     {
+        qDebug() << "onRunOnStartup";
         QString theTest = "This is my Secret";
         if (theTest != decryptThis(encryptThis(theTest)))
-        {
-            qDebug() << "decryptThis Failed";
-            QMessageBox::critical(nullptr, QObject::tr("Crypto Fail"), QObject::tr("Crypto Fail: MyOrgSettings::onRunOnStartup()"), QMessageBox::Ok);
-        }
+        { showMessageBox(QObject::tr("Crypto Fail").toLocal8Bit(), tr("Crypto Fail: MyOrgSettings::onRunOnStartup()").toLocal8Bit(), Critical); }
     }
 }
-/**************************************************************************
-* \fn void getSettings()
-* Creates QSettings for organizationName, organizationDomain, applicationName
-***************************************************************************/
+/************************************************
+ * @brief get Settings.
+ * getSettings
+ ***********************************************/
 QSettings *MyOrgSettings::getSettings()
 {
-    if (isDebugMessage) qDebug() << "getSettings";
+    if (isDebugMessage) { qDebug() << "getSettings"; }
     // organizationName, organizationDomain, applicationName and applicationName
     // are set in main.cpp, and passed into Constuctor, so they are set
     QCoreApplication::setOrganizationName(getOrgName());
@@ -53,210 +70,189 @@ QSettings *MyOrgSettings::getSettings()
     //QCoreApplication::setApplicationDisplayName(getAppName());
     // see *.pro file where it is: DEFINES *= APP_VERSION=$${VERSION}
     // cmake does not have this yet, this is a hack till I FIXME
-#ifndef APP_VERSION
-#define APP_VERSION ("1.0.0")
-#endif
-    QCoreApplication::setApplicationVersion(QObject::tr(APP_VERSION));
+    QCoreApplication::setApplicationVersion(QObject::tr(VERSION));
     QString myIni = QString("%1%2%3").arg(getAppDataLocation(), QDir::separator(), myConstants->MY_INI_FILE);
     if (!isFileMake(getAppDataLocation(), myConstants->MY_INI_FILE))
     {
-        qDebug() << "Failed to make File in getSettings " << getAppDataLocation() << QDir::separator() << myConstants->MY_INI_FILE;
+        qCritical() << "Failed to make File in getSettings " << getAppDataLocation() << QDir::separator() << myConstants->MY_INI_FILE;
     }
     return new QSettings(myIni, QSettings::IniFormat);
 } // end qSettingsInstance
-/**************************************************************************
-* \fn bool isSetting(const QString &thisFieldName)
-***************************************************************************/
+/************************************************
+ * @brief is Setting.
+ * isSetting
+ ***********************************************/
 bool MyOrgSettings::isSetting(const QString &thisFieldName)
 {
-    if (isDebugMessage) qDebug() << "isSetting";
+    if (isDebugMessage) { qDebug() << "isSetting"; }
     QSettings *mySettings = getSettings();
     return mySettings->contains(thisFieldName);
 } // end isSetting
-/******************************************************************************
-* \fn readSettings
-*******************************************************************************/
+/************************************************
+ * @brief read Settings.
+ * readSettings
+ ***********************************************/
 QString MyOrgSettings::readSettings(const QString &thisSetting, const QString &thisDefault)
 {
-    if (isDebugMessage) qDebug() << "readSettings";
+    if (isDebugMessage) { qDebug() << "readSettings"; }
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
     QString theSetting = mySettings->value(thisSetting, thisDefault).toString();
     mySettings->endGroup();
     return theSetting;
 }
-/******************************************************************************
-* \fn readSettingsBool
-*******************************************************************************/
+/************************************************
+ * @brief read Settings Bool.
+ * readSettingsBool
+ ***********************************************/
 bool MyOrgSettings::readSettingsBool(const QString &thisSetting, bool thisDefault)
 {
-    if (isDebugMessage) qDebug() << "readSettingsBool";
+    if (isDebugMessage) { qDebug() << "readSettingsBool"; }
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
     bool theSetting = mySettings->value(thisSetting, thisDefault).toBool();
     mySettings->endGroup();
     return theSetting;
 }
-/******************************************************************************
-* \fn readSettingsInt
-*******************************************************************************/
+/************************************************
+ * @brief read Settings Int.
+ * readSettingsInt
+ ***********************************************/
 int MyOrgSettings::readSettingsInt(const QString &thisSetting, int thisDefault)
 {
-    if (isDebugMessage) qDebug() << "readSettingsInt";
+    if (isDebugMessage) { qDebug() << "readSettingsInt"; }
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
     int theSetting = mySettings->value(thisSetting, thisDefault).toInt();
     mySettings->endGroup();
     return theSetting;
 }
-/******************************************************************************
-* \fn writeSettings
-*******************************************************************************/
+/************************************************
+ * @brief write Settings.
+ * writeSettings
+ ***********************************************/
 void MyOrgSettings::writeSettings(const QString &thisSetting, const QString &thisValue)
 {
-    if (isDebugMessage) qDebug() << "writeSettings";
+    if (isDebugMessage) { qDebug() << "writeSettings"; }
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
     mySettings->setValue(thisSetting, thisValue);
     mySettings->endGroup();
 }
-/******************************************************************************
-* \fn getDataPath
-*******************************************************************************/
+/************************************************
+ * @brief get Data Path.
+ * getDataPath
+ ***********************************************/
 QString MyOrgSettings::getDataPath(const QString &thisFileName)
 {
-    if (isDebugMessage) qDebug() << "getDataPath";
+    if (isDebugMessage) { qDebug() << "getDataPath"; }
     //
     QDir settingsPath;
-    // FIXME Path
-    QString myDataPath = QString(settingsPath.currentPath()).append(QDir::separator()).append(thisFileName);
-    if (isDebugMessage) qDebug() << "getDataPath = " << myDataPath;
+    // FIXME this is where the exe is
+    QString myDataPath = QString("%1%2%3").arg(settingsPath.currentPath(), QDir::separator(), thisFileName);
+    if (isDebugMessage) { qDebug() << "getDataPath = " << myDataPath; }
     return myDataPath;
 }
-/**************************************************************************
-* \fn QString combinePathFileName(QString thisPath, QString thisFileName)
-***************************************************************************/
-QString MyOrgSettings::combinePathFileName(const QString &thisPath,const  QString &thisFileName)
+/************************************************
+ * @brief get Last Application Path.
+ * getLastApplicationPath
+ ***********************************************/
+QString MyOrgSettings::getLastApplicationPath()
 {
-    if (isDebugMessage) qDebug() << "combinePathFileName";
-    return QString("%1%2%3").arg(thisPath, QDir::separator(), thisFileName);
-} // end combinePathFileName
-/**************************************************************************
-* \fn bool isPathExists(QString thisPath)
-***************************************************************************/
-bool MyOrgSettings::isPathExists(QString thisPath)
-{
-    return QDir(thisPath).exists() && QFileInfo(thisPath).isDir();
-} // end isPathExists
-/**************************************************************************
-* \fn bool isFileExists(QString thisFile)
-***************************************************************************/
-bool MyOrgSettings::isFileExists(QString thisFile)
-{
-    if (isDebugMessage) qDebug() << "isFileExists";
-    // check if file exists and if yes: Is it really a file and not directory?
-    return QFileInfo::exists(thisFile) && QFileInfo(thisFile).isFile();
-} // end isFileExists
-/**************************************************************************
-* \fn bool isFileMake(const QString &thisPath, const QString &thisFileName)
-***************************************************************************/
-bool MyOrgSettings::isFileMake(const QString &thisPath, const QString &thisFileName)
-{
-    if (isDebugMessage) qDebug() << "isFileMake";
-    if (!isMakeDir(thisPath)) return false;
-    if (!isFileExists(combinePathFileName(thisPath, thisFileName)))
+    if (isDebugMessage) { qDebug() << "getLastApplicationPath"; }
+    if (myLastApplicationFolder.isEmpty())
     {
-        QFile file(combinePathFileName(thisPath, thisFileName));
-        if (file.open(QIODevice::WriteOnly))
+        //
+        QString theProjectPath = QCoreApplication::applicationFilePath();
+        if (!isPathExists(theProjectPath))
         {
-            file.close();
-            return isFileExists(combinePathFileName(thisPath, thisFileName));
+            qWarning() << "getLastApplicationPath not found = " << theProjectPath;
+            theProjectPath = QDir::currentPath();
         }
-        else return false;
+        myLastApplicationFolder = readSettings(myConstants->MY_LAST_PROJECT_FOLDER, theProjectPath);
     }
-    return true;
-} // end isFileMake
-/**************************************************************************
-* \fn bool isMakeDir(const QString &thisPath)
-***************************************************************************/
-bool MyOrgSettings::isMakeDir(const QString &thisPath)
+    return myLastApplicationFolder;
+}
+/************************************************
+ * @brief set Last Application Path.
+ * setLastApplicationPath
+ ***********************************************/
+void MyOrgSettings::setLastApplicationPath(const QString &thisPath)
 {
-    if (isDebugMessage) qDebug() << "isMakeDir";
-    QDir dir(thisPath);
-    if (!dir.exists())
-    {
-        if (!dir.mkpath("."))
-        {
-            qFatal("%s", QString("Error: cannot create file %1").arg(thisPath).toLocal8Bit().constData());
-        }
-        else return true;
-    }
-    return isPathExists(thisPath);
-} // end isMakeDir
-/**************************************************************************
-* \fn QString getOrgName()
-* This value is used for Qt Settings: GitHub Account Name is one example
-***************************************************************************/
+    if (isDebugMessage) { qDebug() << "setLastApplicationPath"; }
+    myLastApplicationFolder = thisPath;
+    writeSettings(myConstants->MY_LAST_PROJECT_FOLDER, thisPath);
+}
+/************************************************
+ * @brief This value is used for Qt Settings: GitHub Account Name is one example.
+ * getOrgName
+ ***********************************************/
 QString MyOrgSettings::getOrgName()
 {
-    if (isDebugMessage) qDebug() << "getOrgName";
+    if (isDebugMessage) { qDebug() << "getOrgName"; }
     return myOrganizationName;
 } // end getOrgName
-/**************************************************************************
-* \fn void setOrgName(const QString &thisOrgName)
-***************************************************************************/
+/************************************************
+ * @brief set Org Name.
+ * setOrgName
+ ***********************************************/
 void MyOrgSettings::setOrgName(const QString &thisOrgName)
 {
-    if (isDebugMessage) qDebug() << "setOrgName";
+    if (isDebugMessage) { qDebug() << "setOrgName"; }
     if (QString::compare(myOrganizationName, thisOrgName, Qt::CaseInsensitive))
     {
         myOrganizationName = thisOrgName;
     }
 } // end setOrgName
-/**************************************************************************
-* \fn QString getOrgDomain()
-***************************************************************************/
+/************************************************
+ * @brief get Org Domain.
+ * getOrgDomain
+ ***********************************************/
 QString MyOrgSettings::getOrgDomain()
 {
-    if (isDebugMessage) qDebug() << "getOrgDomain";
+    if (isDebugMessage) { qDebug() << "getOrgDomain"; }
     return myOrganizationDomain;
 } // end getOrgDomain
-/**************************************************************************
-* \fn void setOrgDomain(const QString &thisOrgDomain)
-***************************************************************************/
+/************************************************
+ * @brief set Org Domain.
+ * setOrgDomain
+ ***********************************************/
 void MyOrgSettings::setOrgDomain(const QString &thisOrgDomain)
 {
-    if (isDebugMessage) qDebug() << "setOrgDomain";
+    if (isDebugMessage) { qDebug() << "setOrgDomain"; }
     if (QString::compare(myOrganizationDomain, thisOrgDomain, Qt::CaseInsensitive))
     {
         myOrganizationDomain = thisOrgDomain;
     }
 } // end setOrgDomain
-/**************************************************************************
-* \fn QString getAppName()
-***************************************************************************/
+/************************************************
+ * @brief get App Name.
+ * getAppName
+ ***********************************************/
 QString MyOrgSettings::getAppName()
 {
-    if (isDebugMessage) qDebug() << "getAppName";
+    if (isDebugMessage) { qDebug() << "getAppName"; }
     return myApplicationName;
 } // end getAppName
-/**************************************************************************
-* \fn void setAppName(const QString &thisAppName)
-***************************************************************************/
+/************************************************
+ * @brief set App Name.
+ * setAppName
+ ***********************************************/
 void MyOrgSettings::setAppName(const QString &thisAppName)
 {
-    if (isDebugMessage) qDebug() << "setAppName";
+    if (isDebugMessage) { qDebug() << "setAppName"; }
     if (QString::compare(myApplicationName, thisAppName, Qt::CaseInsensitive))
     {
         myApplicationName = thisAppName;
     }
 } // end setAppName
-/**************************************************************************
-* \fn void setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool isMin)
-***************************************************************************/
+/************************************************
+ * @brief set Geometry.
+ * setGeometry
+ ***********************************************/
 void MyOrgSettings::setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool isMin)
 {
-    if (isDebugMessage) qDebug() << "isSetting";
+    if (isDebugMessage) { qDebug() << "setGeometry"; }
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
     mySettings->setValue(myConstants->MY_GEOMETRY_POS, thisPos);
@@ -265,12 +261,13 @@ void MyOrgSettings::setGeometry(QPoint thisPos, QSize thisSize, bool isMax, bool
     if(!isMax && !isMin) mySettings->setValue(myConstants->MY_GEOMETRY_SIZE, thisSize);
     mySettings->endGroup();
 } // end setGeometry
-/**************************************************************************
-* \fn QPoint getGeometry(const QPoint &thisDefaultValue)
-***************************************************************************/
+/************************************************
+ * @brief get Geometry.
+ * getGeometry
+ ***********************************************/
 void MyOrgSettings::getGeometry()
 {
-    if (isDebugMessage) qDebug() << "readSettingsBool";
+    if (isDebugMessage) { qDebug() << "getGeometry"; }
     // Geometry
     QSettings *mySettings = getSettings();
     mySettings->beginGroup("General");
@@ -280,48 +277,53 @@ void MyOrgSettings::getGeometry()
     myGeometryMin  = mySettings->value(myConstants->MY_GEOMETRY_MIN, false).toBool();
     mySettings->endGroup();
 } // end getGeometry
-/**************************************************************************
-* \fn QPoint getGeometryPos(const QPoint &thisDefaultValue)
-***************************************************************************/
+/************************************************
+ * @brief get Geometry Pos.
+ * getGeometryPos
+ ***********************************************/
 QPoint MyOrgSettings::getGeometryPos()
 {
-    if (isDebugMessage) qDebug() << "getGeometryPos";
+    if (isDebugMessage) { qDebug() << "getGeometryPos"; }
     return myGeometryPos;
 } // end getGeometryPos
-/**************************************************************************
-* \fn QSize getGeometrySize(const QSize &thisDefaultValue)
-***************************************************************************/
+/************************************************
+ * @brief get Geometry Size.
+ * getGeometrySize
+ ***********************************************/
 QSize MyOrgSettings::getGeometrySize()
 {
-    if (isDebugMessage) qDebug() << "getGeometrySize";
+    if (isDebugMessage) { qDebug() << "getGeometrySize"; }
     return myGeometrySize;
 } // end getGeometrySize
-/**************************************************************************
-* \fn bool getGeometryMax(const bool &thisDefaultValue)
-***************************************************************************/
+/************************************************
+ * @brief get Geometry Max.
+ * getGeometryMax
+ ***********************************************/
 bool MyOrgSettings::getGeometryMax()
 {
-    if (isDebugMessage) qDebug() << "getGeometryMax";
+    if (isDebugMessage) { qDebug() << "getGeometryMax"; }
     return myGeometryMax;
 } // end getGeometryMax
-/**************************************************************************
-* \fn bool getGeometryMin(const bool &thisDefaultValue)
-***************************************************************************/
+/************************************************
+ * @brief get Geometry Min.
+ * getGeometryMin
+ ***********************************************/
 bool MyOrgSettings::getGeometryMin()
 {
-    if (isDebugMessage) qDebug() << "getGeometryMin";
+    if (isDebugMessage) { qDebug() << "getGeometryMin"; }
     return myGeometryMin;
 } // end getGeometryMin
-/**************************************************************************
-* \fn QString readFile(const bool &thisFileName)
-***************************************************************************/
+/************************************************
+ * @brief read File.
+ * readFile
+ ***********************************************/
 QString MyOrgSettings::readFile(const QString &thisFileName)
 {
-    if (isDebugMessage) qDebug() << "readFile";
+    if (isDebugMessage) { qDebug() << "readFile"; }
     QFile file(thisFileName);
     if(!file.open(QFile::ReadOnly | QFile::Text))
     {
-        qDebug() << " Could not open the file for reading";
+        showMessageBox(tr("Error opening file for reading").toLocal8Bit(), QString("%1: %2").arg(tr("Could not open file for reading"), thisFileName).toLocal8Bit(), Critical);
         return "";
     }
     QTextStream in(&file);
@@ -329,30 +331,52 @@ QString MyOrgSettings::readFile(const QString &thisFileName)
     file.close();
     return thisText;
 }
-/**************************************************************************
-* \fn encryptThis
-* Crypto using SimpleCrypt
-***************************************************************************/
+/************************************************
+ * @brief write File.
+ * writeFile
+ ***********************************************/
+bool MyOrgSettings::writeFile(const QString &thisFileName, const QString &thisContent)
+{
+    if (isDebugMessage) { qDebug() << "writeFile"; }
+    QFile theFile(thisFileName);
+    // Trying to open in WriteOnly and Text mode
+    if(!theFile.open(QFile::WriteOnly | QFile::Text))
+    {
+        showMessageBox(tr("Error opening file for writing").toLocal8Bit(), QString("%1: %2").arg(tr("Could not open file for writing"), thisFileName).toLocal8Bit(), Critical);
+        return false;
+    }
+    // Write to file
+    QTextStream theFileStream(&theFile);
+    theFileStream << thisContent;
+    theFile.flush();
+    theFile.close();
+    return true;
+} // end writeFile
+/************************************************
+ * @brief Crypto using SimpleCrypt.
+ * encryptThis
+ ***********************************************/
 QString MyOrgSettings::encryptThis(const QString &thisSecret)
 {
-    if (isDebugMessage) qDebug() << "encryptThis";
+    if (isDebugMessage) { qDebug() << "encryptThis"; }
     return myCrypto->encryptToString(thisSecret);
 }
-/**************************************************************************
-* \fn decryptThis
-* Crypto using SimpleCrypt
-***************************************************************************/
+/************************************************
+ * @brief Crypto using SimpleCrypt.
+ * decryptThis
+ ***********************************************/
 QString MyOrgSettings::decryptThis(const QString &thisSecret)
 {
-    if (isDebugMessage) qDebug() << "decryptThis";
+    if (isDebugMessage) { qDebug() << "decryptThis"; }
     return myCrypto->decryptToString(thisSecret);
 }
-/**************************************************************************
-* \fn questionYesNo
-* Titel and Question Yes No
-***************************************************************************/
+/************************************************
+ * @brief Titel and Question Yes No.
+ * questionYesNo
+ ***********************************************/
 bool MyOrgSettings::questionYesNo(const char *thisTitle, const char *thisQuestion)
 {
+    if (isDebugMessage) { qDebug() << "questionYesNo"; }
     QMessageBox theMsgBox;
     theMsgBox.setWindowTitle(QObject::tr(thisTitle));
     theMsgBox.setText(QObject::tr(thisQuestion));
@@ -361,50 +385,38 @@ bool MyOrgSettings::questionYesNo(const char *thisTitle, const char *thisQuestio
     theMsgBox.setDefaultButton(QMessageBox::No);
     if(theMsgBox.exec() == QMessageBox::Yes)
     {
-        qDebug() << "Yes was clicked";
+        if (isDebugMessage) { qDebug() << "Yes was clicked"; }
         return true;
     }
     else
     {
-        qDebug() << "Yes was *not* clicked";
+        if (isDebugMessage) { qDebug() << "Yes was *not* clicked"; }
         return false;
     }
-}
-/**************************************************************************
-* \fn showMessageBox
-* theMessage.toLocal8Bit()
-*  information
-*  question: 1 = true, 0 = false
-*  warning
-*  critical
-***************************************************************************/
-int MyOrgSettings::showMessageBox(const char *thisTitle, const char *thisMessage, const QString &thisMessageType)
+} // end questionYesNo
+/************************************************
+ * @brief information, question: 1 = true, 0 = false, warning, critical: theMessage.toLocal8Bit().
+ * showMessageBox
+ ***********************************************/
+int MyOrgSettings::showMessageBox(const QString &thisTitle, const QString &thisMessage, MyMessageTypes thisMessageType)
 {
-    if (thisMessageType == "information")
+    if (isDebugMessage) { qDebug() << "showMessageBox(" << thisTitle << ", " << thisMessage << ", " << thisMessageType << ")"; }
+    switch (thisMessageType)
     {
-        return QMessageBox::information(nullptr, QObject::tr(thisTitle), QObject::tr(thisMessage), QMessageBox::Ok);
-    }
-    else if (thisMessageType == "question")
-    {
-        if (questionYesNo(thisTitle, thisMessage)) return 1; else return 0;
-    }
-    else if (thisMessageType == "warning")
-    {
-        return QMessageBox::warning(nullptr, QObject::tr(thisTitle), QObject::tr(thisMessage), QMessageBox::Ok);
-    }
-    else if (thisMessageType == "critical")
-    {
-        return QMessageBox::critical(nullptr, QObject::tr(thisTitle), QObject::tr(thisMessage), QMessageBox::Ok);
+        case Information:   { return QMessageBox::information(nullptr, thisTitle, thisMessage, QMessageBox::Ok); }
+        case Question:      { if (questionYesNo(thisTitle.toLocal8Bit(), thisMessage.toLocal8Bit())) return 1; else return 0; }
+        case Warning:       { return QMessageBox::warning(nullptr, thisTitle, thisMessage, QMessageBox::Ok); }
+        case Critical:      { return QMessageBox::critical(nullptr, thisTitle, thisMessage, QMessageBox::Ok); }
     }
     return 0;
-}
-/**************************************************************************
-* \fn getFileInfo
-* theMessage.toLocal8Bit()
-***************************************************************************/
+} // end showMessageBox
+/************************************************
+ * @brief get File Info.
+ * getFileInfo
+ ***********************************************/
 QString MyOrgSettings::getFileInfo(MyOrgSettings::MyFileinfo thisInfo, const QString &thisFileFolder)
 {
-    if (isDebugMessage) qDebug() << "getFileInfo";
+    if (isDebugMessage) { qDebug() << "getFileInfo"; }
     if (thisFileFolder.isEmpty()) { return ""; }
     //
     QFileInfo theFileInfo(thisFileFolder);
@@ -441,7 +453,7 @@ QString MyOrgSettings::getFileInfo(MyOrgSettings::MyFileinfo thisInfo, const QSt
             // Returns the path of the object's parent directory as a QDir object.
             return theFileInfo.dir().currentPath();
         case FileName:
-            // Returns the name of the file, excluding the path.
+            // Returns the name of the file, excluding the path. getFileInfo(FileName, "")
             return theFileInfo.fileName();
         case FilePath:
             // Returns the file name, including the path (which may be absolute or relative).
@@ -462,13 +474,14 @@ QString MyOrgSettings::getFileInfo(MyOrgSettings::MyFileinfo thisInfo, const QSt
     }
     return "";
 }
-/**************************************************************************
-* \fn isAppDataLocationGood
-***************************************************************************/
+/************************************************
+ * @brief is App Data Location Good.
+ * isAppDataLocationGood
+ ***********************************************/
 bool MyOrgSettings::isAppDataLocationGood(const QString &thisFolder)
 {
+    if (isDebugMessage) { qDebug() << "isAppDataLocationGood"; }
     bool isGood = true;
-
     if (isFileMake(thisFolder, "ReadMe.txt"))
     {
         if (getFileInfo(IsWritable, combinePathFileName(thisFolder, "ReadMe.txt")) == "false")
@@ -480,29 +493,184 @@ bool MyOrgSettings::isAppDataLocationGood(const QString &thisFolder)
     {
         isGood = false;
     }
-
     if (getFileInfo(IsFolder, thisFolder) == "false")
     {
         isGood = false;
     }
     return isGood;
-}
-/**************************************************************************
-* \fn getAppDataLocation
-***************************************************************************/
+} // end isAppDataLocationGood
+/************************************************
+ * @brief get App Data Location.
+ * getAppDataLocation
+ ***********************************************/
 QString MyOrgSettings::getAppDataLocation()
 {
+    if (isDebugMessage) { qDebug() << "getAppDataLocation"; }
     QString theAppDataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (theAppDataLocation.isEmpty())
     {
         theAppDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
         if (theAppDataLocation.isEmpty())
-        { theAppDataLocation = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation); }
+            { theAppDataLocation = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation); }
+        if (theAppDataLocation.isEmpty())
+            { theAppDataLocation = QDir::currentPath(); }
     }
     if (!isAppDataLocationGood(theAppDataLocation))
     {
         return QDir::currentPath(); // FIXME
     }
     return theAppDataLocation;
+} // end getAppDataLocation
+/************************************************
+ * @brief get Environment Var.
+ * getEnvironmentVar
+ * inline auto get_environement_variable(const char* key )
+ * {
+ *     char * val = getenv(key);
+ *     return (val == NULL) ? "" : std::string(val);
+ * }
+ * auto programFiles = get_environement_variable("%ProgramW6432%");
+ * auto programFilesX86 = get_environement_variable("%ProgramFiles(x86)%");
+ * auto userProfile = get_environement_variable("%USERPROFILE%");
+ * auto userProfile = get_environement_variable("%USERPROFILE%\Documents");
+ ***********************************************/
+QString MyOrgSettings::getEnvironmentVar(const QString &thisVar, const QString &thisDefault)
+{
+    QString theEnvValue = qEnvironmentVariable(thisVar.toLocal8Bit());
+    if (!theEnvValue.isNull())
+        { return theEnvValue; }
+    else
+        { return thisDefault; }
 }
+/************************************************
+ * @brief is Word.
+ * isWord
+ ***********************************************/
+bool MyOrgSettings::isWord(const QString &thisString) const
+{
+    for(int i = 0; i< thisString.length(); i++)
+    {
+        if (thisString.at(i).isLetter())
+            return true;
+    }
+    return false;
+}
+/************************************************
+ * @brief delay.
+ * delay
+ ***********************************************/
+void MyOrgSettings::delay(int thisSeconds)
+{
+    QEventLoop theDelayLoop;
+    QTimer::singleShot(thisSeconds * 1000, &theDelayLoop, &QEventLoop::quit);
+    theDelayLoop.exec();
+} // end delay
+/************************************************
+ * @brief Number of Lines in a file.
+ * fileNumberLines
+ ***********************************************/
+int MyOrgSettings::fileNumberLines(const QString &thisFile)
+{
+    if (!isFileExists(thisFile)) { showMessageBox(tr("File not found").toLocal8Bit(), QString("%1: %2").arg(tr("File not found"), thisFile).toLocal8Bit(), Critical); return 0; }
+    std::ifstream inFile(thisFile.toLocal8Bit());
+    return std::count(std::istreambuf_iterator<char>(inFile), std::istreambuf_iterator<char>(), '\n');
+} // end fileNumberLines
+/************************************************
+ * @brief removeAllFiles.
+ * removeAllFiles
+ ***********************************************/
+void MyOrgSettings::removeAllFiles(const QString &thisFolder)
+{
+    if (!isPathExists(thisFolder)) { showMessageBox(tr("Folder not found").toLocal8Bit(), QString("%1: %2").arg(tr("Folder not found"), thisFolder).toLocal8Bit(), Critical); return;  }
+    QDir theDirFiles(thisFolder);
+    theDirFiles.setNameFilters(QStringList() << "*.*");
+    theDirFiles.setFilter(QDir::Files);
+    foreach(QString theDirFile, theDirFiles.entryList())
+    {
+        theDirFiles.remove(theDirFile);
+    }
+} // end removeAllFiles
+/************************************************
+ * @brief combine Path File Name.
+ * combinePathFileName
+ ***********************************************/
+QString MyOrgSettings::combinePathFileName(const QString &thisPath,const  QString &thisFileName)
+{
+    if (isDebugMessage) { qDebug() << "combinePathFileName"; }
+    return QString("%1%2%3").arg(thisPath, QDir::separator(), thisFileName);
+} // end combinePathFileName
+/************************************************
+ * @brief is Path Exists.
+ * isPathExists
+ ***********************************************/
+bool MyOrgSettings::isPathExists(const QString &thisPath)
+{
+    if (isDebugMessage) { qDebug() << "isPathExists"; }
+    return QDir(thisPath).exists() && QFileInfo(thisPath).isDir();
+} // end isPathExists
+/************************************************
+ * @brief is File Exists.
+ * isFileExists
+ ***********************************************/
+bool MyOrgSettings::isFileExists(const QString &thisFile)
+{
+    if (isDebugMessage) { qDebug() << "isFileExists"; }
+    // check if file exists and if yes: Is it really a file and not directory?
+    return QFileInfo::exists(thisFile) && QFileInfo(thisFile).isFile();
+} // end isFileExists
+/************************************************
+ * @brief remove File.
+ * removeFile
+ ***********************************************/
+bool MyOrgSettings::removeFile(const QString &thisFile)
+{
+    if (isDebugMessage) { qDebug() << "removeFile"; }
+    if (isFileExists(thisFile))
+    { return QFile::remove(thisFile); }
+    return true;
+}
+/************************************************
+ * @brief is File Make.
+ * isFileMake
+ ***********************************************/
+bool MyOrgSettings::isFileMake(const QString &thisPath, const QString &thisFileName)
+{
+    if (isDebugMessage) { qDebug() << "isFileMake"; }
+    isCreated = false;
+    QString thePath = combinePathFileName(thisPath, thisFileName);
+    if (!isMakeDir(thisPath)) return false;
+    if (!isFileExists(thePath))
+    {
+        QFile theFile(thePath);
+        if (theFile.open(QIODevice::WriteOnly))
+        {
+            /* Point a QTextStream object at the file */
+            QTextStream outStream(&theFile);
+            /* Write the line to the file */
+            outStream << QString("%1 %2").arg(tr("This file was created to test if this folder is writeable by"), QCoreApplication::applicationName()).toLocal8Bit();
+            /* Close the file */
+            theFile.close();
+            if (isFileExists(thePath)) { isCreated = true; }
+            return isCreated;
+        }
+        else return false;
+    }
+    return true;
+} // end isFileMake
+/************************************************
+ * @brief is Make Dir.
+ * isMakeDir
+ ***********************************************/
+bool MyOrgSettings::isMakeDir(const QString &thisPath)
+{
+    if (isDebugMessage) { qDebug() << "isMakeDir"; }
+    QDir dir(thisPath);
+    if (!dir.exists())
+    {
+        if (!dir.mkpath("."))
+             { showMessageBox(QObject::tr("File System Error").toLocal8Bit(), QString("%1 %2").arg(tr("Error: cannot create file"), thisPath).toLocal8Bit(), Critical); }
+        else { return true; }
+    }
+    return isPathExists(thisPath);
+} // end isMakeDir
 /*** ************************* End of File ***********************************/

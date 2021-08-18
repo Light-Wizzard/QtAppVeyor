@@ -40,6 +40,13 @@ export ARTIFACT_APPIMAGE="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage";
 #export ARTIFACT_ZSYNC="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage.zsync";
 export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 # 
+# Doxygen requires Doxyfile
+if [ "$MY_RUN_DOXYFILE" == "true" ]; then
+    if [ -f Doxyfile ]; then
+        doxygen Doxyfile;
+        # FIXME make Artifact or upload
+    fi
+fi
 # use RAM disk if possible (as in: not building on CI system like Appveyor, and RAM disk is available)
 declare TEMP_BASE;
 if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BASE="/tmp"; fi
