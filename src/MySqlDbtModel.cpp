@@ -145,7 +145,7 @@ QString MySqlDbtModel::getSqlDatabaseName()
 }
 /************************************************
  * @brief Set SQL Password.
- * @parm thisPassword QString Password Plain Text
+ * @param thisPassword QString Password Plain Text
  * setSqlPassword
  ***********************************************/
 void MySqlDbtModel::setSqlPassword(const QString &thisPassword)

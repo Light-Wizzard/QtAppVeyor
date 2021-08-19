@@ -49,17 +49,18 @@ class MainWindow : public QMainWindow
          */
         enum MainTabs
         {
-            TabSettings    = 0,  //!< \c TabSettings    @brief Tab Settings.
-            TabSql         = 1,  //!< \c TabSql         @brief Tab SQL
-            TabUbuntu      = 2,  //!< \c TabUbuntu      @brief Tab Ubuntu.
-            TabMac         = 3,  //!< \c TabMac         @brief Tab Mac.
-            TabAndroid     = 4,  //!< \c TabAndroid     @brief Tab Android.
-            TabWebAssembly = 5,  //!< \c TabWebAssembly @brief Tab WebAssembly.
-            TabIOS         = 6,  //!< \c TabIOS         @brief Tab IOS.
-            TabWindows     = 7,  //!< \c TabWindows     @brief Tab Windows.
-            TabDefaults    = 8,  //!< \c TabDefaults    @brief Tab Defaults.
-            TabYaml        = 9,  //!< \c TabYaml        @brief Tab Yaml.
-            TabAll         = 10  //!< \c TabAll         @brief Tab All used for Actions on all Tabs.
+            TabSettings    = 100,  //!< \c TabSettings    @brief Tab Settings.
+            TabSql         = 101,  //!< \c TabSql         @brief Tab SQL
+            TabUbuntu      = 102,  //!< \c TabUbuntu      @brief Tab Ubuntu.
+            TabMac         = 103,  //!< \c TabMac         @brief Tab Mac.
+            TabAndroid     = 104,  //!< \c TabAndroid     @brief Tab Android.
+            TabWebAssembly = 105,  //!< \c TabWebAssembly @brief Tab WebAssembly.
+            TabIOS         = 106,  //!< \c TabIOS         @brief Tab IOS.
+            TabWindows     = 107,  //!< \c TabWindows     @brief Tab Windows.
+            TabDefaults    = 108,  //!< \c TabDefaults    @brief Tab Defaults.
+            TabYaml        = 109,  //!< \c TabYaml        @brief Tab Yaml.
+            TabAll         = 110,  //!< \c TabAll         @brief Tab All used for Actions on all Tabs.
+            TabHelp        = 111   //!< \c TabHelp        @brief Tab Help.
         }; // end enum MainTabs
 
         Q_ENUM(MainTabs) // I enumerate the Tabs to make it easier to travers

@@ -18,10 +18,12 @@
  ***********************************************/
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    mySqlDb = new MyDatatables(this);
-    myLocalization  = new MyLocalization(this, mySqlDb);
+    // App Icon
+    QApplication::setWindowIcon(QIcon(":/images/logo32.png"));
     // ui stuff
     ui->setupUi(this);
+    mySqlDb         = new MyDatatables(this);
+    myLocalization  = new MyLocalization(this, mySqlDb); // FIXME settings
     // Read in Settings First
     readSettingsFirst();
     // Set to defaults
@@ -205,8 +207,8 @@ void MainWindow::onRunOnStartup()
     myLocalization->setMainLoaded(true);
 }
 /************************************************
- * readSettingsFirst
  * @brief read Settings First.
+ * readSettingsFirst
  ***********************************************/
 void MainWindow::readSettingsFirst()
 {
@@ -258,7 +260,7 @@ void MainWindow::writeStatesChanges()
     // Debug Messaging
     mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_IS_DEBUG_MESSAGE, isDebugMessage ? "true" : "false");
     // Language ComboBox
-    myLocalization->getLanguageCode() = myLocalization->languageNameToCode(ui->comboBoxSettingsLanguage->currentText());
+    myLocalization->setLanguageCode(myLocalization->languageNameToCode(ui->comboBoxSettingsLanguage->currentText()));
     myLocalization->writeLanguage(myLocalization->getLanguageCode());
 }
 /************************************************
