@@ -82,8 +82,9 @@ DISTFILES += \
     scripts/install.cmd \
     scripts/install.ps1 \
     scripts/install.sh \
-    scripts/upload.sh
-
+    scripts/upload.sh \
+    .github/workflows/main.yml \
+    Doxyfile
 ###############################################################################
 #
 # The following define makes your compiler emit warnings if you use

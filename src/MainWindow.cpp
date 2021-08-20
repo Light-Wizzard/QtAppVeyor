@@ -23,12 +23,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // ui stuff
     ui->setupUi(this);
     mySqlDb         = new MyDatatables(this);
-    myLocalization  = new MyLocalization(this, mySqlDb); // FIXME settings
+    myLocalization  = new MyLocalization(this, mySqlDb->mySqlModel->mySetting);
     // Read in Settings First
     readSettingsFirst();
     // Set to defaults
     myLocalization->setTransFilePrefix("QtAppVeyor");       //!< Prefix of Translation files
     myLocalization->setTranslationSource("translations");   //!< Relative Folder for Translation files
+    myLocalization->setHelpSource("help");                  //!< Relative Folder for Help files
     // SQL Database Types
     ui->comboBoxSqlDatabaseType->addItem(":memory:");
     ui->comboBoxSqlDatabaseType->addItem("QSQLITE");
@@ -159,6 +160,7 @@ bool MainWindow::setQtProjectCombo()
     theModalQtAppVeyor->setHeaderData(0,Qt::Horizontal, tr("ID"));
     theModalQtAppVeyor->setHeaderData(1, Qt::Horizontal, tr("Project"));
     QTableView *theTableView = new QTableView;
+    theTableView->setModel(theModalQtAppVeyor);
     theTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     theTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     theTableView->verticalHeader()->setVisible(false);
@@ -182,6 +184,7 @@ bool MainWindow::setQtProjectCombo()
  ***********************************************/
 void MainWindow::onRunOnStartup()
 {
+    isMainLoaded = false;
     myLocalization->setMainLoaded(false);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabSettings")));
     // Read Settings First

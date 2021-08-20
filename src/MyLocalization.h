@@ -24,18 +24,18 @@
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
+//
+#include "MyOrgSettings.h"
 // Local
-#include "MyDatatables.h"
-
 /************************************************
- * \class TranslationFiles
  * @brief Translation Files.
+ * \class TranslationFiles
  ***********************************************/
 class MyLocalization : public QObject
 {
         Q_OBJECT
     public:
-        explicit MyLocalization(QObject *parent = nullptr, MyDatatables *thisSqlDb = nullptr);  //!< TranslationFiles Constructor
+        explicit MyLocalization(QObject *parent = nullptr, MyOrgSettings *thisSetting = nullptr);  //!< TranslationFiles Constructor
         enum MyMessageTypes
         {
             Information = 100, //!< \c Information  @brief Information
@@ -46,11 +46,17 @@ class MyLocalization : public QObject
         // Makes getting file Info easier
         Q_ENUM(MyMessageTypes)
 //
+        // Public
+        MyOrgSettings  *mySetting;                       //!< \c mySetting @brief Domain Settings
+        // Constants
+        const QString MY_LANG_CODE = "LanguageCode"; //!< \c MY_LANG_CODE @brief Field Name for Language Code
+        const QString MY_LANG_NAME = "LanguageName"; //!< \c MY_LANG_NAME @brief Field Name for Language Name
         // Is Debug Message
         void setDebugMessage(bool thisState);       //!< set Debug Message
         bool getDebugMessage();                     //!< get Debug Message
         // Localization
-        QStringList findQmFiles(const QString &thisFolder);                             //!< findQmFiles
+        QStringList findQmFiles(const QString &thisFolder);                             //!< find Qm Files
+        QStringList findTsFiles(const QString &thisFolder);                             //!< find Ts Files
         bool        languageMatch(const QString &thisPrefix, const QString &thisLang, const QString &thisQmFile); //!< language Match
         QString     languageNameFromFile(const QString &thisTranslationFile);               //!< language Name From File
         QString     getLocalizerCode(const QString &thisPrefix, const QString &thisQmFile); //!< get Localizer Code
@@ -65,14 +71,19 @@ class MyLocalization : public QObject
         void loadLanguage(const QString &thisQmLanguageFile); //!< load Language
         QString getLanguageFile(const QString &thisLanguage, const QString &thisPath, const QString &thisPrefix); //!< get Language File
         QString getLanguageFromFile(const QString &thisPrefix, const QString &thisQmLanguageFile); //!< getLanguageFromFile
+        // Translation Source
         QString getTranslationSource();                                     //!< get Translation Source
         void setTranslationSource(const QString &thisTranslationSource);    //!< set Translation Source
+        // Help Source
+        QString getHelpSource();                                            //!< get Help Source
+        void setHelpSource(const QString &thisHelpSource);                  //!< set Help Source
+        //
         QString getTransFilePrefix();                                       //!< get TransFile Prefix
         void setTransFilePrefix(const QString &thisTransFilePrefix);        //!< set TransFile Prefix
         //
         QString readLanguage();                                             //!< read Language
         void writeLanguage(const QString &thisCurrentLanguageCode);         //!< write Language
-        QString language(const QLocale &locale);                            //!< language
+        QString language(const QLocale &thisLocale);                        //!< language
         // Language Code
         void setLanguageCode(const QString &thisLanguageCode);              //!< set Language Code
         QString getLanguageCode();                                          //!< get Language Code
@@ -83,10 +94,10 @@ class MyLocalization : public QObject
     private:
         static const QMap<QString, QString>  s_genericLanguageNameToCode; //!< \c s_genericLanguageNameToCode @brief generic Language Name to Code
         static const QMap<QString, QString>  s_genericLanguageCodeToName; //!< \c s_genericLanguageCodeToName @brief generic Language Code to Name
-        MyDatatables   *mySqlDb;                        //!< \c mySqlDb              @brief Sql Datatables
         bool            isDebugMessage       = true;    //!< \c isDebugMessage       @brief is Debug Message
         QString         myRemoveTransArgs;              //!< \c myRemoveTransArgs    @brief List of Remove Trans Args
         QString         myTranslationSource  = "";      //!< \c myTranslationSource  @brief Translation Source
+        QString         myHelpSource         = "";      //!< \c myHelpSource         @brief Help Source
         QString         myTransFilePrefix    = "";      //!< \c myTransFilePrefix    @brief Translation File Prefix
         bool            isMainLoaded         = false;   //!< \c isMainLoaded         @brief Set true after one shot time loads
         QTranslator    *myTranslator;                   //!< \c myTranslator         @brief Translator
