@@ -27,13 +27,34 @@ set(SOURCES
     src/SimpleCrypt.cpp
 )
 # UI
-set(UI_SOURCES
-    src/MainWindow.ui
-    src/AboutDialog.ui
-    src/HelpDialog.ui
-)
+set(UI_SOURCES src/MainWindow.ui)
 #
 qt5_add_resources(SOURCES QtAppVeyor.qrc)
+# https://github.com/pedrolcl/qt5-i18n
+# not sure if I need to add en since it is the default
+set(TS_FILES
+    translations/QtAppVeyor_ar.ts
+    translations/QtAppVeyor_de.ts
+    translations/QtAppVeyor_en.ts
+    translations/QtAppVeyor_es.ts
+    translations/QtAppVeyor_fr.ts
+    translations/QtAppVeyor_it.ts
+    translations/QtAppVeyor_ja.ts
+    translations/QtAppVeyor_no.ts
+    translations/QtAppVeyor_ru.ts
+    translations/QtAppVeyor_sv.ts
+    translations/QtAppVeyor_zh-CN.ts
+)
+#
+if (QT_VERSION VERSION_LESS 5.15.0)
+    qt5_add_translation(QM_FILES ${TS_FILES})
+else()
+    qt_add_translation(QM_FILES ${TS_FILES})
+endif()
+
+include(TranslationUtils)
+add_app_translations_resource(APP_RES ${QM_FILES})
+add_qt_translations_resource(QT_RES ar de en es fr it ja no ru sv zh-CN)
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
 # The qm files are generated in the build tree, but the qrc file is inside the
@@ -59,7 +80,7 @@ qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_SOURCES})
 # IMPORTANT: Adding generated headers to target as dependencies
 # hint from [unable to include a ui_form header of QT5 in cmake](http://stackoverflow.com/questions/16245147/unable-to-include-a-ui-form-header-of-qt5-in-cmake)
 #
-add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS})
+add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES})
 #
 # `target_link_libraries()` rather than `qt5_use_modules()` for CMake 2.8.11 or later
 # hint from [CMake & QT5 - QT5_WRAP_UI not generating ui header files](http://stackoverflow.com/questions/25875255/cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)

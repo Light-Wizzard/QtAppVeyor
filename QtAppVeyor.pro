@@ -37,8 +37,7 @@ SOURCES += src/main.cpp \
     src/MySqlDbtModel.cpp \
     src/SimpleCrypt.cpp
 # Headers
-HEADERS += \
-    src/MainWindow.h \
+HEADERS += src/MainWindow.h \
     src/MyConstants.h \
     src/MyDatatables.h \
     src/MyLocalization.h \
@@ -57,10 +56,11 @@ CONFIG += lrelease
 CONFIG += embed_translations
 LRELEASE_DIR=./translations
 QM_FILES_RESOURCE_PREFIX=./translations
-# ar,de,en,fr,it,ja,no,ru,sv,zh-CN
+# ar,de,en,es,fr,it,ja,no,ru,sv,zh-CN
 TRANSLATIONS += translations/QtAppVeyor_ar.ts \
                 translations/QtAppVeyor_de.ts \
                 translations/QtAppVeyor_en.ts \
+                translations/QtAppVeyor_es.ts \
                 translations/QtAppVeyor_fr.ts \
                 translations/QtAppVeyor_it.ts \
                 translations/QtAppVeyor_ja.ts \

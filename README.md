@@ -44,6 +44,7 @@ For Windows I am not sure if MingW is the right tool, or if VS is,
 or if I should use MSYS, or Cygwin.
 
 ## Table of Content
+
 1. [Broken](https://github.com/Light-Wizzard/QtAppVeyor#Broken)
 2. [Status](https://github.com/Light-Wizzard/QtAppVeyor#Status)
 3. [Development-Progress](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
@@ -56,6 +57,7 @@ or if I should use MSYS, or Cygwin.
 10. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
 
 ## Broken
+
 Things that are Broken need to be worked on first, 
 these are the things I need help with.
 
@@ -97,10 +99,12 @@ and Doxygen ready, the Translation needs to be done,
 but I always wait to till the end to start on it.
 
 ## Status
+
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
 ### :package: **Downloads:**
+
  - :penguin: [Linux zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
  - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
  - :apple: Currenty unavalible [Apple zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
@@ -223,6 +227,7 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 
 ## Help
+
 This Application has built in [Help](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/Help-en.html) on the app itself,
 and an [About](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-en.html),
 as well as an [Author](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-Author-en.html) button on both Dialog boxes,
@@ -235,6 +240,7 @@ and add more [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki) Content,
 that might help.
 
 ## Screen-Shots
+
 ![Settings](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
 ![SQL](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
 ![Ubuntu](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/ubuntu.png)
