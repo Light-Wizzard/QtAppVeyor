@@ -56,7 +56,7 @@ CONFIG += lrelease
 CONFIG += embed_translations
 LRELEASE_DIR=./translations
 QM_FILES_RESOURCE_PREFIX=./translations
-# ar,de,en,es,fr,it,ja,no,ru,sv,zh-CN
+# ar,de,en,es,fr,it,ja,no,ru,sv,zh_CN
 TRANSLATIONS += translations/QtAppVeyor_ar.ts \
                 translations/QtAppVeyor_de.ts \
                 translations/QtAppVeyor_en.ts \
@@ -67,7 +67,7 @@ TRANSLATIONS += translations/QtAppVeyor_ar.ts \
                 translations/QtAppVeyor_no.ts \
                 translations/QtAppVeyor_ru.ts \
                 translations/QtAppVeyor_sv.ts \
-                translations/QtAppVeyor_zh-CN.ts
+                translations/QtAppVeyor_zh_CN.ts
 # Distrobution Files
 DISTFILES += \
     .appveyor.yml \
