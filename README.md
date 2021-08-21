@@ -55,8 +55,9 @@ or if I should use MSYS, or Cygwin.
 8. [Screen-Shots](https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
 9. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 10. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
+11. [Doxygen Documention](https://light-wizzard.github.io/QtAppVeyor)
 
-## Broken
+# Broken
 
 Things that are Broken need to be worked on first, 
 these are the things I need help with.
@@ -98,7 +99,7 @@ and why I have branded it QtAppVeyor, and tried to make all the documention easy
 and Doxygen ready, the Translation needs to be done,
 but I always wait to till the end to start on it.
 
-## Status
+# Status
 
 Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
@@ -116,13 +117,13 @@ and run the file QtAppVeyor.exe inside of the deploy AppDir folder.
 
 When completed, it will only have one Artifact, the Qt Installer Framework with Qt Auto Update in a zip file.
 
-## Development-Progress
+# Development-Progress
 
 For more information see: [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 
 This is a work in progress, please report any bugs, and leave comments.
 
-## Working-On
+# Working-On
 
 * Qt Installer Framework
 * Updateable AppImage 
@@ -133,7 +134,7 @@ This is a work in progress, please report any bugs, and leave comments.
 * iOS
 * MSVS build of Qt Project
 
-## Variables
+# Variables
 
 If you use this Application to make .appveyor.yml files, 
 you will need to know all these Variables,
@@ -185,7 +186,8 @@ MY_QIF_PACKAGE_URI:   'com.appveyor.qtappveyor\data' #
 MY_PYTHON_VER:        3.8         # Last version Windows 7 can run is 3.8.x
 MY_PYTHON_REQUIRED:   false       # if Python is required
 ```
-## Database
+
+# Database
 
 ```sql
 Projects: id, QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWebAssembly, IsOSiOS, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
@@ -225,8 +227,7 @@ CREATE TABLE Configuration(id integer PRIMARY KEY autoincrement,
 
 ```
 
-
-## Help
+# Help
 
 This Application has built in [Help](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/Help-en.html) on the app itself,
 and an [About](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-en.html),
@@ -239,7 +240,7 @@ and I will try to expand on the Help sections,
 and add more [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki) Content,
 that might help.
 
-## Screen-Shots
+# Screen-Shots
 
 ![Settings](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
 ![SQL](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
