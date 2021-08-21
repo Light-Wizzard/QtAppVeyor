@@ -10,7 +10,6 @@
 *.rej
 *_pch.h.cpp
 *_resource.rc
-*.qm
 .#*
 *.*#
 core
@@ -26,8 +25,9 @@ Thumbs.db
 # qtcreator generated files
 *.pro.user
 *.pro.user*
-*.txt.user
-*.txt.user*
+# cmake user
+CMakeLists.txt.user
+CMakeLists.txt.user*
 
 # xemacs temporary files
 *.flc
@@ -49,7 +49,6 @@ Thumbs.db
 *.opensdf
 *.vcxproj
 *vcxproj.*
-
 
 # MinGW generated files
 *.Debug
