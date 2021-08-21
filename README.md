@@ -101,8 +101,7 @@ but I always wait to till the end to start on it.
 
 # Status
 
-Unix: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
-Windows: [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
 ### :package: **Downloads:**
 
@@ -125,6 +124,7 @@ This is a work in progress, please report any bugs, and leave comments.
 
 # Working-On
 
+* cmake instead of qmake
 * Qt Installer Framework
 * Updateable AppImage 
 * Windows scripts instead of inline
@@ -167,7 +167,8 @@ MY_QT_IF_VERSION:     '4.1.1'    # QT Installer Framework Version
 MY_QIF_PACKAGE_URI:   'com.appveyor.qtappveyor\data' #
 MY_PYTHON_VER:        3.8        # Last version Windows 7 can run is 3.8.x
 MY_PYTHON_REQUIRED:   false      # if Python is required
-MY_UPGRADE_OS: false             # apt-get upgrade: true or false only
+MY_UPGRADE_OS:        false      # apt-get upgrade: true or false only
+MY_RUN_DOXYFILE:      false;     # run Doxygen
 ```
 
 Windows 
@@ -185,6 +186,7 @@ MY_QT_IF_VERSION:     '4.1.1'     # QT Installer Framework Version
 MY_QIF_PACKAGE_URI:   'com.appveyor.qtappveyor\data' #
 MY_PYTHON_VER:        3.8         # Last version Windows 7 can run is 3.8.x
 MY_PYTHON_REQUIRED:   false       # if Python is required
+MY_RUN_DOXYFILE:      false;      # run Doxygen
 ```
 
 # Database
@@ -243,10 +245,15 @@ that might help.
 # Screen-Shots
 
 ![Settings](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
+
 ![SQL](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
+
 ![Ubuntu](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/ubuntu.png)
+
 ![Windows](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/windows.png)
+
 ![Defaults](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/defaults.png)
+
 ![YML](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
 ### End-of-README.md
