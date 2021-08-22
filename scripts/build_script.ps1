@@ -14,8 +14,8 @@ $env:CMAKEGENERATOR = "MinGW Makefiles"
 #$env:CMAKEGENERATOR = "Visual Studio 16 2019"
 #$env:CMAKEGENERATOR = "Unix Makefiles"
 # 32 Bit only
-$env:CC=C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32\bin\mingw32-gcc.exe
-$env:CXX=C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW32\bin\mingw32-g++.exe
+$env:CC="C:\MINGW\bin\mingw32-gcc.exe"
+$env:CXX="C:\MINGW\bin\mingw32-g++.exe"
 
 # -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" $env:CMAKE_PATH_PREFIX = "C:\Qt\$env:MY_QT_VERSION\msvc$env:MY_VS_VERSION_64\lib\cmake"
 #$env:MY_MAKE = "cmake -A x64 -G $env:CMAKEGENERATOR -DCMAKE_PREFIX_PATH=$env:CMAKE_PATH_PREFIX -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=AppDir .."
