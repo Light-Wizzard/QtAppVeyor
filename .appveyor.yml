@@ -1,3 +1,5 @@
+# https://www.appveyor.com/docs/build-environment/#qt
+# https://download.qt.io/snapshots/ifw/installer-framework/30/
 #
 version: '{branch}-{build}'
 
