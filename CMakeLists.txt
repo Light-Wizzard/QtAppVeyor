@@ -20,9 +20,9 @@ set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
 set(SOURCES
     src/main.cpp
-    src/AboutDialog.cpp
-    src/HelpDialog.cpp
     src/MainWindow.cpp
+    src/MyDatatables.cpp
+    src/MyLocalization.cpp
     src/MyOrgSettings.cpp
     src/MySqlDbtModel.cpp
     src/SimpleCrypt.cpp
