@@ -24,7 +24,7 @@ for:
       - image: Visual Studio 2019
   environment:
     MY_BIN_PRO_RES_NAME: QtAppVeyor
-    MY_QIF_PACKAGE_URI: 'com.appveyor.qtappveyor'
+    MY_QIF_PACKAGE_URI: 'packages\com.appveyor.qtappveyor\data'
     MY_OS: Windows # No Spaces
     MY_COMPILER: "Qt"
     MY_QT_VERSION: 5.15.2
@@ -59,7 +59,7 @@ for:
       - image: Ubuntu
   environment:
     MY_BIN_PRO_RES_NAME: QtAppVeyor
-    MY_QIF_PACKAGE_URI: 'com.appveyor.qtappveyor'
+    MY_QIF_PACKAGE_URI: 'packages\com.appveyor.qtappveyor\data'
     MY_OS: Ubuntu
     MY_COMPILER: "Qt"
     MY_QT_VERSION: 5.15.2
