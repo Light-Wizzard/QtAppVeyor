@@ -39,6 +39,7 @@ export ARTIFACT_APPIMAGE="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage";
 #export ARTIFACT_ZSYNC="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage.zsync";
 export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 # Doxygen requires Doxyfile
+# C:\Tools\Doxygen;
 if [ "$MY_RUN_DOXYFILE" == "true" ]; then
     if [ -f Doxyfile ]; then
         doxygen Doxyfile;

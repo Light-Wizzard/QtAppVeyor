@@ -43,7 +43,7 @@ set(TS_FILES
     translations/QtAppVeyor_no.ts
     translations/QtAppVeyor_ru.ts
     translations/QtAppVeyor_sv.ts
-    translations/QtAppVeyor_zh-CN.ts
+    translations/QtAppVeyor_zh_CN.ts
 )
 #
 if (QT_VERSION VERSION_LESS 5.15.0)
@@ -54,7 +54,7 @@ endif()
 
 include(TranslationUtils)
 add_app_translations_resource(APP_RES ${QM_FILES})
-add_qt_translations_resource(QT_RES ar de en es fr it ja no ru sv zh-CN)
+add_qt_translations_resource(QT_RES ar de en es fr it ja no ru sv zh_CN)
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
 # The qm files are generated in the build tree, but the qrc file is inside the
