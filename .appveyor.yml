@@ -17,10 +17,6 @@ platform:
   - x64
   #- x86
 
-image:
-  - Visual Studio 2019
-  - Ubuntu
-
 for:
 -
   matrix:
