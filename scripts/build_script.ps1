@@ -26,7 +26,7 @@ $env:CMAKEGENERATOR = "MinGW Makefiles"
 cmd /c cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX=AppDir ..
 If ($?) {
     Write-Host "build_script Windows QT x64 cmake"
-    Invoke-Expression "cmake --build . --config $env:CONFIGURATION --target install"
+    Invoke-Expression "cmake --build . --config $env:CONFIGURATION"
     If ($?) {
         Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
         If ($?) {
