@@ -26,8 +26,7 @@ win32:CONFIG       += static
 win32:DEFINES      += STATIC
 win32:QMAKE_LFLAGS += -static
 #
-win32:CONFIG       *= windeployqt
-win32:CONFIG       *= windows
+win32:CONFIG       *= windeployqt windows
 # Source
 SOURCES += src/main.cpp \
     src/MainWindow.cpp \
