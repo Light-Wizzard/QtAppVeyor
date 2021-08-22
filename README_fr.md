@@ -1,147 +1,259 @@
-# Calculatrice Galaxie 2
+# QtAppVeyor
 
-Galaxy Calculator 2 intègre 4 calculatrices :
+Chaque programme a besoin d'une raison d'exister,
+celui-ci existe parce que je travaillais sur un projet pour mettre à jour mon [Galaxy Calculator] (https://github.com/Light-Wizzard/galaxy-calculator) à partir de QML,
+en C++, donc cette application Qt, je veux travailler sur autant de plates-formes que possible,
+avoir eu le programme Galaxy Calculator sur [AppVeyor](https://appveyor.com) pendant un certain temps,
+J'ai décidé de lui laisser une chance,
+mais j'ai vite eu du mal à faire fonctionner mon projet sous Windows et Linux,
+ce programme est plus complexe avec celui de Library,
+j'ai donc voulu écrire une petite application qui faisait quelque chose d'utile pour exister,
+mais en même temps c'était uniquement pour tester mes scripts AppVeyor,
+c'est alors que j'ai décidé pourquoi ne pas créer un outil d'automatisation de script AppVeyor,
+et maintenant mon concept est d'utiliser le script Yaml que cette application sort pour déployer cette application.
 
-1. :milky_way : Calculatrice Galatique
-2. :confused: Calculatrice de folie
-3. :earth_americas: Calculatrice de planètes
-4. :ordinateur: Calculatrice
+Ce projet est destiné à AppVeyor s'ils veulent le partager et le reprendre en tant que projet communautaire,
+pour en faire une meilleure application et donner aux développeurs quelque chose qui fonctionne,
+pour qu'ils puissent fonder leurs projets sur ce projet,
+et faites-le effectuer une compilation croisée sur autant de plates-formes que possible.
 
-J'ai utilisé les fichiers de projet de ma première calculatrice Galaxy qui est écrite en utilisant Qt QML et JavaScript,
-celui-ci utilise Qt C++, et Widgets,
-donc la documentation peut être farfelue jusqu'à ce que j'aie une chance de réparer tous les liens et de les convertir en ce nouveau projet,
-Je vais devoir faire des projets Travis et AppYeyer, c'est donc un travail en cours.
+Il s'agit d'une application simple écrite en Qt C++ à l'aide de Widgets,
+il utilise SQL pour stocker les projets,
+c'est une application simple qui a une page de paramètres pour entrer toutes les variables nécessaires pour créer un fichier AppVeyor Yaml,
+ainsi, d'un simple clic, vous pouvez automatiser la création d'un fichier .appveyor.yml.
 
-Les calculateurs Galaxy, Madness et Planet sont basés sur les calculs de Sir Isaac Newtons,
-et a été mis à jour pour inclure le Math Nikola Tesla,
-inventant ainsi un nouveau type de mathématiques que j'appelle les mathématiques trinaires, qui sont utilisées pour calculer la galaxie.
+Cette application est essentiellement juste pour vous montrer comment déployer des projets Qt C++ QtCreator,
+sur Linux, Mac, Windows, et peut-être WebAssembly et iOS, ainsi qu'Android,
+et comment utiliser Qt Installer Framework pour créer des applications installables,
+qui peuvent également être mis à jour.
 
-Ce projet est Open Source, sans licence requise, il s'agit d'une application Qt C++,
-qui s'exécutera sur le bureau et d'autres appareils, le script bash que j'ai utilisé pour le portage vers cette application est inclus.
+Ce projet n'est pas seulement destiné aux développeurs de Qt Software,
+il devrait être capable de gérer de nombreux environnements différents,
+mais actuellement Qt est le seul environnement sur lequel j'ai travaillé,
+mais j'ai ajouté un bouton pour différents environnements,
+de cette façon, cet outil sera utile à chaque développeur de logiciels.
 
-Cette application peut être compilée pour n'importe quel système d'exploitation pris en charge par Qt : Linux, Windows, MAC, Android et iOS,
-ainsi que tous les systèmes d'exploitation pris en charge par Qt, cela devrait donc fonctionner sur la plupart, sinon tous les systèmes d'exploitation populaires.
+Mon plus gros problème est le manque d'expérience des scripts Windows,
+Je n'ai pas utilisé Windows depuis des décennies et j'ai acheté récemment Windows 10 Pro,
+juste pour utiliser Word, et je ne fais pas de Mac, donc Linux est vraiment tout ce que je peux utiliser pour travailler,
+donc je peux vraiment utiliser de l'aide pour écrire les scripts.
 
-Je vais essayer de créer des programmes d'installation et des exécutables pour tous les systèmes d'exploitation Qt pris en charge, actuellement j'ai :
+Qt passe à cmake dans la version 6, je n'ai donc pas d'autre choix que de m'éloigner de qmake.
 
-Si les badges sont verts, vous devriez pouvoir télécharger les applications, si ce n'est pas le cas,
-il se peut que je travaille dessus, mais la mise à jour ne prend que quelques minutes.
-
-Ce projet est en cours, donc les fichiers peuvent se casser, mais le code source devrait s'exécuter s'il est compilé sur n'importe quelle machine.
-
-Le Qt Installer Framework fonctionne pour Linux et peut-être Windows mais le programme d'installation ne se téléchargera pas,
-au travail, j'ai un installateur pour Windows 10 ci-dessous, pas sûr de 8, mais pas 7.
+Pour Windows, je ne sais pas si MingW est le bon outil, ou si VS l'est,
+ou si je devais utiliser MSYS, ou Cygwin.
 
 ## Table des matières
 
-1. [Statut](https://github.com/Light-Wizzard/Galaxy-Calculator-2#Status)
-2. [Développement-Progrès](https://github.com/Light-Wizzard/Galaxy-Calculator-2#Development-Progress)
-3. [Contexte] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Background)
-4. [Captures d'écran] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Screen-Shots)
-5. [Captures d'écran] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#3rd-Party-Code)
-6. [Wiki](https://github.com/Light-Wizzard/Galaxy-Calculator-2/wiki)
-7. [Documentation Doxygen](https://light-wizzard.github.io/Galaxy-Calculator-2)
+1. [Cassé](https://github.com/Light-Wizzard/QtAppVeyor#Cassé)
+2. [Statut](https://github.com/Light-Wizzard/QtAppVeyor#Status)
+3. [Développement-Progrès](https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
+4. [Travail sur] (https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
+5. [Variables](https://github.com/Light-Wizzard/QtAppVeyor#Variables)
+6. [Base de données] (https://github.com/Light-Wizzard/QtAppVeyor#Database)
+7. [Aide](https://github.com/Light-Wizzard/QtAppVeyor#Help)
+8. [Captures d'écran] (https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
+9. [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
+10. [Cross-Compile](https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
+11. [Documentation Doxygen] (https://light-wizzard.github.io/QtAppVeyor)
+
+# Cassé
+
+Les choses qui sont cassées doivent être travaillées en premier,
+ce sont les choses pour lesquelles j'ai besoin d'aide.
+
+1. Les versions Windows x86 et x64 ne fonctionnent pas, j'utilise windeploy, toutes les dll sont là, mais elles ne fonctionneront pas.
+2. Cadre d'installation de Qt.
+3. Mac, WebAssembly, iOS et Android.
+4. cmake, le futur de Qt 6.
+
+Problèmes : Windows est conforme mais ne fonctionne pas à cause des dll qui se trouvent dans le même dossier, il s'agit d'un projet qmake,
+et j'ai créé un fichier cmake fonctionnel, et j'ai vraiment besoin de passer à cmake pour tout le projet,
+et c'est sur quoi je travaille actuellement, mais mon manque de scripts Windows, PowerShell ou Command,
+Je comprends un peu le langage, ayant dû en écrire au fil des ans,
+mon objectif est de mettre tous les scripts dans deux fichiers, un pour l'installation, l'autre pour le build,
+Je souhaite créer un package Qt Installer Framework avec [Qt Auto Updates] (https://github.com/Skycoder42/QtAutoUpdater),
+ce projet GitHub est adapté à Qt Installer Framework,
+en tant que tel, je ne souhaite créer qu'un seul fichier zip avec le package Qt Installer.
+
+Si je peux faire fonctionner toutes ces choses, j'aimerais voir si AppVeyor le ferait,
+et on peut y travailler là-bas, j'ai écrit ça pour qu'ils le donnent aux autres,
+pour les aider à publier leurs Applications en toute simplicité,
+le concept est simple, cette application utilise la plupart des fonctionnalités que la plupart des gens veulent,
+Paramètres Qt pour stocker les variables, et SQL,
+donc si vous pouvez faire en sorte que cela fonctionne pour tous les systèmes d'exploitation pris en charge par Qt,
+il sera beaucoup plus facile pour les gens de copier comment cela a été fait,
+ce projet a donc besoin de beaucoup de travail pour en faire un exemple de meilleure pratique,
+vous pouvez donc voir que je n'ai ajouté qu'un nombre minimal de fonctionnalités faciles à développer.
+
+J'ai besoin de vos commentaires sur ce que vous pensez du concept,
+que l'Application, quelles fonctionnalités vous voudriez y voir,
+et vraiment j'ai besoin de savoir quels scripts exécuter pour que tout cela fonctionne,
+Je suis bon en bash, mais pas tellement en PowerShell ou CMD,
+et pas grand-chose dans Mac, iOS, mais j'ai un Android.
+
+Je veux voir cette application devenir la norme pour AppVeyor à recommander d'utiliser,
+et pourquoi ils ont besoin de le forger, et de le faire leur,
+J'essaie juste de leur donner quelque chose qui vaut la peine d'être repris,
+et pourquoi je l'ai marqué QtAppVeyor, et essayé de rendre toute la documentation facile à nettoyer,
+et Doxygen ready, la traduction doit être faite,
+mais j'attends toujours la fin pour commencer.
 
 # Statut
 
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/Galaxy- Calculatrice-2)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
-## :package : **Téléchargements :**
+### :package : **Téléchargements :**
 
- - :pingouin: [Linux](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-x86_64.AppImage)
- - :penguin: :inbox_tray: [Linux ZSync](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-x86_64.AppImage.zsync)
- - :penguin: :outbox_tray: [Linux Installer in work](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-Linux-Installer)
- - :office : [Windows zip](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/GalaxyCalculator2-Windows.zip)
- - :office: :outbox_tray: [Windows Installer exe](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/GalaxyCalculator2.exe)
- - :apple : [Apple](https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2.dmg)
+ - :pingouin : [Linux zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
+ - :office : [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
+ - :apple : actuellement indisponible [Apple zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
 
-Windows (Testé sur 7 et 10, dites-moi si 8 fonctionne) : Téléchargez zip et extrayez-le, puis exécutez le fichier Galaxy-Calculator-2.exe à l'intérieur du dossier de déploiement.
+Actuellement, Windows ne fonctionne pas, si c'était le cas, il dirait quelque chose comme ceci :
 
-Tous mes livres sont gratuits en ligne sur http://LightWizzard.com, mais les imprimer ou envoyer des ePubs sur votre appareil coûte de l'argent.
+Windows (Testé sur 7 et 10, dites-moi si 8 fonctionne) : Téléchargez le zip et extrayez-le,
+et exécutez le fichier QtAppVeyor.exe dans le dossier deploy AppDir.
 
-Je ne publie pas mes livres ici, vous pouvez les lire gratuitement sur mon
-[Compte Github Light-Wizzard/The-Principles-Of-The-Trinary-Universe](https://github.com/Light-Wizzard/The-Principles-Of-The-Trinary-Universe),
-mais vous devez payer pour des livres imprimés, ou la facilité d'avoir un ePub livré via vos appareils ePub Reader, sans avoir à le télécharger.
+Une fois terminé, il n'aura qu'un seul artefact, le Qt Installer Framework avec Qt Auto Update dans un fichier zip.
 
-Livre imprimé et ePub disponible sur :
+# Développement-Progrès
 
-Loulou
-* :livre: :ordinateur: http://www.lulu.com/spotlight/LightWizzard
+Pour plus d'informations, consultez : [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 
-Amazone
-* :book: Book https://www.amazon.com/Principles-Trinary-Universe-according-Johannes/dp/1795429186/
-* :ordinateur : ePub https://www.amazon.com/Principles-Trinary-Universe-according-Johannes-ebook/dp/B086D24HX9
+Ceci est un travail en cours, veuillez signaler tout bug et laisser des commentaires.
 
-Vous pouvez également l'obtenir dans n'importe quelle grande librairie, mais je vous recommande de le lire, si vous voulez connaître tous les détails sur les mathématiques, vous ne les trouverez pas autant dans le code.
+# Travaille sur
 
-Si vous ne voyez pas votre système d'exploitation, téléchargez-le, extrayez-le dans un dossier et ouvrez-le avec Qt Creator, qui doit être installé, et compilez ou exécutez-le.
+* cmake au lieu de qmake
+* Cadre d'installation Qt
+* AppImage pouvant être mise à jour
+* Scripts Windows au lieu d'inline
+* Mac
+* Android
+* WebAssemblage
+* iOS
+* Version MSVS du projet Qt
 
-# Avancement du développement
+# Variables
 
-Vous devez comprendre la science trinaire et l'univers trinaire pour comprendre le calculateur galactique,
-mais fondamentalement Trinary a la même signification que Trinity a fait à Sir Isaac Newton, il décrit et courant alternatif ou AC,
-le Père est le +1, le Fils est le -1, et le Saint-Esprit ou Esprit de Mère Nature est 0, donc c'est la Logique Trinaire avec : +1, -1 et 0 comme Niveaux Logiques,
-J'utilise le nom Trinaire parce que Newton détestait l'Enseignement du Christ.
+Si vous utilisez cette application pour créer des fichiers .appveyor.yml,
+vous aurez besoin de connaître toutes ces variables,
+même si vous faites votre propre fichier, vous les aurez connus,
+et maintenir manuellement les modifications,
+alors que cette application vous permet simplement de modifier les variables et de créer un nouveau fichier.
 
-Il y a un écran de configuration où vous configurez le Galaxy, vous pouvez nommer le Galaxy, définir sa taille de soleil en miles de diamètre,
-définir sa taille de planètes vivantes en miles de diamètre, définir le nombre de moteurs trinaires, voir l'aide pour plus de détails,
-et le rayon de la galaxie en miles de diamètre et le nombre de pistes que vous souhaitez imprimer.
+Chaque variable est utilisée dans les scripts pour configurer l'application pour le déploiement.
 
-J'ai supprimé la fonctionnalité de stockage local en raison des autorisations sur certains appareils.
+* MY_BIN_PRO_RES_NAME : nom de Qt Projects, c'est-à-dire. QtAppVeyor.pro, suppose que le nom de l'exe est le même.
+* MY_OS : Ceci est utilisé pour créer des noms de packages, donc pas d'espaces
+* MY_VS_VERSION : version Qt
+* MY_QT_IF_VERSION : version Qt Installer Framework (QIF)
+* MY_QIF_PACKAGE_URI : Dossier pour les packages QIF
+* MY_PYTHON_VER : Version Python, notez que Windows 7 s'arrête à 3.8
+* MY_PYTHON_REQUIRED : Python est-il requis
+* MY_UPGRADE_OS : mise à niveau du système Unix
+* MY_QT_MINGW32 : chemins MingW
+* MY_QT_MINGW32 : chemins MingW
+* MY_QT_TOOLS_MINGW32 : chemins MingW
+* MY_QT_TOOLS_MINGW64 : chemins MingW
 
-# Fond
+Unix
 
-Le calculateur Galaxy est un simple clic pour calculer, il enregistre le numéro de piste, combien de moteurs trinaires il faut pour être sur cette piste,
-sa vitesse minimale et maximale du soleil en milles par heure, la fréquence des planètes habitables, la distance orbitale du soleil en milles et la fréquence des pistes,
-que Sir Isaac Newton a utilisé pour déterminer quand la fin de la civilisation se produira, et selon son et mon calcul,
-cela se produira en 2060 sous le calendrier julien encore utilisé par les militaires, ou en 2061 sous le calendrier grégorien en usage aujourd'hui,
-c'était le même calcul donné au Public, mais peu savent comment il l'a calculé, j'ai écrit une nouvelle formule, car je n'ai pas pu trouver son équation d'origine.
+```yaml
+MY_BIN_PRO_RES_NAME : QtAppVeyor #
+MY_OS : Windows # Pas d'espaces, cela affiche le nom du fichier, format project-os-configuration-plateform
+MY_QT_VERSION : 5.15.2 # Version Qt
+MY_QT_IF_VERSION : '4.1.1' # Version du cadre d'installation de QT
+MY_QIF_PACKAGE_URI : 'com.appveyor.qtappveyor\data' #
+MY_PYTHON_VER : 3.8 # La dernière version que Windows 7 peut exécuter est la 3.8.x
+MY_PYTHON_REQUIRED : false # si Python est requis
+MY_UPGRADE_OS : false # apt-get upgrade : true ou false uniquement
+MY_RUN_DOXYFILE : faux ; # exécuter Doxygen
+```
 
-Sir Isaac Newton a brûlé sa copie de son calcul de 2060, il a écrit que cela pèse lourd sur son ÂME, il a donc dû laisser tomber,
-et a écrit que quiconque veut savoir, peut le comprendre, toutes les formules sont dans la Bible, 36 ans plus tard, je les ai toutes trouvées.
+les fenêtres
 
-Cette calculatrice Galaxy a été écrite pour être utilisée, après avoir pensé au script bash qui a créé cette page :
+```yaml
+MY_BIN_PRO_RES_NAME : QtAppVeyor #
+MY_OS : Windows # Pas d'espaces, cela affiche le nom du fichier, format project-os-configuration-plateform
+MY_QT_VERSION : 5.15.2 # Version Qt
+MY_VS_VERSION : 2019 # Vs Version
+MY_QT_MINGW32 : mingw81_32 # Variables du dossier Qt pour Windows uniquement
+MY_QT_MINGW64: mingw81_64 # Windows uniquement Dossier Qt Variables
+MY_QT_TOOLS_MINGW32 : mingw810_32 # Variables du dossier Qt pour Windows uniquement
+MY_QT_TOOLS_MINGW64 : mingw810_64 # Windows uniquement Dossier Qt Variables
+MY_QT_IF_VERSION : '4.1.1' # Version du cadre d'installation de QT
+MY_QIF_PACKAGE_URI : 'com.appveyor.qtappveyor\data' #
+MY_PYTHON_VER : 3.8 # La dernière version que Windows 7 peut exécuter est la 3.8.x
+MY_PYTHON_REQUIRED : false # si Python est requis
+MY_RUN_DOXYFILE : faux ; # exécuter Doxygen
+```
 
-http://LightWizzard.com/books/trinary.universe/appendix.a.html
+# Base de données
 
-Le script bash a non seulement créé la page, mais a également calculé les valeurs de la table.
+```sql
+Projets : id, QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWebAssembly, IsOSiOS, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
 
-J'espère que cela aidera tout le monde à visualiser ce que l'application doit faire, c'est-à-dire uniquement tracer et tracer le chemin des étoiles autour de la galaxie.
+CREATE TABLE Projects(id entier PRIMARY KEY auto-incrément,
+                      QtProject varchar,
+                      Varchar secret,
+                      IsOsUbuntu varchar,
+                      IsOsMac varchar,
+                      IsOsWebAssembly varchar,
+                      IsOSiOS varchar,
+                      IsOsWindows varchar,
+                      IsOsAndroid varchar,
+                      IsX64 varchar,
+                      IsX86 varchar,
+                      IsDebug varchar,
+                      IsRelease varchar
 
-Ce n'est pas un simulateur Galaxy, seulement un graphique et un tracé, et c'est très important à comprendre,
-Je voudrais écrire un Galaxy Simulator construit en utilisant uniquement les lois et règles ou l'électronique,
-et ce projet s'appellera un simulateur Galaxy, et pourquoi ce projet ne s'appelle qu'un Calculatrice Galaxie,
-mais je cherche à utiliser Qt 3D Studio pour simuler un simulateur.
+Configuration : ID, ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
 
-Pour plus d'informations, consultez : [Wiki](https://github.com/Light-Wizzard/Galaxy-Calculator-2/wiki)
+ProjectsID est l'identifiant du projet
 
-Il s'agit d'un travail en cours, veuillez signaler tout bug et faire des commentaires.
+CREATE TABLE Configuration(id entier PRIMARY KEY auto-incrémentation,
+                           ProjectsID varchar,
+                           OS varchar,
+                           QtVersion varchar,
+                           QtIfVersion varchar,
+                           QtIfPackageUri varchar,
+                           PythonVersion varchar,
+                           PythonRequis varchar,
+                           QtMingW32 varchar,
+                           QtMingW64 varchar,
+                           QtToolsMingW32 varchar,
+                           QtToolsMingW64 varchar,
+                           VisualStudio varchar,
+                           OsUpgrade varchar
+
+```
+
+# Aider
+
+Cette application a intégré [Aide](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/Help-en.html) sur l'application elle-même,
+et un [À propos](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-en.html),
+ainsi qu'un bouton [Auteur](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-Author-en.html) sur les deux boîtes de dialogue,
+que vous pouvez supprimer facilement en supprimant simplement le bouton des deux formulaires, et en supprimant le fichier lui-même,
+ce bouton et ce contenu sont à propos de moi, l'auteur original, mais n'est pas obligatoire,
+ni aucune licence, ce projet a une licence [Unlicnsed](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/unlicense.txt),
+cela permet à quiconque de fork et de l'utiliser plus facilement comme modèle,
+et je vais essayer de développer les sections d'aide,
+et ajoutez plus de contenu [Wiki](https://github.com/Light-Wizzard/QtAppVeyor/wiki),
+ça pourrait aider.
 
 # Captures d'écran
 
-![Configuration Galaxy](/doc/images/screenshot-config.png?raw=true "Configuration Galaxy")
+![Paramètres](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
 
-![Galaxy Calculator](/doc/images/screenshot-galaxy.png?raw=true "Galaxy Calculator")
+![SQL](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
 
-![Calculateur d'énergie](/doc/images/screenshot-energy.png?raw=true "Calculateur d'énergie")
+![Ubuntu](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/ubuntu.png)
 
-![Calculateur de folie](/doc/images/screenshot-madness.png?raw=true "Calculateur de folie")
+![Windows](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/windows.png)
 
-![Calculatrice mondiale](/doc/images/screenshot-world.png?raw=true "Calculatrice planétaire")
+![Par défaut](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/defaults.png)
 
-![Calculatrice](/doc/images/screenshot-calc.png?raw=true "Calculatrice")
+![YML](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
-
-# Code tiers
-
-[QCalculator](https://github.com/xenotux/qcalc)
-https://github.com/xenotux/qcalc
-
-DLL GMP pour Windows
-https://osdn.net/projects/mingw/releases/69295
-
-MPFR Dll pour Windows
-https://osdn.net/projects/mingw/releases/69297
-
-
-Fin du fichier README.md
+### Fin du fichier README.md

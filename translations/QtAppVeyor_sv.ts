@@ -6,22 +6,22 @@
     <message>
         <location filename="../src/MainWindow.ui" line="19"/>
         <source>MainWindow</source>
-        <translation type="unfinished">MainWindow</translation>
+        <translation>MainWindow</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="39"/>
         <source>Settings</source>
-        <translation type="unfinished">inställningar</translation>
+        <translation>inställningar</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="52"/>
         <source>Qt Project</source>
-        <translation type="unfinished">Qt -projekt</translation>
+        <translation>Qt -projekt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="96"/>
         <source>#</source>
-        <translation type="unfinished">Yaml (*.yml)</translation>
+        <translation>Yaml (*.yml)</translation>
     </message>
     <message>
         <source>ProjectID</source>
@@ -30,76 +30,76 @@
     <message>
         <location filename="../src/MainWindow.ui" line="117"/>
         <source>Encrpyted Secret</source>
-        <translation type="unfinished">Encrpyted Secret</translation>
+        <translation>Encrpyted Secret</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="147"/>
         <source>OS</source>
-        <translation type="unfinished">OS</translation>
+        <translation>OS</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="156"/>
         <location filename="../src/MainWindow.ui" line="1402"/>
         <source>iOS</source>
-        <translation type="unfinished">iOS</translation>
+        <translation>iOS</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="168"/>
         <location filename="../src/MainWindow.ui" line="1590"/>
         <source>Windows</source>
-        <translation type="unfinished">Windows</translation>
+        <translation>Windows</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="180"/>
         <source>Ubuntu</source>
-        <translation type="unfinished">Ubuntu</translation>
+        <translation>Ubuntu</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="187"/>
         <source>Web Assembly</source>
-        <translation type="unfinished">Webbmontering</translation>
+        <translation>Webbmontering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="194"/>
         <location filename="../src/MainWindow.ui" line="1026"/>
         <source>Android</source>
-        <translation type="unfinished">Android</translation>
+        <translation>Android</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="206"/>
         <location filename="../src/MainWindow.ui" line="838"/>
         <source>Mac</source>
-        <translation type="unfinished">Mac</translation>
+        <translation>Mac</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="233"/>
         <source>Platform</source>
-        <translation type="unfinished">Plattform</translation>
+        <translation>Plattform</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="247"/>
         <source>x64</source>
-        <translation type="unfinished">x64</translation>
+        <translation>x64</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="259"/>
         <source>x86</source>
-        <translation type="unfinished">x86</translation>
+        <translation>x86</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="286"/>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguration</translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="300"/>
         <source>Release</source>
-        <translation type="unfinished">Släpp</translation>
+        <translation>Släpp</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="312"/>
         <source>Debug</source>
-        <translation type="unfinished">Felsöka</translation>
+        <translation>Felsöka</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="334"/>
@@ -111,12 +111,12 @@
         <location filename="../src/MainWindow.ui" line="1515"/>
         <location filename="../src/MainWindow.ui" line="1789"/>
         <source>Options</source>
-        <translation type="unfinished">alternativ</translation>
+        <translation>alternativ</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="343"/>
         <source>Add</source>
-        <translation type="unfinished">Lägg till</translation>
+        <translation>Lägg till</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="350"/>
@@ -130,87 +130,87 @@
         <location filename="../src/MainWindow.ui" line="2175"/>
         <location filename="../src/MainWindow.ui" line="2343"/>
         <source>Save</source>
-        <translation type="unfinished">Spara</translation>
+        <translation>Spara</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="357"/>
         <source>Delete</source>
-        <translation type="unfinished">Radera</translation>
+        <translation>Radera</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="379"/>
         <source>Environment</source>
-        <translation type="unfinished">Miljö</translation>
+        <translation>Miljö</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="392"/>
         <source>Qt</source>
-        <translation type="unfinished">Qt</translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="399"/>
         <source>MSVS</source>
-        <translation type="unfinished">MSVS</translation>
+        <translation>MSVS</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="422"/>
         <source>Messaging</source>
-        <translation type="unfinished">Meddelanden</translation>
+        <translation>Meddelanden</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="431"/>
         <source>Log Debugging Messages</source>
-        <translation type="unfinished">Logga felsökningsmeddelanden</translation>
+        <translation>Logga felsökningsmeddelanden</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="453"/>
         <source>Language</source>
-        <translation type="unfinished">Språk</translation>
+        <translation>Språk</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="483"/>
         <source>SQL</source>
-        <translation type="unfinished">SQL</translation>
+        <translation>SQL</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="491"/>
         <source>Database Name</source>
-        <translation type="unfinished">Databas namn</translation>
+        <translation>Databas namn</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="498"/>
         <source>SQL Type</source>
-        <translation type="unfinished">SQL -typ</translation>
+        <translation>SQL -typ</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="512"/>
         <source>Host Name</source>
-        <translation type="unfinished">Värdnamn</translation>
+        <translation>Värdnamn</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="532"/>
         <source>User Name</source>
-        <translation type="unfinished">Användarnamn</translation>
+        <translation>Användarnamn</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="552"/>
         <source>Password</source>
-        <translation type="unfinished">Lösenord</translation>
+        <translation>Lösenord</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="583"/>
         <source>Show Password</source>
-        <translation type="unfinished">Visa lösenord</translation>
+        <translation>Visa lösenord</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="607"/>
         <source>Browse</source>
-        <translation type="unfinished">Bläddra</translation>
+        <translation>Bläddra</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="650"/>
         <source>Ubnutu</source>
-        <translation type="unfinished">Ubnutu</translation>
+        <translation>Ubnutu</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="658"/>
@@ -221,7 +221,7 @@
         <location filename="../src/MainWindow.ui" line="1598"/>
         <location filename="../src/MainWindow.ui" line="1886"/>
         <source>Qt Version</source>
-        <translation type="unfinished">Qt -version</translation>
+        <translation>Qt -version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="678"/>
@@ -232,7 +232,7 @@
         <location filename="../src/MainWindow.ui" line="1618"/>
         <location filename="../src/MainWindow.ui" line="1906"/>
         <source>Qt Installer Version</source>
-        <translation type="unfinished">Qt -installationsversion</translation>
+        <translation>Qt -installationsversion</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="698"/>
@@ -243,7 +243,7 @@
         <location filename="../src/MainWindow.ui" line="1638"/>
         <location filename="../src/MainWindow.ui" line="1926"/>
         <source>Qt Installer Package</source>
-        <translation type="unfinished">Qt -installationspaket</translation>
+        <translation>Qt -installationspaket</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="718"/>
@@ -254,7 +254,7 @@
         <location filename="../src/MainWindow.ui" line="1738"/>
         <location filename="../src/MainWindow.ui" line="2026"/>
         <source>Python Version</source>
-        <translation type="unfinished">Python -version</translation>
+        <translation>Python -version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="740"/>
@@ -265,7 +265,7 @@
         <location filename="../src/MainWindow.ui" line="1760"/>
         <location filename="../src/MainWindow.ui" line="2048"/>
         <source>Python Required</source>
-        <translation type="unfinished">Python krävs</translation>
+        <translation>Python krävs</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="749"/>
@@ -273,12 +273,12 @@
         <location filename="../src/MainWindow.ui" line="1313"/>
         <location filename="../src/MainWindow.ui" line="1501"/>
         <source>OS Upgrade</source>
-        <translation type="unfinished">OS -uppgradering</translation>
+        <translation>OS -uppgradering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="756"/>
         <source>Ubuntu Upgrade</source>
-        <translation type="unfinished">Ubuntu -uppgradering</translation>
+        <translation>Ubuntu -uppgradering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="792"/>
@@ -290,7 +290,7 @@
         <location filename="../src/MainWindow.ui" line="2135"/>
         <location filename="../src/MainWindow.ui" line="2157"/>
         <source>Reset</source>
-        <translation type="unfinished">Återställa</translation>
+        <translation>Återställa</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="801"/>
@@ -301,7 +301,7 @@
         <location filename="../src/MainWindow.ui" line="1827"/>
         <location filename="../src/MainWindow.ui" line="1872"/>
         <source>Record ID</source>
-        <translation type="unfinished">Registrera ID</translation>
+        <translation>Registrera ID</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="815"/>
@@ -312,175 +312,175 @@
         <location filename="../src/MainWindow.ui" line="1841"/>
         <location filename="../src/MainWindow.ui" line="2197"/>
         <source>Vs Version</source>
-        <translation type="unfinished">Vs version</translation>
+        <translation>Vs version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="944"/>
         <source>Mac Upgrade</source>
-        <translation type="unfinished">Mac -uppgradering</translation>
+        <translation>Mac -uppgradering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1125"/>
         <location filename="../src/MainWindow.ui" line="2084"/>
         <source>Upgrade OS</source>
-        <translation type="unfinished">Uppgradera OS</translation>
+        <translation>Uppgradera OS</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1132"/>
         <source>Android Upgrade</source>
-        <translation type="unfinished">Android -uppgradering</translation>
+        <translation>Android -uppgradering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1214"/>
         <source>WebAssembly</source>
-        <translation type="unfinished">WebAssemble</translation>
+        <translation>WebAssemble</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1320"/>
         <source>Web Assembly Upgrade</source>
-        <translation type="unfinished">Uppgradering av webbmontering</translation>
+        <translation>Uppgradering av webbmontering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1508"/>
         <source>iOS Upgrade</source>
-        <translation type="unfinished">iOS -uppgradering</translation>
+        <translation>iOS -uppgradering</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1658"/>
         <location filename="../src/MainWindow.ui" line="1946"/>
         <source>Qt MingW32</source>
-        <translation type="unfinished">Qt MingW32</translation>
+        <translation>Qt MingW32</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1678"/>
         <location filename="../src/MainWindow.ui" line="1966"/>
         <source>Qt MingW64</source>
-        <translation type="unfinished">Qt MingW64</translation>
+        <translation>Qt MingW64</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1698"/>
         <location filename="../src/MainWindow.ui" line="1986"/>
         <source>Qt Tools MingW32</source>
-        <translation type="unfinished">Qt Tools MingW32</translation>
+        <translation>Qt Tools MingW32</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1718"/>
         <location filename="../src/MainWindow.ui" line="2006"/>
         <source>Qt Tools MingW64</source>
-        <translation type="unfinished">Qt Tools MingW64</translation>
+        <translation>Qt Tools MingW64</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1769"/>
         <location filename="../src/MainWindow.ui" line="2057"/>
         <source>Visual Studio Version</source>
-        <translation type="unfinished">Visual Studio -version</translation>
+        <translation>Visual Studio -version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1864"/>
         <source>Defaults</source>
-        <translation type="unfinished">Standardvärden</translation>
+        <translation>Standardvärden</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2077"/>
         <source>OS Upgrades</source>
-        <translation type="unfinished">OS -uppgraderingar</translation>
+        <translation>OS -uppgraderingar</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2091"/>
         <source>Set all OS&apos;s to Default</source>
-        <translation type="unfinished">Ställ in alla operativsystem på Standard</translation>
+        <translation>Ställ in alla operativsystem på Standard</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2113"/>
         <source>Set Defaults</source>
-        <translation type="unfinished">Ange standardvärden</translation>
+        <translation>Ange standardvärden</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2166"/>
         <source>Save Defaults</source>
-        <translation type="unfinished">Spara standardvärden</translation>
+        <translation>Spara standardvärden</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2220"/>
         <source>YML</source>
-        <translation type="unfinished">YML</translation>
+        <translation>YML</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2236"/>
         <location filename="../src/MainWindow.ui" line="2352"/>
         <source>Help</source>
-        <translation type="unfinished">Hjälp</translation>
+        <translation>Hjälp</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2259"/>
         <source>File</source>
-        <translation type="unfinished">Fil</translation>
+        <translation>Fil</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2273"/>
         <location filename="../src/MainWindow.ui" line="2325"/>
         <source>About</source>
-        <translation type="unfinished">Handla om</translation>
+        <translation>Handla om</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2287"/>
         <source>toolBar</source>
-        <translation type="unfinished">verktygsfält</translation>
+        <translation>verktygsfält</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2316"/>
         <source>Exit</source>
-        <translation type="unfinished">Utgång</translation>
+        <translation>Utgång</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2334"/>
         <source>Create</source>
-        <translation type="unfinished">Skapa</translation>
+        <translation>Skapa</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2361"/>
         <source>Print</source>
-        <translation type="unfinished">Skriva ut</translation>
+        <translation>Skriva ut</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2370"/>
         <source>Clipboard</source>
-        <translation type="unfinished">Urklipp</translation>
+        <translation>Urklipp</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2379"/>
         <source>Author</source>
-        <translation type="unfinished">Författare</translation>
+        <translation>Författare</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="160"/>
         <source>ID</source>
-        <translation type="unfinished">ID</translation>
+        <translation>ID</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="161"/>
         <source>Project</source>
-        <translation type="unfinished">Projekt</translation>
+        <translation>Projekt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="835"/>
         <source>Save File As</source>
-        <translation type="unfinished">Spara fil som</translation>
+        <translation>Spara fil som</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="835"/>
         <source>Yaml (*.yml)</source>
-        <translation type="unfinished">Yaml (*.yml)</translation>
+        <translation>Yaml (*.yml)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1683"/>
         <source>Sqlite Folder Location</source>
-        <translation type="unfinished">Plats för SQLite -mapp</translation>
+        <translation>Plats för SQLite -mapp</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="136"/>
         <source>English</source>
-        <translation type="unfinished">engelsk</translation>
+        <translation>engelsk</translation>
     </message>
 </context>
 <context>
@@ -488,7 +488,7 @@
     <message>
         <location filename="../src/MyDatatables.cpp" line="292"/>
         <source>Not adding: Record found in database</source>
-        <translation type="unfinished">Lägger inte till: Posten finns i databasen</translation>
+        <translation>Lägger inte till: Posten finns i databasen</translation>
     </message>
 </context>
 <context>
@@ -496,22 +496,22 @@
     <message>
         <location filename="../src/MyLocalization.cpp" line="156"/>
         <source>Remove Arguments that use Percent Sign x</source>
-        <translation type="unfinished">Ta bort argument som använder procenttecken x</translation>
+        <translation>Ta bort argument som använder procenttecken x</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="168"/>
         <source>Remove Args</source>
-        <translation type="unfinished">Ta bort Args</translation>
+        <translation>Ta bort Args</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="168"/>
         <source>File: </source>
-        <translation type="unfinished">Fil:</translation>
+        <translation>Fil:</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="177"/>
         <source>File not found</source>
-        <translation type="unfinished">Filen hittades inte</translation>
+        <translation>Filen hittades inte</translation>
     </message>
 </context>
 <context>
@@ -519,47 +519,47 @@
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="55"/>
         <source>Crypto Fail: MyOrgSettings::onRunOnStartup()</source>
-        <translation type="unfinished">Crypto Fail: MyOrgSettings :: onRunOnStartup ()</translation>
+        <translation>Crypto Fail: MyOrgSettings :: onRunOnStartup ()</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="326"/>
         <source>Error opening file for reading</source>
-        <translation type="unfinished">Ett fel uppstod när filen skulle läsas</translation>
+        <translation>Ett fel uppstod när filen skulle läsas</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="326"/>
         <source>Could not open file for reading</source>
-        <translation type="unfinished">Det gick inte att öppna filen för läsning</translation>
+        <translation>Det gick inte att öppna filen för läsning</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="345"/>
         <source>Error opening file for writing</source>
-        <translation type="unfinished">Ett fel uppstod när filen skulle skrivas</translation>
+        <translation>Ett fel uppstod när filen skulle skrivas</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="345"/>
         <source>Could not open file for writing</source>
-        <translation type="unfinished">Det gick inte att öppna filen för att skriva</translation>
+        <translation>Det gick inte att öppna filen för att skriva</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="574"/>
         <source>File not found</source>
-        <translation type="unfinished">Filen hittades inte</translation>
+        <translation>Filen hittades inte</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="584"/>
         <source>Folder not found</source>
-        <translation type="unfinished">Mappen hittades inte</translation>
+        <translation>Mappen hittades inte</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="650"/>
         <source>This file was created to test if this folder is writeable by</source>
-        <translation type="unfinished">Den här filen skapades för att testa om den här mappen är skrivbar av</translation>
+        <translation>Den här filen skapades för att testa om den här mappen är skrivbar av</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="671"/>
         <source>Error: cannot create file</source>
-        <translation type="unfinished">Fel: fil kan inte skapas</translation>
+        <translation>Fel: fil kan inte skapas</translation>
     </message>
 </context>
 <context>
@@ -567,32 +567,32 @@
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="379"/>
         <source>Database SQL Driver is missing</source>
-        <translation type="unfinished">Databas SQL -drivrutin saknas</translation>
+        <translation>Databas SQL -drivrutin saknas</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="379"/>
         <source>Install SQL</source>
-        <translation type="unfinished">Installera SQL</translation>
+        <translation>Installera SQL</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="384"/>
         <source>Cannot open database</source>
-        <translation type="unfinished">Kan inte öppna databasen</translation>
+        <translation>Kan inte öppna databasen</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="384"/>
         <source>Unable to establish a database connection</source>
-        <translation type="unfinished">Det gick inte att upprätta en databasanslutning</translation>
+        <translation>Det gick inte att upprätta en databasanslutning</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="453"/>
         <source>runProcces cannot start process</source>
-        <translation type="unfinished">runProcces kan inte starta processen</translation>
+        <translation>runProcces kan inte starta processen</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="457"/>
         <source>runProcces timeout ..</source>
-        <translation type="unfinished">runProcces timeout ..</translation>
+        <translation>runProcces timeout ..</translation>
     </message>
 </context>
 <context>
@@ -601,73 +601,73 @@
         <location filename="../src/MainWindow.cpp" line="1222"/>
         <location filename="../src/MainWindow.cpp" line="1227"/>
         <source>Could not read from the Database</source>
-        <translation type="unfinished">Det gick inte att läsa från databasen</translation>
+        <translation>Det gick inte att läsa från databasen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1222"/>
         <location filename="../src/MainWindow.cpp" line="1227"/>
         <source>Unable to find record in database. Click Cancel to exit.</source>
-        <translation type="unfinished">Det gick inte att hitta posten i databasen. Klicka på Avbryt för att avsluta.</translation>
+        <translation>Det gick inte att hitta posten i databasen. Klicka på Avbryt för att avsluta.</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1630"/>
         <source>Password Revieled</source>
-        <translation type="unfinished">Lösenord Revieled</translation>
+        <translation>Lösenord Revieled</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1630"/>
         <source>%1</source>
-        <translation type="unfinished">Yaml (*.yml)</translation>
+        <translation>Yaml (*.yml)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1698"/>
         <source>Database Move Failed</source>
-        <translation type="unfinished">Databasflyttning misslyckades</translation>
+        <translation>Databasflyttning misslyckades</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1698"/>
         <source>Failed to move Database</source>
-        <translation type="unfinished">Det gick inte att flytta databasen</translation>
+        <translation>Det gick inte att flytta databasen</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="292"/>
         <source>Record found!</source>
-        <translation type="unfinished">Rekord hittat!</translation>
+        <translation>Rekord hittat!</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="315"/>
         <source>Record already exists in Database</source>
-        <translation type="unfinished">Posten finns redan i databasen</translation>
+        <translation>Posten finns redan i databasen</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="315"/>
         <source>Unable to add this record to databasen. Click Cancel to exit.</source>
-        <translation type="unfinished">Det gick inte att lägga till den här posten i databasen. Klicka på Avbryt för att avsluta.</translation>
+        <translation>Det gick inte att lägga till den här posten i databasen. Klicka på Avbryt för att avsluta.</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="168"/>
         <source>Remove Args file is created</source>
-        <translation type="unfinished">Ta bort Args -filen skapas</translation>
+        <translation>Ta bort Args -filen skapas</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="55"/>
         <source>Crypto Fail</source>
-        <translation type="unfinished">Krypto misslyckas</translation>
+        <translation>Krypto misslyckas</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="671"/>
         <source>File System Error</source>
-        <translation type="unfinished">Filsystemsfel</translation>
+        <translation>Filsystemsfel</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="39"/>
         <source>Failed to open log file</source>
-        <translation type="unfinished">Det gick inte att öppna loggfilen</translation>
+        <translation>Det gick inte att öppna loggfilen</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="60"/>
         <source>Log File</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

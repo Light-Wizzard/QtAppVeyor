@@ -1,147 +1,259 @@
-# Калькулятор Галактики 2
+# QtAppVeyor
 
-В Galaxy Calculator 2 встроено 4 калькулятора:
+Каждой программе нужна причина для существования,
+этот существует, потому что я работал над проектом по обновлению моего [Galaxy Calculator] (https://github.com/Light-Wizzard/galaxy-calculator) из QML,
+на C ++, поэтому с этим приложением Qt я хочу работать на как можно большем количестве платформ,
+некоторое время имея программу Galaxy Calculator на [AppVeyor] (https://appveyor.com),
+Я решил попробовать,
+но вскоре стало трудно заставить мой проект работать в Windows и Linux,
+эта программа более сложна с библиотекой,
+поэтому я хотел написать короткое приложение, которое могло бы существовать что-то полезное,
+но в то же время это было только для тестирования моих скриптов AppVeyor,
+тогда я решил, почему бы не сделать инструмент автоматизации сценариев AppVeyor,
+и теперь моя идея состоит в том, чтобы использовать сценарий Yaml, который это приложение выпускает, для развертывания этого приложения.
 
-1.: milky_way: Галатический калькулятор
-2.: confounded: Калькулятор безумия
-3.: earth_americas: Калькулятор планет
-4.: компьютер: Калькулятор
+Это проект для AppVeyor, если они хотят его разветвить и взять на себя как проект сообщества,
+чтобы сделать приложение лучше и дать разработчикам то, что работает,
+чтобы они могли основывать свои проекты на этом проекте,
+и сделайте кросс-компилирование на как можно большем количестве платформ.
 
-Я использовал файлы проекта из своего первого калькулятора Galaxy, написанного с использованием Qt QML и JavaScript,
-этот использует Qt C ++ и виджеты,
-так что документация может показаться дурацкой, пока у меня не будет возможности исправить все ссылки и преобразовать их в этот новый проект,
-Мне нужно будет сделать проекты Travis и AppYeyer, так что эта работа еще не завершена.
+Это простое приложение, написанное на Qt C ++ с использованием виджетов,
+он использует SQL для хранения проектов,
+это простое приложение со страницей настроек для ввода всех переменных, необходимых для создания файла AppVeyor Yaml,
+так что одним щелчком нижней части вы можете автоматизировать создание файла .appveyor.yml.
 
-Калькуляторы Галактики, Безумия и Планеты основаны на расчетах сэра Исаака Ньютона,
-и был обновлен, чтобы включить математику Николы Теслы,
-Таким образом, изобрел новый тип математики, который я называю тройной математикой, которая используется для вычисления Галактики.
+Это приложение в основном предназначено только для того, чтобы показать вам, как развертывать проекты Qt C ++ QtCreator,
+в Linux, Mac, Windows и, возможно, WebAssembly и iOS, а также Android,
+и как использовать Qt Installer Framework для создания устанавливаемых приложений,
+которые также можно обновлять.
 
-Это проект с открытым исходным кодом, лицензия не требуется, это приложение Qt C ++,
-который будет работать на рабочем столе и других устройствах, включен сценарий bash, который я использовал для переноса в это приложение.
+Этот проект ориентирован не только на разработчиков Qt Software,
+он должен быть в состоянии обрабатывать множество различных сред,
+но в настоящее время Qt - единственная среда, над которой я работал,
+но я добавил кнопку для разных сред,
+Таким образом, этот инструмент будет полезен каждому разработчику ПО.
 
-Это приложение можно скомпилировать для любой ОС, поддерживаемой Qt: Linux, Windows, MAC, Android и iOS,
-а также любая ОС, которую поддерживает Qt, поэтому она должна работать на большинстве, если не на всех популярных ОС.
+Моя самая большая проблема - это отсутствие опыта работы со сценариями Windows,
+Я не использовал Windows десятилетиями и только недавно купил Windows 10 Pro,
+просто использовать Word, а я не Mac, так что Linux - это все, что я могу заставить работать,
+так что мне действительно нужна помощь в написании скриптов.
 
-Я постараюсь сделать установщики и исполняемые файлы для всех поддерживаемых ОС Qt, в настоящее время у меня есть:
+Qt переходит на cmake в версии 6, поэтому у меня нет другого выбора, кроме как отойти от qmake.
 
-Если значки зеленые, вы сможете загружать приложения, если нет,
-возможно, я над этим работаю, но обновление займет всего несколько минут.
-
-Этот проект находится в разработке, поэтому файлы могут сломаться, но исходный код должен работать, если скомпилирован на любой машине.
-
-Qt Installer Framework работает для Linux и, возможно, Windows, но установщик не загружается,
-в работе у меня ниже установщик для Windows 10, не уверен насчет 8, но не 7.
+Для Windows я не уверен, подходит ли MingW, или если VS,
+или если я должен использовать MSYS или Cygwin.
 
 ## Таблица содержания
 
-1. [Статус] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Status)
-2. [Ход разработки] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Development-Progress)
-3. [Фон] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Background)
-4. [Снимки экрана] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#Screen-Shots)
-5. [Снимки экрана] (https://github.com/Light-Wizzard/Galaxy-Calculator-2#3rd-Party-Code)
-6. [Wiki] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/wiki)
-7. [Документация Doxygen] (https://light-wizzard.github.io/Galaxy-Calculator-2)
+1. [Сломано] (https://github.com/Light-Wizzard/QtAppVeyor#Broken)
+2. [Статус] (https://github.com/Light-Wizzard/QtAppVeyor#Status)
+3. [Прогресс разработки] (https://github.com/Light-Wizzard/QtAppVeyor#Development-Progress)
+4. [Работа над] (https://github.com/Light-Wizzard/QtAppVeyor#Working-On)
+5. [Переменные] (https://github.com/Light-Wizzard/QtAppVeyor#Variables)
+6. [База данных] (https://github.com/Light-Wizzard/QtAppVeyor#Database)
+7. [Справка] (https://github.com/Light-Wizzard/QtAppVeyor#Help)
+8. [Снимки экрана] (https://github.com/Light-Wizzard/QtAppVeyor#Screen-Shots)
+9. [Wiki] (https://github.com/Light-Wizzard/QtAppVeyor/wiki)
+10. [Кросс-компиляция] (https://github.com/Light-Wizzard/QtAppVeyor/wiki/Cross-Compile)
+11. [Документация Doxygen] (https://light-wizzard.github.io/QtAppVeyor)
+
+# Сломанный
+
+В первую очередь нужно поработать над сломанными вещами,
+вот с чем мне нужна помощь.
+
+1. Сборки Windows x86 и x64 не работают, я использую windeploy, все dll есть, но он не запускается.
+2. Фреймворк установщика Qt.
+3. Mac, WebAssembly, iOS и Android.
+4. cmake, будущее Qt 6.
+
+Проблемы: Windows соответствует требованиям, но не запускается из-за того, что библиотеки DLL находятся в той же папке, это проект qmake,
+и я создал рабочий файл cmake, и мне действительно нужно переключиться на cmake для всего проекта,
+и это то, над чем я сейчас работаю, но мое отсутствие сценариев Windows, PowerShell или команд,
+Я немного понимаю этот язык, так как за эти годы мне пришлось кое-что написать,
+Моя цель - поместить все сценарии в два файла, один для установки, другой для сборки,
+Я хочу создать пакет Qt Installer Framework с [Qt Auto Updates] (https://github.com/Skycoder42/QtAutoUpdater),
+этот проект GitHub ориентирован на Qt Installer Framework,
+поэтому я хочу создать только один zip-файл с пакетом Qt Installer.
+
+Если я смогу заставить все эти вещи работать, я хотел бы увидеть, сможет ли AppVeyor его форкнуть,
+и мы можем поработать над этим там, я написал это, чтобы они раздавали другим,
+чтобы помочь им легко опубликовать свои приложения,
+концепция проста, это приложение использует большинство функций, которые нужны большинству людей,
+Qt Settings для хранения переменных и SQL,
+поэтому, если вы можете заставить это работать для всех ОС, которые поддерживает Qt,
+людям будет намного проще скопировать, как это было сделано,
+так что этот проект требует большой работы, чтобы сделать его лучшим практическим примером,
+Итак, вы можете видеть, что я добавил лишь минимальное количество функций, которые легко расширить.
+
+Мне нужен отзыв о том, что вы думаете о концепции,
+чем Приложение, какие функции вы бы хотели в нем видеть,
+и мне действительно нужно знать, какие скрипты нужно запустить, чтобы все это работало,
+Я хорошо разбираюсь в bash, но не в PowerShell или CMD,
+и не очень в Mac, iOS, но у меня есть Android.
+
+Я хочу, чтобы это приложение стало стандартом для AppVey, или рекомендую использовать,
+и почему им нужно его разветвить и сделать своим,
+Я просто пытаюсь дать им что-то стоящее,
+и почему я назвал его QtAppVeyor и попытался упростить очистку всей документации,
+и Doxygen готовы, перевод должен быть выполнен,
+но я всегда жду до конца, чтобы начать.
 
 # Положение дел
 
-[! [Статус сборки Appveyor] (https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)] (https://ci.appveyor.com/project/Light-Wizzard/Galaxy- Калькулятор-2)
+[! [Статус сборки приложения] (https://ci.appveyor.com/api/projects/status/j7htumuwfx31elf6?svg=true)] (https://ci.appveyor.com/project/Light-Wizzard/QtAppVeyor)
 
-##: package: ** Загрузки: **
+###: package: ** Загрузки: **
 
- -: penguin: [Linux] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-x86_64.AppImage)
- -: penguin:: inbox_tray: [Linux ZSync] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-x86_64.AppImage.zsync)
- -: penguin:: outbox_tray: [Установщик Linux в работе] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2-Linux-Installer)
- -: office: [Windows zip] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/GalaxyCalculator2-Windows.zip)
- -: office:: outbox_tray: [Windows Installer exe] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/GalaxyCalculator2.exe)
- -: apple: [Apple] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/releases/download/continuous/Galaxy-Calculator-2.dmg)
+ -: penguin: [Linux zip] (https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
+ -: office: [Windows zip] (https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
+ -: apple: В настоящее время недоступен [Apple zip] (https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
 
-Windows (проверено на 7 и 10, дайте мне знать, работает ли 8): загрузите zip-архив, извлеките его и запустите файл Galaxy-Calculator-2.exe внутри папки развертывания.
+В настоящее время Windows не работает, если бы это было так, она бы сказала что-то вроде этого:
 
-Все мои книги доступны бесплатно на сайте http://LightWizzard.com, но их распечатка или отправка файлов в формате ePub на ваше устройство стоит денег.
+Windows (проверено на 7 и 10, дайте мне знать, работает ли 8): загрузите zip и распакуйте его,
+и запустите файл QtAppVeyor.exe внутри папки развертывания AppDir.
 
-Я не публикую здесь свои книги, вы можете бесплатно читать их на моем
-[Аккаунт Github Light-Wizzard / The-Principles-Of-The-Trinary-Universe] (https://github.com/Light-Wizzard/The-Principles-Of-The-Trinary-Universe),
-но вы должны платить за печатные книги или просто доставить ePub через ваши устройства ePub Reader, не загружая его.
+По завершении у него будет только один артефакт, среда установки Qt с автоматическим обновлением Qt в zip-файле.
 
-Печатная книга и ePub доступны по адресу:
+# Развитие-Прогресс
 
-Лулу
-*: книга:: компьютер: http://www.lulu.com/spotlight/LightWizzard
+Для получения дополнительной информации см .: [Wiki] (https://github.com/Light-Wizzard/QtAppVeyor/wiki)
 
-Амазонка
-*: книга: Книга https://www.amazon.com/Principles-Trinary-Universe-according-Johannes/dp/1795429186/
-*: компьютер: ePub https://www.amazon.com/Principles-Trinary-Universe-according-Johannes-ebook/dp/B086D24HX9
+Это работа, пожалуйста, сообщайте о любых ошибках и оставляйте комментарии.
 
-Вы также можете получить его в любом крупном книжном магазине, но я бы рекомендовал прочитать его, если вы хотите знать все подробности о математике, вы не найдете их в коде так часто.
+# Работа над
 
-Если вы не видите свою ОС, просто загрузите, распакуйте в папку и откройте с помощью Qt Creator, который должен быть установлен, и скомпилируйте или запустите его.
+* cmake вместо qmake
+* Фреймворк установщика Qt
+* Обновляемый AppImage
+* Скрипты Windows вместо встроенных
+* Mac
+* Android
+* WebAssembly
+* iOS
+* Сборка MSVS Qt Project
 
-# Прогресс в разработке
+# Переменные
 
-Вам нужно будет понять Тройную Науку и Тройную Вселенную, чтобы понять Галактический Калькулятор,
-но в основном Trinary имеет то же значение, что и Trinity для сэра Исаака Ньютона, он описывает и переменный ток, или переменный ток,
-Отец - это +1, Сын - это -1, а Святой Дух или Дух Матери-Природы - 0, поэтому это тройная логика с: +1, -1 и 0 в качестве логических уровней,
-Я использую имя Тринар, потому что Ньютон ненавидел Учение Христа.
+Если вы используете это приложение для создания файлов .appveyor.yml,
+вам нужно будет знать все эти переменные,
+даже если вы создадите свой собственный файл, вы будете знать это,
+и вручную поддерживать изменения,
+где, поскольку это приложение позволяет вам просто изменить переменные и создать новый файл.
 
-Существует экран конфигурации, на котором вы настраиваете галактику, вы можете назвать галактику, установить размер ее Солнца в милях в диаметре,
-задайте размер живых планет в милях в диаметре, установите количество тройных двигателей, см. справку для получения более подробной информации,
-и радиус Галактики в милях в диаметре, и сколько треков вы хотите напечатать.
+Каждая переменная используется в сценариях для настройки приложения для развертывания.
 
-Я удалил функцию локального хранилища из-за разрешений на некоторых устройствах.
+* MY_BIN_PRO_RES_NAME: имя проекта Qt, т.е. QtAppVeyor.pro предполагает, что имя exe совпадает.
+* MY_OS: используется для создания имен пакетов, поэтому без пробелов
+* MY_VS_VERSION: Версия Qt
+* MY_QT_IF_VERSION: Версия Qt Installer Framework (QIF)
+* MY_QIF_PACKAGE_URI: папка для пакетов QIF
+* MY_PYTHON_VER: версия Python, обратите внимание, что Windows 7 останавливается на 3.8
+* MY_PYTHON_REQUIRED: требуется ли Python
+* MY_UPGRADE_OS: Обновление системы Unix
+* MY_QT_MINGW32: Пути MingW
+* MY_QT_MINGW32: Пути MingW
+* MY_QT_TOOLS_MINGW32: Пути MingW
+* MY_QT_TOOLS_MINGW64: Пути MingW
 
-# Фон
+Unix
 
-Калькулятор Галактики - это одно нажатие кнопки для вычисления, он записывает номер трека, сколько тринальных двигателей требуется, чтобы быть на этом треке,
-его минимальная и максимальная скорость Солнца в милях в час, частота пригодных для жизни планет, орбитальное расстояние Солнца в милях и частота треков,
-который сэр Исаак Ньютон использовал, чтобы определить, когда наступит Конец цивилизации, и согласно его и моим расчетам,
-это произойдет в 2060 году по юлианскому календарю, который все еще используется военными, или в 2061 году по григорианскому календарю, который используется сегодня,
-это был тот же расчет, что и Публика, но мало кто знает, как он его рассчитал. Я написал новую формулу, потому что не смог найти его исходное уравнение.
+ямл
+MY_BIN_PRO_RES_NAME: QtAppVeyor #
+MY_OS: Windows # Без пробелов, здесь отображается имя файла в формате project-os-configuration-plateform
+MY_QT_VERSION: 5.15.2 # Версия Qt
+MY_QT_IF_VERSION: '4.1.1' # Версия среды установки QT
+MY_QIF_PACKAGE_URI: 'com.appveyor.qtappveyor \ data' #
+MY_PYTHON_VER: 3.8 # Последняя версия, которую может запустить Windows 7, - 3.8.x
+MY_PYTHON_REQUIRED: false # если требуется Python
+MY_UPGRADE_OS: false # apt-get upgrade: только true или false
+MY_RUN_DOXYFILE: ложь; # запустить Doxygen
+`` ''
 
-Сэр Исаак Ньютон сжег свою копию своего «Расчёта 2060 года», он написал, что это тяжело сказывается на его ДУШЕ, поэтому ему пришлось отпустить его,
-и написал, что любой, кто хочет знать, может понять это, все формулы есть в Библии, 36 лет спустя я нашел их все.
+Окна
 
-Этот калькулятор галактики был написан для использования после того, как я подумал о сценарии bash, который создал эту страницу:
+ямл
+MY_BIN_PRO_RES_NAME: QtAppVeyor #
+MY_OS: Windows # Без пробелов, здесь отображается имя файла в формате project-os-configuration-plateform
+MY_QT_VERSION: 5.15.2 # Версия Qt
+MY_VS_VERSION: 2019 # Версия по сравнению с
+MY_QT_MINGW32: mingw81_32 # Переменные папки Qt только для Windows
+MY_QT_MINGW64: mingw81_64 # Переменные папки Qt только для Windows
+MY_QT_TOOLS_MINGW32: mingw810_32 # Переменные папки Qt только для Windows
+MY_QT_TOOLS_MINGW64: mingw810_64 # Переменные папки Qt только для Windows
+MY_QT_IF_VERSION: '4.1.1' # Версия среды установки QT
+MY_QIF_PACKAGE_URI: 'com.appveyor.qtappveyor \ data' #
+MY_PYTHON_VER: 3.8 # Последняя версия, которую может запустить Windows 7, - 3.8.x
+MY_PYTHON_REQUIRED: false # если требуется Python
+MY_RUN_DOXYFILE: ложь; # запустить Doxygen
+`` ''
 
-http://LightWizzard.com/books/trinary.universe/appendix.a.html
+# База данных
 
-Сценарий bash не только создал страницу, но и вычислил значения таблицы.
+`` sql
+Проекты: id, QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWebAssembly, IsOSiOS, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
 
-Я надеюсь, что это поможет каждому визуализировать то, что нужно делать Приложению, а именно графическое отображение и построение пути Звезд вокруг Галактики.
+CREATE TABLE Projects (id integer, автоинкремент PRIMARY KEY,
+                      QtProject varchar,
+                      Секретный варчар,
+                      IsOsUbuntu varchar,
+                      IsOsMac varchar,
+                      IsOsWebAssembly varchar,
+                      IsOSiOS varchar,
+                      IsOsWindows varchar,
+                      IsOsAndroid varchar,
+                      IsX64 varchar,
+                      IsX86 varchar,
+                      IsDebug varchar,
+                      IsRelease varchar
 
-Это не симулятор галактики, а только график и график, и это очень важно понимать.
-Я хотел бы написать симулятор галактики, построенный только с использованием законов и правил или электроники,
-и этот проект будет называться симулятором галактики, и почему этот проект называется только Калькулятор Галактики,
-но я пытаюсь использовать Qt 3D Studio для моделирования симулятора.
+Конфигурация: id, ProjectsID, OS, QtVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade
 
-Для получения дополнительной информации см .: [Wiki] (https://github.com/Light-Wizzard/Galaxy-Calculator-2/wiki)
+ProjectsID - это идентификатор проекта.
 
-Это работа, пожалуйста, сообщайте о любых ошибках и комментариях.
+CREATE TABLE Configuration (id integer PRIMARY KEY автоинкремент,
+                           ProjectsID varchar,
+                           ОС varchar,
+                           QtVersion varchar,
+                           QtIfVersion varchar,
+                           QtIfPackageUri varchar,
+                           PythonVersion varchar,
+                           PythonRequired varchar,
+                           QtMingW32 varchar,
+                           QtMingW64 varchar,
+                           QtToolsMingW32 varchar,
+                           QtToolsMingW64 varchar,
+                           VisualStudio varchar,
+                           OsUpgrade varchar
 
-# Снимки экрана
+`` ''
 
-! [Конфигурация Galaxy] (/ doc / images / screenshot-config.png? Raw = true «Конфигурация Galaxy»)
+# Помощь
 
-! [Калькулятор Галактики] (/ doc / images / screenshot-galaxy.png? Raw = true «Калькулятор Галактики»)
+Это приложение имеет встроенную [Справку] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/Help-en.html) в самом приложении,
+и [О программе] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-en.html),
+а также кнопку [Автор] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/About-Author-en.html) в обоих диалоговых окнах,
+которые вы можете легко удалить, просто удалив кнопку из двух форм и удалив сам файл,
+эта кнопка и контент обо мне, как о первоначальном авторе, но не обязательны,
+также нет никаких Лицензий, у этого проекта есть [Нелицензированная] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/unlicense.txt) Лицензия,
+это сделано для того, чтобы кому-либо было проще форкнуть и использовать его в качестве шаблона,
+и я постараюсь расширить разделы справки,
+и добавить больше [Wiki] (https://github.com/Light-Wizzard/QtAppVeyor/wiki) Контента,
+это может помочь.
 
-! [Калькулятор энергии] (/ doc / images / screenshot-energy.png? Raw = true «Калькулятор энергии»)
+# Скриншоты
 
-! [Калькулятор безумия] (/ doc / images / screenshot-madness.png? Raw = true «Калькулятор безумия»)
+! [Настройки] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/settings.png)
 
-! [Мировой калькулятор] (/ doc / images / screenshot-world.png? Raw = true «Калькулятор планет»)
+! [SQL] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/sql.png)
 
-! [Калькулятор] (/ doc / images / screenshot-calc.png? Raw = true "Калькулятор")
+! [Ubuntu] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/ubuntu.png)
 
+! [Windows] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/windows.png)
 
-# Сторонний код
+! [По умолчанию] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/defaults.png)
 
-[QCalculator] (https://github.com/xenotux/qcalc)
-https://github.com/xenotux/qcalc
+! [YML] (https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
-GMP Dll для Windows
-https://osdn.net/projects/mingw/releases/69295
-
-MPFR Dll для Windows
-https://osdn.net/projects/mingw/releases/69297
-
-
-Конец README.md
+### End-of-README.md
