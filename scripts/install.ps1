@@ -7,8 +7,9 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin"
     $env:Path += ";C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64"
     $env:Path += ";C:\Python$env:MY_PYTHON_VER-x64"
-    $env:Path += ";C:\MINGW;C:\MINGW\bin"
+    $env:Path += ";C:\MINGW;C:\MINGW\bin;C:\MinGW\msys\1.0;C:\msys64"
     $env:Path += ";C:\Strawberry\perl\bin"
+    $env:MSYSTEM = 'MINGW64'  # Start a 64 bit Mingw environment
     $env:MY_QT_BAT = "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin\qtenv2.bat"
     Invoke-Expression $env:MY_QT_BAT
     $env:MY_VS_BAT = "C:\Program Files (x86)\Microsoft Visual Studio\$env:MY_VS_VERSION\Community\VC\Auxiliary\Build\vcvars64.bat"

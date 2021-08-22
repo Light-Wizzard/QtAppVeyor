@@ -1,9 +1,10 @@
 $env:MY_BUILD_GOOD = false
 If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
-    Write-Host "build_script Windows QT x64" -ForegroundColor Yellow
+    Write-Host "build_script Windows QT x64 path=$env:Path" -ForegroundColor Yellow
     Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
-    New-Item -Path 'build' -ItemType Directory
+    New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "build" -ItemType Directory
     Set-Location -Path 'build'
+    New-Item -Path $env:APPVEYOR_BUILD_FOLDER\build -Name "AppDir" -ItemType "directory"
     $env:INSTALL_ROOT = 'AppDir'
     $env:DESTDIR = 'AppDir'
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
@@ -11,11 +12,11 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     Write-Host "qmake dbug: $env:MY_QMAKE"
     Invoke-Expression $env:MY_QMAKE
     If ($?) {
-        Write-Host "build_script Windows QT x64 mingw32-make"
-        Invoke-Expression "mingw32-make.exe"
+        Write-Host "build_script Windows QT x64 make"
+        Invoke-Expression "make.exe"
         If ($?) {
-            Write-Host "build_script Windows QT x64 mingw32-make install"
-            Invoke-Expression "mingw32-make.exe install"
+            Write-Host "build_script Windows QT x64 make install"
+            Invoke-Expression "make.exe install"
             If ($?) {
                 Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
                 If ($?) {
@@ -26,7 +27,7 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     }
 }
 ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
-    Write-Host "build_script Windows QT x86" -ForegroundColor Magenta
+    Write-Host "build_script Windows QT x86 path=$env:Path" -ForegroundColor Magenta
     Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
     New-Item -Path 'build' -ItemType Directory
     Set-Location -Path build
@@ -52,7 +53,7 @@ ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
     }
 }
 ElseIf ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
-    Write-Host "build_script Windows VS x64" -ForegroundColor DarkYellow
+    Write-Host "build_script Windows VS x64 path=$env:Path" -ForegroundColor DarkYellow
     Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
     New-Item -Path 'build' -ItemType Directory
     Set-Location -Path build
@@ -76,7 +77,7 @@ ElseIf ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
     }
 }
 ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Vs") {
-    Write-Host "build_script Windows VS x86" -ForegroundColor DarkMagenta
+    Write-Host "build_script Windows VS x86 path=$env:Path" -ForegroundColor DarkMagenta
     Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
     New-Item -Path 'build' -ItemType Directory
     Set-Location -Path build
