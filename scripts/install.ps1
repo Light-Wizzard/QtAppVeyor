@@ -9,14 +9,14 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     $env:Path += ";C:\Python$env:MY_PYTHON_VER-x64"
     $env:Path += ";C:\MINGW;C:\MINGW\bin;C:\MinGW\msys\1.0;C:\msys64"
     $env:Path += ";C:\Strawberry\perl\bin"
-    $env:MSYSTEM = 'MINGW64'  # Start a 64 bit Mingw environment
+    $env:MSYSTEM = "MINGW64"  # Start a 64 bit Mingw environment
     $env:MY_QT_BAT = "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin\qtenv2.bat"
     Invoke-Expression $env:MY_QT_BAT
     $env:MY_VS_BAT = "C:\Program Files (x86)\Microsoft Visual Studio\$env:MY_VS_VERSION\Community\VC\Auxiliary\Build\vcvars64.bat"
     cmd /c call $env:MY_VS_BAT
     $env:QTDIR     *= "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64;C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin;C:\MINGW;C:\MINGW\bin"
-    $env:QMAKESPEC *= win32-g++
-    $env:LANG      *= en
+    $env:QMAKESPEC *= "win32-g++"
+    $env:LANG      *= "en"
 }
 ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
     Write-Host "install Windows QT x86" -ForegroundColor Magenta
@@ -30,8 +30,8 @@ ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
     Invoke-Expression $env:MY_QT_BAT
     cmd /c call "C:\Program Files (x86)\Microsoft Visual Studio\$env:MY_VS_VERSION\Community\VC\Auxiliary\Build\vcvars32.bat"
     $env:QTDIR     *= "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64;C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin;C:\MINGW;C:\MINGW\bin"
-    $env:QMAKESPEC *= win32-g++
-    $env:LANG      *= en
+    $env:QMAKESPEC *= "win32-g++"
+    $env:LANG      *= "en"
 }
 ElseIf ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
     Write-Host "install Windows VS x64" -ForegroundColor DarkYellow
@@ -43,8 +43,8 @@ ElseIf ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Vs") {
     Invoke-Expression "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin\qtenv2.bat"
     cmd /c call "C:\Program Files (x86)\Microsoft Visual Studio\$env:MY_VS_VERSION\Community\VC\Auxiliary\Build\vcvars64.bat"
     $env:QTDIR     *= "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64;C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin;C:\MINGW;C:\MINGW\bin"
-    $env:QMAKESPEC *= win32-g++
-    $env:LANG      *= en
+    $env:QMAKESPEC *= "win32-g++"
+    $env:LANG      *= "en"
 }
 ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Vs") {
     Write-Host "install Windows VS x86" -ForegroundColor DarkMagenta
@@ -57,6 +57,6 @@ ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Vs") {
     Invoke-Expression "C:\Qt\$env:MY_QT_VERSION\msvc$env:MY_VS_VERSION\bin\qtenv2.bat"
     cmd /c call "C:\Program Files (x86)\Microsoft Visual Studio\$env:MY_VS_VERSION\Community\VC\Auxiliary\Build\vcvars32.bat"
     $env:QTDIR     *= "C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64;C:\Qt\$env:MY_QT_VERSION\$env:MY_QT_MINGW64\bin;C:\MINGW;C:\MINGW\bin"
-    $env:QMAKESPEC *= win32-g++
-    $env:LANG      *= en
+    $env:QMAKESPEC *= "win32-g++"
+    $env:LANG      *= "en"
 }

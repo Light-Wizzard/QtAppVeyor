@@ -12,11 +12,11 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     Write-Host "qmake dbug: $env:MY_QMAKE"
     Invoke-Expression $env:MY_QMAKE
     If ($?) {
-        Write-Host "build_script Windows QT x64 make"
-        Invoke-Expression "make.exe"
+        Write-Host "build_script Windows QT x64 nmake"
+        Invoke-Expression "nmake.exe"
         If ($?) {
-            Write-Host "build_script Windows QT x64 make install"
-            Invoke-Expression "make.exe install"
+            Write-Host "build_script Windows QT x64 nmake install"
+            Invoke-Expression "nmake.exe install"
             If ($?) {
                 Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
                 If ($?) {
