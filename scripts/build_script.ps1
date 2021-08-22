@@ -8,20 +8,20 @@ If ($env:PLATFORM -eq "x64" -And $env:MY_COMPILER -eq "Qt") {
     $env:INSTALL_ROOT = 'AppDir'
     $env:DESTDIR = 'AppDir'
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
-    $env:MY_QMAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86_64"
-    Write-Host "qmake dbug: $env:MY_QMAKE"
-    Invoke-Expression $env:MY_QMAKE
+    #$env:MY_MAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86_64"
+    $env:CMAKEGENERATOR = "MinGW Makefiles"
+    #$env:CMAKEGENERATOR = "NMake Makefiles"
+    $env:CMAKE_PATH_PREFIX = "C:\Qt\$env:MY_QT_VERSION\msvc$env:MY_VS_VERSION_64\lib\cmake"
+    $env:MY_MAKE = "cmake -G $env:CMAKEGENERATOR -DCMAKE_PREFIX_PATH=$env:CMAKE_PATH_PREFIX -DCMAKE_BUILD_TYPE=$env:CONFIGURATION CONFIG+=x86_64 -DCMAKE_INSTALL_PREFIX=AppDir .."
+    Write-Host "qmake dbug: $env:MY_MAKE"
+    Invoke-Expression $env:MY_MAKE
     If ($?) {
         Write-Host "build_script Windows QT x64 cmake"
-        Invoke-Expression "cmake.exe"
+        Invoke-Expression "cmake --build . --config $env:CONFIGURATION --target install"
         If ($?) {
-            Write-Host "build_script Windows QT x64 cmake install"
-            Invoke-Expression "cmake.exe install"
+            Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
             If ($?) {
-                Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
-                If ($?) {
-                    $env:MY_BUILD_GOOD = true
-                }
+                $env:MY_BUILD_GOOD = true
             }
         }
     }
@@ -34,9 +34,9 @@ ElseIf ($env:PLATFORM -eq "x86" -And $env:MY_COMPILER -eq "Qt") {
     $env:INSTALL_ROOT = 'AppDir'
     $env:DESTDIR = 'AppDir'
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
-    $env:MY_QMAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86"
-    Write-Host "qmake dbug: $env:MY_QMAKE"
-    Invoke-Expression $env:MY_QMAKE
+    $env:MY_MAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86"
+    Write-Host "qmake dbug: $env:MY_MAKE"
+    Invoke-Expression $env:MY_MAKE
     If ($?) {
         Write-Host "build_script Windows QT x64 mingw32-make"
         Invoke-Expression "mingw32-make.exe"
