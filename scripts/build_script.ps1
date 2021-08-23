@@ -36,7 +36,7 @@ If ($env:PLATFORM -eq "x64") {
     #$env:CXX="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
     $env:CC="gcc"
     $env:CXX="g++"
-    cmd cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
+    cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
     If ($?) {
         mingw32-make
         If ($?) {
@@ -64,7 +64,7 @@ ElseIf ($env:PLATFORM -eq "x86") {
     $env:CXX="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW32\bin\g++.exe"
     #$env:CC="gcc"
     #$env:CXX="g++"
-    cmd cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
+    cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
     If ($?) {
         mingw32-make
         If ($?) {
