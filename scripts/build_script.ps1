@@ -80,7 +80,7 @@ ElseIf ($env:PLATFORM -eq "x86") {
         }
     }
 }
-#Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
+Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
 #
 If ($env:MY_BUILD_GOOD -eq "true") {
     $currentDirectory = [System.AppDomain]::CurrentDomain.BaseDirectory.TrimEnd('\')
