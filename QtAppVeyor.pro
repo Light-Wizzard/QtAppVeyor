@@ -19,8 +19,8 @@ INCLUDEPATH     += src
 INCLUDEPATH     += "${QT_INSTALL_LIBS}/qt"
 ##-------------------------------------------------------------------------------------
 #
-win32:QMAKE_CC     += gcc
-win32:QMAKE_CXX    += g++
+win32:QMAKE_CC     += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\gcc.exe"
+win32:QMAKE_CXX    += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
 #
 win32:CONFIG       += static
 win32:DEFINES      += STATIC
