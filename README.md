@@ -256,4 +256,12 @@ that might help.
 
 ![YML](https://github.com/Light-Wizzard/QtAppVeyor/blob/main/help/images/yml.png)
 
+# PowerShell
+
+```bash
+$env:ProgramFiles
+
+$env:ProgramFiles(x86)
+```
+
 ### End-of-README.md

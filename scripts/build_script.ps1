@@ -25,15 +25,15 @@ $env:CMAKE_CXX_COMPILER="C:\Program Files\LLVM\bin\clang-cl"
 # -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" $env:CMAKE_PATH_PREFIX = "C:\Qt\$env:MY_QT_VERSION\msvc$env:MY_VS_VERSION_64\lib\cmake"
 #$env:MY_MAKE = "cmake -A x64 -G $env:CMAKEGENERATOR -DCMAKE_PREFIX_PATH=$env:CMAKE_PATH_PREFIX -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=AppDir .."
 #cmd /c cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" -DCMAKE_INSTALL_PREFIX=AppDir -DCMAKE_C_COMPILER=/c/MinGW/bin/gcc.exe -DCMAKE_CXX_COMPILER=/c/MinGW/bin/g++.exe ..
-cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T "LLVM"  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX="AppDir"
+# $env:ProgramFiles\LLVM\bin $env:ProgramFiles(x86)\LLVM\bin\clang.exe
+#cmake -E env LDFLAGS="-fuse-ld=lld-link" PATH="<path\to\ninja>"
+#cmake -H. -G "Ninja" -Bbuild -DCMAKE_C_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic"
+#cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T "LLVM"  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX="AppDir"
+cmd /c cmake -H. -G "Ninja" -Bbuild -DCMAKE_C_FLAGS=TRUE -DCMAKE_CXX_FLAGS=TRUE -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
 If ($?) {
-    Write-Host "build_script Windows QT cmake"
-    Invoke-Expression "cmake --build . --config $env:CONFIGURATION"
+    Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
     If ($?) {
-        Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
-        If ($?) {
-            $env:MY_BUILD_GOOD = true
-        }
+        $env:MY_BUILD_GOOD = true
     }
 }
 If ($env:MY_BUILD_GOOD -eq "true") {
