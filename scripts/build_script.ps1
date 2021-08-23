@@ -72,15 +72,15 @@ ElseIf ($env:PLATFORM -eq "x86") {
             If ($?) {
                 Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
-                    #New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
-                    #Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
+                    New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
+                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
             }
         }
     }
 }
-Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
+#Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
 #
 If ($env:MY_BUILD_GOOD -eq "true") {
     $currentDirectory = [System.AppDomain]::CurrentDomain.BaseDirectory.TrimEnd('\')
