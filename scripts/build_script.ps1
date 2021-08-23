@@ -72,11 +72,12 @@ ElseIf ($env:PLATFORM -eq "x86") {
             mingw32-make all
             Get-ChildItem -File
             If ($?) {
-                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\Release\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
+                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
                     Write-Host "File exist copying to install folder"
                     New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
-                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\Release\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
+                    Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Directory
+                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
             }
