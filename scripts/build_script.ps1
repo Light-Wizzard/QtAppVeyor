@@ -34,7 +34,7 @@ If ($env:PLATFORM -eq "x64") {
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
     $env:CC="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\gcc.exe"
     $env:CXX="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
-    cmd /c cmake .. -G "CodeBlocks - MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
+    Invoke-Expression cmake .. -G "CodeBlocks - MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
     If ($?) {
         mingw32-make
         If ($?) {
