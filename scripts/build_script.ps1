@@ -40,7 +40,7 @@ If ($env:PLATFORM -eq "x64") {
     If ($?) {
         mingw32-make
         If ($?) {
-            mingw32-make install INSTALL_ROOT="AppDir"
+            mingw32-make VERBOSE=1 install INSTALL_ROOT="AppDir"
             If ($?) {
                 Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
                 If ($?) {
