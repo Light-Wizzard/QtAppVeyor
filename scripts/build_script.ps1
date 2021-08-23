@@ -28,7 +28,7 @@ $env:CMAKE_CXX_COMPILER="C:\Program Files\LLVM\bin\clang-cl"
 #cmd /c cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" -DCMAKE_INSTALL_PREFIX=AppDir -DCMAKE_C_COMPILER=/c/MinGW/bin/gcc.exe -DCMAKE_CXX_COMPILER=/c/MinGW/bin/g++.exe ..
 cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF "-DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T LLVM  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX=AppDir
 If ($?) {
-    Write-Host "build_script Windows QT x64 cmake"
+    Write-Host "build_script Windows QT cmake"
     Invoke-Expression "cmake --build . --config $env:CONFIGURATION"
     If ($?) {
         Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
@@ -43,13 +43,13 @@ If ($env:MY_BUILD_GOOD -eq "true") {
     If ($currentDirectory -eq $PSHOME.TrimEnd('\')) {
         $currentDirectory = $PSScriptRoot
     }
-    Write-Host "After Windows build $env:currentDirectory" -ForegroundColor DarkGreen
+    Write-Host "After Windows build $env:currentDirectory"
     Get-ChildItem -Path AppDir
     Copy-Item "C:\Qt\Tools\QtCreator\bin\plugins\platforms\*" -Destination "AppDir" -Recurse
     Invoke-Expression "windeployqt AppDir\$env:MY_BIN_PRO_RES_NAME.exe --verbose=2"
     Invoke-Expression "7z a -tzip $env:MY_BIN_PRO_RES_NAME-$env:MY_OS-$env:CONFIGURATION-$env:PLATFORM.zip AppDir -r"
     Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME-$env:MY_OS-$env:CONFIGURATION-$env:PLATFORM.zip" -Destination "$env:APPVEYOR_BUILD_FOLDER\"
     Copy-Item "*.zip" -Destination "$env:APPVEYOR_BUILD_FOLDER\"
-    Set-Location -Path $env:APPVEYOR_BUILD_FOLDER
-    Write-Host "Completed-Build Windows" -ForegroundColor DarkGreen
+    Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
+    Write-Host "Completed-Build Windows"
 }
