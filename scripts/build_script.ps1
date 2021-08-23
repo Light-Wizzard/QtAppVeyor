@@ -32,8 +32,8 @@ If ($env:PLATFORM -eq "x64") {
     $env:INSTALL_ROOT = "AppDir"
     $env:DESTDIR = "AppDir"
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
-    $env:CC="C:\Qt\Tools\$env:MY_QT_MINGW64\bin\gcc.exe"
-    $env:CXX="C:\Qt\Tools\$env:MY_QT_MINGW64\bin\g++.exe"
+    $env:CC="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\gcc.exe"
+    $env:CXX="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
     cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir"
     If ($?) {
         mingw32-make
@@ -58,8 +58,8 @@ ElseIf ($env:PLATFORM -eq "x86") {
     $env:INSTALL_ROOT = "AppDir"
     $env:DESTDIR = "AppDir"
     $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
-    $env:CC="C:\Qt\Tools\$env:MY_QT_MINGW32\bin\gcc.exe"
-    $env:CXX="C:\Qt\Tools\$env:MY_QT_MINGW32\bin\g++.exe"
+    $env:CC="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW32\bin\gcc.exe"
+    $env:CXX="C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW32\bin\g++.exe"
     cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T "LLVM"  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX="AppDir"
     If ($?) {
         mingw32-make
