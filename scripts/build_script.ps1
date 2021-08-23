@@ -2,14 +2,14 @@ Write-Host "build_script Windows QT path=$env:Path" -ForegroundColor Yellow
 $env:MY_BUILD_GOOD = false
 Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
 New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "build" -ItemType Directory
-Set-Location -Path 'build'
+Set-Location -Path "build"
 New-Item -Path $env:APPVEYOR_BUILD_FOLDER\build -Name "AppDir" -ItemType "directory"
-$env:INSTALL_ROOT = 'AppDir'
-$env:DESTDIR = 'AppDir'
+$env:INSTALL_ROOT = "AppDir"
+$env:DESTDIR = "AppDir"
 $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
 #$env:MY_MAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86_64"
 #Invoke-Expression $env:MY_MAKE
-$env:CMAKEGENERATOR = "MinGW Makefiles"
+#$env:CMAKEGENERATOR = "MinGW Makefiles"
 #$env:CMAKEGENERATOR = "NMake Makefiles"
 #$env:CMAKEGENERATOR = "Visual Studio 16 2019"
 #$env:CMAKEGENERATOR = "Unix Makefiles"
