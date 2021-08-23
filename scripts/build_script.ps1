@@ -70,10 +70,10 @@ ElseIf ($env:PLATFORM -eq "x86") {
         If ($?) {
             mingw32-make VERBOSE=1 all
             If ($?) {
-                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
+                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
                     New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
-                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
+                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
             }
