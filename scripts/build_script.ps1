@@ -1,4 +1,4 @@
-Write-Host "build_script Windows QT path=$env:Path" -ForegroundColor Yellow
+Write-Host "build_script Windows QT" -ForegroundColor Yellow
 $env:MY_BUILD_GOOD = false
 Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
 New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "build" -ItemType Directory
@@ -28,9 +28,10 @@ $env:CMAKE_CXX_COMPILER="C:\Program Files\LLVM\bin\clang-cl"
 # $env:ProgramFiles\LLVM\bin $env:ProgramFiles(x86)\LLVM\bin\clang.exe
 # "C:\MeineProgramme\Ninja\bin"
 #cmake -E env LDFLAGS="-fuse-ld=lld-link" PATH="<path\to\ninja>"
-#cmake -H. -G "Ninja" -Bbuild -DCMAKE_C_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic"
+#cmake .. -G "Ninja" -Bbuild -DCMAKE_C_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic"
 #cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T "LLVM"  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX="AppDir"
-cmd /c cmake .. -G "Ninja" -Bbuild -DCMAKE_C_FLAGS=TRUE -DCMAKE_CXX_FLAGS=TRUE -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
+#cmd /c cmake .. -G "Ninja" -Bbuild -DCMAKE_C_FLAGS=TRUE -DCMAKE_CXX_FLAGS=TRUE -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
+cmd /c cmake .. -G "Ninja" -Bbuild -DCMAKE_C_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="$env:ProgramFiles(x86)\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic"
 If ($?) {
     Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
     If ($?) {
