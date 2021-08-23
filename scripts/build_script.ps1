@@ -66,15 +66,15 @@ ElseIf ($env:PLATFORM -eq "x86") {
     #$env:CXX="g++"
     cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=-DCMAKE_INSTALL_PREFIX="$env:APPVEYOR_BUILD_FOLDER/install"
     If ($?) {
-        mingw32-make
+        mingw32-make -j2
         If ($?) {
-            mingw32-make VERBOSE=1 all
+            mingw32-make -f Makefile.Release
             If ($?) {
-                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
+                Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\Release\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
                     Write-Host "File exist copying to install folder"
                     New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
-                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
+                    Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\Release\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
             }
@@ -89,7 +89,7 @@ If ($env:MY_BUILD_GOOD -eq "true") {
         $currentDirectory = $PSScriptRoot
     }
     Write-Host "After Windows build $env:currentDirectory"
-    Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER\install"
+    #Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER\install"
     Copy-Item "C:\Qt\Tools\QtCreator\bin\plugins\platforms\*" -Destination "$env:APPVEYOR_BUILD_FOLDER\install" -Recurse
     Invoke-Expression "windeployqt $env:APPVEYOR_BUILD_FOLDER\install\$env:MY_BIN_PRO_RES_NAME.exe --verbose=2"
     Invoke-Expression "7z a -tzip $env:MY_BIN_PRO_RES_NAME-$env:MY_OS-$env:CONFIGURATION-$env:PLATFORM.zip $env:APPVEYOR_BUILD_FOLDER\install -r"
@@ -99,4 +99,4 @@ If ($env:MY_BUILD_GOOD -eq "true") {
     Write-Host "Completed-Build Windows"
 }
 
-Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
+#Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
