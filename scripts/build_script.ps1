@@ -67,8 +67,10 @@ ElseIf ($env:PLATFORM -eq "x86") {
     cmd /c cmake .. -G "MinGW Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=-DCMAKE_INSTALL_PREFIX="$env:APPVEYOR_BUILD_FOLDER/install"
     If ($?) {
         mingw32-make -j2
+        Get-ChildItem -File
         If ($?) {
-            mingw32-make -f Makefile.Release
+            mingw32-make all
+            Get-ChildItem -File
             If ($?) {
                 Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\build\Release\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
@@ -81,7 +83,6 @@ ElseIf ($env:PLATFORM -eq "x86") {
         }
     }
 }
-
 #
 If ($env:MY_BUILD_GOOD -eq "true") {
     $currentDirectory = [System.AppDomain]::CurrentDomain.BaseDirectory.TrimEnd('\')
