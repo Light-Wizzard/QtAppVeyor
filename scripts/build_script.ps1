@@ -1,3 +1,6 @@
+#
+# 23 Auguest 2021
+#
 #$env:MY_MAKE = "qmake.exe $env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.pro CONFIG+=$env:CONFIGURATION CONFIG+=x86_64"
 #Invoke-Expression $env:MY_MAKE
 #$env:CMAKEGENERATOR = "MinGW Makefiles"
