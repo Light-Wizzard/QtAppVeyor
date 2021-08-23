@@ -24,7 +24,7 @@
 #cmd /c cmake .. -G "Ninja" -Bbuild -DCMAKE_C_FLAGS=TRUE -DCMAKE_CXX_FLAGS=TRUE -DCMAKE_C_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_CXX_COMPILER="C:/Program Files/LLVM/bin/clang.exe" -DCMAKE_LINKER="C:/Program Files/LLVM/bin/lld-link.exe"
 If ($env:PLATFORM -eq "x64") {
     Write-Host "build_script Windows QT x64" -ForegroundColor Yellow
-    $env:MY_BUILD_GOOD = false
+    $env:MY_BUILD_GOOD = "false"
     Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
     New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "build" -ItemType Directory
     Set-Location -Path "build"
@@ -44,7 +44,7 @@ If ($env:PLATFORM -eq "x64") {
             If ($?) {
                 Test-Path -Path AppDir\$env:MY_BIN_PRO_RES_NAME.exe -PathType Leaf
                 If ($?) {
-                    $env:MY_BUILD_GOOD = true
+                    $env:MY_BUILD_GOOD = "true"
                 }
             }
         }
@@ -52,7 +52,7 @@ If ($env:PLATFORM -eq "x64") {
 }
 ElseIf ($env:PLATFORM -eq "x86") {
     Write-Host "build_script Windows QT x86" -ForegroundColor Yellow
-    $env:MY_BUILD_GOOD = false
+    $env:MY_BUILD_GOOD = "false"
     Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
     New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "build" -ItemType Directory
     Set-Location -Path "build"
@@ -78,7 +78,8 @@ ElseIf ($env:PLATFORM -eq "x86") {
                     New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
                     Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Directory
                     Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
-                    $env:MY_BUILD_GOOD = true
+                    Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER\install" -File
+                    $env:MY_BUILD_GOOD = "true"
                 }
             }
         }
