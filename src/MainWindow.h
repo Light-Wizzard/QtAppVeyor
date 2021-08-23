@@ -98,6 +98,7 @@ class MainWindow : public QMainWindow
         void setMessagingStates(bool thisMessageState);          //!< set Messaging States
         void retranslate();                                      //!< retranslate none designer components
         void loadLanguageComboBox();                             //!< load Language ComboBox
+        void setMessage(const QString &thisMessage);             //!< set Message
 
     public slots:
         void onAbout();                       //!< ui->actionAbout

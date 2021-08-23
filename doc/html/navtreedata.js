@@ -54,8 +54,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "MainWindow_8cpp.html",
-"classMyDatatables.html#a0df58c4391f7931b3bc61aafef9b31c4",
-"functions.html"
+"classMyDatatables.html#a01e4f24362cd3741150ceb7acc1a92e2",
+"classSimpleCrypt.html#ac0a68b3ef5441aaf7724f11376e036bd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

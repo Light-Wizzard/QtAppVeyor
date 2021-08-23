@@ -238,6 +238,7 @@ class MyConstants
         #endif
         // Constants
         const QString MY_INI_FILE         = "QtAppVeyor.ini";   //!< \c MY_INI_FILE      @brief Ini File Name
+        const QString MY_INTERNET_URL     = "http://www.google.com"; //!< \c MY_INTERNET_URL @brief Default Internet URL for testing if Internet is up.
         const QString MY_SQL_DEFAULT      = "QSQLITE";          //!< \c SQL_DEFAULT     @brief Default SQL Driver QSQLITE
         const QString MY_SQL_COMBO_INDEX  = "SqlComboBoxIndex"; //!< \c SQL_COMBO_INDEX @brief Field Name for SQL ComboBox Index
         const QString MY_SQL_COMBO_VALUE  = "SqlComboBoxValue"; //!< \c SQL_COMBO_VALUE @brief Field Name for SQL ComboBox Value

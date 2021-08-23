@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['_7emainwindow_721',['~MainWindow',['../classMainWindow.html#ae98d00a93bc118200eeef9f9bba1dba7',1,'MainWindow']]],
-  ['_7emydatatables_722',['~MyDatatables',['../classMyDatatables.html#afddeb9099481eb82a8eb91367f316eef',1,'MyDatatables']]],
-  ['_7emyorgsettings_723',['~MyOrgSettings',['../classMyOrgSettings.html#a3fe4c6e09f68342e242e86c754e0005c',1,'MyOrgSettings']]],
-  ['_7emysqldbtmodel_724',['~MySqlDbtModel',['../classMySqlDbtModel.html#a63dad1efad75e7acd44c0072f91be8b9',1,'MySqlDbtModel']]]
+  ['writeallsettings_729',['writeAllSettings',['../classMainWindow.html#a0fa4ae019382a6d52e51a4c86d3e527e',1,'MainWindow']]],
+  ['writefile_730',['writeFile',['../classMyOrgSettings.html#a83d81922b53ff7db6edaaa3eaf4f9c28',1,'MyOrgSettings']]],
+  ['writelanguage_731',['writeLanguage',['../classMyLocalization.html#a0c698c62e65e31ad4de5b5cbc2c18018',1,'MyLocalization']]],
+  ['writesettings_732',['writeSettings',['../classMyOrgSettings.html#ac2b7c734e784998d2c8e470298395646',1,'MyOrgSettings']]],
+  ['writesqldatabaseinfo_733',['writeSqlDatabaseInfo',['../classMainWindow.html#ae81fdd40d2735e75581c5bf8ccc26380',1,'MainWindow']]],
+  ['writestateschanges_734',['writeStatesChanges',['../classMainWindow.html#a0bbfa6a80a96a571e0d24c495ec22e3d',1,'MainWindow']]]
 ];

@@ -27,7 +27,7 @@ MyDatatables::~MyDatatables()
 void MyDatatables::setDebugMessage(bool thisState)
 {
     isDebugMessage = thisState;
-    if (isDebugMessage) { qDebug() << "setDebugMessage"; }
+    setMessage("setDebugMessage");
 }
 /************************************************
  * @brief get Debug Message.
@@ -35,7 +35,7 @@ void MyDatatables::setDebugMessage(bool thisState)
  ***********************************************/
 bool MyDatatables::getDebugMessage()
 {
-    if (isDebugMessage) { qDebug() << "getDebugMessage"; }
+    setMessage("getDebugMessage");
     return isDebugMessage;
 }
 /************************************************
@@ -44,7 +44,7 @@ bool MyDatatables::getDebugMessage()
  ***********************************************/
 void MyDatatables::setProjectFolder(const QString &thisProjectFolder)
 {
-    if (isDebugMessage) { qDebug() << "setProjectFolder"; }
+    setMessage("setProjectFolder");
     myProjectFolder = thisProjectFolder;
 }
 /************************************************
@@ -53,7 +53,7 @@ void MyDatatables::setProjectFolder(const QString &thisProjectFolder)
  ***********************************************/
 QString MyDatatables::getProjectFolder()
 {
-    if (isDebugMessage) { qDebug() << "getProjectFolder"; }
+    setMessage("getProjectFolder");
     return myProjectFolder;
 }
 /************************************************
@@ -62,7 +62,7 @@ QString MyDatatables::getProjectFolder()
  ***********************************************/
 void MyDatatables::setProjectName(const QString &thisProjectName)
 {
-    if (isDebugMessage) { qDebug() << "setProjectName"; }
+    setMessage("setProjectName");
     myProjectName = thisProjectName;
 }
 /************************************************
@@ -71,7 +71,7 @@ void MyDatatables::setProjectName(const QString &thisProjectName)
  ***********************************************/
 QString MyDatatables::getProjectName()
 {
-    if (isDebugMessage) { qDebug() << "getProjectName"; }
+    setMessage("getProjectName");
     return myProjectName;
 }
 /************************************************
@@ -80,7 +80,7 @@ QString MyDatatables::getProjectName()
  ***********************************************/
 void MyDatatables::setProjectID(const QString &thisProjectID)
 {
-    if (isDebugMessage) { qDebug() << "setProjectID"; }
+    setMessage("setProjectID");
     myProjectID = thisProjectID;
 }
 /************************************************
@@ -89,7 +89,7 @@ void MyDatatables::setProjectID(const QString &thisProjectID)
  ***********************************************/
 QString MyDatatables::getProjectID()
 {
-    if (isDebugMessage) { qDebug() << "getProjectID"; }
+    setMessage("getProjectID");
     return myProjectID;
 }
 /************************************************
@@ -98,7 +98,7 @@ QString MyDatatables::getProjectID()
  ***********************************************/
 void MyDatatables::setComboBoxSqlValue(const QString &thisComboBoxSqlValue)
 {
-    if (isDebugMessage) { qDebug() << "setComboBoxSqlValue"; }
+    setMessage("setComboBoxSqlValue");
     myComboBoxSqlValue = thisComboBoxSqlValue;
 }
 /************************************************
@@ -107,7 +107,7 @@ void MyDatatables::setComboBoxSqlValue(const QString &thisComboBoxSqlValue)
  ***********************************************/
 QString MyDatatables::getComboBoxSqlValue()
 {
-    if (isDebugMessage) { qDebug() << "getComboBoxSqlValue"; }
+    setMessage("getComboBoxSqlValue");
     return myComboBoxSqlValue;
 }
 /************************************************
@@ -116,7 +116,7 @@ QString MyDatatables::getComboBoxSqlValue()
  ***********************************************/
 bool MyDatatables::checkDatabase()
 {
-    if (isDebugMessage) { qDebug() << "checkDatabase"; }
+    setMessage("checkDatabase");
     // Database
     mySqlModel->setSqlDriver(myComboBoxSqlValue);
     if (!mySqlModel->createDataBaseConnection()) { return false; }
@@ -245,10 +245,10 @@ bool MyDatatables::checkDatabase()
  *******************************************************************************/
 bool MyDatatables::insertProjects()
 {
-    if (isDebugMessage) { qDebug() << "insertProjects"; }
+    setMessage("insertProjects");
     // QtProject, Secret, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsX64, IsX86, IsDebug, IsRelease
     QString theQuery = QLatin1String(R"(INSERT INTO Projects (QtProject, Secret, Environment, IsOsUbuntu, IsOsMac, IsOsWindows, IsOsAndroid, IsOsWebAssembly, IsOSiOS, IsX64, IsX86, IsDebug, IsRelease) values('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12', '%13'))").arg(myProject->getQtProject(), myProject->getSecret(), myProject->getEnvironment(), myProject->getIsOsUbuntu(), myProject->getIsOsMac(), myProject->getIsOsWindows(), myProject->getIsOsAndroid(), myProject->getIsOsWebAssembly(), myProject->getIsOSiOS(), myProject->getIsX64(), myProject->getIsX86(), myProject->getIsDebug(), myProject->getIsRelease());
-    if (isDebugMessage) { qDebug() << "insertProjects: " << theQuery; }
+    setMessage("insertProjects: " + theQuery);
     //
     if (!mySqlModel->runQuery(theQuery))
     {
@@ -267,9 +267,9 @@ bool MyDatatables::insertProjects()
  *******************************************************************************/
 bool MyDatatables::insertConfiguration()
 {
-    if (isDebugMessage) { qDebug() << "insertConfiguration"; }
+    setMessage("insertConfiguration");
     QString myQuery = QString("INSERT INTO Configuration (ProjectsID, OS, QtVersion, VsVersion, QtIfVersion, QtIfPackageUri, PythonVersion, PythonRequired, QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade) VALUES('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8', '%9', '%10', '%11', '%12', '%13', '%14')").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getVsVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade());
-    if (isDebugMessage) { qDebug() << "insertConfiguration: " << myQuery; }
+    setMessage("insertConfiguration: " + myQuery);
     //
     if (!mySqlModel->runQuery(myQuery))
     {
@@ -302,12 +302,12 @@ bool MyDatatables::addProject()
  *******************************************************************************/
 void MyDatatables::addConfiguration()
 {
-    if (isDebugMessage) qDebug() << "onAddConfiguration";
+    setMessage("onAddConfiguration");
     QSqlQuery theQuery; //!< SQL Query
 
     // Check the Configuration table and exist if record found
     QString myConfigurationSelectQuery = getConfigurationProjectIdOsSelectQuery(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS());
-    if (isDebugMessage) qDebug() << "myConfigurationSelectQuery: " << myConfigurationSelectQuery;
+    setMessage("myConfigurationSelectQuery: " + myConfigurationSelectQuery);
     if (theQuery.exec(myConfigurationSelectQuery))
     {
         if (theQuery.first())
@@ -328,17 +328,17 @@ void MyDatatables::addConfiguration()
  *******************************************************************************/
 void MyDatatables::deleteConfiguration(const QString &thisID)
 {
-    if (isDebugMessage) qDebug() << "onDeleteConfiguration";
+    setMessage("onDeleteConfiguration");
     QSqlQuery query; //!< SQL Query
     QString theQuery = QString("DELETE FROM Projects WHERE id = ").append(thisID);
-    qDebug() << "thisQuery: " << theQuery;
+    setMessage("thisQuery: " + theQuery);
     if (!query.exec(theQuery))
     {
         qCritical() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
     }
     // FIXME Delete from both tables
     theQuery = QString("DELETE FROM Configuration WHERE ProjectsID = '").append(thisID).append("'");
-    qDebug() << "thisQuery: " << theQuery;
+    setMessage("thisQuery: " + theQuery);
     if (!query.exec(theQuery))
     {
         qCritical() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
@@ -350,7 +350,7 @@ void MyDatatables::deleteConfiguration(const QString &thisID)
  *******************************************************************************/
 QString MyDatatables::getQtProjectSelectQuery()
 {
-    if (isDebugMessage) qDebug() << "getQtProjectSelectQuery";
+    setMessage("getQtProjectSelectQuery");
     return QString("SELECT id, QtProject FROM Projects");
 }
 /******************************************************************************
@@ -359,7 +359,7 @@ QString MyDatatables::getQtProjectSelectQuery()
  *******************************************************************************/
 QString MyDatatables::getQtProjectByNameQuery(const QString &thisProject)
 {
-    if (isDebugMessage) qDebug() << "getQtProjectByNameQuery";
+    setMessage("getQtProjectByNameQuery");
     return QString("SELECT id, QtProject FROM Projects WHERE QtProject = '%1'").arg(thisProject);
 }
 /******************************************************************************
@@ -368,7 +368,7 @@ QString MyDatatables::getQtProjectByNameQuery(const QString &thisProject)
  *******************************************************************************/
 bool MyDatatables::isProjectQuery(const QString &thisProject)
 {
-    if (isDebugMessage) qDebug() << "getProjectsSelectQuery";
+    setMessage("getProjectsSelectQuery");
     QSqlQuery theQuery; //!< SQL Query
     QString theQueryCommand = getQtProjectByNameQuery(thisProject);
     if (theQuery.exec(theQueryCommand))
@@ -388,7 +388,7 @@ bool MyDatatables::isProjectQuery(const QString &thisProject)
  *******************************************************************************/
 QString MyDatatables::getProjectsFullSelectQueryID(const QString &thisWhereID)
 {
-    if (isDebugMessage) qDebug() << "getProjectsFullSelectQueryID";
+    setMessage("getProjectsFullSelectQueryID");
     return QString("SELECT * FROM Projects WHERE id = ").append(thisWhereID);
 }
 /******************************************************************************
@@ -397,7 +397,7 @@ QString MyDatatables::getProjectsFullSelectQueryID(const QString &thisWhereID)
  *******************************************************************************/
 QString MyDatatables::getQtProjectsSelectQueryID(const QString &thisWhereID)
 {
-    if (isDebugMessage) qDebug() << "getQtProjectsSelectQueryID";
+    setMessage("getQtProjectsSelectQueryID");
     return QString("SELECT id, QtProject FROM Projects WHERE id = ").append(thisWhereID);
 }
 /******************************************************************************
@@ -406,7 +406,7 @@ QString MyDatatables::getQtProjectsSelectQueryID(const QString &thisWhereID)
  *******************************************************************************/
 QString MyDatatables::getConfigurationSelectQuery(const QString &thisWhereID)
 {
-    if (isDebugMessage) qDebug() << "getConfigurationSelectQuery";
+    setMessage("getConfigurationSelectQuery");
     return QString("SELECT * FROM Configuration WHERE id = ").append(thisWhereID);
 }
 /******************************************************************************
@@ -415,7 +415,7 @@ QString MyDatatables::getConfigurationSelectQuery(const QString &thisWhereID)
  *******************************************************************************/
 QString MyDatatables::getConfigurationProjectIdOsSelectQuery(const QString &thisWhereID, const QString &thisOS)
 {
-    if (isDebugMessage) qDebug() << "getConfigurationProjectIdOsSelectQuery";
+    setMessage("getConfigurationProjectIdOsSelectQuery");
     return QString("SELECT * FROM Configuration WHERE ProjectsID = '").append(thisWhereID).append("' AND OS = '").append(thisOS).append("'");
 }
 /******************************************************************************
@@ -424,7 +424,7 @@ QString MyDatatables::getConfigurationProjectIdOsSelectQuery(const QString &this
  *******************************************************************************/
 QString MyDatatables::getThisConfigurationProjectIDSelectQuery(const QString &thisProjectsID)
 {
-    if (isDebugMessage) qDebug() << "getThisConfigurationSelectQuery";
+    setMessage("getThisConfigurationSelectQuery");
     return QString("SELECT * FROM Configuration WHERE ProjectsID = '").append(thisProjectsID).append("'");
 }
 /******************************************************************************
@@ -433,10 +433,10 @@ QString MyDatatables::getThisConfigurationProjectIDSelectQuery(const QString &th
  *******************************************************************************/
 void MyDatatables::saveProject()
 {
-    if (isDebugMessage) qDebug() << "saveProject";
+    setMessage("saveProject");
     QSqlQuery theQuery; //!< SQL Query
     QString theQueryString = QString("UPDATE Projects set QtProject = '%1', Secret = '%2', Environment = '%3', IsOsUbuntu = '%4', IsOsMac = '%5', IsOsWebAssembly = '%6', IsOSiOS = '%7', IsOsWindows = '%8', IsOsAndroid = '%9', IsX64 ='%10', IsX86 = '%11', IsDebug = '%12', IsRelease = '%13' WHERE id = %14").arg(myProject->getQtProject(), myProject->getSecret(), myProject->getEnvironment(), myProject->getIsOsUbuntu(), myProject->getIsOsMac(), myProject->getIsOsWebAssembly(), myProject->getIsOSiOS(), myProject->getIsOsWindows(), myProject->getIsOsAndroid(), myProject->getIsX64(), myProject->getIsX86(), myProject->getIsDebug(), myProject->getIsRelease(), myProject->getID());
-    if (isDebugMessage) qDebug() << "thisQuery: |" << theQueryString << "|  QtProject = " << myProject->getQtProject() << "| Secret=" << myProject->getSecret() << "| Environment=" << myProject->getEnvironment() << "| IsOsUbuntu=" << myProject->getIsOsUbuntu() << "| IsOsMac=" << myProject->getIsOsMac() << "| IsOsWebAssembly=" << myProject->getIsOsWebAssembly() << "| IsOSiOS=" << myProject->getIsOSiOS() << "| IsOsWindows=" << myProject->getIsOsWindows() << "| IsOsAndroid=" << myProject->getIsOsAndroid() << "| IsX64=" << myProject->getIsX64() << "| IsX86=" << myProject->getIsX86() << "| IsDebug=" << myProject->getIsDebug() << "| IsRelease=" << myProject->getIsRelease() << "| ID=" << myProject->getID() << "|";
+    //setMessage("thisQuery: |" + theQueryString + "|  QtProject = " + myProject->getQtProject() + "| Secret=" + myProject->getSecret() + "| Environment=" + myProject->getEnvironment() + "| IsOsUbuntu=" + myProject->getIsOsUbuntu() ? "true" : "false" + "| IsOsMac=" + myProject->getIsOsMac() + "| IsOsWebAssembly=" + myProject->getIsOsWebAssembly() + "| IsOSiOS=" + myProject->getIsOSiOS() + "| IsOsWindows=" + myProject->getIsOsWindows() + "| IsOsAndroid=" + myProject->getIsOsAndroid() + "| IsX64=" + myProject->getIsX64() + "| IsX86=" << myProject->getIsX86() + "| IsDebug=" + myProject->getIsDebug() + "| IsRelease=" + myProject->getIsRelease() + "| ID=" << myProject->getID() + "|");
     if (!theQuery.exec(theQueryString))
     {
         qCritical() << "SqLite error saveProject:" << theQuery.lastError().text() << ", SqLite error code:" << theQuery.lastError();
@@ -449,11 +449,11 @@ void MyDatatables::saveProject()
  *******************************************************************************/
 void MyDatatables::saveConfiguration()
 {
-    if (isDebugMessage) qDebug() << "saveConfiguration";
+    setMessage("saveConfiguration");
     QSqlQuery theQuery; //!< SQL Query
     //                                                                                                                                                                                                                                       , , , , , ,
     QString theQueryString = QString("UPDATE Configuration set ProjectsID = '%1', OS = '%2', QtVersion = '%3', VsVersion = '%4', QtIfVersion = '%5', QtIfPackageUri = '%6', PythonVersion = '%7', PythonRequired = '%8', QtMingW32 = '%9', QtMingW64 ='%10', QtToolsMingW32 = '%11', QtToolsMingW64 = '%12', VisualStudio = '%13', OsUpgrade = '%14' WHERE id = %15").arg(myConfigurationVariables->getProjectsID(), myConfigurationVariables->getOS(), myConfigurationVariables->getQtVersion(), myConfigurationVariables->getVsVersion(), myConfigurationVariables->getQtIfVersion(), myConfigurationVariables->getQtIfPackageUri(), myConfigurationVariables->getPythonVersion(), myConfigurationVariables->getPythonRequired(), myConfigurationVariables->getQtMingW32(), myConfigurationVariables->getQtMingW64(), myConfigurationVariables->getQtToolsMingW32(), myConfigurationVariables->getQtToolsMingW64(), myConfigurationVariables->getVisualStudio(), myConfigurationVariables->getOsUpgrade(), myConfigurationVariables->getID());
-    if (isDebugMessage) qDebug() << "thisQuery: " << theQueryString;
+    setMessage("thisQuery: " + theQueryString);
     if (!theQuery.exec(theQueryString))
     {
         qCritical() << "SqLite error saveConfiguration:" << theQuery.lastError().text() << ", SqLite error code:" << theQuery.lastError();
@@ -466,7 +466,7 @@ void MyDatatables::saveConfiguration()
  *******************************************************************************/
 void MyDatatables::setConfiguration(const QString &thisID,const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade)
 {
-    if (isDebugMessage) qDebug() << "setConfiguration";
+    setMessage("setConfiguration");
     // Common
     myConfigurationVariables->setID(thisID);                          // ID is per record for Update
     myConfigurationVariables->setProjectsID(thisProjectsID);          // ProjectID is per Project id
@@ -491,7 +491,7 @@ void MyDatatables::setConfiguration(const QString &thisID,const QString &thisPro
  *******************************************************************************/
 void MyDatatables::setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease)
 {
-    if (isDebugMessage) qDebug() << "setProject";
+    setMessage("setProject");
     myProject->setQtProject(thisQtProject);
     myProject->setSecret(thisSecret);
     myProject->setEnvironment(thisEnvironment);
@@ -505,5 +505,17 @@ void MyDatatables::setProject(const QString &thisQtProject, const QString &thisS
     myProject->setIsX86(thisIsX86);
     myProject->setIsDebug(thisIsDebug);
     myProject->setIsRelease(thisIsRelease);
+}
+/************************************************
+ * @brief set Message.
+ * setMessage
+ ***********************************************/
+void MyDatatables::setMessage(const QString &thisMessage)
+{
+    if (isDebugMessage)
+    {
+        qDebug() << thisMessage;
+        std::cout << thisMessage.toStdString() << std::endl;
+    }
 }
 /*** ************************* End of File ***********************************/

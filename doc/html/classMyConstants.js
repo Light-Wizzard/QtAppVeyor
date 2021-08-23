@@ -36,6 +36,7 @@ var classMyConstants =
     [ "MY_GEOMETRY_POS", "classMyConstants.html#a2d6a7101536a9862b407e44a225824d8", null ],
     [ "MY_GEOMETRY_SIZE", "classMyConstants.html#a1cae17d618618ad519a6c0949cef5f4e", null ],
     [ "MY_INI_FILE", "classMyConstants.html#a0828d1f9d4a27f63c63c53620cbb7496", null ],
+    [ "MY_INTERNET_URL", "classMyConstants.html#af9b5d4b98c51bab5e3fd9fe72a31e2cb", null ],
     [ "MY_IOS_MINGW32", "classMyConstants.html#ac50239b6f7df76ec032001489985d557", null ],
     [ "MY_IOS_MINGW32_TOOLS", "classMyConstants.html#a2be2c8fb5e0f8f638669928de21361c1", null ],
     [ "MY_IOS_MINGW64", "classMyConstants.html#ad0662b30ce417fd073fb7a38accc53b3", null ],

@@ -42,6 +42,7 @@ var classMainWindow =
     [ "readSqlDatabaseInfo", "classMainWindow.html#ab9196b2547d09289a1fb9cb068afb7d4", null ],
     [ "readStatesChanges", "classMainWindow.html#a42b32b087bb8b6c1601144ec513e8f12", null ],
     [ "retranslate", "classMainWindow.html#ae8662ae2ae5fc1d7921a9b18ec38ae9d", null ],
+    [ "setMessage", "classMainWindow.html#aedb8451a38316ec9d1f79fd77ee5d294", null ],
     [ "setMessagingStates", "classMainWindow.html#acaf4f4d06b8b4263e5628b4d0b035df9", null ],
     [ "setMyProjectConfigurationClass", "classMainWindow.html#a6d808973e9e2a54aed69d1825832f3a1", null ],
     [ "setQtProjectCombo", "classMainWindow.html#a2f0ac2578b352db357801c79602fd65d", null ],

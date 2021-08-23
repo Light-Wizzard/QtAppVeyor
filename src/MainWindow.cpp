@@ -67,7 +67,7 @@ MainWindow::~MainWindow()
  ***********************************************/
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (isDebugMessage) qDebug() << "closeEvent";
+    setMessage("closeEvent");
     if (isSaveSettings) on_pushButtonSettingsSave_clicked();
     mySqlDb->mySqlModel->mySetting->setGeometry(pos(), size(), isMaximized(), isMinimized());
     writeAllSettings();
@@ -80,7 +80,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
  ***********************************************/
 void MainWindow::changeEvent(QEvent *event)
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "changeEvent"; }
+    setMessage("changeEvent");
     if (event ->type() == QEvent::LanguageChange && isMainLoaded)
     {
         // retranslate designer form (single inheritance approach)
@@ -97,8 +97,7 @@ void MainWindow::changeEvent(QEvent *event)
  ***********************************************/
 void MainWindow::retranslate()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "retranslate"; }
-    // FIXME
+    setMessage("retranslate");
     loadLanguageComboBox();
 }
 /************************************************
@@ -107,7 +106,7 @@ void MainWindow::retranslate()
  ***********************************************/
 void MainWindow::loadLanguageComboBox()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "loadLanguageComboBox"; }
+    setMessage("loadLanguageComboBox");
     bool lastIsMainLoaded = isMainLoaded;
     isMainLoaded = false;
     myLocalization->setMainLoaded(false);
@@ -154,9 +153,7 @@ bool MainWindow::setQtProjectCombo()
     const auto SELECTED_PROJECTS_SQL = QLatin1String(R"(%1)").arg(mySqlDb->getQtProjectSelectQuery());
     theModalQtAppVeyor->setQuery(SELECTED_PROJECTS_SQL);
     if (theModalQtAppVeyor->lastError().isValid())
-    {
-        qDebug() << theModalQtAppVeyor->lastError();
-    }
+        { mySqlDb->mySqlModel->mySetting->showMessageBox(QObject::tr("SQL error").toLocal8Bit(), QString("%1: %2").arg(tr("SQL error"), theModalQtAppVeyor->lastError().text()), mySqlDb->mySqlModel->mySetting->Warning); }
     theModalQtAppVeyor->setHeaderData(0,Qt::Horizontal, tr("ID"));
     theModalQtAppVeyor->setHeaderData(1, Qt::Horizontal, tr("Project"));
     QTableView *theTableView = new QTableView;
@@ -201,11 +198,9 @@ void MainWindow::onRunOnStartup()
     //
     if (!mySqlDb->checkDatabase()) close();
     setQtProjectCombo();
-    // FIXME save last combobox ID
     fillForms(mySqlDb->getProjectID());
     //
     setSqlBrowseButton();
-    // FIXME read database to ui
     isMainLoaded = true;
     myLocalization->setMainLoaded(true);
 }
@@ -228,7 +223,7 @@ void MainWindow::readSettingsFirst()
  ***********************************************/
 void MainWindow::readAllSettings()
 {
-    if (isDebugMessage) { qDebug() << "readAllSettings"; }
+    setMessage("readAllSettings");
     //resize(myMySettings->getGeometrySize());
     //move(myMySettings->getGeometryPos());
     //
@@ -245,7 +240,7 @@ void MainWindow::readAllSettings()
  ***********************************************/
 bool MainWindow::writeAllSettings()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "writeAllSettings"; }
+    setMessage("writeAllSettings");
     //
     writeStatesChanges();
     writeSqlDatabaseInfo();
@@ -257,7 +252,7 @@ bool MainWindow::writeAllSettings()
  ***********************************************/
 void MainWindow::writeStatesChanges()
 {
-    if (isDebugMessage) qDebug() << "writeSqlDatabaseStates";
+    setMessage("writeSqlDatabaseStates");
     // Project ID
     mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_PROJECT_ID, mySqlDb->getProjectID());
     // Debug Messaging
@@ -285,7 +280,7 @@ void MainWindow::readStatesChanges()
  ***********************************************/
 void MainWindow::writeSqlDatabaseInfo()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << ""; }
+    setMessage("writeSqlDatabaseInfo");
     // SQL Database Name
     mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_NAME,  ui->lineEditSqlDatabaseName->text());
     // SQL Database Type State
@@ -306,7 +301,7 @@ void MainWindow::writeSqlDatabaseInfo()
  ***********************************************/
 void MainWindow::readSqlDatabaseInfo()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "readSqlDatabaseInfo"; }
+    setMessage("readSqlDatabaseInfo");
     QString theDb = QString("%1%2%3.db").arg(mySqlDb->mySqlModel->mySetting->getAppDataLocation(), QDir::separator(), mySqlDb->mySqlModel->getSqlDatabaseName());
     // SQL Database Name
     ui->lineEditSqlDatabaseName->setText(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_NAME, theDb));
@@ -332,7 +327,7 @@ void MainWindow::readSqlDatabaseInfo()
 void MainWindow::on_comboBoxSettingsLanguage_currentIndexChanged(const QString &thisLanguage)
 {
     if (!isMainLoaded) { return; }
-    if (isDebugMessage && isMainLoaded) { qDebug() << "on_comboBoxSettingsLanguage_currentIndexChanged"; }
+    setMessage("on_comboBoxSettingsLanguage_currentIndexChanged");
     myLocalization->writeLanguage(myLocalization->languageNameToCode(thisLanguage));
     myLocalization->loadLanguage(myLocalization->getLanguageFile(myLocalization->languageNameToCode(thisLanguage), myLocalization->getTranslationSource(), myLocalization->getTransFilePrefix()));
 }
@@ -342,7 +337,7 @@ void MainWindow::on_comboBoxSettingsLanguage_currentIndexChanged(const QString &
  ***********************************************/
 void MainWindow::onAbout()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "onAbout"; }
+    setMessage("onAbout");
     // Go to Tab
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
@@ -357,7 +352,7 @@ void MainWindow::onAbout()
  ***********************************************/
 void MainWindow::onAuthor()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "onAuthor"; }
+    setMessage("onAuthor");
     // Go to Tab
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
@@ -372,7 +367,7 @@ void MainWindow::onAuthor()
  ***********************************************/
 void MainWindow::onHelp()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "onHelp"; }
+    setMessage("onHelp");
     // Go to Tab
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
@@ -381,7 +376,7 @@ void MainWindow::onHelp()
         { theFileName = QString(":help/Help_%1.md").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
     QString theFileContent = mySqlDb->mySqlModel->mySetting->readFile(theFileName);
     // Do not translate this file
-    QString theLanguageFileName = QString(":help/Language.txt").arg(myLocalization->getLanguageCode());
+    QString theLanguageFileName = ":help/Language.txt";
     if (mySqlDb->mySqlModel->mySetting->isFileExists(theLanguageFileName))
     {
         theFileContent.append(mySqlDb->mySqlModel->mySetting->readFile(theLanguageFileName));
@@ -394,7 +389,7 @@ void MainWindow::onHelp()
  ***********************************************/
 void MainWindow::onClipboard()
 {
-    if (isDebugMessage) qDebug() << "onClipboard";
+    setMessage("onClipboard");
     if (!isYamlLoaded) { onCreate();}
     clipboard->setText(ui->textEditYml->toPlainText());
 }
@@ -408,7 +403,7 @@ void MainWindow::onClipboard()
  ***********************************************/
 void MainWindow::onCreate()
 {
-    if (isDebugMessage) qDebug() << "onCreate";
+    setMessage("onCreate");
     QList<QString> thePythonList;
     isYamlLoaded = true;
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabYml")));
@@ -830,7 +825,7 @@ void MainWindow::onCreate()
  ***********************************************/
 void MainWindow::onSaveAsYmlFile()
 {
-    if (isDebugMessage) qDebug() << "onSaveAsYmlFile";
+    setMessage("onSaveAsYmlFile");
     if (!isYamlLoaded) { onCreate(); }
     QString qPath = QFileDialog::getSaveFileName(this, tr("Save File As"), ".appveyor.yml", tr("Yaml (*.yml)"));
     QFile qFile(qPath);
@@ -1028,7 +1023,7 @@ void MainWindow::clearForms(int tabNumber)
 void MainWindow::on_comboBoxSettingsProjects_currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    if (isDebugMessage) qDebug() << "on_comboBoxSettingsProjects_currentIndexChanged";
+    setMessage("on_comboBoxSettingsProjects_currentIndexChanged");
     if (!isMainLoaded) { return; }
     QString thisIndex = ui->comboBoxSettingsProjects->model()->data(ui->comboBoxSettingsProjects->model()->index(ui->comboBoxSettingsProjects->currentIndex(), 0)).toString();
     fillForms(thisIndex);
@@ -1054,7 +1049,7 @@ void MainWindow::on_actionPrint_triggered()
  ***********************************************/
 void MainWindow::settingsButtons(bool thisEnabled)
 {
-    if (isDebugMessage) { qDebug() << "settingsButtons"; }
+    setMessage("settingsButtons");
     ui->pushButtonSettingsAdd->setEnabled(thisEnabled);
     ui->pushButtonSettingsSave->setEnabled(thisEnabled);
     ui->pushButtonSettingsDelete->setEnabled(thisEnabled);
@@ -1065,7 +1060,7 @@ void MainWindow::settingsButtons(bool thisEnabled)
  ***********************************************/
 void MainWindow::setSqlBrowseButton()
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "setSqlBrowseButton"; }
+    setMessage("setSqlBrowseButton");
     ui->pushButtonSqlFileBrowswer->setEnabled(ui->comboBoxSqlDatabaseType->currentText() == mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DEFAULT || ui->comboBoxSqlDatabaseType->currentText() == ":memory:");
 }
 /************************************************
@@ -1075,7 +1070,7 @@ void MainWindow::setSqlBrowseButton()
 void MainWindow::on_comboBoxSqlDatabaseType_currentIndexChanged(const QString &thisSqlType)
 {
     if (isMainLoaded) { return; }
-    if (isDebugMessage) qDebug() << "on_comboBoxSqlDatabaseType_currentIndexChanged=" << thisSqlType;
+    setMessage("on_comboBoxSqlDatabaseType_currentIndexChanged=" + thisSqlType);
     mySqlDb->mySqlModel->setSqlDriver(thisSqlType);
     writeStatesChanges();
     setSqlBrowseButton();
@@ -1086,7 +1081,7 @@ void MainWindow::on_comboBoxSqlDatabaseType_currentIndexChanged(const QString &t
  ***********************************************/
 void MainWindow::fillForms(const QString &thisProjectID)
 {
-    if (isDebugMessage && isMainLoaded) { qDebug() << "fillForms=" << thisProjectID; }
+    setMessage("fillForms=" + thisProjectID);
     clearForms(TabAll);
     ui->labelRecordIdSettings->setText(thisProjectID); // Project id and Configuration ProjectID
     // Declare all variable in function scope
@@ -1094,7 +1089,7 @@ void MainWindow::fillForms(const QString &thisProjectID)
     bool theIsOsUbuntu, theIsOsMac, theIsOsWindows, theIsOsAndroid, theIsOsWebAssembly, theIsOSiOS;
     theIsOsUbuntu = theIsOsMac = theIsOsWindows = theIsOsAndroid = theIsOsWebAssembly = theIsOSiOS = false;
     QString myConfigurationSelectQuery = mySqlDb->getProjectsFullSelectQueryID(thisProjectID);
-    if (isDebugMessage && isMainLoaded) { qDebug() << " myConfigurationSelectQuery=|" << myConfigurationSelectQuery << "|"; }
+    setMessage("myConfigurationSelectQuery=|" + myConfigurationSelectQuery + "|");
     /*
     Projects
     id
@@ -1135,7 +1130,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     {
         if (query.first())
         {
-            if (isDebugMessage) qDebug() << " QtProject=|" << query.value("QtProject").toString() << "|" << " IsOsUbuntu=|" << query.value("IsOsUbuntu").toString() << "|" << " IsOsMac=|" << query.value("IsOsMac").toString() << "|" << " IsOsWindows=|" << query.value("IsOsWindows").toString() << "|" << " IsX64=|" << query.value("IsX64").toString() << "|";
+            setMessage(" QtProject=|" + query.value("QtProject").toString() + "|" + " IsOsUbuntu=|" + query.value("IsOsUbuntu").toString() + "|" + " IsOsMac=|" + query.value("IsOsMac").toString() + "|" + " IsOsWindows=|" + query.value("IsOsWindows").toString() + "|" + " IsX64=|" + query.value("IsX64").toString() + "|");
             // Set Record ID
             ui->labelRecordIdSettings->setText(query.value("id").toString());
 
@@ -1231,7 +1226,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     if (theIsOsUbuntu)
     {
         myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_UBUNTU);
-        if (isDebugMessage) qDebug() << "myConfigurationSelectQuery=" << myConfigurationSelectQuery;
+        setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1256,7 +1251,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // Mac
@@ -1287,7 +1282,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // Android
@@ -1318,14 +1313,14 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // WebAssembly
     if (theIsOsWebAssembly)
     {
         myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
-        if (isDebugMessage) qDebug() << "myConfigurationSelectQuery=" << myConfigurationSelectQuery;
+        setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1350,14 +1345,14 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // iOS
     if (theIsOSiOS)
     {
         myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_IOS);
-        if (isDebugMessage) qDebug() << "myConfigurationSelectQuery=" << myConfigurationSelectQuery;
+        setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1382,7 +1377,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // Windows
@@ -1415,7 +1410,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+            QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
         }
     }
     // Defaults
@@ -1449,7 +1444,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     }
     else
     {
-        qDebug() << "SqLite error:" << query.lastError().text() << ", SqLite error code:" << query.lastError();
+        QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
     }
     isSaveSettings = false;
 }
@@ -2188,8 +2183,20 @@ void MainWindow::setMessagingStates(bool thisMessageState)
 void MainWindow::on_checkBoxSettignsMessaging_stateChanged(int thisCheckState)
 {
     if (isMainLoaded)   { return; }
-    if (isDebugMessage) { qDebug() << "on_checkBoxSettignsMessaging_stateChanged"; }
+    setMessage("on_checkBoxSettignsMessaging_stateChanged");
     if (thisCheckState == Qt::Checked)  { setMessagingStates(true);  }
     else                                { setMessagingStates(false); }
+}
+/************************************************
+ * @brief set Message.
+ * setMessage
+ ***********************************************/
+void MainWindow::setMessage(const QString &thisMessage)
+{
+    if (isDebugMessage && isMainLoaded)
+    {
+        qDebug() << thisMessage;
+        std::cout << thisMessage.toStdString() << std::endl;
+    }
 }
 /*** ************************* End of File ***********************************/

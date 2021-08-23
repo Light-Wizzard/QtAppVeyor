@@ -190,6 +190,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abce4872801f83111eaa0c53a535dcf24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMySqlDbtModel.html#abce4872801f83111eaa0c53a535dcf24">getDebugMessage</a> ()</td></tr>
 <tr class="memdesc:abce4872801f83111eaa0c53a535dcf24"><td class="mdescLeft">&#160;</td><td class="mdescRight">get Debug Message  <a href="classMySqlDbtModel.html#abce4872801f83111eaa0c53a535dcf24">More...</a><br /></td></tr>
 <tr class="separator:abce4872801f83111eaa0c53a535dcf24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c767a6a7a92c313120d1d30b00f8f22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a> (const QString &amp;thisMessage)</td></tr>
+<tr class="memdesc:a4c767a6a7a92c313120d1d30b00f8f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">set Message  <a href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">More...</a><br /></td></tr>
+<tr class="separator:a4c767a6a7a92c313120d1d30b00f8f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -227,7 +230,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="comment">// MySettings Settings</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a> = <span class="keyword">new</span> <a class="code" href="classMyOrgSettings.html">MyOrgSettings</a>(parent);</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
-<div class="ttc" id="aclassMyOrgSettings_html"><div class="ttname"><a href="classMyOrgSettings.html">MyOrgSettings</a></div><div class="ttdoc">My Org Settings.</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00028">MyOrgSettings.h:29</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html"><div class="ttname"><a href="classMyOrgSettings.html">MyOrgSettings</a></div><div class="ttdoc">My Org Settings.</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00031">MyOrgSettings.h:32</a></div></div>
 <div class="ttc" id="aclassMySqlDbtModel_html_ad56b6ae71a80657ad169af0e443d23f4"><div class="ttname"><a href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">MySqlDbtModel::mySetting</a></div><div class="ttdeci">MyOrgSettings * mySetting</div><div class="ttdoc">mySetting</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8h_source.html#l00023">MySqlDbtModel.h:23</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -287,7 +290,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00284">284</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;{</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;createDataBaseConnection&quot;</span>; }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;createDataBaseConnection&quot;</span>);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">// Make sure Drive is set</span></div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (mySqlDriver == <span class="stringliteral">&quot;NOTSET&quot;</span>) { <a class="code" href="classMySqlDbtModel.html#ad1d092a5dcbd001cda16cb8b39eff835">setSqlDriver</a>(<a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a797b8a2459bca688b3e2e7ffb8d958d1">myConstants</a>-&gt;<a class="code" href="classMyConstants.html#a673b33ba2dee738d64bcbfb3ea9e59fc">MY_SQL_DEFAULT</a>); }</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    QString theDb = <a class="code" href="classMySqlDbtModel.html#a5511e449b4f2bf50b4f3e4435643065b">getSqlDatabaseName</a>();</div>
@@ -380,12 +383,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    {</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <span class="keywordflow">if</span>(!QSqlDatabase::isDriverAvailable(mySqlDriver))</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        {</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#aa6e1b0609dba865ade37e95f6200066f">showMessageBox</a>(tr(<span class="stringliteral">&quot;Database SQL Driver is missing&quot;</span>).toLocal8Bit(), tr(<span class="stringliteral">&quot;Install SQL&quot;</span>).toLocal8Bit(), <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">Critical</a>);</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a9393c71df338dbe47e24de1e728646d0">showMessageBox</a>(tr(<span class="stringliteral">&quot;Database SQL Driver is missing&quot;</span>).toLocal8Bit(), tr(<span class="stringliteral">&quot;Install SQL&quot;</span>).toLocal8Bit(), <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">Critical</a>);</div>
 <div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        }</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#aa6e1b0609dba865ade37e95f6200066f">showMessageBox</a>(QString(<span class="stringliteral">&quot;%1: %2&quot;</span>).arg(tr(<span class="stringliteral">&quot;Cannot open database&quot;</span>), myDb.lastError().text()).toLocal8Bit(), tr(<span class="stringliteral">&quot;Unable to establish a database connection&quot;</span>).toLocal8Bit(), <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">Critical</a>);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a9393c71df338dbe47e24de1e728646d0">showMessageBox</a>(QString(<span class="stringliteral">&quot;%1: %2&quot;</span>).arg(tr(<span class="stringliteral">&quot;Cannot open database&quot;</span>), myDb.lastError().text()).toLocal8Bit(), tr(<span class="stringliteral">&quot;Unable to establish a database connection&quot;</span>).toLocal8Bit(), <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">Critical</a>);</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        }</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
@@ -394,15 +397,16 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#ac2b7c734e784998d2c8e470298395646">writeSettings</a>(<a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a797b8a2459bca688b3e2e7ffb8d958d1">myConstants</a>-&gt;<a class="code" href="classMyConstants.html#aa8be0ef5ca07c113d47149208feb3477">MY_SQL_DB_TYPE</a>, <span class="stringliteral">&quot;QSQLITE&quot;</span>);</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;} <span class="comment">// end createDataBaseConnection</span></div>
-<div class="ttc" id="aclassMyConstants_html_a63ea17ac82f3396194888a58f7c4652c"><div class="ttname"><a href="classMyConstants.html#a63ea17ac82f3396194888a58f7c4652c">MyConstants::MY_SQL_DB_NAME</a></div><div class="ttdeci">const QString MY_SQL_DB_NAME</div><div class="ttdoc">MY_SQL_DB_NAME</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00247">MyConstants.h:247</a></div></div>
-<div class="ttc" id="aclassMyConstants_html_a673b33ba2dee738d64bcbfb3ea9e59fc"><div class="ttname"><a href="classMyConstants.html#a673b33ba2dee738d64bcbfb3ea9e59fc">MyConstants::MY_SQL_DEFAULT</a></div><div class="ttdeci">const QString MY_SQL_DEFAULT</div><div class="ttdoc">SQL_DEFAULT</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00241">MyConstants.h:241</a></div></div>
-<div class="ttc" id="aclassMyConstants_html_aa8be0ef5ca07c113d47149208feb3477"><div class="ttname"><a href="classMyConstants.html#aa8be0ef5ca07c113d47149208feb3477">MyConstants::MY_SQL_DB_TYPE</a></div><div class="ttdeci">const QString MY_SQL_DB_TYPE</div><div class="ttdoc">MY_SQL_DB_TYPE</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00248">MyConstants.h:248</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_a1d0297815658142c555f7b2820f9aa86"><div class="ttname"><a href="classMyOrgSettings.html#a1d0297815658142c555f7b2820f9aa86">MyOrgSettings::isFileExists</a></div><div class="ttdeci">bool isFileExists(const QString &amp;thisFile)</div><div class="ttdoc">File Functions.</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00615">MyOrgSettings.cpp:615</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03"><div class="ttname"><a href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">MyOrgSettings::Critical</a></div><div class="ttdeci">@ Critical</div><div class="ttdoc">Critical</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00069">MyOrgSettings.h:69</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_a4e8aa5e10c528d29515bc989adf778e7"><div class="ttname"><a href="classMyOrgSettings.html#a4e8aa5e10c528d29515bc989adf778e7">MyOrgSettings::getAppDataLocation</a></div><div class="ttdeci">QString getAppDataLocation()</div><div class="ttdoc">getAppDataLocation</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00506">MyOrgSettings.cpp:506</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_a797b8a2459bca688b3e2e7ffb8d958d1"><div class="ttname"><a href="classMyOrgSettings.html#a797b8a2459bca688b3e2e7ffb8d958d1">MyOrgSettings::myConstants</a></div><div class="ttdeci">MyConstants * myConstants</div><div class="ttdoc">myConstants</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00074">MyOrgSettings.h:74</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_aa6e1b0609dba865ade37e95f6200066f"><div class="ttname"><a href="classMyOrgSettings.html#aa6e1b0609dba865ade37e95f6200066f">MyOrgSettings::showMessageBox</a></div><div class="ttdeci">int showMessageBox(const QString &amp;thisTitle, const QString &amp;thisMessage, MyOrgSettings::MyMessageTypes thisMessageType)</div><div class="ttdoc">show Message Box information, question, warning, critica</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00401">MyOrgSettings.cpp:401</a></div></div>
-<div class="ttc" id="aclassMyOrgSettings_html_ac2b7c734e784998d2c8e470298395646"><div class="ttname"><a href="classMyOrgSettings.html#ac2b7c734e784998d2c8e470298395646">MyOrgSettings::writeSettings</a></div><div class="ttdeci">void writeSettings(const QString &amp;thisSetting, const QString &amp;thisValue)</div><div class="ttdoc">writeSettings</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00134">MyOrgSettings.cpp:134</a></div></div>
+<div class="ttc" id="aclassMyConstants_html_a63ea17ac82f3396194888a58f7c4652c"><div class="ttname"><a href="classMyConstants.html#a63ea17ac82f3396194888a58f7c4652c">MyConstants::MY_SQL_DB_NAME</a></div><div class="ttdeci">const QString MY_SQL_DB_NAME</div><div class="ttdoc">MY_SQL_DB_NAME</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00248">MyConstants.h:248</a></div></div>
+<div class="ttc" id="aclassMyConstants_html_a673b33ba2dee738d64bcbfb3ea9e59fc"><div class="ttname"><a href="classMyConstants.html#a673b33ba2dee738d64bcbfb3ea9e59fc">MyConstants::MY_SQL_DEFAULT</a></div><div class="ttdeci">const QString MY_SQL_DEFAULT</div><div class="ttdoc">SQL_DEFAULT</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00242">MyConstants.h:242</a></div></div>
+<div class="ttc" id="aclassMyConstants_html_aa8be0ef5ca07c113d47149208feb3477"><div class="ttname"><a href="classMyConstants.html#aa8be0ef5ca07c113d47149208feb3477">MyConstants::MY_SQL_DB_TYPE</a></div><div class="ttdeci">const QString MY_SQL_DB_TYPE</div><div class="ttdoc">MY_SQL_DB_TYPE</div><div class="ttdef"><b>Definition:</b> <a href="MyConstants_8h_source.html#l00249">MyConstants.h:249</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a1d0297815658142c555f7b2820f9aa86"><div class="ttname"><a href="classMyOrgSettings.html#a1d0297815658142c555f7b2820f9aa86">MyOrgSettings::isFileExists</a></div><div class="ttdeci">bool isFileExists(const QString &amp;thisFile)</div><div class="ttdoc">File Functions.</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00681">MyOrgSettings.cpp:681</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03"><div class="ttname"><a href="classMyOrgSettings.html#a2581082145269c6d97a03441ef55f23ea7f1a2fea930a25b2360bc1666493bc03">MyOrgSettings::Critical</a></div><div class="ttdeci">@ Critical</div><div class="ttdoc">Critical</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00072">MyOrgSettings.h:72</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a4e8aa5e10c528d29515bc989adf778e7"><div class="ttname"><a href="classMyOrgSettings.html#a4e8aa5e10c528d29515bc989adf778e7">MyOrgSettings::getAppDataLocation</a></div><div class="ttdeci">QString getAppDataLocation()</div><div class="ttdoc">get AppData Location</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00496">MyOrgSettings.cpp:496</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a797b8a2459bca688b3e2e7ffb8d958d1"><div class="ttname"><a href="classMyOrgSettings.html#a797b8a2459bca688b3e2e7ffb8d958d1">MyOrgSettings::myConstants</a></div><div class="ttdeci">MyConstants * myConstants</div><div class="ttdoc">myConstants</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8h_source.html#l00078">MyOrgSettings.h:78</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a9393c71df338dbe47e24de1e728646d0"><div class="ttname"><a href="classMyOrgSettings.html#a9393c71df338dbe47e24de1e728646d0">MyOrgSettings::showMessageBox</a></div><div class="ttdeci">int showMessageBox(const QString &amp;thisTitle, const QString &amp;thisMessage, MyOrgSettings::MyMessageTypes thisMessageType) const</div><div class="ttdoc">show Message Box information, question, warning, critica</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00390">MyOrgSettings.cpp:390</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_ac2b7c734e784998d2c8e470298395646"><div class="ttname"><a href="classMyOrgSettings.html#ac2b7c734e784998d2c8e470298395646">MyOrgSettings::writeSettings</a></div><div class="ttdeci">void writeSettings(const QString &amp;thisSetting, const QString &amp;thisValue)</div><div class="ttdoc">write Settings</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00117">MyOrgSettings.cpp:117</a></div></div>
+<div class="ttc" id="aclassMySqlDbtModel_html_a4c767a6a7a92c313120d1d30b00f8f22"><div class="ttname"><a href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">MySqlDbtModel::setMessage</a></div><div class="ttdeci">void setMessage(const QString &amp;thisMessage)</div><div class="ttdoc">set Message</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8cpp_source.html#l00481">MySqlDbtModel.cpp:481</a></div></div>
 <div class="ttc" id="aclassMySqlDbtModel_html_a5511e449b4f2bf50b4f3e4435643065b"><div class="ttname"><a href="classMySqlDbtModel.html#a5511e449b4f2bf50b4f3e4435643065b">MySqlDbtModel::getSqlDatabaseName</a></div><div class="ttdeci">QString getSqlDatabaseName()</div><div class="ttdoc">getSqlDatabaseName</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8cpp_source.html#l00141">MySqlDbtModel.cpp:141</a></div></div>
 <div class="ttc" id="aclassMySqlDbtModel_html_ac33cace25021417957742269bc4bf00d"><div class="ttname"><a href="classMySqlDbtModel.html#ac33cace25021417957742269bc4bf00d">MySqlDbtModel::getSqlPassword</a></div><div class="ttdeci">QString getSqlPassword()</div><div class="ttdoc">getSqlPassword</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8cpp_source.html#l00170">MySqlDbtModel.cpp:170</a></div></div>
 <div class="ttc" id="aclassMySqlDbtModel_html_ad1d092a5dcbd001cda16cb8b39eff835"><div class="ttname"><a href="classMySqlDbtModel.html#ad1d092a5dcbd001cda16cb8b39eff835">MySqlDbtModel::setSqlDriver</a></div><div class="ttdeci">void setSqlDriver(const QString &amp;thisDriver)</div><div class="ttdoc">setSqlDriver</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8cpp_source.html#l00227">MySqlDbtModel.cpp:227</a></div></div>
@@ -431,7 +435,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00218">218</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;{</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getConnectionName&quot;</span>; }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getConnectionName&quot;</span>);</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">return</span> myConnectionName;</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
 </div><!-- fragment -->
@@ -532,7 +536,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00060">60</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlDatabase&quot;</span>; }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlDatabase&quot;</span>);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> myDb;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 </div><!-- fragment -->
@@ -558,7 +562,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00141">141</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlDatabaseName&quot;</span>; }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlDatabaseName&quot;</span>);</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">return</span> myDatabaseName;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
 </div><!-- fragment -->
@@ -584,7 +588,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00069">69</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlDriver&quot;</span>; }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlDriver&quot;</span>);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> mySqlDriver;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 </div><!-- fragment -->
@@ -610,7 +614,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00105">105</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlHostName&quot;</span>; }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlHostName&quot;</span>);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">return</span> myHostName;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
 </div><!-- fragment -->
@@ -637,7 +641,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00170">170</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;{</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlPassword&quot;</span>; }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlPassword&quot;</span>);</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (myUseEncryption)</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    {</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">if</span> (isEncrypted)</div>
@@ -654,7 +658,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">return</span> myPassword;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
-<div class="ttc" id="aclassMyOrgSettings_html_a8958ee8685fc46b40ead10f0ba2b1067"><div class="ttname"><a href="classMyOrgSettings.html#a8958ee8685fc46b40ead10f0ba2b1067">MyOrgSettings::decryptThis</a></div><div class="ttdeci">QString decryptThis(const QString &amp;thisSecret)</div><div class="ttdoc">decryptThis</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00368">MyOrgSettings.cpp:368</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a8958ee8685fc46b40ead10f0ba2b1067"><div class="ttname"><a href="classMyOrgSettings.html#a8958ee8685fc46b40ead10f0ba2b1067">MyOrgSettings::decryptThis</a></div><div class="ttdeci">QString decryptThis(const QString &amp;thisSecret)</div><div class="ttdoc">decrypt This</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00354">MyOrgSettings.cpp:354</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -678,7 +682,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00087">87</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlTableName&quot;</span>; }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlTableName&quot;</span>);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> myTableName;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
 </div><!-- fragment -->
@@ -704,7 +708,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00123">123</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;getSqlUserName&quot;</span>; }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;getSqlUserName&quot;</span>);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">return</span> myUserName;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
 </div><!-- fragment -->
@@ -731,7 +735,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00040">40</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;isDatabase&quot;</span>; }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;isDatabase&quot;</span>);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    QStringList theTables = myDb.tables();</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (theTables.contains(thisTable, Qt::CaseInsensitive))  { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">else</span>                                                     { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
@@ -777,7 +781,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00417">417</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;{</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;moveDb&quot;</span>; }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;moveDb&quot;</span>);</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    QFile file(QString(<span class="stringliteral">&quot;%1%2%3&quot;</span>).arg(thisSourcePath, QDir::separator(), thisSourceFile));</div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="comment">//</span></div>
@@ -785,7 +789,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="comment">//</span></div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a1d0297815658142c555f7b2820f9aa86">isFileExists</a>(theNewDatabaseName))</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    {</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a8a2eaabdc89025b2dfbde2485d43c971">questionYesNo</a>(<span class="stringliteral">&quot;Overwrite Database&quot;</span>, <span class="stringliteral">&quot;Are you sure you want to overwrite existing Database?&quot;</span>))</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a59a90e7e9d20eb74c80349e61c079352">questionYesNo</a>(<span class="stringliteral">&quot;Overwrite Database&quot;</span>, <span class="stringliteral">&quot;Are you sure you want to overwrite existing Database?&quot;</span>))</div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        {</div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        }</div>
@@ -799,7 +803,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    }</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <span class="keywordflow">else</span> { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;}</div>
-<div class="ttc" id="aclassMyOrgSettings_html_a8a2eaabdc89025b2dfbde2485d43c971"><div class="ttname"><a href="classMyOrgSettings.html#a8a2eaabdc89025b2dfbde2485d43c971">MyOrgSettings::questionYesNo</a></div><div class="ttdeci">bool questionYesNo(const char *thisTitle, const char *thisQuestion)</div><div class="ttdoc">questionYesNo</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00377">MyOrgSettings.cpp:377</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a59a90e7e9d20eb74c80349e61c079352"><div class="ttname"><a href="classMyOrgSettings.html#a59a90e7e9d20eb74c80349e61c079352">MyOrgSettings::questionYesNo</a></div><div class="ttdeci">bool questionYesNo(const char *thisTitle, const char *thisQuestion) const</div><div class="ttdoc">question Yes No</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00363">MyOrgSettings.cpp:363</a></div></div>
 <div class="ttc" id="aclassMySqlDbtModel_html_a244cd55fe4e04f3e39fb34a47b5f86bb"><div class="ttname"><a href="classMySqlDbtModel.html#a244cd55fe4e04f3e39fb34a47b5f86bb">MySqlDbtModel::createDataBaseConnection</a></div><div class="ttdeci">bool createDataBaseConnection()</div><div class="ttdoc">create DataBase Connection</div><div class="ttdef"><b>Definition:</b> <a href="MySqlDbtModel_8cpp_source.html#l00284">MySqlDbtModel.cpp:284</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -893,7 +897,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00397">397</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;{</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;runQuery=&quot;</span> &lt;&lt; thisQuery; }</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;runQuery=&quot;</span> + thisQuery);</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    QSqlQuery theQuery; </div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keywordflow">if</span> (theQuery.exec(thisQuery))</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    {</div>
@@ -932,7 +936,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00193">193</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;{</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setConnectionName&quot;</span>; }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setConnectionName&quot;</span>);</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    myConnectionName = thisConnectionName;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
 </div><!-- fragment -->
@@ -961,6 +965,36 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    isDebugMessage = thisState;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4c767a6a7a92c313120d1d30b00f8f22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c767a6a7a92c313120d1d30b00f8f22">&#9670;&nbsp;</a></span>setMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MySqlDbtModel::setMessage </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>thisMessage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set Message </p>
+<p>set Message. setMessage </p>
+
+<p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00481">481</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;{</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage)</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    {</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;        qDebug() &lt;&lt; thisMessage;</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;        std::cout &lt;&lt; thisMessage.toStdString() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    }</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1011,7 +1045,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00051">51</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlDatabase&quot;</span>; }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlDatabase&quot;</span>);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    myDb = thisDatabase;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 </div><!-- fragment -->
@@ -1038,7 +1072,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00132">132</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlDatabaseName&quot;</span>; }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlDatabaseName&quot;</span>);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    myDatabaseName = thisPassword;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 </div><!-- fragment -->
@@ -1065,7 +1099,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00227">227</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlDriver&quot;</span>; }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlDriver&quot;</span>);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    QString theDriver = thisDriver;</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">if</span> (theDriver.length() == 0)  { theDriver = <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a797b8a2459bca688b3e2e7ffb8d958d1">myConstants</a>-&gt;<a class="code" href="classMyConstants.html#a673b33ba2dee738d64bcbfb3ea9e59fc">MY_SQL_DEFAULT</a>; }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="comment">// Check for Database memory setting</span></div>
@@ -1140,7 +1174,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00096">96</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlHostName&quot;</span>; }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlHostName&quot;</span>);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    myHostName = thisHostName;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
 </div><!-- fragment -->
@@ -1173,7 +1207,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00151">151</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlPassword&quot;</span>; }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlPassword&quot;</span>);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">if</span> (myUseEncryption)</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    {</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        myPassword  = <a class="code" href="classMySqlDbtModel.html#ad56b6ae71a80657ad169af0e443d23f4">mySetting</a>-&gt;<a class="code" href="classMyOrgSettings.html#a8eb3a65b446c74a7da9ba2791dc47aea">encryptThis</a>(thisPassword);</div>
@@ -1185,7 +1219,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        isEncrypted = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="ttc" id="aclassMyOrgSettings_html_a8eb3a65b446c74a7da9ba2791dc47aea"><div class="ttname"><a href="classMyOrgSettings.html#a8eb3a65b446c74a7da9ba2791dc47aea">MyOrgSettings::encryptThis</a></div><div class="ttdeci">QString encryptThis(const QString &amp;thisSecret)</div><div class="ttdoc">encryptThis</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00359">MyOrgSettings.cpp:359</a></div></div>
+<div class="ttc" id="aclassMyOrgSettings_html_a8eb3a65b446c74a7da9ba2791dc47aea"><div class="ttname"><a href="classMyOrgSettings.html#a8eb3a65b446c74a7da9ba2791dc47aea">MyOrgSettings::encryptThis</a></div><div class="ttdeci">QString encryptThis(const QString &amp;thisSecret)</div><div class="ttdoc">encrypt This</div><div class="ttdef"><b>Definition:</b> <a href="MyOrgSettings_8cpp_source.html#l00345">MyOrgSettings.cpp:345</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1210,7 +1244,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00078">78</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlTableName&quot;</span>; }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlTableName&quot;</span>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    myTableName = thisTableName;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
 </div><!-- fragment -->
@@ -1237,7 +1271,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MySqlDbtModel_8cpp_source.html#l00114">114</a> of file <a class="el" href="MySqlDbtModel_8cpp_source.html">MySqlDbtModel.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">if</span> (isDebugMessage) { qDebug() &lt;&lt; <span class="stringliteral">&quot;setSqlUserName&quot;</span>; }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="classMySqlDbtModel.html#a4c767a6a7a92c313120d1d30b00f8f22">setMessage</a>(<span class="stringliteral">&quot;setSqlUserName&quot;</span>);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    myUserName = thisUserName;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
 </div><!-- fragment -->

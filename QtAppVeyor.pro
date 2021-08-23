@@ -2,10 +2,7 @@
 # Specifies the name of the template to use when generating the project.
 # The allowed values are: app, lib, subdirs, aux, vcapp or vclib
 TEMPLATE = "app"
-QT      += core gui sql
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-#qtHaveModule(printsupport):       QT *= printsupport
-CONFIG += c++17
+QT      += core gui sql widgets network printsupport
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -18,13 +15,14 @@ INCLUDEPATH     += .
 INCLUDEPATH     += src
 INCLUDEPATH     += "${QT_INSTALL_LIBS}/qt"
 ##-------------------------------------------------------------------------------------
+#CONFIG += c++17
 #
-win32:QMAKE_CC     += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\gcc.exe"
-win32:QMAKE_CXX    += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
-#
-win32:CONFIG       += static
-win32:DEFINES      += STATIC
-win32:QMAKE_LFLAGS += -static
+#win32:QMAKE_CC     += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\gcc.exe"
+#win32:QMAKE_CXX    += "C:\Qt\Tools\$env:MY_QT_TOOLS_MINGW64\bin\g++.exe"
+##
+#win32:CONFIG       += static
+#win32:DEFINES      += STATIC
+#win32:QMAKE_LFLAGS += -static
 #
 win32:CONFIG       *= windeployqt windows
 # Source
@@ -117,12 +115,12 @@ win32-g++{
     }
     CONFIG(release, debug|release) {
         #release
-        QMAKE_CXXFLAGS += -std=c++0x -O2 -Os -msse2 -ffp-contract=fast -fpic
+        QMAKE_CXXFLAGS += -O2 -Os -msse2 -ffp-contract=fast -fpic
     }
     else {
         #debug
         DEFINES += _DEBUG
-        QMAKE_CXXFLAGS += -std=c++0x -O0 -g3 -msse2 -fpic
+        QMAKE_CXXFLAGS += -O0 -g3 -msse2 -fpic
     }
 }
 #

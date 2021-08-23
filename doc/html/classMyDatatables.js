@@ -27,6 +27,7 @@ var classMyDatatables =
     [ "setComboBoxSqlValue", "classMyDatatables.html#a5696aa9cea1cd4204f88fb3dd09a69ff", null ],
     [ "setConfiguration", "classMyDatatables.html#addf513b4aa22e0f98ae8b567c954c6cd", null ],
     [ "setDebugMessage", "classMyDatatables.html#a2bdd34b2e594351c4df2210421869c64", null ],
+    [ "setMessage", "classMyDatatables.html#ad0ddb5c02f3dabfbcb55dc1393505ceb", null ],
     [ "setProject", "classMyDatatables.html#a88e0b13e6366ade44950e1868681e854", null ],
     [ "setProject", "classMyDatatables.html#a081b83dcecc7cec5ad56b5d4d7c129b1", null ],
     [ "setProjectFolder", "classMyDatatables.html#aab6ff8980df638ac7edcecfa43e0be42", null ],

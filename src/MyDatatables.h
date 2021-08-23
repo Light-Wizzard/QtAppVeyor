@@ -134,23 +134,24 @@ class MyDatatables : public QObject
         void setDebugMessage(bool thisState);                               //!< set Debug Message
         bool getDebugMessage();                                             //!< get Debug Message
 
-        bool insertProjects();
-        bool insertConfiguration();
-        bool addProject();
-        void addConfiguration();
-        void deleteConfiguration(const QString &thisID);
-        QString getQtProjectSelectQuery();
-        QString getQtProjectByNameQuery(const QString &thisProject);
-        bool isProjectQuery(const QString &thisProject);
-        QString getProjectsFullSelectQueryID(const QString &thisWhereID);
-        QString getQtProjectsSelectQueryID(const QString &thisWhereID);
-        QString getConfigurationSelectQuery(const QString &thisWhereID);
-        QString getConfigurationProjectIdOsSelectQuery(const QString &thisWhereID, const QString &thisOS);
-        QString getThisConfigurationProjectIDSelectQuery(const QString &thisProjectsID);
-        void saveProject();
-        void saveConfiguration();
-        void setConfiguration(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade);
-        void setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease);
+        bool insertProjects();                                              //!< insert Projects
+        bool insertConfiguration();                                         //!< insert Configuration
+        bool addProject();                                                  //!< add Project
+        void addConfiguration();                                            //!< add Configuration
+        void deleteConfiguration(const QString &thisID);                    //!< delete Configuration
+        QString getQtProjectSelectQuery();                                  //!< get Qt Project Select Query
+        QString getQtProjectByNameQuery(const QString &thisProject);        //!< get Qt Project By Name Query
+        QString getProjectsFullSelectQueryID(const QString &thisWhereID);   //!< get Projects Full Select Query ID
+        QString getQtProjectsSelectQueryID(const QString &thisWhereID);     //!< get Qt Projects Select Query ID
+        QString getConfigurationSelectQuery(const QString &thisWhereID);    //!< get Configuration Select Query
+        QString getConfigurationProjectIdOsSelectQuery(const QString &thisWhereID, const QString &thisOS); //!< get Configuration Project Id Os Select Query
+        QString getThisConfigurationProjectIDSelectQuery(const QString &thisProjectsID); //!<
+        bool isProjectQuery(const QString &thisProject);                    //!< is Project Query
+        void saveProject();               //!< save Project
+        void saveConfiguration();         //!< save Configuration
+        void setConfiguration(const QString &thisID, const QString &thisProjectsID, const QString &thisOS, const QString &thisQtVersion, const QString &thisVsVersion, const QString &thisQtIfVersion, const QString &thisQtIfPackageUri, const QString &thisPythonVersion, const QString &thisPythonRequired, const QString &thisQtMingW32, const QString &thisQtMingW64, const QString &thisQtToolsMingW32, const QString &thisQtToolsMingW64, const QString &thisVisualStudio, const QString &thisOsUpgrade); //!< set Configuration
+        void setProject(const QString &thisQtProject, const QString &thisSecret, const QString &thisEnvironment, const QString &thisIsOsUbuntu, const QString &thisIsOsMac, const QString &thisIsOsWebAssembly, const QString &thisIsOSiOS, const QString &thisIsOsWindows, const QString &thisIsOsAndroid, const QString &thisIsX64, const QString &thisIsX86, const QString &thisIsDebug, const QString &thisIsRelease); //!< set Project
+        void setMessage(const QString &thisMessage); //!< set Message
 
     private:
         QString myProjectID        = "-1";          //!< \c myProjectID         @brief Project ID
