@@ -77,9 +77,6 @@ ElseIf ($env:PLATFORM -eq "x86") {
                     Copy-Item "$env:APPVEYOR_BUILD_FOLDER\build\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
-                Else {
-                    Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
-                }
             }
         }
     }
@@ -101,3 +98,5 @@ If ($env:MY_BUILD_GOOD -eq "true") {
     Set-Location -Path "$env:APPVEYOR_BUILD_FOLDER"
     Write-Host "Completed-Build Windows"
 }
+
+Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER" -Recurse –File
