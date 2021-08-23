@@ -15,18 +15,17 @@ $env:BUILD_ROOT = "$env:APPVEYOR_BUILD_FOLDER\build"
 #$env:CMAKEGENERATOR = "Unix Makefiles"
 # 32 Bit only
 # ! C:\msys64\mingw32\bin\i686-w64-mingw32-g++.exe
-# C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe
+# ! C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe
 #
 #$env:CC="C:\msys64\mingw64\bin\x86_64-w64-mingw32-gcc.exe"
 #$env:CXX="C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe"
-
 $env:CC="clang-cl -mrtm"
 $env:CXX="clang-cl -mrtm"
 $env:CMAKE_CXX_COMPILER="C:\Program Files\LLVM\bin\clang-cl"
 # -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" $env:CMAKE_PATH_PREFIX = "C:\Qt\$env:MY_QT_VERSION\msvc$env:MY_VS_VERSION_64\lib\cmake"
 #$env:MY_MAKE = "cmake -A x64 -G $env:CMAKEGENERATOR -DCMAKE_PREFIX_PATH=$env:CMAKE_PATH_PREFIX -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=AppDir .."
 #cmd /c cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="$env:CMAKE_PATH_PREFIX" -DCMAKE_INSTALL_PREFIX=AppDir -DCMAKE_C_COMPILER=/c/MinGW/bin/gcc.exe -DCMAKE_CXX_COMPILER=/c/MinGW/bin/g++.exe ..
-cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF "-DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T LLVM  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX=AppDir
+cmd /c cmake .. -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake" -T "LLVM"  -DCMAKE_LINKER="$env:LLD_LINK" -DCMAKE_INSTALL_PREFIX="AppDir"
 If ($?) {
     Write-Host "build_script Windows QT cmake"
     Invoke-Expression "cmake --build . --config $env:CONFIGURATION"
@@ -37,7 +36,6 @@ If ($?) {
         }
     }
 }
-
 If ($env:MY_BUILD_GOOD -eq "true") {
     $currentDirectory = [System.AppDomain]::CurrentDomain.BaseDirectory.TrimEnd('\')
     If ($currentDirectory -eq $PSHOME.TrimEnd('\')) {
