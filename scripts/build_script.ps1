@@ -72,7 +72,7 @@ ElseIf ($env:PLATFORM -eq "x86") {
             If ($?) {
                 Test-Path -Path "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -PathType Leaf
                 If ($?) {
-                    New-Item -Path $env:APPVEYOR_BUILD_FOLDER -Name "install" -ItemType Directory
+                    New-Item -Path "$env:APPVEYOR_BUILD_FOLDER" -Name "install" -ItemType Directory
                     Copy-Item "$env:APPVEYOR_BUILD_FOLDER\$env:MY_BIN_PRO_RES_NAME.exe" -Destination "$env:APPVEYOR_BUILD_FOLDER\install"
                     $env:MY_BUILD_GOOD = true
                 }
