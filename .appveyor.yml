@@ -14,8 +14,8 @@ build: off
 configuration: Release
 
 platform:
-  #- x64
-  - x86
+  - x64
+  #- x86
 
 image:
   - Visual Studio 2019
