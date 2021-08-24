@@ -87,7 +87,7 @@ endif()
 #
 #
 if (UNIX AND NOT APPLE)
-        install (FILES ${TRANSLATION_QM} DESTINATION ${SCC_DATA_DIR}/translations)
+        install (FILES ${TRANSLATION_QM} DESTINATION translations)
 endif (UNIX AND NOT APPLE)
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
