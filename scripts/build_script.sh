@@ -109,9 +109,10 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # tried make install INSTALL_ROOT=AppDir;
     INSTALL_ROOT=AppDir make install;
     # trying this to see if it works
-    #cp "${HOME}/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
-    echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64";
-    ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64";
+    cp "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
+    # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
+    #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
+    #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
     # bin ls AppDir/usr
     # does not exist ls AppDir/usr/lib
     #
