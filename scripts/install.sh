@@ -21,8 +21,8 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     sudo add-apt-repository ppa:deadsnakes/ppa -y;
     sudo apt-get update -qq && sudo apt-get install -qq;
     if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
-    # Developer tools and libsqlite3
-    #  libegl1-Mesa-dev libmesa-dev xnviewmp libgstreamer0.10-0 libgstreamer-plugins-base0.10-0 libjasper1
+    # Developer tools, some multimedia and libsqlite3
+    # This is what I needed for all my projects to work, and is not optimized for any one of them.
     sudo apt install -qqy build-essential cmake software-properties-common libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev;
     sudo apt install -qqy libffi-dev mesa-common-dev libglu1-mesa-dev freeglut3-dev pkg-config libegl1-mesa;
     sudo apt install -qqy libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev flex bison checkinstall libsqlite3-dev;

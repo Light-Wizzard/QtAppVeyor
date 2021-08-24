@@ -101,7 +101,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #
     # configure build files with qmake
     # this works if I put the .pro back into the project
-    declare -ix DO_CMAKE; DO_CMAKE=0;
+    declare -ix DO_CMAKE; DO_CMAKE=1;
     if [ "${DO_CMAKE}" -eq 1 ]; then
         # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
