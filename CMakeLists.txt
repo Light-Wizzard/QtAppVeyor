@@ -11,8 +11,8 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 #
-# set the default path for built executables to the "bin" directory
-#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/AppDir)
+# set the default path for built executables to the "bin" directory tried AppDir
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/usr)
 #
 find_package(Qt5${QT_VERSION_MAJOR} COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
 #3DAnimation             Help                    QuickWidgets
