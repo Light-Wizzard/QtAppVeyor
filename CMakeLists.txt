@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 project(QtAppVeyor)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 set(APP_VERSION "0.1.0")
 # [Using CMake with Qt 5](http://www.kdab.com/using-cmake-with-qt-5/)
 set(CMAKE_AUTOMOC ON)
@@ -12,9 +11,27 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 #
-find_package(Qt5 COMPONENTS Core Widgets LinguistTools PrintSupport Sql REQUIRED)
+find_package(Qt5${QT_VERSION_MAJOR} COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
+#3DAnimation             Help                    QuickWidgets
+#3DCore                  LinguistTools           RemoteObjects
+#3DExtras                Location                RepParser
+#3DInput                 Multimedia              Scxml
+#3DLogic                 MultimediaWidgets       Sensors
+#3DQuick                 Network                 SerialPort
+#3DQuickAnimation        Nfc                     Sql
+#3DQuickExtras           OpenGL                  Svg
+#3DQuickInput            OpenGLExtensions        Test
+#3DQuickRender           Positioning             TextToSpeech
+#3DQuickScene2D          PositioningQuick        UiPlugin
+#3DRender                PrintSupport            UiTools
+#AndroidExtras           Qml                     WebChannel
+#Bluetooth               Quick                   WebSockets
+#Concurrent              QuickCompiler           WebView
+#Core                    QuickControls2          Widgets
+#Gamepad                 QuickTemplates2         Xml
+#Gui                     QuickTest               XmlPatterns
 # Libraries
-set(QT5_LIBRARIES Qt5::Widgets Qt5::PrintSupport Qt5::Sql)
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::PrintSupport Qt5::Network)
 #
 set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
@@ -46,16 +63,29 @@ set(TS_FILES
     translations/QtAppVeyor_sv.ts
     translations/QtAppVeyor_zh_CN.ts
 )
-#
+set(TRANSLATION_QM
+    translations/QtAppVeyor_ar.qm
+    translations/QtAppVeyor_de.qm
+    translations/QtAppVeyor_en.qm
+    translations/QtAppVeyor_es.qm
+    translations/QtAppVeyor_fr.qm
+    translations/QtAppVeyor_it.qm
+    translations/QtAppVeyor_ja.qm
+    translations/QtAppVeyor_no.qm
+    translations/QtAppVeyor_ru.qm
+    translations/QtAppVeyor_sv.qm
+    translations/QtAppVeyor_zh_CN.qm
+)#
 if (QT_VERSION VERSION_LESS 5.15.0)
     qt5_add_translation(QM_FILES ${TS_FILES})
 else()
     qt_add_translation(QM_FILES ${TS_FILES})
 endif()
-
-include(TranslationUtils)
-add_app_translations_resource(APP_RES ${QM_FILES})
-add_qt_translations_resource(QT_RES ar de en es fr it ja no ru sv zh_CN)
+#
+#
+if (UNIX AND NOT APPLE)
+        install (FILES ${TRANSLATION_QM} DESTINATION ${SCC_DATA_DIR}/translations)
+endif (UNIX AND NOT APPLE)
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
 # The qm files are generated in the build tree, but the qrc file is inside the

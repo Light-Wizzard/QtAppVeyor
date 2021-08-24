@@ -65,6 +65,10 @@ TRANSLATIONS += translations/QtAppVeyor_ar.ts \
                 translations/QtAppVeyor_ru.ts \
                 translations/QtAppVeyor_sv.ts \
                 translations/QtAppVeyor_zh_CN.ts
+#
+LCONVERT_LANGS=ar de en es fr it ja no ru sv zh_CN
+include(lconvert.pri)
+#
 # Distrobution Files
 DISTFILES += \
     .appveyor.yml \
@@ -73,10 +77,8 @@ DISTFILES += \
     help/About-Author_en.md \
     help/About_en.md \
     help/Help_en.md \
-    scripts/build_script.cmd \
     scripts/build_script.ps1 \
     scripts/build_script.sh \
-    scripts/install.cmd \
     scripts/install.ps1 \
     scripts/install.sh \
     scripts/upload.sh \
