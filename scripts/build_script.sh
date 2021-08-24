@@ -95,7 +95,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64"
 fi
 #
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
-    echo "PATH=$PATH";
+    if [ "${DEBUGGING}" -eq 1 ]; then echo "PATH=$PATH"; fi
     #
     # configure build files with qmake
     # this works if I put the .pro back into the project
@@ -109,8 +109,9 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # tried make install INSTALL_ROOT=AppDir;
     INSTALL_ROOT=AppDir make install;
     # trying this to see if it works
-    #cp "$HOME/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
-    ls "$HOME/Qt/${MY_QT_VERSION}";
+    #cp "${HOME}/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
+    echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}";
+    ls "${HOME}/Qt/${MY_QT_VERSION}";
     # bin ls AppDir/usr
     # does not exist ls AppDir/usr/lib
     #
