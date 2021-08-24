@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 23 Auguest 2021
+# Last Update: 24 Auguest 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build_script.sh
@@ -99,7 +99,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #
     # configure build files with qmake
     #qmake "${REPO_ROOT}";
-    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir";
+    #  -DBUILD_SHARED_LIBS=OFF
+    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="AppDir";
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
