@@ -99,7 +99,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #
     # configure build files with qmake
     #qmake "${REPO_ROOT}";
-    cmake "${REPO_ROOT}";
+    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="AppDir";
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
