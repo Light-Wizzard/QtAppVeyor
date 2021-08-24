@@ -101,17 +101,21 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #
     # configure build files with qmake
     # this works if I put the .pro back into the project
-    # qmake "${REPO_ROOT}";
-    # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
-    # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
+    declare -ix DO_CMAKE; DO_CMAKE=0;
+    if [ "${DO_CMAKE}" -eq 1 ]; then
+        # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
+        # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
+        # Add this copy Qt Plugins to AppDir to see if that fixes cmake
+        cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
+    else
+        qmake "${REPO_ROOT}";
+    fi
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
     # tried make install INSTALL_ROOT=AppDir;
     INSTALL_ROOT=AppDir make install;
-    # trying this to see if it works
-    cp "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
     #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
