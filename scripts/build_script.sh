@@ -109,7 +109,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # tried make install INSTALL_ROOT=AppDir;
     INSTALL_ROOT=AppDir make install;
     # trying this to see if it works
-    cp "$HOME/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
+    #cp "$HOME/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
+    ls "$HOME/Qt/${MY_QT_VERSION}";
     # bin ls AppDir/usr
     # does not exist ls AppDir/usr/lib
     #
