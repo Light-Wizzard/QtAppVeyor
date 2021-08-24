@@ -64,6 +64,7 @@ OLD_CWD="$(readlink -f .)";
 # switch to build dir
 pushd "$BUILD_DIR";
 # Make AppDir folder at the BUILD_DIR level
+if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir -p AppDir;
 # x86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
@@ -104,9 +105,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # this works if I put the .pro back into the project
     declare -ix DO_CMAKE; DO_CMAKE=1;
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
-        # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
+        echo "cmake build";
         # Add this copy Qt Plugins to AppDir to see if that fixes cmake
         if [ -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms" ]; then
             echo "Copy Qt Plugins to AppDir";
@@ -114,7 +113,11 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         else
             echo "Qt Plugins not found at ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms";
         fi
+        # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
+        # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
     else
+        echo "qmake build";
         qmake "${REPO_ROOT}";
     fi
     #

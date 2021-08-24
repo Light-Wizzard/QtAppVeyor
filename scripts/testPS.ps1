@@ -1,3 +1,4 @@
+# Get-Command -syntax 'testPS.ps1'
 # if(Test-Syntax build_script.ps1){ Write-Host 'Build Script looks good!' }
 # if(Test-Syntax install.ps1){ Write-Host 'Install Script looks good!' }
 function Test-Syntax
