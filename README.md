@@ -62,10 +62,9 @@ or if I should use MSYS, or Cygwin.
 Things that are Broken need to be worked on first, 
 these are the things I need help with.
 
-1. Windows x86 and x64 builds are not working, I am using windeploy, all the dll's are there, but it will not run.
-2. Qt installer Framework.
-3. Mac, WebAssembly, iOS, and Android.
-4. cmake, the future of Qt 6.
+1. Qt installer Framework.
+2. Mac, WebAssembly, iOS, and Android.
+3. cmake, the future of Qt 6.
 
 Issues: Windows complies but does not run due to dll's that are in the same folder, this is a qmake project, 
 and I have created a working cmake file, and I really do need to switch over to cmake for all the whole project,
@@ -105,8 +104,8 @@ but I always wait to till the end to start on it.
 
 ### :package: **Downloads:**
 
- - :penguin: [Linux zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
- - :office: [Windows zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
+ - :penguin: [Linux x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip) [Linux x64 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x64.zip)
+ - :office: [Windows x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip) [Windows x64 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x64.zip)
  - :apple: Currenty unavalible [Apple zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
 
 Currenty, Windows is not working, if it was, it would say something like this:
