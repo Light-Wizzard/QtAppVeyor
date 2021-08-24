@@ -63,7 +63,7 @@ OLD_CWD="$(readlink -f .)";
 #
 # switch to build dir
 pushd "$BUILD_DIR";
-# Make AppDir folder at the BUILD_DIR level
+# Make AppDir folder at the BUILD_DIR level, I should not need to do this normally, but I am not able to get cmake to work
 if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir -p AppDir;
 # x86
@@ -108,9 +108,9 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         echo "cmake build";
         # Add this copy Qt Plugins to AppDir to see if that fixes cmake
         if [ -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms" ]; then
-            #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
+            #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir; # this did not work
             if [ -d "${APPVEYOR_BUILD_FOLDER}/usr/lib" ]; then
-                echo "Copy Qt Plugins to AppDir";
+                echo "Copy Qt Plugins to ${APPVEYOR_BUILD_FOLDER}/usr/lib";
                 cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* ${APPVEYOR_BUILD_FOLDER}/usr/lib;
             else
                 echo "usr/lib folder not found ${APPVEYOR_BUILD_FOLDER}/usr/lib";
