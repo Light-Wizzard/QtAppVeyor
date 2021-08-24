@@ -110,7 +110,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         if [ -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms" ]; then
             echo "Copy Qt Plugins to AppDir";
             #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
-            cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* usr/lib;
+            cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* ${APPVEYOR_BUILD_FOLDER}/usr/lib;
         else
             echo "Qt Plugins not found at ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms";
         fi
