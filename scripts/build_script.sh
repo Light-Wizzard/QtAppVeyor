@@ -98,12 +98,18 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     echo "PATH=$PATH";
     #
     # configure build files with qmake
-    #qmake "${REPO_ROOT}";
+    # this works if I put the .pro back into the project
+    # qmake "${REPO_ROOT}";
+    # tried this with -DCMAKE_INSTALL_PREFIX="AppDir"
+    # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
     cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
+    # tried make install INSTALL_ROOT=AppDir;
     INSTALL_ROOT=AppDir make install;
+    # trying this to see if it works
+    cp "$HOME/Qt/${MY_QT_VERSION}"/qt/plugins/platforms/* AppDir;
     # bin ls AppDir/usr
     # does not exist ls AppDir/usr/lib
     #
