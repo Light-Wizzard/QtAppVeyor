@@ -62,7 +62,9 @@ OLD_CWD="$(readlink -f .)";
 #
 # switch to build dir
 pushd "$BUILD_DIR";
-# x86 gcc_32? FIXME how to dox86
+# Make AppDir folder at the BUILD_DIR level
+mkdir -p AppDir;
+# x86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
     if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
