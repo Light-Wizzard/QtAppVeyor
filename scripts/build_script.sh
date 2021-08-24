@@ -15,6 +15,7 @@ echo "build_script Unix";
 # Debug Information, not always a good idea when not debugging, and thanks to the TheAssassin, this is now working.
 # These are the setting you might want to change
 declare -ix DEBUGGING;         DEBUGGING=0;          # Set 1=True and 0=False
+declare -ix SHOW_PATH;         SHOW_PATH=1;          # Set 1=True and 0=False
 declare -ix EXIT_ON_UNDEFINED; EXIT_ON_UNDEFINED=0;  # Set 1=True and 0=False
 # Below should be agnostic
 # I use a Variable so I can turn it off on exit
@@ -97,7 +98,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64"
 fi
 #
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
-    if [ "${DEBUGGING}" -eq 1 ]; then echo "PATH=$PATH"; fi
+    if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
     #
     # configure build files with qmake
     # this works if I put the .pro back into the project
@@ -107,7 +108,12 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
         cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
         # Add this copy Qt Plugins to AppDir to see if that fixes cmake
-        cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
+        if [ -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms" ]; then
+            echo "Copy Qt Plugins to AppDir";
+            cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir;
+        else
+            echo "Qt Plugins not found at ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms";
+        fi
     else
         qmake "${REPO_ROOT}";
     fi
