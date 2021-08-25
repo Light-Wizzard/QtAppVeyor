@@ -130,6 +130,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
     echo "AppDir/usr";
     ls "AppDir";
+    ls "AppDir/home";
+    ls "AppDir/bin";
     ls "AppDir/usr";
     if [ -d "AppDir/usr/bin" ]; then
         echo "found AppDir/usr/bin";
