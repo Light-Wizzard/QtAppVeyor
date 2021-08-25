@@ -7,6 +7,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 #
+include(GNUInstallDirs)
+#
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
@@ -118,7 +120,7 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES}
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 # libQt5Sql.so.5 missing tried this with and without lib changes
-INSTALL(TARGETS ${TARGET}
+install(TARGETS ${TARGET}
   RUNTIME DESTINATION /usr/bin
   LIBRARY DESTINATION /usr/lib
   ARCHIVE DESTINATION /usr/lib

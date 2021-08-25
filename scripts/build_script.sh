@@ -121,14 +121,15 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # build project and install files into AppDir
     make -j"$(nproc)";
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        make install DESTDIR=AppDir;
+        make install DESTDIR="AppDir";
     else
-        make install INSTALL_ROOT=AppDir;
+        make install INSTALL_ROOT="AppDir";
     fi
     # did not work
     #mkdir -p usr/lib;
     #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
     echo "AppDir/usr";
+    ls "AppDir";
     ls "AppDir/usr";
     if [ -d "AppDir/usr/bin" ]; then
         echo "found AppDir/usr/bin";
@@ -136,12 +137,6 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         # shows QtAppVeyor
         if [ -f "AppDir/usr/bin/QtAppVeyor" ]; then
             echo "found executable AppDir/usr/bin/QtAppVeyor";
-        fi
-        if [ -d "AppDir/usr/bin/QtAppVeyor" ]; then
-            echo "found AppDir/usr/bin/QtAppVeyor";
-            ls "AppDir/usr/bin/QtAppVeyor";
-        else
-           echo "not found AppDir/usr/bin/QtAppVeyor";
         fi
     else
         echo "not found AppDir/usr/bin";
