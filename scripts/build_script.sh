@@ -131,7 +131,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     echo "AppDir/usr";
     ls "AppDir";
     ls "AppDir/home";
-    ls "AppDir/bin";
+    ls "AppDir/home/usr";
     ls "AppDir/usr";
     if [ -d "AppDir/usr/bin" ]; then
         echo "found AppDir/usr/bin";
