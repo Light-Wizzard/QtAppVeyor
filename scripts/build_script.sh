@@ -112,7 +112,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ "${DO_CMAKE}" -eq 1 ]; then
         echo "cmake build";
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr" DESTDIR="AppDir";
     else
         echo "qmake build";
         qmake "${REPO_ROOT}";
