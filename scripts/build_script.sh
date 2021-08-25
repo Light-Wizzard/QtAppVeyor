@@ -121,7 +121,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # build project and install files into AppDir
     make -j"$(nproc)";
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        make install DESTDIR="AppDir";
+        make install DESTDIR=AppDir
     else
         make install INSTALL_ROOT="AppDir";
     fi
