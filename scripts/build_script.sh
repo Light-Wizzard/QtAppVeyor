@@ -49,7 +49,8 @@ echo -e "Make Temp Folder";
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 else
-    BUILD_DIR="$(mktemp -d "$TEMP_BASE/${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+    #BUILD_DIR="$(mktemp -d "${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+    BUILD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t '${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX')
 fi
 #
 # make sure to clean up build dir, even if errors occur
