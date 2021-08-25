@@ -112,7 +112,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ "${DO_CMAKE}" -eq 1 ]; then
         echo "cmake build";
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
+        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
     else
         echo "qmake build";
         qmake "${REPO_ROOT}";
@@ -131,6 +131,14 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ -d "usr/lib" ]; then
         echo "found usr/lib";
         ls "usr/lib";
+    else
+        echo "not found usr/lib";
+        if [ -d "AppDir/usr/lib" ]; then
+            echo "found AppDir/usr/lib";
+            ls "AppDir/usr/lib";
+        else
+            echo "not found AppDir/usr/lib";
+        fi
     fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
