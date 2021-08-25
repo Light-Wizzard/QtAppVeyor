@@ -154,11 +154,15 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
     # make them executable
     chmod +x linuxdeploy*.AppImage;
-    export LD_LIBRARY_PATH="${REPO_ROOT}/build/AppDir/usr/lib/";
+    export LD_LIBRARY_PATH="AppDir/usr/lib/";
     if [ -d "$LD_LIBRARY_PATH" ]; then
+        echo "";
         echo "Found $LD_LIBRARY_PATH";
+        echo "";
     else
+        echo "";
         echo "Not Found $LD_LIBRARY_PATH";
+        echo "";
     fi
     # make sure Qt plugin finds QML sources so it can deploy the imported files
     if [ -d "${REPO_ROOT}/qml" ]; then
