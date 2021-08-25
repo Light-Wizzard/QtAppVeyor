@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 25 Auguest 2021
+# Last Update: 24 Auguest 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build_script.sh
@@ -36,76 +36,20 @@ if [ -z "${GITHUB_USERNAME+x}" ] || [ -z "${GITHUB_PROJECT}" ]; then
 fi
 # Set our Artifacts for later
 #
-export ARTIFACT_APPIMAGE="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage";
+#export ARTIFACT_APPIMAGE="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage";
 #export ARTIFACT_ZSYNC="${MY_BIN_PRO_RES_NAME}-x86_64.AppImage.zsync";
-export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
+#export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 # use RAM disk if possible (as in: not building on CI system like Appveyor, and RAM disk is available)
-declare TEMP_BASE;
-if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BASE="/tmp"; fi
 #
-echo -e "Make Temp Folder";
-#
-# building in temporary directory to keep system clean
-if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
-    BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
-else
-    BUILD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t '${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX')
-fi
-#
-# make sure to clean up build dir, even if errors occur
-function cleanup()
-{
-    if [ -d "$BUILD_DIR" ]; then rm -rf "$BUILD_DIR"; fi
-    if [ "${DEBUGGING}" -eq 1 ]; then set +x; fi
-}
-trap "cleanup; exit;" SIGINT SIGTERM
-#trap cleanup EXIT;
-#
-# store repo root as variable
-REPO_ROOT="$(readlink -f "$(dirname "$(dirname "$0")")")";
-OLD_CWD="$(readlink -f .)";
 #
 # switch to build dir
-pushd "$BUILD_DIR";
+mkdir build;
+cd build;
 # Make AppDir folder at the BUILD_DIR level, I should not need to do this normally, but I am not able to get cmake to work
 if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir AppDir;
-# x86
-if [[ "$PLATFORM" == "x86" ]]; then
-    # Matrix does not show a gcc_32 or 86
-    # https://www.appveyor.com/docs/linux-images-software/
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
-    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
-        echo "Qt x86 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin";
-        ls "${HOME}/Qt/${MY_QT_VERSION}/";
-    fi
-    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x86 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$MY_PYTHON_REQUIRED" == "true" ]]; then
-        export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
-        # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
-        # export PATH=${HOME}/venv${MY_PYTHON_VER}:${HOME}/venv${MY_PYTHON_VER}/bin:${HOME}/venv${MY_PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${MY_PYTHON_VER}" ]; then    echo "Python x86 not found: /usr/lib/python${MY_PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${MY_PYTHON_VER}" ]; then echo "Python x86 include not found: /usr/lib/python${MY_PYTHON_VER}"; fi
-    fi
-fi
-# x64
-if [[ "$PLATFORM" == "x64" ]]; then
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
-    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
-    # Check Qt
-    if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
-    if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
-    if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then
-        export PATH="/usr/lib/python${MY_PYTHON_VER}:/usr/include/python${MY_PYTHON_VER}:$PATH";
-        # Check Python
-        # source ${HOME}/venv${MY_PYTHON_VER}/bin/activate
-        # export PATH=${HOME}/venv${MY_PYTHON_VER}:${HOME}/venv${MY_PYTHON_VER}/bin:${HOME}/venv${MY_PYTHON_VER}/lib:$PATH
-        if [ ! -d "/usr/lib/python${MY_PYTHON_VER}" ]; then     echo "Python x64 not found: /usr/lib/python${MY_PYTHON_VER}"; fi
-        if [ ! -d "/usr/include/python${MY_PYTHON_VER}" ]; then echo "Python x64 include not found: /usr/lib/python${MY_PYTHON_VER}"; fi
-    fi
-fi
 #
+
 if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
 #
 echo "cmake build";
@@ -116,34 +60,23 @@ cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUI
 # build project and install files into AppDir
 make -j"$(nproc)";
 make install DESTDIR=AppDir
-# now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
-# download linuxdeploy and its Qt plugin
-wget -c -nv https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage;
-wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
-# make them executable
-chmod +x linuxdeploy*.AppImage;
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/opt/qt5/bin:AppDir";
 # make sure Qt plugin finds QML sources so it can deploy the imported files
 if [ -d "${REPO_ROOT}/qml" ]; then
     export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
 fi
-# ${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage
-#export TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage";
-# QtQuickApp does support "make install", but we don't use it because we want to show the manual packaging approach in this example
-# initialize AppDir, bundle shared libraries, add desktop file and icon, use Qt plugin to bundle additional resources, and build AppImage, all in one command
-# env TARGET_APPIMAGE="${MY_BIN_PRO_RES_NAME}-$PLATFORM.AppImage" APPIMAGE_EXTRACT_AND_RUN=1
-./linuxdeploy-x86_64.AppImage --appdir=AppDir -i "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.svg" -d "${REPO_ROOT}/desktop/${MY_BIN_PRO_RES_NAME}.desktop" --plugin qt --output appimage;
-chmod +x "${MY_BIN_PRO_RES_NAME}"*.AppImage*;
-cp -v "${MY_BIN_PRO_RES_NAME}"*.AppImage* AppDir/usr/bin/;
+
+macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
+
+chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
+cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
 cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
 7z a -tzip -r "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" AppDir;
-cp "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" "${OLD_CWD}";
+cp "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" ../;
 #
-# AppImage move to Artifacts
-mv "${MY_BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
 #
 # Pop Directory for Qt Installer Framework
-popd;
+cd ..;
 #
 #echo "Preparing for Qt Installer Framework";
 #
