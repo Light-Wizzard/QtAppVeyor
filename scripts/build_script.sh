@@ -123,7 +123,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
             echo "Qt Plugins not found at ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms";
         fi
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
+        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
     else
         echo "qmake build";
         qmake "${REPO_ROOT}";
