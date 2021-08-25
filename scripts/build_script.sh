@@ -104,52 +104,15 @@ fi
 #
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
-    # did not help
-    # sudo strip --remove-section=.note.ABI-tag "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5";
-    # configure build files with qmake
-    # this works if I put the .pro back into the project
-    declare -ix DO_CMAKE; DO_CMAKE=1;
-    if [ "${DO_CMAKE}" -eq 1 ]; then
-        echo "cmake build";
-        DESTDIR=AppDir;
-        # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-        cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
-    else
-        echo "qmake build";
-        qmake "${REPO_ROOT}";
-    fi
+    #
+    echo "cmake build";
+    DESTDIR=AppDir;
+    # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
-    if [ "${DO_CMAKE}" -eq 1 ]; then
-        make install DESTDIR=AppDir
-        #DESTDIR=AppDir ninja install
-    else
-        make install INSTALL_ROOT="AppDir";
-    fi
-    # did not work
-    #mkdir -p usr/lib;
-    #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
-    echo "AppDir/usr";
-    ls "AppDir";
-    ls "AppDir/home";
-    ls "AppDir/usr";
-    if [ -d "AppDir/usr/bin" ]; then
-        echo "found AppDir/usr/bin";
-        ls "AppDir/usr/bin";
-        # shows QtAppVeyor
-        if [ -f "AppDir/usr/bin/QtAppVeyor" ]; then
-            echo "found executable AppDir/usr/bin/QtAppVeyor";
-        fi
-    else
-        echo "not found AppDir/usr/bin";
-    fi
-    # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
-    #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
-    #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
-    # bin ls AppDir/usr
-    # does not exist ls AppDir/usr/lib
-    #
+    make install DESTDIR=AppDir
     # now, build AppImage using linuxdeploy and linuxdeploy-plugin-qt
     # download linuxdeploy and its Qt plugin
     wget -c -nv https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage;
@@ -157,16 +120,6 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # make them executable
     chmod +x linuxdeploy*.AppImage;
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
-    sudo ldconfig;
-    if [ -d "$LD_LIBRARY_PATH" ]; then
-        echo "";
-        echo "Found $LD_LIBRARY_PATH";
-        echo "";
-    else
-        echo "";
-        echo "Not Found $LD_LIBRARY_PATH";
-        echo "";
-    fi
     # make sure Qt plugin finds QML sources so it can deploy the imported files
     if [ -d "${REPO_ROOT}/qml" ]; then
         export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
