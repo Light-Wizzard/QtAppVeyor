@@ -155,6 +155,11 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # make them executable
     chmod +x linuxdeploy*.AppImage;
     export LD_LIBRARY_PATH="${REPO_ROOT}/build/AppDir/usr/lib/";
+    if [ -d "$LD_LIBRARY_PATH" ]; then
+        echo "Found $LD_LIBRARY_PATH";
+    else
+        echo "Not Found $LD_LIBRARY_PATH";
+    fi
     # make sure Qt plugin finds QML sources so it can deploy the imported files
     if [ -d "${REPO_ROOT}/qml" ]; then
         export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
