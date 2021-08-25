@@ -137,7 +137,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
         sudo INSTALL_ROOT=AppDir make install;
     else
         # tried make install DESTDIR=AppDir;
-        sudo DESTDIR=AppDir make install;
+        #sudo DESTDIR=AppDir make install;
+        make install DESTDIR=AppDir;
     fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
