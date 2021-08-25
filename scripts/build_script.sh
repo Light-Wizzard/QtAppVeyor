@@ -68,7 +68,10 @@ if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir -p AppDir;
 # x86
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
+    # Matrix does not show a gcc_32 or 86
+    # https://www.appveyor.com/docs/linux-images-software/
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
     if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then
         echo "Qt x86 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin";
         ls "${HOME}/Qt/${MY_QT_VERSION}/";
@@ -85,6 +88,7 @@ fi
 # x64
 if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64" ]]; then
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
+    export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
     # Check Qt
     if [ ! -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin" ]; then echo "Qt x64 not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin"; fi
     if [ ! -f "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake" ]; then echo "Qt x64 qmake not found: ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin/qmake"; fi
@@ -128,8 +132,13 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     #
     # build project and install files into AppDir
     make -j"$(nproc)";
-    # tried make install INSTALL_ROOT=AppDir;
-    INSTALL_ROOT=AppDir make install;
+    if [ "${DO_CMAKE}" -eq 1 ]; then
+        # tried make install INSTALL_ROOT=AppDir;
+        sudo INSTALL_ROOT=AppDir make install;
+    else
+        # tried make install DESTDIR=AppDir;
+        sudo DESTDIR=AppDir make install;
+    fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
     #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
