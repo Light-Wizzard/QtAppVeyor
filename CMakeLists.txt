@@ -17,7 +17,19 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 #
-find_package(Qt5 COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
+# Specify where to find Qt
+# If Qt5 is not installed on a system known location,
+# or you want to use a specific version,
+# or you are on Windows, QT_PREFIX_PATH should be specified
+if(QT_PREFIX_PATH)
+  list(APPEND CMAKE_PREFIX_PATH "${QT_PREFIX_PATH}")
+endif()
+#
+#find_package(Qt5 ${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
+
+find_package(QT NAMES Qt5 COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
+
 #3DAnimation             Help                    QuickWidgets
 #3DCore                  LinguistTools           RemoteObjects
 #3DExtras                Location                RepParser
@@ -37,7 +49,7 @@ find_package(Qt5 COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network L
 #Gamepad                 QuickTemplates2         Xml
 #Gui                     QuickTest               XmlPatterns
 # Libraries
-set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::PrintSupport Qt5::Network)
+set(QT5_LIBRARIES Qt5${QT_VERSION_MAJOR}::Core Qt5${QT_VERSION_MAJOR}::Gui Qt5${QT_VERSION_MAJOR}::Widgets Qt5${QT_VERSION_MAJOR}::Sql Qt5${QT_VERSION_MAJOR}::PrintSupport Qt5${QT_VERSION_MAJOR}::Network)
 # Source
 set(SOURCES
     src/main.cpp
@@ -108,6 +120,9 @@ set(CMAKE_SHARED_LINKER_FLAGS "-z noexecstack -z relro -z now")
 include_directories(${Qt5Widgets_INCLUDES})
 # We need add -DQT_WIDGETS_LIB when using QtWidgets in Qt 5.
 add_definitions(${Qt5Widgets_DEFINITIONS})
+add_definitions(${Qt5Core_DEFINITIONS})
+add_definitions(${Qt5Gui_DEFINITIONS})
+add_definitions(${Qt5Network_DEFINITIONS})
 #
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 # Executables fail to build with Qt 5 in the default configuration without -fPIE, added here.
