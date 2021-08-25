@@ -65,8 +65,12 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/opt/qt5/bin:AppDir";
 if [ -d "../qml" ]; then
     export QML_SOURCES_PATHS="../qml";
 fi
+echo "build dir"
+ls;
+echo "AppDir dir"
+ls AppDir;
 
-macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
+macdeployqt "AppDir/${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
