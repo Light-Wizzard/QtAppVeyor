@@ -49,7 +49,6 @@ echo -e "Make Temp Folder";
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 else
-    #BUILD_DIR="$(mktemp -d "${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
     BUILD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t '${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX')
 fi
 #
@@ -63,14 +62,19 @@ trap "cleanup; exit;" SIGINT SIGTERM
 #trap cleanup EXIT;
 #
 # store repo root as variable
-REPO_ROOT="$(readlink -f "$(dirname "$(dirname "$0")")")";
-OLD_CWD="$(readlink -f .)";
+if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
+    REPO_ROOT="$(readlink -f "$(dirname "$(dirname "$0")")")";
+    OLD_CWD="$(readlink -f .)";
+else
+    REPO_ROOT="$(greadlink -f "$(dirname "$(dirname "$0")")")";
+    OLD_CWD="$(greadlink -f .)";
+fi
 #
 # switch to build dir
 pushd "$BUILD_DIR";
 # Make AppDir folder at the BUILD_DIR level, I should not need to do this normally, but I am not able to get cmake to work
-if [ -d "AppDir" ]; then rm -r AppDir; fi
-mkdir -p AppDir;
+#if [ -d "AppDir" ]; then rm -r AppDir; fi
+#mkdir -p AppDir;
 # x86
 if [[ "$PLATFORM" == "x86" ]]; then
     # Matrix does not show a gcc_32 or 86

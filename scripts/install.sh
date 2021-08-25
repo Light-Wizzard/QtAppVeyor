@@ -46,7 +46,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "macos" ]]; then
     brew cleanup;
     brew config;
     brew doctor || true;
-    brew install qt5 cmake binutils create-dmg openssl@1.1 curl;
+    brew install coreutils qt5 cmake binutils create-dmg openssl@1.1 curl;
     brew link qt5 --force;
     export PATH="/usr/local/opt/qt5/bin:$PATH";
     PATH="$(brew --prefix qt5)/bin:$PATH";
