@@ -131,9 +131,12 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ -d "AppDir/usr/bin" ]; then
         echo "found AppDir/usr/bin";
         ls "AppDir/usr/bin";
+        # shows QtAppVeyor
         if [ -d "AppDir/usr/bin/QtAppVeyor" ]; then
             echo "found AppDir/usr/bin/QtAppVeyor";
             ls "AppDir/usr/bin/QtAppVeyor";
+        else
+           echo "not found AppDir/usr/bin/QtAppVeyor";
         fi
     else
         echo "not found AppDir/usr/bin";
