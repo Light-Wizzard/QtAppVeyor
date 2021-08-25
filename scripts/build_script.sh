@@ -133,12 +133,9 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # build project and install files into AppDir
     make -j"$(nproc)";
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        # tried make install INSTALL_ROOT=AppDir;
-        sudo INSTALL_ROOT=AppDir make install;
-    else
-        # tried make install DESTDIR=AppDir;
-        #sudo DESTDIR=AppDir make install;
         make install DESTDIR=AppDir;
+    else
+        make install INSTALL_ROOT=AppDir;
     fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
