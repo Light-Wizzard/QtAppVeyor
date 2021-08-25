@@ -158,8 +158,8 @@ target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 # libQt5Sql.so.5 missing tried this with and without lib changes
 # tried /usr/bin no help
 install(TARGETS ${TARGET}
-  RUNTIME DESTINATION usr/bin
-  LIBRARY DESTINATION usr/lib
-  ARCHIVE DESTINATION usr/lib
+  RUNTIME DESTINATION /usr/bin
+  LIBRARY DESTINATION /usr/lib
+  ARCHIVE DESTINATION /usr/lib
 )
 # ***************************** End of cmake **********************************
