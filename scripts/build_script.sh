@@ -67,7 +67,7 @@ pushd "$BUILD_DIR";
 if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir -p AppDir;
 # x86
-if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86" ]]; then
+if [[ "$PLATFORM" == "x86" ]]; then
     # Matrix does not show a gcc_32 or 86
     # https://www.appveyor.com/docs/linux-images-software/
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
@@ -86,7 +86,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x86"
     fi
 fi
 # x64
-if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64" ]]; then
+if [[ "$PLATFORM" == "x64" ]]; then
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
     # Check Qt
@@ -102,7 +102,7 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" == "${MY_OS}" ]] && [[ "$PLATFORM" == "x64"
     fi
 fi
 #
-if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
+if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
     #
     echo "cmake build";
@@ -137,8 +137,34 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     cp "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" "${OLD_CWD}";
 fi
 #
+if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "macos" ]]; then
+    if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
+    #
+    echo "cmake build";
+    DESTDIR=AppDir;
+    # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+    cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+    #
+    # build project and install files into AppDir
+    make -j"$(nproc)";
+    make install DESTDIR=AppDir
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
+    # make sure Qt plugin finds QML sources so it can deploy the imported files
+    if [ -d "${REPO_ROOT}/qml" ]; then
+        export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
+    fi
+
+    macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
+
+    chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
+    cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
+    cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
+    7z a -tzip -r "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" AppDir;
+    cp "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" "${OLD_CWD}";
+fi
+#
 # AppImage move to Artifacts
-mv "${MY_BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
+# mv "${MY_BIN_PRO_RES_NAME}"*.AppImage* "$OLD_CWD";
 #
 # Pop Directory for Qt Installer Framework
 popd;
