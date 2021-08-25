@@ -25,8 +25,8 @@ if(QT_PREFIX_PATH)
   list(APPEND CMAKE_PREFIX_PATH "${QT_PREFIX_PATH}")
 endif()
 #
-find_package(Qt5 ${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets
-    Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets
+    Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
 #3DAnimation             Help                    QuickWidgets
 #3DCore                  LinguistTools           RemoteObjects
 #3DExtras                Location                RepParser
@@ -104,7 +104,7 @@ endif()
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
 # The qm files are generated in the build tree, but the qrc file is inside the
 # source directory and the path to resources are relative to the location of
-# the qrc file itself. We use configure_file() to copy the qrc file in the build
+# the qrc file. We use configure_file() to copy the qrc file in the build
 # directory such that it can find the qm translations files. The qrc file is
 # copied if it doesn't exist in the destination or if it is modified.
 #configure_file(QtAppVeyor.qrc ${CMAKE_BINARY_DIR} COPYONLY)
@@ -124,6 +124,7 @@ include_directories(${Qt5Widgets_INCLUDES})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 add_definitions(${Qt5Core_DEFINITIONS})
 add_definitions(${Qt5Gui_DEFINITIONS})
+add_definitions(${Qt5Sql_DEFINITIONS})
 add_definitions(${Qt5Network_DEFINITIONS})
 #
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -155,9 +156,10 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 # libQt5Sql.so.5 missing tried this with and without lib changes
+# tried /usr/bin no help
 install(TARGETS ${TARGET}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION usr/bin
+  LIBRARY DESTINATION usr/lib
+  ARCHIVE DESTINATION usr/lib
 )
 # ***************************** End of cmake **********************************
