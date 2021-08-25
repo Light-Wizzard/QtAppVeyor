@@ -46,7 +46,11 @@ if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BA
 echo -e "Make Temp Foler";
 #
 # building in temporary directory to keep system clean
-BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
+    BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+else
+    BUILD_DIR="$(mktemp -d "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+fi
 #
 # make sure to clean up build dir, even if errors occur
 function cleanup()
