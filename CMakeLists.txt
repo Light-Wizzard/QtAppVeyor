@@ -25,11 +25,8 @@ if(QT_PREFIX_PATH)
   list(APPEND CMAKE_PREFIX_PATH "${QT_PREFIX_PATH}")
 endif()
 #
-#find_package(Qt5 ${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
-
-find_package(QT NAMES Qt5 COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
-
+find_package(Qt5 ${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets
+    Sql PrintSupport Network LinguistTools LinguistTools Concurrent REQUIRED)
 #3DAnimation             Help                    QuickWidgets
 #3DCore                  LinguistTools           RemoteObjects
 #3DExtras                Location                RepParser
@@ -49,7 +46,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Sql PrintSupport 
 #Gamepad                 QuickTemplates2         Xml
 #Gui                     QuickTest               XmlPatterns
 # Libraries
-set(QT5_LIBRARIES Qt5${QT_VERSION_MAJOR}::Core Qt5${QT_VERSION_MAJOR}::Gui Qt5${QT_VERSION_MAJOR}::Widgets Qt5${QT_VERSION_MAJOR}::Sql Qt5${QT_VERSION_MAJOR}::PrintSupport Qt5${QT_VERSION_MAJOR}::Network)
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets
+    Qt5::Sql Qt5::PrintSupport Qt5::Network)
 # Source
 set(SOURCES
     src/main.cpp
@@ -92,15 +90,16 @@ set(TRANSLATION_QM
     translations/QtAppVeyor_sv.qm
     translations/QtAppVeyor_zh_CN.qm
 )#
-if (QT_VERSION VERSION_LESS 5.15.0)
+if(QT_VERSION VERSION_LESS 5.15.0)
     qt5_add_translation(QM_FILES ${TS_FILES})
 else()
     qt_add_translation(QM_FILES ${TS_FILES})
 endif()
 #
-if (UNIX AND NOT APPLE)
-    install (FILES ${TRANSLATION_QM} DESTINATION ${CMAKE_SOURCE_DIR}/translations)
-endif (UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE)
+    install(FILES ${TRANSLATION_QM} DESTINATION
+        ${CMAKE_SOURCE_DIR}/translations)
+endif()
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
 # The qm files are generated in the build tree, but the qrc file is inside the
@@ -110,13 +109,16 @@ endif (UNIX AND NOT APPLE)
 # copied if it doesn't exist in the destination or if it is modified.
 #configure_file(QtAppVeyor.qrc ${CMAKE_BINARY_DIR} COPYONLY)
 # Set CFLAGS for C/C++
-set(CMAKE_C_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2")
-set(CMAKE_CXX_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+set(CMAKE_C_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic
+    -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+set(CMAKE_CXX_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic
+    -fstack-protector-strong -D_FORTIFY_SOURCE=2")
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 # Set LDFLAGS
 set(CMAKE_SHARED_LINKER_FLAGS "-z noexecstack -z relro -z now")
 
-# The Qt5Widgets_INCLUDES also includes the include directories for dependencies QtCore and QtGui
+# The Qt5Widgets_INCLUDES also includes the include directories
+# for dependencies QtCore and QtGui
 include_directories(${Qt5Widgets_INCLUDES})
 # We need add -DQT_WIDGETS_LIB when using QtWidgets in Qt 5.
 add_definitions(${Qt5Widgets_DEFINITIONS})
@@ -125,22 +127,31 @@ add_definitions(${Qt5Gui_DEFINITIONS})
 add_definitions(${Qt5Network_DEFINITIONS})
 #
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-# Executables fail to build with Qt 5 in the default configuration without -fPIE, added here.
+# Executables fail to build with Qt 5 in the
+# default configuration without -fPIE, added here.
 set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 #
 # Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
-# hint from [Cross-platform Qt5 project using cmake](http://stackoverflow.com/questions/21174586/cross-platform-qt5-project-using-cmake)
+# hint from [Cross-platform Qt5 project using cmake]
+# (http://stackoverflow.com/questions/21174586/
+# cross-platform-qt5-project-using-cmake)
 #
 qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_SOURCES})
 #
 #
 # IMPORTANT: Adding generated headers to target as dependencies
-# hint from [unable to include a ui_form header of QT5 in cmake](http://stackoverflow.com/questions/16245147/unable-to-include-a-ui-form-header-of-qt5-in-cmake)
+# hint from [unable to include a ui_form header of QT5 in cmake]
+# (http://stackoverflow.com/questions/16245147/
+# unable-to-include-a-ui-form-header-of-qt5-in-cmake)
 #
-add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES})
+add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
+    ${APP_RES} ${QT_RES})
 #
-# `target_link_libraries()` rather than `qt5_use_modules()` for CMake 2.8.11 or later
-# hint from [CMake & QT5 - QT5_WRAP_UI not generating ui header files](http://stackoverflow.com/questions/25875255/cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)
+# `target_link_libraries()` rather than `qt5_use_modules()`
+# for CMake 2.8.11 or later hint from [CMake & QT5 - QT5_WRAP_UI
+# not generating ui header files]
+# (http://stackoverflow.com/questions/25875255/
+# cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 # libQt5Sql.so.5 missing tried this with and without lib changes
