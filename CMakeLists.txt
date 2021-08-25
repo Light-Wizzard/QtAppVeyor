@@ -17,6 +17,10 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 #
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+#
 # Specify where to find Qt
 # If Qt5 is not installed on a system known location,
 # or you want to use a specific version,
@@ -120,12 +124,11 @@ set(CMAKE_SHARED_LINKER_FLAGS "-z noexecstack -z relro -z now")
 # The Qt5Widgets_INCLUDES also includes the include directories
 # for dependencies QtCore and QtGui
 include_directories(${Qt5Widgets_INCLUDES})
-# We need add -DQT_WIDGETS_LIB when using QtWidgets in Qt 5.
+# Add the include directories for the Qt 5 Widgets module to
+# the compile lines.
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+# Use the compile definitions defined in the Qt 5 Widgets module
 add_definitions(${Qt5Widgets_DEFINITIONS})
-add_definitions(${Qt5Core_DEFINITIONS})
-add_definitions(${Qt5Gui_DEFINITIONS})
-add_definitions(${Qt5Sql_DEFINITIONS})
-add_definitions(${Qt5Network_DEFINITIONS})
 #
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 # Executables fail to build with Qt 5 in the
