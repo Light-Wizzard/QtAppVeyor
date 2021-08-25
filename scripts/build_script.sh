@@ -137,8 +137,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     else
         make install INSTALL_ROOT=AppDir;
     fi
-    echo "${APPVEYOR_BUILD_FOLDER}/usr/bin";
-    ls "${APPVEYOR_BUILD_FOLDER}/usr/bin";
+    echo "usr/bin";
+    ls "usr/bin";
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
     #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
