@@ -45,7 +45,7 @@ for:
     - ps: $env:REPO_NAME =  $env:APPVEYOR_REPO_NAME.Substring($env:APPVEYOR_REPO_NAME.IndexOf('/') + 1)
     - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
     - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
-    - sh: bash -c "scripts/install.sh"
+    - sh: bash -c "scripts/install_mac.sh"
   build_script:
     - sh: bash -c "scripts/build_script_mac.sh"
   artifacts:
