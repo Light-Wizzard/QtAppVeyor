@@ -105,7 +105,7 @@ fi
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
     # did not help
-    sudo strip --remove-section=.note.ABI-tag "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5";
+    # sudo strip --remove-section=.note.ABI-tag "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5";
     # configure build files with qmake
     # this works if I put the .pro back into the project
     declare -ix DO_CMAKE; DO_CMAKE=1;
@@ -125,10 +125,13 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     else
         make install INSTALL_ROOT=AppDir;
     fi
-    #
-    mkdir -p usr/lib;
-    cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
-
+    # did not work
+    #mkdir -p usr/lib;
+    #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
+    if [ -d "usr/lib" ]; then
+        echo "found usr/lib";
+        ls "usr/lib";
+    fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations
     #echo "Looking for ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
     #ls "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins";
