@@ -14,10 +14,10 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     if [[ "$MY_UPGRADE_OS" = "true" ]]; then sudo apt-get upgrade -qqy; fi
     # Developer tools, some multimedia and libsqlite3
     # This is what I needed for all my projects to work, and is not optimized for any one of them.
-    sudo apt install -qqy build-essential cmake software-properties-common zlib1g-dev;
+    sudo apt install -qqy build-essential cmake zlib1g-dev;
     sudo apt install -qqy yasm git flex bison checkinstall pkg-config;
     sudo apt install -qqy mesa-common-dev libgl1-mesa-dev;
-    #sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev;
+    #sudo apt install -qqy libglu1-mesa-dev libegl1-mesa libgles2-mesa-dev software-properties-common;
     #sudo apt install -qqy libncurses5-dev libncursesw5-dev openssl libssl-dev;
     #sudo apt install -qqy libffi-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev sqlite3 libsqlite3-dev libsqlite3-dev;
     #sudo apt install -qqy libreadline-dev libgl-dev libpulse-mainloop-glib0 libglfw3-dev freeglut3-dev;

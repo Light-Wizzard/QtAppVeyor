@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 project(QtAppVeyor)
+#
+set(TARGET ${CMAKE_PROJECT_NAME})
+#
 set(APP_VERSION "0.1.0")
 # [Using CMake with Qt 5](http://www.kdab.com/using-cmake-with-qt-5/)
 set(CMAKE_AUTOMOC ON)
@@ -32,8 +35,6 @@ find_package(Qt5 COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network L
 #Gui                     QuickTest               XmlPatterns
 # Libraries
 set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::PrintSupport Qt5::Network)
-#
-set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
 set(SOURCES
     src/main.cpp
@@ -93,6 +94,13 @@ endif (UNIX AND NOT APPLE)
 # directory such that it can find the qm translations files. The qrc file is
 # copied if it doesn't exist in the destination or if it is modified.
 #configure_file(QtAppVeyor.qrc ${CMAKE_BINARY_DIR} COPYONLY)
+# Set CFLAGS for C/C++
+set(CMAKE_C_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+set(CMAKE_CXX_FLAGS "-fPIE -fPIC -O2 -Wall -pedantic -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+# Set LDFLAGS
+set(CMAKE_SHARED_LINKER_FLAGS "-z noexecstack -z relro -z now")
+
 # The Qt5Widgets_INCLUDES also includes the include directories for dependencies QtCore and QtGui
 include_directories(${Qt5Widgets_INCLUDES})
 # We need add -DQT_WIDGETS_LIB when using QtWidgets in Qt 5.
