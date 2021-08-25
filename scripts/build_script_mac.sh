@@ -55,15 +55,15 @@ if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
 echo "cmake build";
 DESTDIR=AppDir;
 # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
 #
 # build project and install files into AppDir
 make -j"$(nproc)";
 make install DESTDIR=AppDir
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/opt/qt5/bin:AppDir";
 # make sure Qt plugin finds QML sources so it can deploy the imported files
-if [ -d "${REPO_ROOT}/qml" ]; then
-    export QML_SOURCES_PATHS="${REPO_ROOT}/qml";
+if [ -d "../qml" ]; then
+    export QML_SOURCES_PATHS="../qml";
 fi
 
 macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
