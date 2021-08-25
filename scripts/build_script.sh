@@ -128,6 +128,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # did not work
     #mkdir -p usr/lib;
     #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
+    ls;
     if [ -d "usr/lib" ]; then
         echo "found usr/lib";
         ls "usr/lib";
@@ -138,6 +139,18 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
             ls "AppDir/usr/lib";
         else
             echo "not found AppDir/usr/lib";
+        fi
+    fi
+    if [ -d "usr/bin" ]; then
+        echo "found usr/bin";
+        ls "usr/bin";
+    else
+        echo "not found usr/bin";
+        if [ -d "AppDir/usr/bin" ]; then
+            echo "found AppDir/usr/bin";
+            ls "AppDir/usr/bin";
+        else
+            echo "not found AppDir/usr/bin";
         fi
     fi
     # bin  doc  include  lib	libexec  mkspecs  phrasebooks  plugins	qml  resources	translations

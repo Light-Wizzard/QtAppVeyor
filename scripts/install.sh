@@ -15,15 +15,16 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "Ubuntu" ]]; then
     # Developer tools, some multimedia and libsqlite3
     # This is what I needed for all my projects to work, and is not optimized for any one of them.
     sudo apt install -qqy build-essential cmake software-properties-common libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev;
-    sudo apt install -qqy libffi-dev mesa-common-dev libglu1-mesa-dev freeglut3-dev pkg-config libegl1-mesa openssl libssl-dev;
-    sudo apt install -qqy libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev flex bison checkinstall sqlite3 libsqlite3-dev libsqlite3-dev;
-    sudo apt install -qqy libreadline-dev libgl-dev libpulse-mainloop-glib0 libgles2-mesa-dev libglfw3-dev libgl1-mesa-dev;
-    sudo apt install -qqy libfreetype6-dev libfontconfig1-dev libdbus-1-dev libxi-dev libgstreamer-plugins-base1.0-0;
-    sudo apt install -qqy libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libssl1.0.0 glibc patchelf inotify-tools;
-    sudo apt install -qqy yasm git gfortran libjpeg8-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev;
-    sudo apt install -qqy libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libatlas-base-dev libfaac-dev libmp3lame-dev;
-    sudo apt install -qqy libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev libavresample-dev;
-    sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
+    sudo apt install -qqy yasm git flex bison checkinstall pkg-config openssl libssl-dev;
+    #sudo apt install -qqy libegl1-mesa mesa-common-dev libglu1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev;
+    #sudo apt install -qqy libffi-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev sqlite3 libsqlite3-dev libsqlite3-dev;
+    #sudo apt install -qqy libreadline-dev libgl-dev libpulse-mainloop-glib0 libglfw3-dev freeglut3-dev;
+    #sudo apt install -qqy libfreetype6-dev libfontconfig1-dev libdbus-1-dev libxi-dev libgstreamer-plugins-base1.0-0;
+    #sudo apt install -qqy libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libssl1.0.0 glibc patchelf inotify-tools;
+    #sudo apt install -qqy gfortran libjpeg8-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev;
+    #sudo apt install -qqy libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libatlas-base-dev libfaac-dev libmp3lame-dev;
+    #sudo apt install -qqy libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev libavresample-dev;
+    #sudo apt install -qqy x264 v4l-utils libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev;
     # Python
     if [[ "$MY_PYTHON_REQUIRED" = "true" ]]; then sudo apt-get install -qqy python3.9-dev python3-venv; fi
     # Required by LinuxDeploy
