@@ -156,7 +156,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
     # make them executable
     chmod +x linuxdeploy*.AppImage;
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:AppDir/usr/lib/";
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:AppDir";
     sudo ldconfig;
     if [ -d "$LD_LIBRARY_PATH" ]; then
         echo "";
