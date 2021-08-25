@@ -43,13 +43,13 @@ export ARTIFACT_QIF="${MY_BIN_PRO_RES_NAME}-Linux-Installer";
 declare TEMP_BASE;
 if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BASE="/tmp"; fi
 #
-echo -e "Make Temp Foler";
+echo -e "Make Temp Folder";
 #
 # building in temporary directory to keep system clean
 if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 else
-    BUILD_DIR="$(mktemp -d "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
+    BUILD_DIR="$(mktemp -d "$TEMP_BASE/${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 fi
 #
 # make sure to clean up build dir, even if errors occur

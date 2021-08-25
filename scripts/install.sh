@@ -54,5 +54,5 @@ if [[ "$APPVEYOR_BUILD_WORKER_IMAGE" = "macos" ]]; then
     #    curl -fsS -o scripts/QtInstallerFramework-macOS.dmg "https://download.qt.io/official_releases/qt-installer-framework/$MY_QT_IF_VERSION/QtInstallerFramework-macOS-x86_64-$MY_QT_IF_VERSION.dmg";
     #    # make it executable
     #    chmod +x scripts/QtInstallerFramework-macOS.dmg;
-
 fi
+# ****************************** End of install.sh ****************************
