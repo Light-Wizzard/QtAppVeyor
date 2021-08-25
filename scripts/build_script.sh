@@ -115,7 +115,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
             #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir; # this did not work
             if [ -d "${APPVEYOR_BUILD_FOLDER}/usr/lib" ]; then
                 echo "Copy Qt Plugins to ${APPVEYOR_BUILD_FOLDER}/usr/lib";
-                cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* "${APPVEYOR_BUILD_FOLDER}/usr/lib";
+                mkdir -p usr/lib;
+                cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* "usr/lib";
             else
                 echo "usr/lib folder not found ${APPVEYOR_BUILD_FOLDER}/usr/lib";
             fi
