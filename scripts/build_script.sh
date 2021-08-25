@@ -10,7 +10,7 @@
 # This file is Open Source and I tried my best to make it cut and paste,
 # so I am adding the Environment Variables here as well as the OS installer.
 #
-echo "build_script Unix";
+echo "build_script Linux Ubuntu";
 #
 # Debug Information, not always a good idea when not debugging, and thanks to the TheAssassin, this is now working.
 # These are the setting you might want to change

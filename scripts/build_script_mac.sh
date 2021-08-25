@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 24 Auguest 2021
+# Last Update: 25 Auguest 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build_script.sh
@@ -10,7 +10,7 @@
 # This file is Open Source and I tried my best to make it cut and paste,
 # so I am adding the Environment Variables here as well as the OS installer.
 #
-echo "build_script Unix";
+echo "build_script_mac MacOS";
 #
 # Debug Information, not always a good idea when not debugging, and thanks to the TheAssassin, this is now working.
 # These are the setting you might want to change
@@ -54,7 +54,9 @@ if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
 #
 echo "cmake build";
 DESTDIR=AppDir;
-# tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
+export PATH="/usr/local/sbin:/usr/local/opt/qt5/bin:$PATH";
+export PATH="$(brew --prefix qt5)/bin:$PATH";
+export CMAKE_PREFIX_PATH="$(brew --prefix qt5)";
 PATH="$(brew --prefix qt5)/bin:$PATH" cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
 #
 # build project and install files into AppDir
@@ -67,10 +69,10 @@ if [ -d "../qml" ]; then
 fi
 echo "build dir"
 ls;
-echo "AppDir/usr dir"
-ls "AppDir/usr";
-
-macdeployqt "${MY_BIN_PRO_RES_NAME}" -dmg -verbose=2;
+echo "AppDir/usr/bin dir"
+ls "AppDir/usr/bin";
+echo "macdeployqt AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}.app -dmg -verbose=2";
+macdeployqt "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
@@ -79,7 +81,7 @@ cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
 cp "${MY_BIN_PRO_RES_NAME}-${MY_OS}-${CONFIGURATION}-${PLATFORM}.zip" ../;
 #
 #
-# Pop Directory for Qt Installer Framework
+# cd Directory for Qt Installer Framework
 cd ..;
 #
 #echo "Preparing for Qt Installer Framework";
@@ -126,5 +128,5 @@ cd ..;
 #    "$MyQtInstallerFramework" -c "${APPVEYOR_BUILD_FOLDER}/config/config.xml" -p "${APPVEYOR_BUILD_FOLDER}/packages" "${ARTIFACT_QIF}";
 #fi
 #
-echo -e "Completed build-script.sh";
+echo -e "Completed build_script_mac.sh";
 ################################ End of File ##################################
