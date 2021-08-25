@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.1.3)
 
 project(QtAppVeyor)
 #
 set(TARGET ${CMAKE_PROJECT_NAME})
+#
+# Include GNUInstallDirs to get canonical paths
+include(GNUInstallDirs)
 #
 set(APP_VERSION "0.1.0")
 # [Using CMake with Qt 5](http://www.kdab.com/using-cmake-with-qt-5/)
@@ -127,8 +130,8 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES}
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 # libQt5Sql.so.5 missing tried this with and without lib changes
 install(TARGETS ${TARGET}
-  RUNTIME DESTINATION /usr/bin
-  LIBRARY DESTINATION /usr/lib
-  ARCHIVE DESTINATION /usr/lib
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
 )
 # ***************************** End of cmake **********************************
