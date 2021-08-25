@@ -85,9 +85,8 @@ else()
     qt_add_translation(QM_FILES ${TS_FILES})
 endif()
 #
-#
 if (UNIX AND NOT APPLE)
-        install (FILES ${TRANSLATION_QM} DESTINATION ${CMAKE_SOURCE_DIR}/translations)
+    install (FILES ${TRANSLATION_QM} DESTINATION ${CMAKE_SOURCE_DIR}/translations)
 endif (UNIX AND NOT APPLE)
 #
 #qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} QtAppVeyor_en_US.ts)
@@ -99,10 +98,10 @@ endif (UNIX AND NOT APPLE)
 #configure_file(QtAppVeyor.qrc ${CMAKE_BINARY_DIR} COPYONLY)
 # The Qt5Widgets_INCLUDES also includes the include directories for dependencies QtCore and QtGui
 include_directories(${Qt5Widgets_INCLUDES})
-#
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
 # We need add -DQT_WIDGETS_LIB when using QtWidgets in Qt 5.
 add_definitions(${Qt5Widgets_DEFINITIONS})
+#
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 # Executables fail to build with Qt 5 in the default configuration without -fPIE, added here.
 set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 #
@@ -122,9 +121,10 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES}
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 #
+#LIBRARY DESTINATION /usr/lib
+#ARCHIVE DESTINATION /usr/lib
+
 INSTALL(TARGETS ${TARGET}
   RUNTIME DESTINATION /usr/bin
-  LIBRARY DESTINATION /usr/lib
-  ARCHIVE DESTINATION /usr/lib
 )
 # ***************************** End of cmake **********************************
