@@ -111,6 +111,7 @@ set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 #
 qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_SOURCES})
 #
+#
 # IMPORTANT: Adding generated headers to target as dependencies
 # hint from [unable to include a ui_form header of QT5 in cmake](http://stackoverflow.com/questions/16245147/unable-to-include-a-ui-form-header-of-qt5-in-cmake)
 #
@@ -120,3 +121,10 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES}
 # hint from [CMake & QT5 - QT5_WRAP_UI not generating ui header files](http://stackoverflow.com/questions/25875255/cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
+#
+INSTALL(TARGETS ${TARGET}
+  RUNTIME DESTINATION /usr/bin
+  LIBRARY DESTINATION /usr/lib
+  ARCHIVE DESTINATION /usr/lib
+)
+# ***************************** End of cmake **********************************

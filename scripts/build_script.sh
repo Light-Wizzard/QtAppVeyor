@@ -110,19 +110,6 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     declare -ix DO_CMAKE; DO_CMAKE=1;
     if [ "${DO_CMAKE}" -eq 1 ]; then
         echo "cmake build";
-        # Add this copy Qt Plugins to AppDir to see if that fixes cmake
-        if [ -d "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms" ]; then
-            #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* AppDir; # this did not work
-            if [ -d "${APPVEYOR_BUILD_FOLDER}/usr/lib" ]; then
-                echo "Copy Qt Plugins to ${APPVEYOR_BUILD_FOLDER}/usr/lib";
-                mkdir -p usr/lib;
-                cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms"/* "usr/lib";
-            else
-                echo "usr/lib folder not found ${APPVEYOR_BUILD_FOLDER}/usr/lib";
-            fi
-        else
-            echo "Qt Plugins not found at ${HOME}/Qt/${MY_QT_VERSION}/gcc_64/plugins/platforms";
-        fi
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
         cmake "${REPO_ROOT}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="/usr";
     else
