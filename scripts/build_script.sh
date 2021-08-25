@@ -73,10 +73,10 @@ fi
 # switch to build dir
 pushd "$BUILD_DIR";
 # Make AppDir folder at the BUILD_DIR level, I should not need to do this normally, but I am not able to get cmake to work
-#if [ -d "AppDir" ]; then rm -r AppDir; fi
-#mkdir -p AppDir;
+if [ -d "AppDir" ]; then rm -r AppDir; fi
+mkdir AppDir;
 # x86
-if [[ "$PLATFORM" == "x86" ]]; then
+if [[ "$PLATFORM" == "x86" ]] && [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     # Matrix does not show a gcc_32 or 86
     # https://www.appveyor.com/docs/linux-images-software/
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
@@ -95,7 +95,7 @@ if [[ "$PLATFORM" == "x86" ]]; then
     fi
 fi
 # x64
-if [[ "$PLATFORM" == "x64" ]]; then
+if [[ "$PLATFORM" == "x64" ]] && [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib:${HOME}/Qt/${MY_QT_VERSION}/gcc_64/include:$PATH";
     export PATH="${HOME}/Qt/${MY_QT_VERSION}/gcc_64/bin:${HOME}/Qt/${MY_QT_VERSION}/clang_64/bin:$PATH";
     # Check Qt
