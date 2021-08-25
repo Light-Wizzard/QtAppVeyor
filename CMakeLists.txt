@@ -13,8 +13,8 @@ endif()
 #
 # set the default path for built executables to the "bin" directory tried AppDir
 # set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/usr/bin)
-#
-find_package(Qt5${QT_VERSION_MAJOR} COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
+# ${QT_VERSION_MAJOR}
+find_package(Qt5 COMPONENTS REQUIRED Core Gui Widgets Sql PrintSupport Network LinguistTools LinguistTools Concurrent)
 #3DAnimation             Help                    QuickWidgets
 #3DCore                  LinguistTools           RemoteObjects
 #3DExtras                Location                RepParser
@@ -33,8 +33,8 @@ find_package(Qt5${QT_VERSION_MAJOR} COMPONENTS REQUIRED Core Gui Widgets Sql Pri
 #Core                    QuickControls2          Widgets
 #Gamepad                 QuickTemplates2         Xml
 #Gui                     QuickTest               XmlPatterns
-# Libraries  Qt5::Sql
-set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::PrintSupport Qt5::Network)
+# Libraries
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::PrintSupport Qt5::Network)
 #
 set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
