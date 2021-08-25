@@ -33,8 +33,8 @@ find_package(Qt5${QT_VERSION_MAJOR} COMPONENTS REQUIRED Core Gui Widgets Sql Pri
 #Core                    QuickControls2          Widgets
 #Gamepad                 QuickTemplates2         Xml
 #Gui                     QuickTest               XmlPatterns
-# Libraries
-set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::PrintSupport Qt5::Network)
+# Libraries  Qt5::Sql
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::PrintSupport Qt5::Network)
 #
 set(TARGET ${CMAKE_PROJECT_NAME})
 # Source
@@ -120,11 +120,10 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${APP_RES} ${QT_RES}
 # hint from [CMake & QT5 - QT5_WRAP_UI not generating ui header files](http://stackoverflow.com/questions/25875255/cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
-#
-#LIBRARY DESTINATION /usr/lib
-#ARCHIVE DESTINATION /usr/lib
-
+# libQt5Sql.so.5 missing tried this with and without lib changes
 INSTALL(TARGETS ${TARGET}
   RUNTIME DESTINATION /usr/bin
+  LIBRARY DESTINATION /usr/lib
+  ARCHIVE DESTINATION /usr/lib
 )
 # ***************************** End of cmake **********************************
