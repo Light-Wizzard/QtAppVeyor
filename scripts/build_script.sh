@@ -122,8 +122,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # build project and install files into AppDir
     make -j"$(nproc)";
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        #make install DESTDIR=AppDir
-        DESTDIR=AppDir ninja install
+        make install DESTDIR=AppDir
+        #DESTDIR=AppDir ninja install
     else
         make install INSTALL_ROOT="AppDir";
     fi
@@ -156,7 +156,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     wget -c -nv https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage;
     # make them executable
     chmod +x linuxdeploy*.AppImage;
-    export LD_LIBRARY_PATH="AppDir/usr/lib/";
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:AppDir/usr/lib/";
+    sudo ldconfig;
     if [ -d "$LD_LIBRARY_PATH" ]; then
         echo "";
         echo "Found $LD_LIBRARY_PATH";
