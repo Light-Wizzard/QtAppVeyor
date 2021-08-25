@@ -111,6 +111,7 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     declare -ix DO_CMAKE; DO_CMAKE=1;
     if [ "${DO_CMAKE}" -eq 1 ]; then
         echo "cmake build";
+        DESTDIR=AppDir;
         # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
         cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
     else
@@ -121,7 +122,8 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # build project and install files into AppDir
     make -j"$(nproc)";
     if [ "${DO_CMAKE}" -eq 1 ]; then
-        make install DESTDIR=AppDir
+        #make install DESTDIR=AppDir
+        DESTDIR=AppDir ninja install
     else
         make install INSTALL_ROOT="AppDir";
     fi
