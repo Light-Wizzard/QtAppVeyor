@@ -67,10 +67,10 @@ if [ -d "../qml" ]; then
 fi
 echo "build dir"
 ls;
-echo "AppDir dir"
-ls AppDir;
+echo "AppDir/usr dir"
+ls "AppDir/usr";
 
-macdeployqt "AppDir/${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
+macdeployqt "${MY_BIN_PRO_RES_NAME}" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
