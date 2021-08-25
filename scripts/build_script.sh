@@ -128,10 +128,15 @@ if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "${MY_OS}" ]]; then
     # did not work
     #mkdir -p usr/lib;
     #cp -v "${HOME}/Qt/${MY_QT_VERSION}/gcc_64/lib/libQt5Core.so.5"* usr/lib;
+    echo "AppDir/usr";
+    ls "AppDir/usr";
     if [ -d "AppDir/usr/bin" ]; then
         echo "found AppDir/usr/bin";
         ls "AppDir/usr/bin";
         # shows QtAppVeyor
+        if [ -f "AppDir/usr/bin/QtAppVeyor" ]; then
+            echo "found executable AppDir/usr/bin/QtAppVeyor";
+        fi
         if [ -d "AppDir/usr/bin/QtAppVeyor" ]; then
             echo "found AppDir/usr/bin/QtAppVeyor";
             ls "AppDir/usr/bin/QtAppVeyor";
