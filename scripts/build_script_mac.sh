@@ -55,7 +55,7 @@ if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
 echo "cmake build";
 DESTDIR=AppDir;
 # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
-cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
+PATH="$(brew --prefix qt5)/bin:$PATH" cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
 #
 # build project and install files into AppDir
 make -j"$(nproc)";
