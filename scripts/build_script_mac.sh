@@ -67,24 +67,10 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/opt/qt5/bin:AppDir";
 if [ -d "../qml" ]; then
     export QML_SOURCES_PATHS="../qml";
 fi
-echo "build dir"
-ls -lh;
-echo "AppDir/usr/bin dir"
-ls -lh "AppDir/usr/bin";
-#
-if [ -f "${MY_BIN_PRO_RES_NAME}" ]; then
-    echo "File: ${MY_BIN_PRO_RES_NAME}"
-fi
-#
-if [ -f "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
-    echo "File: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
-fi
 #
 DYLD_LIBRARY_PATH="/usr/local/opt/qt5/lib:$DYLD_LIBRARY_PATH";
 #
-echo "macdeployqt ${MY_BIN_PRO_RES_NAME}.app -dmg -verbose=2";
 macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
-
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
 cp -v "${APPVEYOR_BUILD_FOLDER}/README.md" AppDir/usr/bin/;
