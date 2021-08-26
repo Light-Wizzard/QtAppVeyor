@@ -104,12 +104,14 @@ but I always wait to till the end to start on it.
 
 ### :package: **Downloads:**
 
- - :penguin: [Linux x64 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x64.zip) [Linux x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip) 
- - :office:  [Windows x64 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x64.zip) [Windows x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
- - :apple: Currenty unavalible [Apple zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor.zip)
+- :penguin: [Linux x64 zip  ](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x64.zip) [Linux x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Ubuntu-Release-x86.zip)
+- :office:  [Windows x64 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x64.zip) [Windows x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-Windows-Release-x86.zip)
+- :apple:   [Apple x64 zip  ](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-MacOs-Release-x64.zip) [Apple x86 zip](https://github.com/Light-Wizzard/QtAppVeyor/releases/download/continuous/QtAppVeyor-MacOs-Release-x86.zip)
 
 Windows (Tested on 7 and 10 let me know if 8 works): Download zip and extract it, 
 and run the file QtAppVeyor.exe inside of the deploy AppDir folder.
+
+Apple not test since I do not have one.
 
 When completed, it will only have one Artifact, the Qt Installer Framework with Qt Auto Update in a zip file.
 
