@@ -68,18 +68,23 @@ if [ -d "../qml" ]; then
     export QML_SOURCES_PATHS="../qml";
 fi
 echo "build dir"
-ls;
+ls -las;
 echo "AppDir/usr/bin dir"
-ls "AppDir/usr/bin";
-if [ -d "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
-    echo "Folder: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
-    ls "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}";
+ls -las "AppDir/usr/bin";
+
+if [ -d "${MY_BIN_PRO_RES_NAME}" ]; then
+    echo "Folder: ${MY_BIN_PRO_RES_NAME}"
+    ls -las "${MY_BIN_PRO_RES_NAME}";
 fi
+if [ -f "${MY_BIN_PRO_RES_NAME}" ]; then
+    echo "File: ${MY_BIN_PRO_RES_NAME}"
+fi
+#
 if [ -f "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
     echo "File: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
 fi
-echo "macdeployqt AppDir/usr/bin/${MY_BIN_PRO_RES_NAME} -dmg -verbose=2";
-macdeployqt "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" -dmg -verbose=2;
+echo "macdeployqt ${MY_BIN_PRO_RES_NAME} -dmg -verbose=2";
+macdeployqt "${MY_BIN_PRO_RES_NAME}" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
