@@ -163,6 +163,7 @@ if(APPLE)
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/macos/info.plist
         XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
+        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "exeName"
     )
 else()
     add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
@@ -177,9 +178,18 @@ endif()
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
 #
-install(TARGETS ${TARGET}
-  RUNTIME DESTINATION /usr/bin
-  LIBRARY DESTINATION /usr/lib
-  ARCHIVE DESTINATION /usr/lib
-)
+if(APPLE)
+    install(TARGETS ${TARGET}
+      RUNTIME DESTINATION /usr/bin
+      BUNDLE DESTINATION  /usr/bin
+      LIBRARY DESTINATION /usr/lib
+      ARCHIVE DESTINATION /usr/lib
+    )
+else()
+    install(TARGETS ${TARGET}
+      RUNTIME DESTINATION /usr/bin
+      LIBRARY DESTINATION /usr/lib
+      ARCHIVE DESTINATION /usr/lib
+    )
+endif()
 # ***************************** End of cmake **********************************
