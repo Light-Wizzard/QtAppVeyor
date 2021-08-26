@@ -79,6 +79,9 @@ fi
 if [ -f "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
     echo "File: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
 fi
+#
+DYLD_LIBRARY_PATH="/usr/local/opt/qt5/lib:$DYLD_LIBRARY_PATH";
+#
 echo "macdeployqt AppDir/usr/bin -dmg -verbose=2";
 macdeployqt "AppDir/usr/bin" -dmg -verbose=2;
 

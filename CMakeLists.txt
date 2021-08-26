@@ -148,8 +148,22 @@ qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_SOURCES})
 # (http://stackoverflow.com/questions/16245147/
 # unable-to-include-a-ui-form-header-of-qt5-in-cmake)
 #
-add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
-    ${APP_RES} ${QT_RES})
+if(APPLE)
+    add_executable(${TARGET} MACOSX_BUNDLE ${SOURCES} ${UI_GENERATED_HEADERS}
+        ${APP_RES} ${QT_RES})
+    set_target_properties(${TARGET} PROPERTIES
+        BUNDLE True
+        MACOSX_BUNDLE TRUE
+        MACOSX_RPATH TRUE
+        MACOSX_BUNDLE_GUI_IDENTIFIER my.qtappveyor.style.identifier.${TARGET}
+        MACOSX_BUNDLE_BUNDLE_NAME ${TARGET}
+        XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
+        XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
+    )
+else()
+    add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
+        ${APP_RES} ${QT_RES})
+endif()
 #
 # `target_link_libraries()` rather than `qt5_use_modules()`
 # for CMake 2.8.11 or later hint from [CMake & QT5 - QT5_WRAP_UI
@@ -158,8 +172,7 @@ add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS}
 # cmake-qt5-qt5-wrap-ui-not-generating-ui-header-files)
 #
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})
-# libQt5Sql.so.5 missing tried this with and without lib changes
-# tried /usr/bin no help
+#
 install(TARGETS ${TARGET}
   RUNTIME DESTINATION /usr/bin
   LIBRARY DESTINATION /usr/lib
