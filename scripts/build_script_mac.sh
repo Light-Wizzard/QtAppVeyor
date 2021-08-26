@@ -49,14 +49,14 @@ cd build;
 if [ -d "AppDir" ]; then rm -r AppDir; fi
 mkdir AppDir;
 #
-
-if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
-#
 echo "cmake build";
 DESTDIR=AppDir;
 export PATH="/usr/local/sbin:/usr/local/opt/qt5/bin:$PATH";
 export PATH="$(brew --prefix qt5)/bin:$PATH";
 export CMAKE_PREFIX_PATH="$(brew --prefix qt5)";
+#
+if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
+#
 PATH="$(brew --prefix qt5)/bin:$PATH" cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
 #
 # build project and install files into AppDir
@@ -71,8 +71,15 @@ echo "build dir"
 ls;
 echo "AppDir/usr/bin dir"
 ls "AppDir/usr/bin";
-echo "macdeployqt AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}.app -dmg -verbose=2";
-macdeployqt "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
+if [ -d "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
+    echo "Folder: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
+    ls "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}";
+fi
+if [ -f "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" ]; then
+    echo "File: AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}"
+fi
+echo "macdeployqt AppDir/usr/bin/${MY_BIN_PRO_RES_NAME} -dmg -verbose=2";
+macdeployqt "AppDir/usr/bin/${MY_BIN_PRO_RES_NAME}" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
