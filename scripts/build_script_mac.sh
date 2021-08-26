@@ -82,8 +82,8 @@ fi
 #
 DYLD_LIBRARY_PATH="/usr/local/opt/qt5/lib:$DYLD_LIBRARY_PATH";
 #
-echo "macdeployqt AppDir/usr/bin -dmg -verbose=2";
-macdeployqt "AppDir/usr/bin" -dmg -verbose=2;
+echo "macdeployqt ${MY_BIN_PRO_RES_NAME}.app -dmg -verbose=2";
+macdeployqt "${MY_BIN_PRO_RES_NAME}.app" -dmg -verbose=2;
 
 chmod +x "${MY_BIN_PRO_RES_NAME}"*.dmg*;
 cp -v "${MY_BIN_PRO_RES_NAME}"*.dmg* AppDir/usr/bin/;
