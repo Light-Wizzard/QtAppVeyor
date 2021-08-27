@@ -46,11 +46,7 @@ if [ "$CI" == "" ] && [ -d "/dev/shm" ]; then TEMP_BASE="/dev/shm"; else TEMP_BA
 echo -e "Make Temp Folder";
 #
 # building in temporary directory to keep system clean
-if [[ $APPVEYOR_BUILD_WORKER_IMAGE == "Ubuntu" ]]; then
-    BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
-else
-    BUILD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t '${TEMP_BASE}/${MY_BIN_PRO_RES_NAME}-build-XXXXXX')
-fi
+BUILD_DIR="$(mktemp -d -p "$TEMP_BASE" "${MY_BIN_PRO_RES_NAME}-build-XXXXXX")";
 #
 # make sure to clean up build dir, even if errors occur
 function cleanup()
@@ -109,6 +105,7 @@ fi
 if [ "${SHOW_PATH}" -eq 1 ]; then echo "PATH=$PATH"; fi
 #
 echo "cmake build";
+declare -gx DESTDIR;
 DESTDIR=AppDir;
 # tired this without -DCMAKE_BUILD_TYPE=${CONFIGURATION} -DBUILD_SHARED_LIBS=OFF
 cmake "${REPO_ROOT}" -G "Unix Makefiles" -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE="${CONFIGURATION}" -DCMAKE_INSTALL_PREFIX="/usr";
