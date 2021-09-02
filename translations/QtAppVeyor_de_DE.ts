@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.1" language="de">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../src/MainWindow.ui" line="19"/>
         <source>MainWindow</source>
-        <translation>主窗口</translation>
+        <translation>Hauptfenster</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="39"/>
         <source>Settings</source>
-        <translation>设置</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="52"/>
         <source>Qt Project</source>
-        <translation>Qt项目</translation>
+        <translation>Qt-Projekt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="96"/>
@@ -25,29 +25,29 @@
     </message>
     <message>
         <source>ProjectID</source>
-        <translation type="obsolete">项目编号</translation>
+        <translation type="obsolete">ProjektID</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="117"/>
         <source>Encrpyted Secret</source>
-        <translation>加密的秘密</translation>
+        <translation>Verschlüsseltes Geheimnis</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="147"/>
         <source>OS</source>
-        <translation>操作系统</translation>
+        <translation>Betriebssystem</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="156"/>
         <location filename="../src/MainWindow.ui" line="1402"/>
         <source>iOS</source>
-        <translation>IOS</translation>
+        <translation>iOS</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="168"/>
         <location filename="../src/MainWindow.ui" line="1590"/>
         <source>Windows</source>
-        <translation>视窗</translation>
+        <translation>Fenster</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="180"/>
@@ -57,24 +57,24 @@
     <message>
         <location filename="../src/MainWindow.ui" line="187"/>
         <source>Web Assembly</source>
-        <translation>网页组装</translation>
+        <translation>Bahnmontage</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="194"/>
         <location filename="../src/MainWindow.ui" line="1026"/>
         <source>Android</source>
-        <translation>安卓</translation>
+        <translation>Android</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="206"/>
         <location filename="../src/MainWindow.ui" line="838"/>
         <source>Mac</source>
-        <translation>苹果</translation>
+        <translation>Mac</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="233"/>
         <source>Platform</source>
-        <translation>平台</translation>
+        <translation>Plattform</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="247"/>
@@ -89,17 +89,17 @@
     <message>
         <location filename="../src/MainWindow.ui" line="286"/>
         <source>Configuration</source>
-        <translation>配置</translation>
+        <translation>Aufbau</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="300"/>
         <source>Release</source>
-        <translation>发布</translation>
+        <translation>Freigeben</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="312"/>
         <source>Debug</source>
-        <translation>调试</translation>
+        <translation>Debuggen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="334"/>
@@ -111,12 +111,12 @@
         <location filename="../src/MainWindow.ui" line="1515"/>
         <location filename="../src/MainWindow.ui" line="1789"/>
         <source>Options</source>
-        <translation>选项</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="343"/>
         <source>Add</source>
-        <translation>添加</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="350"/>
@@ -130,17 +130,17 @@
         <location filename="../src/MainWindow.ui" line="2175"/>
         <location filename="../src/MainWindow.ui" line="2343"/>
         <source>Save</source>
-        <translation>节省</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="357"/>
         <source>Delete</source>
-        <translation>删除</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="379"/>
         <source>Environment</source>
-        <translation>环境</translation>
+        <translation>Umfeld</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="392"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/MainWindow.ui" line="422"/>
         <source>Messaging</source>
-        <translation>消息传递</translation>
+        <translation>Nachrichten</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="431"/>
         <source>Log Debugging Messages</source>
-        <translation>记录调试消息</translation>
+        <translation>Debugging-Meldungen protokollieren</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="453"/>
         <source>Language</source>
-        <translation>语</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="483"/>
@@ -175,42 +175,42 @@
     <message>
         <location filename="../src/MainWindow.ui" line="491"/>
         <source>Database Name</source>
-        <translation>数据库名称</translation>
+        <translation>Name der Datenbank</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="498"/>
         <source>SQL Type</source>
-        <translation>SQL 类型</translation>
+        <translation>SQL-Typ</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="512"/>
         <source>Host Name</source>
-        <translation>主机名</translation>
+        <translation>Hostname</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="532"/>
         <source>User Name</source>
-        <translation>用户名</translation>
+        <translation>Nutzername</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="552"/>
         <source>Password</source>
-        <translation>密码</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="583"/>
         <source>Show Password</source>
-        <translation>显示密码</translation>
+        <translation>Passwort anzeigen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="607"/>
         <source>Browse</source>
-        <translation>浏览</translation>
+        <translation>Durchsuche</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="650"/>
         <source>Ubnutu</source>
-        <translation>乌努图</translation>
+        <translation>Ubnutu</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="658"/>
@@ -221,7 +221,7 @@
         <location filename="../src/MainWindow.ui" line="1598"/>
         <location filename="../src/MainWindow.ui" line="1886"/>
         <source>Qt Version</source>
-        <translation>Qt版本</translation>
+        <translation>Qt-Version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="678"/>
@@ -232,7 +232,7 @@
         <location filename="../src/MainWindow.ui" line="1618"/>
         <location filename="../src/MainWindow.ui" line="1906"/>
         <source>Qt Installer Version</source>
-        <translation>Qt 安装程序版本</translation>
+        <translation>Qt Installer-Version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="698"/>
@@ -243,7 +243,7 @@
         <location filename="../src/MainWindow.ui" line="1638"/>
         <location filename="../src/MainWindow.ui" line="1926"/>
         <source>Qt Installer Package</source>
-        <translation>Qt 安装包</translation>
+        <translation>Qt-Installationspaket</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="718"/>
@@ -254,7 +254,7 @@
         <location filename="../src/MainWindow.ui" line="1738"/>
         <location filename="../src/MainWindow.ui" line="2026"/>
         <source>Python Version</source>
-        <translation>蟒蛇版</translation>
+        <translation>Python-Version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="740"/>
@@ -265,7 +265,7 @@
         <location filename="../src/MainWindow.ui" line="1760"/>
         <location filename="../src/MainWindow.ui" line="2048"/>
         <source>Python Required</source>
-        <translation>需要 Python</translation>
+        <translation>Python erforderlich</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="749"/>
@@ -273,12 +273,12 @@
         <location filename="../src/MainWindow.ui" line="1313"/>
         <location filename="../src/MainWindow.ui" line="1501"/>
         <source>OS Upgrade</source>
-        <translation>操作系统升级</translation>
+        <translation>Betriebssystem-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="756"/>
         <source>Ubuntu Upgrade</source>
-        <translation>Ubuntu 升级</translation>
+        <translation>Ubuntu-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="792"/>
@@ -290,7 +290,7 @@
         <location filename="../src/MainWindow.ui" line="2135"/>
         <location filename="../src/MainWindow.ui" line="2157"/>
         <source>Reset</source>
-        <translation>重置</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="801"/>
@@ -301,7 +301,7 @@
         <location filename="../src/MainWindow.ui" line="1827"/>
         <location filename="../src/MainWindow.ui" line="1872"/>
         <source>Record ID</source>
-        <translation>记录 ID</translation>
+        <translation>Datensatz-ID</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="815"/>
@@ -312,23 +312,23 @@
         <location filename="../src/MainWindow.ui" line="1841"/>
         <location filename="../src/MainWindow.ui" line="2197"/>
         <source>Vs Version</source>
-        <translation>与版本</translation>
+        <translation>Vs-Version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="944"/>
         <source>Mac Upgrade</source>
-        <translation>Mac 升级</translation>
+        <translation>Mac-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1125"/>
         <location filename="../src/MainWindow.ui" line="2084"/>
         <source>Upgrade OS</source>
-        <translation>升级操作系统</translation>
+        <translation>Betriebssystem aktualisieren</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1132"/>
         <source>Android Upgrade</source>
-        <translation>安卓升级</translation>
+        <translation>Android-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1214"/>
@@ -338,12 +338,12 @@
     <message>
         <location filename="../src/MainWindow.ui" line="1320"/>
         <source>Web Assembly Upgrade</source>
-        <translation>Web 程序集升级</translation>
+        <translation>Web-Assembly-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1508"/>
         <source>iOS Upgrade</source>
-        <translation>iOS升级</translation>
+        <translation>iOS-Upgrade</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1658"/>
@@ -361,44 +361,44 @@
         <location filename="../src/MainWindow.ui" line="1698"/>
         <location filename="../src/MainWindow.ui" line="1986"/>
         <source>Qt Tools MingW32</source>
-        <translation>Qt 工具 MingW32</translation>
+        <translation>Qt Tools MingW32</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1718"/>
         <location filename="../src/MainWindow.ui" line="2006"/>
         <source>Qt Tools MingW64</source>
-        <translation>Qt 工具 MingW64</translation>
+        <translation>Qt Tools MingW64</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1769"/>
         <location filename="../src/MainWindow.ui" line="2057"/>
         <source>Visual Studio Version</source>
-        <translation>Visual Studio 版本</translation>
+        <translation>Visual Studio-Version</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="1864"/>
         <source>Defaults</source>
-        <translation>默认值</translation>
+        <translation>Standardeinstellungen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2077"/>
         <source>OS Upgrades</source>
-        <translation>操作系统升级</translation>
+        <translation>Betriebssystem-Upgrades</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2091"/>
         <source>Set all OS&apos;s to Default</source>
-        <translation>将所有操作系统设置为默认</translation>
+        <translation>Setzen Sie alle Betriebssysteme auf Standard</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2113"/>
         <source>Set Defaults</source>
-        <translation>设置默认值</translation>
+        <translation>Standardwerte festlegen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2166"/>
         <source>Save Defaults</source>
-        <translation>保存默认值</translation>
+        <translation>Standardwerte speichern</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2220"/>
@@ -409,48 +409,48 @@
         <location filename="../src/MainWindow.ui" line="2236"/>
         <location filename="../src/MainWindow.ui" line="2352"/>
         <source>Help</source>
-        <translation>帮助</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2259"/>
         <source>File</source>
-        <translation>文件</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2273"/>
         <location filename="../src/MainWindow.ui" line="2325"/>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2287"/>
         <source>toolBar</source>
-        <translation>工具栏</translation>
+        <translation>Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2316"/>
         <source>Exit</source>
-        <translation>出口</translation>
+        <translation>Ausgang</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2334"/>
         <source>Create</source>
-        <translation>创建</translation>
+        <translation>Schaffen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2361"/>
         <source>Print</source>
-        <translation>打印</translation>
+        <translation>Drucken</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2370"/>
         <source>Clipboard</source>
-        <translation>剪贴板</translation>
+        <translation>Zwischenablage</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.ui" line="2379"/>
         <source>Author</source>
-        <translation>作者</translation>
+        <translation>Autor</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="180"/>
@@ -460,17 +460,17 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="181"/>
         <source>ID</source>
-        <translation>ID</translation>
+        <translation>ICH WÜRDE</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="182"/>
         <source>Project</source>
-        <translation>项目</translation>
+        <translation>Projekt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="870"/>
         <source>Save File As</source>
-        <translation>文件另存为</translation>
+        <translation>Datei speichern als</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="870"/>
@@ -480,12 +480,12 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="1836"/>
         <source>Sqlite Folder Location</source>
-        <translation>Sqlite 文件夹位置</translation>
+        <translation>Speicherort des SQLite-Ordners</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="142"/>
         <source>English</source>
-        <translation>英语</translation>
+        <translation>Englisch</translation>
     </message>
 </context>
 <context>
@@ -493,7 +493,7 @@
     <message>
         <location filename="../src/MyDatatables.cpp" line="300"/>
         <source>Not adding: Record found in database</source>
-        <translation>不添加：在数据库中找到的记录</translation>
+        <translation>Nicht hinzufügen: Datensatz in Datenbank gefunden</translation>
     </message>
 </context>
 <context>
@@ -501,22 +501,22 @@
     <message>
         <location filename="../src/MyLocalization.cpp" line="171"/>
         <source>Remove Arguments that use Percent Sign x</source>
-        <translation>删除使用百分号 x 的参数</translation>
+        <translation>Argumente entfernen, die das Prozentzeichen x . verwenden</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="184"/>
         <source>Remove Args</source>
-        <translation>删除参数</translation>
+        <translation>Args entfernen</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="184"/>
         <source>File: </source>
-        <translation>文件：</translation>
+        <translation>Datei:</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="194"/>
         <source>File not found</source>
-        <translation>文件未找到</translation>
+        <translation>Datei nicht gefunden</translation>
     </message>
 </context>
 <context>
@@ -524,27 +524,27 @@
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="38"/>
         <source>Crypto Fail: MyOrgSettings::onRunOnStartup()</source>
-        <translation>加密失败：MyOrgSettings::onRunOnStartup()</translation>
+        <translation>Krypto-Fehler: MyOrgSettings::onRunOnStartup()</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="310"/>
         <source>Error opening file for reading</source>
-        <translation>打开文件进行读取时出错</translation>
+        <translation>Fehler beim Öffnen der Datei zum Lesen</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="310"/>
         <source>Could not open file for reading</source>
-        <translation>无法打开文件进行阅读</translation>
+        <translation>Datei konnte nicht zum Lesen geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="331"/>
         <source>Error opening file for writing</source>
-        <translation>打开文件写入时出错</translation>
+        <translation>Fehler beim Öffnen der Datei zum Schreiben</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="331"/>
         <source>Could not open file for writing</source>
-        <translation>无法打开文件进行写入</translation>
+        <translation>Datei konnte nicht zum Schreiben geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="374"/>
@@ -559,22 +559,22 @@
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="639"/>
         <source>File not found</source>
-        <translation>文件未找到</translation>
+        <translation>Datei nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="650"/>
         <source>Folder not found</source>
-        <translation>找不到文件夹</translation>
+        <translation>Ordner nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="716"/>
         <source>This file was created to test if this folder is writeable by</source>
-        <translation>创建此文件是为了测试此文件夹是否可由</translation>
+        <translation>Diese Datei wurde erstellt, um zu testen, ob dieser Ordner beschreibbar ist von</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="737"/>
         <source>Error: cannot create file</source>
-        <translation>错误：无法创建文件</translation>
+        <translation>Fehler: Datei kann nicht erstellt werden</translation>
     </message>
 </context>
 <context>
@@ -582,32 +582,32 @@
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="389"/>
         <source>Database SQL Driver is missing</source>
-        <translation>缺少数据库 SQL 驱动程序</translation>
+        <translation>Datenbank-SQL-Treiber fehlt</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="389"/>
         <source>Install SQL</source>
-        <translation>安装 SQL</translation>
+        <translation>SQL installieren</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="394"/>
         <source>Cannot open database</source>
-        <translation>无法打开数据库</translation>
+        <translation>Datenbank kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="394"/>
         <source>Unable to establish a database connection</source>
-        <translation>无法建立数据库连接</translation>
+        <translation>Datenbankverbindung kann nicht hergestellt werden</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="472"/>
         <source>runProcces cannot start process</source>
-        <translation>runProcces 无法启动进程</translation>
+        <translation>runProcces kann den Prozess nicht starten</translation>
     </message>
     <message>
         <location filename="../src/MySqlDbtModel.cpp" line="476"/>
         <source>runProcces timeout ..</source>
-        <translation>runProcces 超时..</translation>
+        <translation>runProcces-Zeitüberschreitung ..</translation>
     </message>
 </context>
 <context>
@@ -628,18 +628,18 @@
         <location filename="../src/MainWindow.cpp" line="1262"/>
         <location filename="../src/MainWindow.cpp" line="1267"/>
         <source>Could not read from the Database</source>
-        <translation>无法从数据库读取</translation>
+        <translation>Konnte nicht aus der Datenbank lesen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1262"/>
         <location filename="../src/MainWindow.cpp" line="1267"/>
         <source>Unable to find record in database. Click Cancel to exit.</source>
-        <translation>无法在数据库中找到记录。单击取消退出。</translation>
+        <translation>Datensatz in Datenbank nicht gefunden. Klicken Sie zum Beenden auf Abbrechen.</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1781"/>
         <source>Password Revieled</source>
-        <translation>密码审核</translation>
+        <translation>Passwort bestätigt</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1781"/>
@@ -649,47 +649,47 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="1851"/>
         <source>Database Move Failed</source>
-        <translation>数据库移动失败</translation>
+        <translation>Datenbankverschiebung fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1851"/>
         <source>Failed to move Database</source>
-        <translation>无法移动数据库</translation>
+        <translation>Datenbank konnte nicht verschoben werden</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="300"/>
         <source>Record found!</source>
-        <translation>记录找到！</translation>
+        <translation>Rekord gefunden!</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="327"/>
         <source>Record already exists in Database</source>
-        <translation>数据库中已存在记录</translation>
+        <translation>Datensatz existiert bereits in der Datenbank</translation>
     </message>
     <message>
         <location filename="../src/MyDatatables.cpp" line="327"/>
         <source>Unable to add this record to databasen. Click Cancel to exit.</source>
-        <translation>无法将此记录添加到数据库中。单击取消退出。</translation>
+        <translation>Dieser Datensatz kann nicht zur Datenbank hinzugefügt werden. Klicken Sie zum Beenden auf Abbrechen.</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="184"/>
         <source>Remove Args file is created</source>
-        <translation>删除 Args 文件已创建</translation>
+        <translation>Entfernen Sie die Args-Datei wird erstellt</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="38"/>
         <source>Crypto Fail</source>
-        <translation>加密失败</translation>
+        <translation>Krypto fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="737"/>
         <source>File System Error</source>
-        <translation>文件系统错误</translation>
+        <translation>Dateisystemfehler</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="39"/>
         <source>Failed to open log file</source>
-        <translation>无法打开日志文件</translation>
+        <translation>Fehler beim Öffnen der Protokolldatei</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="60"/>

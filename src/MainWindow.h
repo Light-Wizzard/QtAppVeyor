@@ -17,7 +17,9 @@
 #include <QtDebug>
 #include <QtGlobal>
 #include <QtMath>
-#include <QtSql>
+#ifdef USE_SQL_FLAG
+    #include <QtSql>
+#endif
 #include <QtWidgets>
 #include <QTabWidget>
 #include <QTextStream>
@@ -99,8 +101,17 @@ class MainWindow : public QMainWindow
         void retranslate();                                      //!< retranslate none designer components
         void loadLanguageComboBox();                             //!< load Language ComboBox
         void setMessage(const QString &thisMessage);             //!< set Message
+        void resetDefaults(int tabNumber);                       //!< reset Defaults
+        void resetUbuntu();                                      //!< reset Ubuntu
+        void resetMac();                                         //!< reset Mac
+        void resetAndroid();                                     //!< reset Android
+        void resetWebAssembly();                                 //!< reset WebAssembly
+        void resetIOS();                                         //!< reset IOS
+        void resetWindows();                                     //!< reset Windows
+        void resetDefault();                                     //!< reset Default
+        void resetSettings();                                    //!< reset Settings
 
-    public slots:
+        public slots:
         void onAbout();                       //!< ui->actionAbout
         void onAuthor();                      //!< ui->actionAuthor
         void onCreate();                      //!< ui->actionCreate
@@ -152,10 +163,10 @@ class MainWindow : public QMainWindow
         virtual void changeEvent(QEvent * event) override;           //!< change Event
 
     private:
+        MyOrgSettings      *mySetting;                      //!< \c mySetting               @brief Domain Settings
         Ui::MainWindow     *ui = nullptr;                   //!< \c ui                      @brief Pointer to mainwindow.ui
-        MyDatatables       *mySqlDb;                        //!< \c mySqlDb                 @brief SQL Datatables
+        MyDatatables       *myDbModal;                      //!< \c myDbModal               @brief Datatables Modal
         QClipboard         *clipboard;                      //!< \c clipboard               @brief clipboard
-        QSqlDatabase        myDb;                           //!< \c myDb                    @brief Database
         bool                isDebugMessage   = true;        //!< \c isDebugMessage          @brief true of false for Debugging
         bool                isYamlLoaded     = false;       //!< \c isLoaded                @brief true of false for if Yaml screen is loaded
         bool                isSaveSettings   = false;       //!< \c isSaveSettings          @brief Auto Save

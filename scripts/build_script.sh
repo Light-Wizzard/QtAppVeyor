@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Last Update: 25 Auguest 2021
+# Last Update: 26 Auguest 2021
 #
 # I use shell check, delete the ? to run it, but leave that in this files so it does not fail when it sees it.
 # shell?check -x scripts/build_script.sh

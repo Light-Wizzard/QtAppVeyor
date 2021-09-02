@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <QtWidgets>
-#include <QtSql>
+#ifdef USE_SQL_FLAG
+    #include <QtSql>
+#endif
 #include <QtDebug>
 #include <QDir>
 //
@@ -17,10 +19,10 @@ class MySqlDbtModel : public QObject
 {
         Q_OBJECT
     public:
-        MySqlDbtModel(QObject *parent = 0);                         //!< MySqlDbtModel
+        MySqlDbtModel(QObject *parent = 0, MyOrgSettings *thisSetting = nullptr); //!< MySqlDbtModel
         ~MySqlDbtModel();                                           //!< ~MySqlDbtModel
         // Public
-        MyOrgSettings  *mySetting;                                  //!< \c mySetting @brief Domain Settings
+        MyOrgSettings  *mySetting;                   //!< \c mySetting @brief Domain Settings
         // DataBase Connection
         bool createDataBaseConnection();                            //!< create DataBase Connection
         bool isDbTable(const QString &thisTable);                   //!< isDbTable
@@ -43,8 +45,10 @@ class MySqlDbtModel : public QObject
         void setSqlDatabaseName(const QString &thisPassword);       //!< setSqlDatabaseName
         QString getSqlDatabaseName();                               //!< getSqlDatabaseName
         // SQL Database
+        #ifdef USE_SQL_FLAG
         void setSqlDatabase(QSqlDatabase thisDatabase);             //!< set SQL Database
         QSqlDatabase getSqlDatabase();                              //!< get SQL Database
+        #endif
         // Connection Name
         QString getConnectionName();                                //!< get Connection Name
         void setConnectionName(const QString &thisConnectionName);  //!< set Connection Name
@@ -64,7 +68,6 @@ class MySqlDbtModel : public QObject
         void setMessage(const QString &thisMessage);    //!< set Message
 
     private:
-        QSqlDatabase myDb;                              //!< \c myDb               @brief Database
         QString      myDatabaseName   = "QtAppVeyor";   //!< \c myDatabaseName     @brief SQL Driver DatabaseName with extention for Sqlite
         QString      myTableName      = "QtAppVeyor" ;  //!< \c myTableName        @brief Table Name
         QString      mySqlDriver      = "NOTSET";       //!< \c mySqlDriver        @brief SQL Driver NOTSET
@@ -77,6 +80,9 @@ class MySqlDbtModel : public QObject
         bool         myUseEncryption  = false;          //!< \c myUseEncryption    @brief Use Encryption
         bool         isEncrypted      = false;          //!< \c isEncrypted        @brief is Encrypted
         int          myRunReturnCode  = 1;              //!< \c myRunReturnCode    @brief Run Return Code
+        #ifdef USE_SQL_FLAG
+        QSqlDatabase myDb;                              //!< \c myDb               @brief Database
+        #endif
 };
 #endif // MY_SQL_DBT_MODEL_H
 /*** ************************* End of File ***********************************/

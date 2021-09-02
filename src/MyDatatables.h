@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtDebug>
+#include "MyOrgSettings.h"
 #include "MySqlDbtModel.h"
 /************************************************
  * \class MyProjectClass
@@ -108,9 +109,11 @@ class MyDatatables : public QObject
 {
         Q_OBJECT
     public:
-        explicit MyDatatables(QObject *parent = nullptr);
+        explicit MyDatatables(QObject *parent = nullptr, MyOrgSettings *thisSetting = nullptr);
         ~MyDatatables();
         //
+        // Public
+        MyOrgSettings        *mySetting;                            //!< \c mySetting @brief Domain Settings
         MyProjectClass       *myProject;                            //!< \c myProject  @brief My Project Variables
         MyConfigurationClass *myConfigurationVariables;             //!< \c myConfigurationVariables  @brief Configuration Variables
         MySqlDbtModel        *mySqlModel;                           //!< \c mySqlModel @brief Pointer to DataTable

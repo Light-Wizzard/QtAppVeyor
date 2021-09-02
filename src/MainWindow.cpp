@@ -22,14 +22,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QApplication::setWindowIcon(QIcon(":/images/logo32.png"));
     // ui stuff
     ui->setupUi(this);
-    mySqlDb         = new MyDatatables(this);
-    myLocalization  = new MyLocalization(this, mySqlDb->mySqlModel->mySetting);
+    mySetting      = new MyOrgSettings(this);
+    myDbModal      = new MyDatatables(this, mySetting);
+    myLocalization = new MyLocalization(this, mySetting);
     // Read in Settings First
     readSettingsFirst();
     // Set to defaults
     myLocalization->setTransFilePrefix("QtAppVeyor");       //!< Prefix of Translation files
     myLocalization->setTranslationSource("translations");   //!< Relative Folder for Translation files
     myLocalization->setHelpSource("help");                  //!< Relative Folder for Help files
+    #ifdef USE_SQL_FLAG
     // SQL Database Types
     ui->comboBoxSqlDatabaseType->addItem(":memory:");
     ui->comboBoxSqlDatabaseType->addItem("QSQLITE");
@@ -39,6 +41,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBoxSqlDatabaseType->addItem("QIBASE");
     ui->comboBoxSqlDatabaseType->addItem("QOCI");
     ui->comboBoxSqlDatabaseType->addItem("QTDS");
+    #else
+    ui->comboBoxSqlDatabaseType->setHidden(true);
+    ui->comboBoxSettingsProjects->setHidden(true);
+    ui->pushButtonSaveAndroid->setHidden(true);
+    ui->pushButtonSaveDefaults->setHidden(true);
+    ui->pushButtonSaveIOS->setHidden(true);
+    ui->pushButtonSaveMac->setHidden(true);
+    ui->pushButtonSaveSql->setHidden(true);
+    ui->pushButtonSaveUbuntu->setHidden(true);
+    ui->pushButtonSaveWebAssembly->setHidden(true);
+    ui->pushButtonSaveWindows->setHidden(true);
+    ui->pushButtonSettingsAdd->setHidden(true);
+    ui->pushButtonSettingsDelete->setHidden(true);
+    ui->pushButtonSettingsSave->setHidden(true);
+    ui->pushButtonSqlPasswordShowHide->setHidden(true);
+    ui->pushButtonSqlFileBrowswer->setHidden(true);
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabSQL")));
+    ui->toolBar->actions().at(4)->setVisible(false);
+    ui->toolBar->actions().at(5)->setVisible(false);
+    ui->labelSettingsOptions->setHidden(true);
+    #endif
     // Triggers
     connect(ui->actionExit,      &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionAbout,     &QAction::triggered, this, &MainWindow::onAbout);
@@ -69,7 +92,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     setMessage("closeEvent");
     if (isSaveSettings) on_pushButtonSettingsSave_clicked();
-    mySqlDb->mySqlModel->mySetting->setGeometry(pos(), size(), isMaximized(), isMinimized());
+    mySetting->setGeometry(pos(), size(), isMaximized(), isMinimized());
     writeAllSettings();
     QMainWindow::closeEvent(event);
     close();
@@ -148,14 +171,16 @@ void MainWindow::loadLanguageComboBox()
  ***********************************************/
 bool MainWindow::setQtProjectCombo()
 {
+    #ifdef USE_SQL_FLAG
     QSqlQueryModel *theModalQtAppVeyor = new QSqlQueryModel; //!< SQL Query Model
     //  SELECT id, QtProject FROM Projects
-    const auto SELECTED_PROJECTS_SQL = QLatin1String(R"(%1)").arg(mySqlDb->getQtProjectSelectQuery());
+    const auto SELECTED_PROJECTS_SQL = QLatin1String(R"(%1)").arg(myDbModal->getQtProjectSelectQuery());
     theModalQtAppVeyor->setQuery(SELECTED_PROJECTS_SQL);
     if (theModalQtAppVeyor->lastError().isValid())
-        { mySqlDb->mySqlModel->mySetting->showMessageBox(QObject::tr("SQL error").toLocal8Bit(), QString("%1: %2").arg(tr("SQL error"), theModalQtAppVeyor->lastError().text()), mySqlDb->mySqlModel->mySetting->Warning); }
+    { mySetting->showMessageBox(QObject::tr("SQL error").toLocal8Bit(), QString("%1: %2").arg(tr("SQL error"), theModalQtAppVeyor->lastError().text()), mySetting->Warning); }
     theModalQtAppVeyor->setHeaderData(0,Qt::Horizontal, tr("ID"));
     theModalQtAppVeyor->setHeaderData(1, Qt::Horizontal, tr("Project"));
+    ui->comboBoxSettingsProjects->setModel(theModalQtAppVeyor);
     QTableView *theTableView = new QTableView;
     theTableView->setModel(theModalQtAppVeyor);
     theTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -168,11 +193,11 @@ bool MainWindow::setQtProjectCombo()
     theTableView->setColumnWidth(1, 196);
     theTableView->setColumnHidden(0, true);
     ui->comboBoxSettingsProjects->setModel(nullptr);
-    ui->comboBoxSettingsProjects->setModel(theModalQtAppVeyor);
     ui->comboBoxSettingsProjects->setView(theTableView);
     ui->comboBoxSettingsProjects->setModelColumn(1);
     ui->comboBoxSettingsProjects->setCurrentIndex(0);
     ui->comboBoxSettingsProjects->setMinimumWidth(200);
+    #endif
     return true;
 }
 /************************************************
@@ -183,6 +208,7 @@ void MainWindow::onRunOnStartup()
 {
     isMainLoaded = false;
     myLocalization->setMainLoaded(false);
+    // Set Tab
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabSettings")));
     // Read Settings First
     readAllSettings();
@@ -196,11 +222,15 @@ void MainWindow::onRunOnStartup()
     loadLanguageComboBox();
     ui->comboBoxSettingsLanguage->setCurrentIndex(ui->comboBoxSettingsLanguage->findText(theLastLanguage));
     //
-    if (!mySqlDb->checkDatabase()) close();
+    if (!myDbModal->checkDatabase()) close();
     setQtProjectCombo();
-    fillForms(mySqlDb->getProjectID());
+    fillForms(myDbModal->getProjectID());
     //
+    #ifdef USE_SQL_FLAG
     setSqlBrowseButton();
+    #else
+    resetDefaults(TabAll);
+    #endif
     isMainLoaded = true;
     myLocalization->setMainLoaded(true);
 }
@@ -210,7 +240,7 @@ void MainWindow::onRunOnStartup()
  ***********************************************/
 void MainWindow::readSettingsFirst()
 {
-    isDebugMessage = mySqlDb->mySqlModel->mySetting->readSettingsBool(mySqlDb->mySqlModel->mySetting->myConstants->MY_IS_DEBUG_MESSAGE, isDebugMessage);
+    isDebugMessage = mySetting->readSettingsBool(mySetting->myConstants->MY_IS_DEBUG_MESSAGE, isDebugMessage);
     if (isDebugMessage)
         { ui->checkBoxSettignsMessaging->setCheckState(Qt::CheckState::Checked); }
     else
@@ -232,7 +262,9 @@ void MainWindow::readAllSettings()
     //
     //
     readStatesChanges();
+    #ifdef USE_SQL_FLAG
     readSqlDatabaseInfo();
+    #endif
 }
 /************************************************
  * @brief Write All Settings.
@@ -243,7 +275,9 @@ bool MainWindow::writeAllSettings()
     setMessage("writeAllSettings");
     //
     writeStatesChanges();
+    #ifdef USE_SQL_FLAG
     writeSqlDatabaseInfo();
+    #endif
     return true;
 }
 /************************************************
@@ -253,10 +287,8 @@ bool MainWindow::writeAllSettings()
 void MainWindow::writeStatesChanges()
 {
     setMessage("writeSqlDatabaseStates");
-    // Project ID
-    mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_PROJECT_ID, mySqlDb->getProjectID());
     // Debug Messaging
-    mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_IS_DEBUG_MESSAGE, isDebugMessage ? "true" : "false");
+    mySetting->writeSettings(mySetting->myConstants->MY_IS_DEBUG_MESSAGE, isDebugMessage ? "true" : "false");
     // Language ComboBox
     myLocalization->setLanguageCode(myLocalization->languageNameToCode(ui->comboBoxSettingsLanguage->currentText()));
     myLocalization->writeLanguage(myLocalization->getLanguageCode());
@@ -267,12 +299,14 @@ void MainWindow::writeStatesChanges()
  ***********************************************/
 void MainWindow::readStatesChanges()
 {
+    #ifdef USE_SQL_FLAG
     // Project ID
     // default set to myProjectID="-1"
-    QString theProjectID = mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_PROJECT_ID, mySqlDb->getProjectID());
+    QString theProjectID = mySetting->readSettings(mySetting->myConstants->MY_SQL_PROJECT_ID, myDbModal->getProjectID());
     // We cannot read from the database yet, we are only getting the last states we know of
-    if (theProjectID != "-1") { mySqlDb->setProjectID(theProjectID); } else { mySqlDb->setProjectID("1"); }
-    ui->labelRecordIdSettings->setText(mySqlDb->getProjectID());
+    if (theProjectID != "-1") { myDbModal->setProjectID(theProjectID); } else { myDbModal->setProjectID("1"); }
+    ui->labelRecordIdSettings->setText(myDbModal->getProjectID());
+    #endif
 }
 /************************************************
  * @brief write SQL Database Info.
@@ -281,19 +315,23 @@ void MainWindow::readStatesChanges()
 void MainWindow::writeSqlDatabaseInfo()
 {
     setMessage("writeSqlDatabaseInfo");
+    #ifdef USE_SQL_FLAG
+    // Project ID
+    mySetting->writeSettings(mySetting->myConstants->MY_SQL_PROJECT_ID, myDbModal->getProjectID());
     // SQL Database Name
-    mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_NAME,  ui->lineEditSqlDatabaseName->text());
+    mySetting->writeSettings(mySetting->myConstants->MY_SQL_DB_NAME,  ui->lineEditSqlDatabaseName->text());
     // SQL Database Type State
-    ui->comboBoxSqlDatabaseType->setCurrentIndex(mySqlDb->mySqlModel->mySetting->readSettingsInt(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_COMBO_STATE, 1));
+    ui->comboBoxSqlDatabaseType->setCurrentIndex(mySetting->readSettingsInt(mySetting->myConstants->MY_SQL_COMBO_STATE, 1));
     // SQL Database Type Value
-    mySqlDb->setComboBoxSqlValue(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_COMBO_VALUE, mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DEFAULT));
+    myDbModal->setComboBoxSqlValue(mySetting->readSettings(mySetting->myConstants->MY_SQL_COMBO_VALUE, mySetting->myConstants->MY_SQL_DEFAULT));
     // SQL Host
-    mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_HOST,  ui->lineEditSqlHostName->text());
+    mySetting->writeSettings(mySetting->myConstants->MY_SQL_DB_HOST,  ui->lineEditSqlHostName->text());
     // SQL User
-    mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_USER,  ui->lineEditSqlUserName->text());
+    mySetting->writeSettings(mySetting->myConstants->MY_SQL_DB_USER,  ui->lineEditSqlUserName->text());
     // SQL Encrypted Password, it is saved in Ini file
     if (!ui->lineEditSqlPassword->text().isEmpty())
-        { mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_PASS, mySqlDb->mySqlModel->mySetting->encryptThis(ui->lineEditSqlPassword->text())); }
+    { mySetting->writeSettings(mySetting->myConstants->MY_SQL_DB_PASS, mySetting->encryptThis(ui->lineEditSqlPassword->text())); }
+    #endif
 }
 /************************************************
  * @brief read SQL Database Info.
@@ -302,23 +340,25 @@ void MainWindow::writeSqlDatabaseInfo()
 void MainWindow::readSqlDatabaseInfo()
 {
     setMessage("readSqlDatabaseInfo");
-    QString theDb = QString("%1%2%3.db").arg(mySqlDb->mySqlModel->mySetting->getAppDataLocation(), QDir::separator(), mySqlDb->mySqlModel->getSqlDatabaseName());
+    #ifdef USE_SQL_FLAG
+    QString theDb = QString("%1%2%3.db").arg(mySetting->getAppDataLocation(), QDir::separator(), myDbModal->mySqlModel->getSqlDatabaseName());
     // SQL Database Name
-    ui->lineEditSqlDatabaseName->setText(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_NAME, theDb));
+    ui->lineEditSqlDatabaseName->setText(mySetting->readSettings(mySetting->myConstants->MY_SQL_DB_NAME, theDb));
     // SQL Database Type State
-    ui->comboBoxSqlDatabaseType->setCurrentIndex(mySqlDb->mySqlModel->mySetting->readSettingsInt(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_COMBO_STATE, 1));
+    ui->comboBoxSqlDatabaseType->setCurrentIndex(mySetting->readSettingsInt(mySetting->myConstants->MY_SQL_COMBO_STATE, 1));
     // SQL Database Type Value
-    mySqlDb->setComboBoxSqlValue(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_COMBO_VALUE, mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DEFAULT));
+    myDbModal->setComboBoxSqlValue(mySetting->readSettings(mySetting->myConstants->MY_SQL_COMBO_VALUE, mySetting->myConstants->MY_SQL_DEFAULT));
     // SQL Host
-    ui->lineEditSqlHostName->setText(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_HOST, "")); // No Default
+    ui->lineEditSqlHostName->setText(mySetting->readSettings(mySetting->myConstants->MY_SQL_DB_HOST, "")); // No Default
     // SQL User
-    ui->lineEditSqlUserName->setText(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_USER, "")); // No Default
+    ui->lineEditSqlUserName->setText(mySetting->readSettings(mySetting->myConstants->MY_SQL_DB_USER, "")); // No Default
     // SQL Decrypted Password, it is saved in Ini file
-    QString thePassword = mySqlDb->mySqlModel->mySetting->decryptThis(mySqlDb->mySqlModel->mySetting->readSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DB_PASS, ""));
+    QString thePassword = mySetting->decryptThis(mySetting->readSettings(mySetting->myConstants->MY_SQL_DB_PASS, ""));
     if (!thePassword.isEmpty())
-        { ui->lineEditSqlPassword->setText(thePassword); }
+    { ui->lineEditSqlPassword->setText(thePassword); }
     else
-        { ui->lineEditSqlPassword->setText(""); }
+    { ui->lineEditSqlPassword->setText(""); }
+    #endif
 }
 /************************************************
  * on_comboBoxSettingsLanguage_currentIndexChanged
@@ -342,9 +382,9 @@ void MainWindow::onAbout()
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
     QString theFileName = QString(":help/About_%1.md").arg(myLocalization->getLanguageCode());
-    if (!mySqlDb->mySqlModel->mySetting->isFileExists(theFileName))
-        { theFileName = QString(":help/About_%1.md").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
-    ui->textEditHelp->setMarkdown(mySqlDb->mySqlModel->mySetting->readFile(theFileName));
+    if (!mySetting->isFileExists(theFileName))
+        { theFileName = QString(":help/About_%1.md").arg(mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
+    ui->textEditHelp->setMarkdown(mySetting->readFile(theFileName));
 } // end onAbout
 /************************************************
  * @brief on Author.
@@ -357,9 +397,9 @@ void MainWindow::onAuthor()
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
     QString theFileName = QString(":help/About-Author_%1.md").arg(myLocalization->getLanguageCode());
-    if (!mySqlDb->mySqlModel->mySetting->isFileExists(theFileName))
-        { theFileName = QString(":help/About-Author_%1.md").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
-    ui->textEditHelp->setMarkdown(mySqlDb->mySqlModel->mySetting->readFile(theFileName));
+    if (!mySetting->isFileExists(theFileName))
+        { theFileName = QString(":help/About-Author_%1.md").arg(mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
+    ui->textEditHelp->setMarkdown(mySetting->readFile(theFileName));
 } // end onAbout
 /************************************************
  * @brief on Help.
@@ -372,14 +412,14 @@ void MainWindow::onHelp()
     ui->tabWidget->setCurrentIndex(ui->tabWidget->indexOf(ui->tabWidget->findChild<QWidget*>("tabHelp")));
     //
     QString theFileName = QString(":help/Help_%1.md").arg(myLocalization->getLanguageCode());
-    if (!mySqlDb->mySqlModel->mySetting->isFileExists(theFileName))
-        { theFileName = QString(":help/Help_%1.md").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
-    QString theFileContent = mySqlDb->mySqlModel->mySetting->readFile(theFileName);
+    if (!mySetting->isFileExists(theFileName))
+        { theFileName = QString(":help/Help_%1.md").arg(mySetting->myConstants->MY_DEFAULT_LANGUAGE_CODE); }
+    QString theFileContent = mySetting->readFile(theFileName);
     // Do not translate this file
     QString theLanguageFileName = ":help/Language.txt";
-    if (mySqlDb->mySqlModel->mySetting->isFileExists(theLanguageFileName))
+    if (mySetting->isFileExists(theLanguageFileName))
     {
-        theFileContent.append(mySqlDb->mySqlModel->mySetting->readFile(theLanguageFileName));
+        theFileContent.append(mySetting->readFile(theLanguageFileName));
     }
     ui->textEditHelp->setMarkdown(theFileContent);
 } // end onHelp
@@ -559,12 +599,12 @@ void MainWindow::onCreate()
         thisYaml.append("    MY_OS: Ubuntu\n"); // Used in Zip and Exe Name: name-os-configuration-platform
         if (ui->radioButtonSettingsEnvironmentQt->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionUbuntu->text()));
         }
         if (ui->radioButtonSettingsEnvironmentVs->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionUbuntu->text()));
         }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionUbuntu->text()));
@@ -613,12 +653,12 @@ void MainWindow::onCreate()
         thisYaml.append("    MY_OS: Mac\n"); // Used in Zip and Exe Name: name-os-configuration-platform
         if (ui->radioButtonSettingsEnvironmentQt->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionMac->text()));
         }
         if (ui->radioButtonSettingsEnvironmentVs->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionMac->text()));
         }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionMac->text()));
@@ -665,12 +705,12 @@ void MainWindow::onCreate()
         thisYaml.append("    MY_OS: WebAssembly\n"); // Used in Zip and Exe Name: name-os-configuration-platform
         if (ui->radioButtonSettingsEnvironmentQt->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionWebAssembly->text()));
         }
         if (ui->radioButtonSettingsEnvironmentVs->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionWebAssembly->text()));
         }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionWebAssembly->text()));
@@ -719,12 +759,12 @@ void MainWindow::onCreate()
         thisYaml.append("    MY_OS: IOS\n"); // Used in Zip and Exe Name: name-os-configuration-platform
         if (ui->radioButtonSettingsEnvironmentQt->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditQtVersionIOS->text()));
         }
         if (ui->radioButtonSettingsEnvironmentVs->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionIOS->text()));
         }
         thisYaml.append(QString("    MY_PYTHON_VER: %1\n").arg(ui->lineEditPythonVersionIOS->text()));
@@ -773,12 +813,12 @@ void MainWindow::onCreate()
         thisYaml.append("    MY_OS: Windows\n"); // Used in Zip and Exe Name: name-os-configuration-platform
         if (ui->radioButtonSettingsEnvironmentQt->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT));
         }
         thisYaml.append(QString("    MY_QT_VERSION: %1\n").arg(ui->lineEditQtVersionWindows->text()));
         if (ui->radioButtonSettingsEnvironmentVs->isChecked())
         {
-            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
+            thisYaml.append(QString("    MY_COMPILER: %1\n").arg(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS));
             thisYaml.append(QString("    MY_VS_VERSION: %1\n").arg(ui->lineEditVsVersionWindows->text()));
         }
         thisYaml.append(QString("    MY_QT_MINGW32: %1\n").arg(ui->lineEditQtMingW32Windows->text()));
@@ -1061,7 +1101,9 @@ void MainWindow::settingsButtons(bool thisEnabled)
 void MainWindow::setSqlBrowseButton()
 {
     setMessage("setSqlBrowseButton");
-    ui->pushButtonSqlFileBrowswer->setEnabled(ui->comboBoxSqlDatabaseType->currentText() == mySqlDb->mySqlModel->mySetting->myConstants->MY_SQL_DEFAULT || ui->comboBoxSqlDatabaseType->currentText() == ":memory:");
+    #ifdef USE_SQL_FLAG
+    ui->pushButtonSqlFileBrowswer->setEnabled(ui->comboBoxSqlDatabaseType->currentText() == mySetting->myConstants->MY_SQL_DEFAULT || ui->comboBoxSqlDatabaseType->currentText() == ":memory:");
+    #endif
 }
 /************************************************
  * @brief on comboBox SQL Database Type current Index Changed.
@@ -1071,9 +1113,11 @@ void MainWindow::on_comboBoxSqlDatabaseType_currentIndexChanged(const QString &t
 {
     if (isMainLoaded) { return; }
     setMessage("on_comboBoxSqlDatabaseType_currentIndexChanged=" + thisSqlType);
-    mySqlDb->mySqlModel->setSqlDriver(thisSqlType);
     writeStatesChanges();
+    #ifdef USE_SQL_FLAG
+    myDbModal->mySqlModel->setSqlDriver(thisSqlType);
     setSqlBrowseButton();
+    #endif
 }
 /************************************************
  * @brief fill Forms.
@@ -1083,12 +1127,13 @@ void MainWindow::fillForms(const QString &thisProjectID)
 {
     setMessage("fillForms=" + thisProjectID);
     clearForms(TabAll);
+    #ifdef USE_SQL_FLAG
     ui->labelRecordIdSettings->setText(thisProjectID); // Project id and Configuration ProjectID
     // Declare all variable in function scope
     QSqlQuery query; //!< SQL Query
     bool theIsOsUbuntu, theIsOsMac, theIsOsWindows, theIsOsAndroid, theIsOsWebAssembly, theIsOSiOS;
     theIsOsUbuntu = theIsOsMac = theIsOsWindows = theIsOsAndroid = theIsOsWebAssembly = theIsOSiOS = false;
-    QString myConfigurationSelectQuery = mySqlDb->getProjectsFullSelectQueryID(thisProjectID);
+    QString myConfigurationSelectQuery = myDbModal->getProjectsFullSelectQueryID(thisProjectID);
     setMessage("myConfigurationSelectQuery=|" + myConfigurationSelectQuery + "|");
     /*
     Projects
@@ -1225,7 +1270,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // Ubuntu
     if (theIsOsUbuntu)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_UBUNTU);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_UBUNTU);
         setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
@@ -1246,7 +1291,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_UBUNTU), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_UBUNTU), QMessageBox::Cancel);
             }
         }
         else
@@ -1257,7 +1302,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // Mac
     if (theIsOsMac)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_MAC);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_MAC);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1277,7 +1322,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_MAC), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_MAC), QMessageBox::Cancel);
             }
         }
         else
@@ -1288,7 +1333,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // Android
     if (theIsOsAndroid)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_ANDROID);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_ANDROID);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1308,7 +1353,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_ANDROID), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_ANDROID), QMessageBox::Cancel);
             }
         }
         else
@@ -1319,7 +1364,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // WebAssembly
     if (theIsOsWebAssembly)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
         setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
@@ -1340,7 +1385,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY), QMessageBox::Cancel);
             }
         }
         else
@@ -1351,7 +1396,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // iOS
     if (theIsOSiOS)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_IOS);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_IOS);
         setMessage("myConfigurationSelectQuery=" + myConfigurationSelectQuery);
         if (query.exec(myConfigurationSelectQuery))
         {
@@ -1372,7 +1417,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_IOS), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_IOS), QMessageBox::Cancel);
             }
         }
         else
@@ -1383,7 +1428,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
     // Windows
     if (theIsOsWindows)
     {
-        myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WINDOWS);
+        myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_WINDOWS);
         if (query.exec(myConfigurationSelectQuery))
         {
             if (query.first())
@@ -1405,7 +1450,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
             }
             else
             {
-                QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WINDOWS), QMessageBox::Cancel);
+                QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_WINDOWS), QMessageBox::Cancel);
             }
         }
         else
@@ -1414,7 +1459,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
     }
     // Defaults
-    myConfigurationSelectQuery = mySqlDb->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_DEFAULTS);
+    myConfigurationSelectQuery = myDbModal->getConfigurationProjectIdOsSelectQuery(thisProjectID, mySetting->myConstants->MY_OS_NAME_DEFAULTS);
     if (query.exec(myConfigurationSelectQuery))
     {
         if (query.first())
@@ -1439,7 +1484,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         }
         else
         {
-            QMessageBox::critical(nullptr, QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySqlDb->mySqlModel->mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_DEFAULTS), QMessageBox::Cancel);
+            QMessageBox::critical(nullptr, QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_1), QObject::tr(mySetting->myConstants->MY_ERROR_MESSAGE_DB_RECORD_NOT_FOUND_2).arg(mySetting->myConstants->MY_OS_NAME_DEFAULTS), QMessageBox::Cancel);
         }
     }
     else
@@ -1447,6 +1492,228 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
         QMessageBox::critical(nullptr, QObject::tr("SQL error"), QObject::tr(QString("%1: %2:%3").arg(QObject::tr("SQL error"), query.lastError().text(), query.lastError().text()).toLocal8Bit()), QMessageBox::Cancel);
     }
     isSaveSettings = false;
+    #endif
+}
+
+/************************************************
+ * @brief reset Ubuntu.
+ * resetUbuntu
+ ***********************************************/
+void MainWindow::resetUbuntu()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionUbuntu->setText(ui->lineEditQtVersionDefaults->text()); }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionUbuntu->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionUbuntu->setText(ui->lineEditQtIfVersionDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriUbuntu->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    ui->lineEditPythonVersionUbuntu->setText(ui->lineEditPythonVersionDefaults->text());
+    ui->checkBoxPythonUbuntu->setCheckState(ui->checkBoxPythonDefaults->checkState());
+    ui->checkBoxUpgradeDefaults->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+}
+/************************************************
+ * @brief reset Mac.
+ * resetMac
+ ***********************************************/
+void MainWindow::resetMac()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionMac->setText(ui->lineEditQtVersionDefaults->text()); }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionMac->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionMac->setText(ui->lineEditQtIfVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriMac->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditPythonVersionMac->setText(ui->lineEditPythonVersionDefaults->text()); }
+    ui->checkBoxPythonMac->setCheckState(ui->checkBoxPythonDefaults->checkState());
+    ui->checkBoxUpgradeDefaults->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+}
+/************************************************
+ * @brief reset Android.
+ * resetAndroid
+ ***********************************************/
+void MainWindow::resetAndroid()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionAndroid->setText(ui->lineEditQtVersionDefaults->text()); }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionAndroid->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionAndroid->setText(ui->lineEditQtIfVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriAndroid->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditPythonVersionAndroid->setText(ui->lineEditPythonVersionDefaults->text()); }
+    ui->checkBoxPythonAndroid->setCheckState(ui->checkBoxPythonDefaults->checkState());
+    ui->checkBoxUpgradeAndroid->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+}
+/************************************************
+ * @brief reset WebAssembly.
+ * resetWebAssembly
+ ***********************************************/
+void MainWindow::resetWebAssembly()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionWebAssembly->setText(ui->lineEditQtVersionDefaults->text()); }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionWebAssembly->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionWebAssembly->setText(ui->lineEditQtIfVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriWebAssembly->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditPythonVersionWebAssembly->setText(ui->lineEditPythonVersionDefaults->text()); }
+    ui->checkBoxPythonWebAssembly->setCheckState(ui->checkBoxPythonDefaults->checkState());
+    ui->checkBoxUpgradeWebAssembly->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+}
+/************************************************
+ * @brief reset IOS.
+ * resetIOS
+ ***********************************************/
+void MainWindow::resetIOS()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionIOS->setText(ui->lineEditQtVersionDefaults->text()); }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionIOS->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionIOS->setText(ui->lineEditQtIfVersionDefaults->text());  }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriIOS->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditPythonVersionIOS->setText(ui->lineEditPythonVersionDefaults->text()); }
+    ui->checkBoxPythonIOS->setCheckState(ui->checkBoxPythonDefaults->checkState());
+    ui->checkBoxUpgradeIOS->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+}
+/************************************************
+ * @brief reset Windows.
+ * resetWindows
+ ***********************************************/
+void MainWindow::resetWindows()
+{
+    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
+    { ui->lineEditQtVersionWindows->setText(ui->lineEditQtVersionDefaults->text());  }
+    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
+    { ui->lineEditVsVersionWindows->setText(ui->lineEditVsVersionDefaults->text()); }
+    if (!ui->lineEditQtIfVersionDefaults->text().isEmpty())
+    { ui->lineEditQtIfVersionWindows->setText(ui->lineEditQtIfVersionDefaults->text()); }
+    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
+    { ui->lineEditQtIfPackageUriWindows->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
+    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
+    { ui->lineEditPythonVersionWindows->setText(ui->lineEditPythonVersionDefaults->text());  }
+    if (!ui->lineEditQtMingW32Defaults->text().isEmpty())
+    { ui->lineEditQtMingW32Windows->setText(ui->lineEditQtMingW32Defaults->text()); }
+    if (!ui->lineEditQtMingW64Defaults->text().isEmpty())
+    { ui->lineEditQtMingW64Windows->setText(ui->lineEditQtMingW64Defaults->text()); }
+    if (!ui->lineEditQtToolsMingW32Defaults->text().isEmpty())
+    { ui->lineEditQtToolsMingW32Windows->setText(ui->lineEditQtToolsMingW32Defaults->text()); }
+    if (!ui->lineEditQtToolsMingW64Defaults->text().isEmpty())
+    { ui->lineEditQtToolsMingW64Windows->setText(ui->lineEditQtToolsMingW64Defaults->text()); }
+    if (!ui->lineEditVisualStudioDefaults->text().isEmpty())
+    { ui->lineEditVisualStudioWindows->setText(ui->lineEditVisualStudioDefaults->text()); }
+    if (!ui->checkBoxPythonDefaults->text().isEmpty())
+    { ui->checkBoxPythonWindows->setCheckState(ui->checkBoxPythonDefaults->checkState()); }
+}
+/************************************************
+ * @brief reset Default.
+ * resetDefault
+ ***********************************************/
+void MainWindow::resetDefault()
+{
+    if (mySetting->isSetting(ui->lineEditQtVersionDefaults->objectName()))
+    {
+        ui->lineEditQtVersionDefaults->setText(mySetting->readSettings(ui->lineEditQtVersionDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_QT_VERSION));
+        ui->lineEditVsVersionDefaults->setText(mySetting->readSettings(ui->lineEditVsVersionDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_VS_VERSION));
+        ui->lineEditQtIfVersionDefaults->setText(mySetting->readSettings(ui->lineEditQtIfVersionDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_QTIF_VERSION));
+        ui->lineEditQtIfPackageUriDefaults->setText(mySetting->readSettings(ui->lineEditQtIfPackageUriDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER));
+        ui->lineEditPythonVersionDefaults->setText(mySetting->readSettings(ui->lineEditPythonVersionDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_PYTHON_VERSION));
+        ui->lineEditQtMingW32Defaults->setText(mySetting->readSettings(ui->lineEditQtMingW32Defaults->objectName(), mySetting->myConstants->MY_DEFAULTS_MINGW32));
+        ui->lineEditQtMingW64Defaults->setText(mySetting->readSettings(ui->lineEditQtMingW64Defaults->objectName(), mySetting->myConstants->MY_DEFAULTS_MINGW64));
+        ui->lineEditQtToolsMingW32Defaults->setText(mySetting->readSettings(ui->lineEditQtToolsMingW32Defaults->objectName(), mySetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS));
+        ui->lineEditQtToolsMingW64Defaults->setText(mySetting->readSettings(ui->lineEditQtToolsMingW64Defaults->objectName(), mySetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS));
+        ui->lineEditVisualStudioDefaults->setText(mySetting->readSettings(ui->lineEditVisualStudioDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO));
+        if (mySetting->readSettings(ui->checkBoxPythonDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED) == "true")
+        { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Checked);    }
+        else { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Unchecked);  }
+        if (mySetting->readSettings(ui->checkBoxUpgradeDefaults->objectName(), mySetting->myConstants->MY_DEFAULTS_UPGRADE_OS) == "true")
+        { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Checked);   }
+        else { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Unchecked); }
+    }
+    else
+    {
+        ui->lineEditQtVersionDefaults->setText(mySetting->myConstants->MY_DEFAULTS_QT_VERSION);
+        ui->lineEditVsVersionDefaults->setText(mySetting->myConstants->MY_DEFAULTS_VS_VERSION);
+        ui->lineEditQtIfVersionDefaults->setText(mySetting->myConstants->MY_DEFAULTS_QTIF_VERSION);
+        ui->lineEditQtIfPackageUriDefaults->setText(mySetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER);
+        ui->lineEditPythonVersionDefaults->setText(mySetting->myConstants->MY_DEFAULTS_PYTHON_VERSION);
+        ui->lineEditQtMingW32Defaults->setText(mySetting->myConstants->MY_DEFAULTS_MINGW32);
+        ui->lineEditQtMingW64Defaults->setText(mySetting->myConstants->MY_DEFAULTS_MINGW64);
+        ui->lineEditQtToolsMingW32Defaults->setText(mySetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS);
+        ui->lineEditQtToolsMingW64Defaults->setText(mySetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS);
+        ui->lineEditVisualStudioDefaults->setText(mySetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO);
+        if (mySetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED == "true")
+        { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Checked); }
+        else { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Unchecked); }
+        if (mySetting->myConstants->MY_DEFAULTS_UPGRADE_OS == "true")
+        { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Checked); }
+        else { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Unchecked); }
+    }
+}
+/************************************************
+ * @brief reset Settings.
+ * resetSettings
+ ***********************************************/
+void MainWindow::resetSettings()
+{
+    ui->lineEditSettingsQtProject->setText("QtAppVeyor");
+    ui->checkBoxSettignsMessaging->setCheckState(Qt::CheckState::Unchecked);
+    ui->checkBoxSettingsConfigurationDebug->setCheckState(Qt::CheckState::Unchecked);
+    ui->checkBoxSettingsConfigurationRelease->setCheckState(Qt::CheckState::Checked);
+    ui->checkBoxSettingsPlatformX64->setCheckState(Qt::CheckState::Checked);
+    ui->checkBoxSettingsPlatformX86->setCheckState(Qt::CheckState::Checked);
+    ui->checkBoxSettingsUbuntu->setCheckState(Qt::CheckState::Checked);
+    ui->checkBoxSettingsMac->setCheckState(Qt::CheckState::Checked);
+    ui->checkBoxSettingsiOS->setCheckState(Qt::CheckState::Unchecked);
+    ui->checkBoxSettingsWebAssembly->setCheckState(Qt::CheckState::Unchecked);
+    ui->checkBoxSettingsAndroid->setCheckState(Qt::CheckState::Unchecked);
+    ui->checkBoxSettingsWindows->setCheckState(Qt::CheckState::Checked);
+}
+/************************************************
+ * @brief reset Defaults.
+ * resetDefaults
+ * @param tabNumber int enum TabX
+ ***********************************************/
+void MainWindow::resetDefaults(int tabNumber)
+{
+
+    switch (tabNumber)
+    {
+        case TabSettings:    resetSettings();    break; // 0
+        case TabUbuntu:      resetUbuntu();      break; // 1
+        case TabMac:         resetMac();         break; // 2
+        case TabAndroid:     resetAndroid();     break; // 3
+        case TabWebAssembly: resetWebAssembly(); break; // 4
+        case TabIOS:         resetIOS();         break; // 5
+        case TabWindows:     resetWindows();     break; // 6
+        case TabDefaults:    resetDefault();     break; // 7
+        case TabYaml:                            break; // 8
+        case TabAll:
+            resetDefault();
+            #ifndef USE_SQL_FLAG
+            resetSettings();
+            #endif
+            resetUbuntu();
+            resetMac();
+            resetAndroid();
+            resetWebAssembly();
+            resetIOS();
+            resetWindows();
+            break; // 9
+    }
 }
 /************************************************
  * @brief on pushButton Reset Defaults Ubuntu clicked.
@@ -1454,17 +1721,7 @@ QtMingW32, QtMingW64, QtToolsMingW32, QtToolsMingW64, VisualStudio, OsUpgrade FR
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsUbuntu_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionUbuntu->setText(ui->lineEditQtVersionDefaults->text()); }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionUbuntu->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionUbuntu->setText(ui->lineEditQtIfVersionDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriUbuntu->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    ui->lineEditPythonVersionUbuntu->setText(ui->lineEditPythonVersionDefaults->text());
-    ui->checkBoxPythonUbuntu->setCheckState(ui->checkBoxPythonDefaults->checkState());
-    ui->checkBoxUpgradeDefaults->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+    resetDefaults(TabUbuntu);
 }
 /************************************************
  * @brief on pushButton Reset Defaults Mac clicked.
@@ -1472,18 +1729,7 @@ void MainWindow::on_pushButtonResetDefaultsUbuntu_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsMac_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionMac->setText(ui->lineEditQtVersionDefaults->text()); }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionMac->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionMac->setText(ui->lineEditQtIfVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriMac->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditPythonVersionMac->setText(ui->lineEditPythonVersionDefaults->text()); }
-    ui->checkBoxPythonMac->setCheckState(ui->checkBoxPythonDefaults->checkState());
-    ui->checkBoxUpgradeDefaults->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+    resetDefaults(TabMac);
 }
 /************************************************
  * @brief on pushButton Reset Defaults Android clicked.
@@ -1491,18 +1737,7 @@ void MainWindow::on_pushButtonResetDefaultsMac_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsAndroid_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionAndroid->setText(ui->lineEditQtVersionDefaults->text()); }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionAndroid->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionAndroid->setText(ui->lineEditQtIfVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriAndroid->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditPythonVersionAndroid->setText(ui->lineEditPythonVersionDefaults->text()); }
-    ui->checkBoxPythonAndroid->setCheckState(ui->checkBoxPythonDefaults->checkState());
-    ui->checkBoxUpgradeAndroid->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+    resetDefaults(TabAndroid);
 }
 /************************************************
  * @brief on pushButton Reset Defaults WebAssembly clicked.
@@ -1510,18 +1745,7 @@ void MainWindow::on_pushButtonResetDefaultsAndroid_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsWebAssembly_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionWebAssembly->setText(ui->lineEditQtVersionDefaults->text()); }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionWebAssembly->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionWebAssembly->setText(ui->lineEditQtIfVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriWebAssembly->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditPythonVersionWebAssembly->setText(ui->lineEditPythonVersionDefaults->text()); }
-    ui->checkBoxPythonWebAssembly->setCheckState(ui->checkBoxPythonDefaults->checkState());
-    ui->checkBoxUpgradeWebAssembly->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+    resetDefaults(TabWebAssembly);
 }
 /************************************************
  * @brief on pushButton Reset Defaults IOS clicked.
@@ -1529,18 +1753,7 @@ void MainWindow::on_pushButtonResetDefaultsWebAssembly_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsIOS_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionIOS->setText(ui->lineEditQtVersionDefaults->text()); }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionIOS->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionIOS->setText(ui->lineEditQtIfVersionDefaults->text());  }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriIOS->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditPythonVersionIOS->setText(ui->lineEditPythonVersionDefaults->text()); }
-    ui->checkBoxPythonIOS->setCheckState(ui->checkBoxPythonDefaults->checkState());
-    ui->checkBoxUpgradeIOS->setCheckState(ui->checkBoxUpgradeDefaults->checkState());
+    resetDefaults(TabIOS);
 }
 /************************************************
  * @brief on pushButton Reset Defaults Windows clicked.
@@ -1548,28 +1761,7 @@ void MainWindow::on_pushButtonResetDefaultsIOS_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaultsWindows_clicked()
 {
-    if (!ui->lineEditQtVersionDefaults->text().isEmpty())
-        { ui->lineEditQtVersionWindows->setText(ui->lineEditQtVersionDefaults->text());  }
-    if (!ui->lineEditVsVersionDefaults->text().isEmpty())
-        { ui->lineEditVsVersionWindows->setText(ui->lineEditVsVersionDefaults->text()); }
-    if (!ui->lineEditQtIfVersionDefaults->text().isEmpty())
-        { ui->lineEditQtIfVersionWindows->setText(ui->lineEditQtIfVersionDefaults->text()); }
-    if (!ui->lineEditQtIfPackageUriDefaults->text().isEmpty())
-        { ui->lineEditQtIfPackageUriWindows->setText(ui->lineEditQtIfPackageUriDefaults->text()); }
-    if (!ui->lineEditPythonVersionDefaults->text().isEmpty())
-        { ui->lineEditPythonVersionWindows->setText(ui->lineEditPythonVersionDefaults->text());  }
-    if (!ui->lineEditQtMingW32Defaults->text().isEmpty())
-        { ui->lineEditQtMingW32Windows->setText(ui->lineEditQtMingW32Defaults->text()); }
-    if (!ui->lineEditQtMingW64Defaults->text().isEmpty())
-        { ui->lineEditQtMingW64Windows->setText(ui->lineEditQtMingW64Defaults->text()); }
-    if (!ui->lineEditQtToolsMingW32Defaults->text().isEmpty())
-        { ui->lineEditQtToolsMingW32Windows->setText(ui->lineEditQtToolsMingW32Defaults->text()); }
-    if (!ui->lineEditQtToolsMingW64Defaults->text().isEmpty())
-        { ui->lineEditQtToolsMingW64Windows->setText(ui->lineEditQtToolsMingW64Defaults->text()); }
-    if (!ui->lineEditVisualStudioDefaults->text().isEmpty())
-        { ui->lineEditVisualStudioWindows->setText(ui->lineEditVisualStudioDefaults->text()); }
-    if (!ui->checkBoxPythonDefaults->text().isEmpty())
-        { ui->checkBoxPythonWindows->setCheckState(ui->checkBoxPythonDefaults->checkState()); }
+    resetDefaults(TabWindows);
 }
 /************************************************
  * @brief on pushButton Reset Defaults clicked.
@@ -1577,44 +1769,7 @@ void MainWindow::on_pushButtonResetDefaultsWindows_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonResetDefaults_clicked()
 {
-    if (mySqlDb->mySqlModel->mySetting->isSetting(ui->lineEditQtVersionDefaults->objectName()))
-    {
-        ui->lineEditQtVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtVersionDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_QT_VERSION));
-        ui->lineEditVsVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditVsVersionDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_VS_VERSION));
-        ui->lineEditQtIfVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtIfVersionDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_QTIF_VERSION));
-        ui->lineEditQtIfPackageUriDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtIfPackageUriDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER));
-        ui->lineEditPythonVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditPythonVersionDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PYTHON_VERSION));
-        ui->lineEditQtMingW32Defaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtMingW32Defaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW32));
-        ui->lineEditQtMingW64Defaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtMingW64Defaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW64));
-        ui->lineEditQtToolsMingW32Defaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtToolsMingW32Defaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS));
-        ui->lineEditQtToolsMingW64Defaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditQtToolsMingW64Defaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS));
-        ui->lineEditVisualStudioDefaults->setText(mySqlDb->mySqlModel->mySetting->readSettings(ui->lineEditVisualStudioDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO));
-        if (mySqlDb->mySqlModel->mySetting->readSettings(ui->checkBoxPythonDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED) == "true")
-             { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Checked);    }
-        else { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Unchecked);  }
-        if (mySqlDb->mySqlModel->mySetting->readSettings(ui->checkBoxUpgradeDefaults->objectName(), mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_UPGRADE_OS) == "true")
-             { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Checked);   }
-        else { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Unchecked); }
-    }
-    else
-    {
-        ui->lineEditQtVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_QT_VERSION);
-        ui->lineEditVsVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_VS_VERSION);
-        ui->lineEditQtIfVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_QTIF_VERSION);
-        ui->lineEditQtIfPackageUriDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PACKAGE_FOLDER);
-        ui->lineEditPythonVersionDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PYTHON_VERSION);
-        ui->lineEditQtMingW32Defaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW32);
-        ui->lineEditQtMingW64Defaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW64);
-        ui->lineEditQtToolsMingW32Defaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW32_TOOLS);
-        ui->lineEditQtToolsMingW64Defaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_MINGW64_TOOLS);
-        ui->lineEditVisualStudioDefaults->setText(mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_VISUAL_STUIDIO);
-        if (mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_PYTHON_REQUIRED == "true")
-             { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Checked); }
-        else { ui->checkBoxPythonDefaults->setCheckState(Qt::CheckState::Unchecked); }
-        if (mySqlDb->mySqlModel->mySetting->myConstants->MY_DEFAULTS_UPGRADE_OS == "true")
-             { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Checked); }
-        else { ui->checkBoxUpgradeDefaults->setCheckState(Qt::CheckState::Unchecked); }
-    }
+    resetDefaults(TabDefaults);
 }
 /************************************************
  * @brief on push Button SQL Password Show Hide clicked.
@@ -1622,7 +1777,9 @@ void MainWindow::on_pushButtonResetDefaults_clicked()
  ***********************************************/
 void MainWindow::on_pushButtonSqlPasswordShowHide_clicked()
 {
+    #ifdef USE_SQL_FLAG
     QMessageBox::critical(nullptr, QObject::tr("Password Revieled"), QObject::tr("%1").arg(ui->lineEditSqlPassword->text()), QMessageBox::Ok);
+    #endif
 }
 /************************************************
  * @brief on lineEdit SQL Database Name text Changed.
@@ -1670,6 +1827,7 @@ void MainWindow::on_lineEditSqlPassword_textChanged(const QString &arg1)
  ***********************************************/
 void MainWindow::on_pushButtonSqlFileBrowswer_clicked()
 {
+    #ifdef USE_SQL_FLAG
     QFileDialog dialogSqlDbFolder;
     dialogSqlDbFolder.setFileMode(QFileDialog::Directory);
     dialogSqlDbFolder.setOption(QFileDialog::ShowDirsOnly);
@@ -1679,21 +1837,22 @@ void MainWindow::on_pushButtonSqlFileBrowswer_clicked()
     if (!theSqlFolder.isEmpty())
     {
         QString theDbLocation = ui->lineEditSqlDatabaseName->text();
-        QString theDbNewLocation = QString("%1/%2.db").arg(theSqlFolder, mySqlDb->mySqlModel->getSqlDatabaseName());
+        QString theDbNewLocation = QString("%1/%2.db").arg(theSqlFolder, myDbModal->mySqlModel->getSqlDatabaseName());
         if (theDbLocation != theDbNewLocation)
         {
             //
-            if (mySqlDb->mySqlModel->mySetting->getFileInfo(MyOrgSettings::IsFile, ui->lineEditSqlDatabaseName->text()) == "true")
+            if (mySetting->getFileInfo(MyOrgSettings::IsFile, ui->lineEditSqlDatabaseName->text()) == "true")
             {
-                QString thePath = mySqlDb->mySqlModel->mySetting->getFileInfo(MyOrgSettings::CanonicalFilePath, ui->lineEditSqlDatabaseName->text());
+                QString thePath = mySetting->getFileInfo(MyOrgSettings::CanonicalFilePath, ui->lineEditSqlDatabaseName->text());
                 // moveDb
-                if (mySqlDb->mySqlModel->moveDb(theDbNewLocation, thePath, theDbNewLocation))
-                    { ui->lineEditSqlDatabaseName->setText(theDbNewLocation); }
+                if (myDbModal->mySqlModel->moveDb(theDbNewLocation, thePath, theDbNewLocation))
+                { ui->lineEditSqlDatabaseName->setText(theDbNewLocation); }
                 else
-                    { QMessageBox::critical(nullptr, QObject::tr("Database Move Failed"), QObject::tr("Failed to move Database"), QMessageBox::Ok); }
+                { QMessageBox::critical(nullptr, QObject::tr("Database Move Failed"), QObject::tr("Failed to move Database"), QMessageBox::Ok); }
             }
         }
     }
+    #endif
 }
 /************************************************
  * @brief set My Project Configuration Class.
@@ -1703,264 +1862,266 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
 {
     //MyProjectClass theProject();
     // Common to all records
-    mySqlDb->myConfigurationVariables->setProjectsID(ui->labelRecordIdSettings->text());
+    myDbModal->myConfigurationVariables->setProjectsID(ui->labelRecordIdSettings->text());
     //
     switch (tabNumber)
     {
         case TabSettings: // 0
             // IsOsUbuntu
             if (ui->checkBoxSettingsUbuntu->isChecked())
-                { mySqlDb->myProject->setIsOsUbuntu("true"); }
+                { myDbModal->myProject->setIsOsUbuntu("true"); }
             else
-                { mySqlDb->myProject->setIsOsUbuntu("false"); }
+                { myDbModal->myProject->setIsOsUbuntu("false"); }
             //IsOsMac
             if (ui->checkBoxSettingsMac->isChecked())
-                { mySqlDb->myProject->setIsOsMac("true"); }
+                { myDbModal->myProject->setIsOsMac("true"); }
             else
-                { mySqlDb->myProject->setIsOsMac("false"); }
+                { myDbModal->myProject->setIsOsMac("false"); }
             // IsOSiOS
             if (ui->checkBoxSettingsiOS->isChecked())
-                { mySqlDb->myProject->setIsOSiOS("true"); }
+                { myDbModal->myProject->setIsOSiOS("true"); }
             else
-                { mySqlDb->myProject->setIsOSiOS("false"); }
+                { myDbModal->myProject->setIsOSiOS("false"); }
             // IsOsAndroid
             if (ui->checkBoxSettingsAndroid->isChecked())
-                { mySqlDb->myProject->setIsOsAndroid("true"); }
+                { myDbModal->myProject->setIsOsAndroid("true"); }
             else
-                { mySqlDb->myProject->setIsOsAndroid("false"); }
+                { myDbModal->myProject->setIsOsAndroid("false"); }
             // IsOsWebAssembly
             if (ui->checkBoxSettingsWebAssembly->isChecked())
-                { mySqlDb->myProject->setIsOsWebAssembly("true"); }
+                { myDbModal->myProject->setIsOsWebAssembly("true"); }
             else
-                { mySqlDb->myProject->setIsOsWebAssembly("false"); }
+                { myDbModal->myProject->setIsOsWebAssembly("false"); }
             // IsOsAndroid
             if (ui->checkBoxSettingsAndroid->isChecked())
-                { mySqlDb->myProject->setIsOsAndroid("true"); }
+                { myDbModal->myProject->setIsOsAndroid("true"); }
             else
-                { mySqlDb->myProject->setIsOsAndroid("false"); }
+                { myDbModal->myProject->setIsOsAndroid("false"); }
             // IsOsWindows
             if (ui->checkBoxSettingsWindows->isChecked())
-                { mySqlDb->myProject->setIsOsWindows("true"); }
+                { myDbModal->myProject->setIsOsWindows("true"); }
             else
-                { mySqlDb->myProject->setIsOsWindows("false"); }
+                { myDbModal->myProject->setIsOsWindows("false"); }
             // IsDebug
             if (ui->checkBoxSettingsConfigurationDebug->isChecked())
-                { mySqlDb->myProject->setIsDebug("true"); }
+                { myDbModal->myProject->setIsDebug("true"); }
             else
-                { mySqlDb->myProject->setIsDebug("false"); }
+                { myDbModal->myProject->setIsDebug("false"); }
             // IsRelease
             if (ui->checkBoxSettingsConfigurationRelease->isChecked())
-                { mySqlDb->myProject->setIsRelease("true"); }
+                { myDbModal->myProject->setIsRelease("true"); }
             else
-                { mySqlDb->myProject->setIsRelease("false"); }
+                { myDbModal->myProject->setIsRelease("false"); }
             // IsX64
             if (ui->checkBoxSettingsPlatformX64->isChecked())
-                { mySqlDb->myProject->setIsX64("true"); }
+                { myDbModal->myProject->setIsX64("true"); }
             else
-                { mySqlDb->myProject->setIsX64("false"); }
+                { myDbModal->myProject->setIsX64("false"); }
             // IsX86
             if (ui->checkBoxSettingsPlatformX86->isChecked())
-                { mySqlDb->myProject->setIsX86("true"); }
+                { myDbModal->myProject->setIsX86("true"); }
             else
-                { mySqlDb->myProject->setIsX86("false"); }
+                { myDbModal->myProject->setIsX86("false"); }
             // Environment Qt
             if (ui->radioButtonSettingsEnvironmentQt->isChecked())
-                { mySqlDb->myProject->setEnvironment(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT); }
+                { myDbModal->myProject->setEnvironment(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_QT); }
             // Environment MSVS
             if (ui->radioButtonSettingsEnvironmentVs->isChecked())
-                { mySqlDb->myProject->setEnvironment(mySqlDb->mySqlModel->mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS); }
+                { myDbModal->myProject->setEnvironment(mySetting->myConstants->MY_PROJECT_ENVIRONMENT_VS); }
             //
-            mySqlDb->myProject->setID(ui->labelRecordIdSettings->text());
-            mySqlDb->myProject->setQtProject(ui->lineEditSettingsQtProject->text());
-            mySqlDb->myProject->setSecret(ui->lineEditSettingsSecret->text());
+            myDbModal->myProject->setID(ui->labelRecordIdSettings->text());
+            myDbModal->myProject->setQtProject(ui->lineEditSettingsQtProject->text());
+            myDbModal->myProject->setSecret(ui->lineEditSettingsSecret->text());
             break;
         case TabSql:      // 1
+            #ifdef USE_SQL_FLAG
             writeSqlDatabaseInfo();
+            #endif
             break;
         case TabUbuntu:   // 2
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdUbuntu->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdUbuntu->text());
             // Clear Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32("");
-            mySqlDb->myConfigurationVariables->setQtMingW64("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64("");
-            mySqlDb->myConfigurationVariables->setVisualStudio("");
+            myDbModal->myConfigurationVariables->setQtMingW32("");
+            myDbModal->myConfigurationVariables->setQtMingW64("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW32("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW64("");
+            myDbModal->myConfigurationVariables->setVisualStudio("");
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_UBUNTU);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionUbuntu->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionUbuntu->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionUbuntu->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriUbuntu->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionUbuntu->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_UBUNTU);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionUbuntu->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionUbuntu->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionUbuntu->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriUbuntu->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionUbuntu->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeUbuntu->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonUbuntu->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
 
             break;
         case TabMac: // 3
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdMac->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdMac->text());
             // Clear Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32("");
-            mySqlDb->myConfigurationVariables->setQtMingW64("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64("");
-            mySqlDb->myConfigurationVariables->setVisualStudio("");
+            myDbModal->myConfigurationVariables->setQtMingW32("");
+            myDbModal->myConfigurationVariables->setQtMingW64("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW32("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW64("");
+            myDbModal->myConfigurationVariables->setVisualStudio("");
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_MAC);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionMac->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionMac->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionMac->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriMac->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionMac->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_MAC);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionMac->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionMac->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionMac->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriMac->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionMac->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeMac->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonMac->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
         case TabAndroid: // 4
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdAndroid->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdAndroid->text());
             // Clear Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32("");
-            mySqlDb->myConfigurationVariables->setQtMingW64("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64("");
-            mySqlDb->myConfigurationVariables->setVisualStudio("");
+            myDbModal->myConfigurationVariables->setQtMingW32("");
+            myDbModal->myConfigurationVariables->setQtMingW64("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW32("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW64("");
+            myDbModal->myConfigurationVariables->setVisualStudio("");
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_ANDROID);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionAndroid->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionAndroid->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionAndroid->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriAndroid->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionAndroid->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_ANDROID);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionAndroid->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionAndroid->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionAndroid->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriAndroid->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionAndroid->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeAndroid->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonAndroid->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
         case TabWebAssembly: // 5
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdWebAssembly->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdWebAssembly->text());
             // Clear Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32("");
-            mySqlDb->myConfigurationVariables->setQtMingW64("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64("");
-            mySqlDb->myConfigurationVariables->setVisualStudio("");
+            myDbModal->myConfigurationVariables->setQtMingW32("");
+            myDbModal->myConfigurationVariables->setQtMingW64("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW32("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW64("");
+            myDbModal->myConfigurationVariables->setVisualStudio("");
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWebAssembly->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWebAssembly->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWebAssembly->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWebAssembly->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWebAssembly->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_WEBASSEMBLY);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWebAssembly->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWebAssembly->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWebAssembly->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWebAssembly->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWebAssembly->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeWebAssembly->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonWebAssembly->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
         case TabIOS: // 6
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdIOS->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdIOS->text());
             // Clear Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32("");
-            mySqlDb->myConfigurationVariables->setQtMingW64("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32("");
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64("");
-            mySqlDb->myConfigurationVariables->setVisualStudio("");
+            myDbModal->myConfigurationVariables->setQtMingW32("");
+            myDbModal->myConfigurationVariables->setQtMingW64("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW32("");
+            myDbModal->myConfigurationVariables->setQtToolsMingW64("");
+            myDbModal->myConfigurationVariables->setVisualStudio("");
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_IOS);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionIOS->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionIOS->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionIOS->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriIOS->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionIOS->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_IOS);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionIOS->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionIOS->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionIOS->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriIOS->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionIOS->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeIOS->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonIOS->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
         case TabWindows: // 7
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdWindows->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdWindows->text());
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_WINDOWS);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWindows->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWindows->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWindows->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWindows->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWindows->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_WINDOWS);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionWindows->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionWindows->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionWindows->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriWindows->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionWindows->text());
             // Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32(ui->lineEditQtMingW32Windows->text());
-            mySqlDb->myConfigurationVariables->setQtMingW64(ui->lineEditQtMingW64Windows->text());
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32(ui->lineEditQtToolsMingW32Windows->text());
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64(ui->lineEditQtToolsMingW64Windows->text());
-            mySqlDb->myConfigurationVariables->setVisualStudio(ui->lineEditVisualStudioWindows->text());
+            myDbModal->myConfigurationVariables->setQtMingW32(ui->lineEditQtMingW32Windows->text());
+            myDbModal->myConfigurationVariables->setQtMingW64(ui->lineEditQtMingW64Windows->text());
+            myDbModal->myConfigurationVariables->setQtToolsMingW32(ui->lineEditQtToolsMingW32Windows->text());
+            myDbModal->myConfigurationVariables->setQtToolsMingW64(ui->lineEditQtToolsMingW64Windows->text());
+            myDbModal->myConfigurationVariables->setVisualStudio(ui->lineEditVisualStudioWindows->text());
             // Python Required
             if (ui->checkBoxPythonWindows->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
         case TabDefaults: // 8
             // Set Record ID
-            mySqlDb->myConfigurationVariables->setID(ui->labelRecordIdDefaults->text());
+            myDbModal->myConfigurationVariables->setID(ui->labelRecordIdDefaults->text());
             // Common
-            mySqlDb->myConfigurationVariables->setOS(mySqlDb->mySqlModel->mySetting->myConstants->MY_OS_NAME_DEFAULTS);
-            mySqlDb->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionDefaults->text());
-            mySqlDb->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionDefaults->text());
-            mySqlDb->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionDefaults->text());
-            mySqlDb->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriDefaults->text());
-            mySqlDb->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionDefaults->text());
+            myDbModal->myConfigurationVariables->setOS(mySetting->myConstants->MY_OS_NAME_DEFAULTS);
+            myDbModal->myConfigurationVariables->setQtVersion(ui->lineEditQtVersionDefaults->text());
+            myDbModal->myConfigurationVariables->setVsVersion(ui->lineEditVsVersionDefaults->text());
+            myDbModal->myConfigurationVariables->setQtIfVersion(ui->lineEditQtIfVersionDefaults->text());
+            myDbModal->myConfigurationVariables->setQtIfPackageUri(ui->lineEditQtIfPackageUriDefaults->text());
+            myDbModal->myConfigurationVariables->setPythonVersion(ui->lineEditPythonVersionDefaults->text());
             // Windows
-            mySqlDb->myConfigurationVariables->setQtMingW32(ui->lineEditQtMingW32Defaults->text());
-            mySqlDb->myConfigurationVariables->setQtMingW64(ui->lineEditQtMingW64Defaults->text());
-            mySqlDb->myConfigurationVariables->setQtToolsMingW32(ui->lineEditQtToolsMingW32Defaults->text());
-            mySqlDb->myConfigurationVariables->setQtToolsMingW64(ui->lineEditQtToolsMingW64Defaults->text());
-            mySqlDb->myConfigurationVariables->setVisualStudio(ui->lineEditVisualStudioDefaults->text());
+            myDbModal->myConfigurationVariables->setQtMingW32(ui->lineEditQtMingW32Defaults->text());
+            myDbModal->myConfigurationVariables->setQtMingW64(ui->lineEditQtMingW64Defaults->text());
+            myDbModal->myConfigurationVariables->setQtToolsMingW32(ui->lineEditQtToolsMingW32Defaults->text());
+            myDbModal->myConfigurationVariables->setQtToolsMingW64(ui->lineEditQtToolsMingW64Defaults->text());
+            myDbModal->myConfigurationVariables->setVisualStudio(ui->lineEditVisualStudioDefaults->text());
             // OS Upgrade
             if (ui->checkBoxUpgradeDefaults->isChecked())
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("true"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setOsUpgrade("false"); }
+                { myDbModal->myConfigurationVariables->setOsUpgrade("false"); }
             // Python Required
             if (ui->checkBoxPythonDefaults->isChecked())
-                { mySqlDb->myConfigurationVariables->setPythonRequired("true"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("true"); }
             else
-                { mySqlDb->myConfigurationVariables->setPythonRequired("false"); }
+                { myDbModal->myConfigurationVariables->setPythonRequired("false"); }
             break;
     } // end switch (tabNumber)
 } // end setMyConfigurationClass
@@ -1971,7 +2132,7 @@ void MainWindow::setMyProjectConfigurationClass(int tabNumber)
 void MainWindow::on_pushButtonSettingsDelete_clicked()
 {
     QString thisIndex = ui->comboBoxSettingsProjects->model()->data(ui->comboBoxSettingsProjects->model()->index(ui->comboBoxSettingsProjects->currentIndex(), 0)).toString();
-    mySqlDb->deleteConfiguration(thisIndex);
+    myDbModal->deleteConfiguration(thisIndex);
     setQtProjectCombo();
 }
 /************************************************
@@ -1981,35 +2142,35 @@ void MainWindow::on_pushButtonSettingsDelete_clicked()
 void MainWindow::on_pushButtonSettingsSave_clicked()
 {
     setMyProjectConfigurationClass(TabSettings);
-    mySqlDb->saveProject();
+    myDbModal->saveProject();
     // Ubuntu
     // Set Variables in Class
     setMyProjectConfigurationClass(TabUbuntu);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // Mac
     // Set Variables in Class
     setMyProjectConfigurationClass(TabMac);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // Android
     // Set Variables in Class
     setMyProjectConfigurationClass(TabAndroid);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // WebAssembly
     // Set Variables in Class
     setMyProjectConfigurationClass(TabWebAssembly);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // IOS
     // Set Variables in Class
     setMyProjectConfigurationClass(TabIOS);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // Windows
     // Set Variables in Class
     setMyProjectConfigurationClass(TabWindows);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
     // Defaults
     // Set Variables in Class
     setMyProjectConfigurationClass(TabDefaults);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Settings Add clicked.
@@ -2018,65 +2179,65 @@ void MainWindow::on_pushButtonSettingsSave_clicked()
 void MainWindow::on_pushButtonSettingsAdd_clicked()
 {
 
-    if (mySqlDb->isProjectQuery(ui->lineEditSettingsQtProject->text()))
+    if (myDbModal->isProjectQuery(ui->lineEditSettingsQtProject->text()))
     {
         QString theMessage = QString("Record found in database: %1").arg(ui->lineEditSettingsQtProject->text());
-        mySqlDb->mySqlModel->mySetting->showMessageBox("Record found!", theMessage.toLocal8Bit(), mySqlDb->mySqlModel->mySetting->Warning);
+        mySetting->showMessageBox("Record found!", theMessage.toLocal8Bit(), mySetting->Warning);
         return;
     }
     //
     setMyProjectConfigurationClass(TabSettings);
-    if (!mySqlDb->addProject())
+    if (!myDbModal->addProject())
     {
         return;
     }
-    ui->labelRecordIdSettings->setText(mySqlDb->getProjectID());
+    ui->labelRecordIdSettings->setText(myDbModal->getProjectID());
     // Ubuntu
     if (ui->checkBoxSettingsUbuntu->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabUbuntu);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // Mac
     if (ui->checkBoxSettingsMac->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabMac);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // Android
     if (ui->checkBoxSettingsAndroid->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabAndroid);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // WebAssembly
     if (ui->checkBoxSettingsWebAssembly->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabWebAssembly);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // IOS
     if (ui->checkBoxSettingsiOS->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabIOS);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // Windows
     if (ui->checkBoxSettingsWindows->isChecked())
     {
         // Set Variables in Class
         setMyProjectConfigurationClass(TabWindows);
-        mySqlDb->addConfiguration();
+        myDbModal->addConfiguration();
     }
     // Defaults
     // Set Variables in Class
     setMyProjectConfigurationClass(TabDefaults);
-    mySqlDb->addConfiguration();
+    myDbModal->addConfiguration();
     setQtProjectCombo();
 }
 /************************************************
@@ -2094,7 +2255,7 @@ void MainWindow::on_pushButtonSaveSql_clicked()
 void MainWindow::on_pushButtonSaveUbuntu_clicked()
 {
     setMyProjectConfigurationClass(TabUbuntu);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save Mac clicked.
@@ -2103,7 +2264,7 @@ void MainWindow::on_pushButtonSaveUbuntu_clicked()
 void MainWindow::on_pushButtonSaveMac_clicked()
 {
     setMyProjectConfigurationClass(TabMac);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save Android clicked.
@@ -2112,7 +2273,7 @@ void MainWindow::on_pushButtonSaveMac_clicked()
 void MainWindow::on_pushButtonSaveAndroid_clicked()
 {
     setMyProjectConfigurationClass(TabAndroid);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save WebAssembly clicked.
@@ -2121,7 +2282,7 @@ void MainWindow::on_pushButtonSaveAndroid_clicked()
 void MainWindow::on_pushButtonSaveWebAssembly_clicked()
 {
     setMyProjectConfigurationClass(TabWebAssembly);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save IOS clicked.
@@ -2130,7 +2291,7 @@ void MainWindow::on_pushButtonSaveWebAssembly_clicked()
 void MainWindow::on_pushButtonSaveIOS_clicked()
 {
     setMyProjectConfigurationClass(TabIOS);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save Windows clicked.
@@ -2139,7 +2300,7 @@ void MainWindow::on_pushButtonSaveIOS_clicked()
 void MainWindow::on_pushButtonSaveWindows_clicked()
 {
     setMyProjectConfigurationClass(TabWindows);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief on pushButton Save Defaults clicked.
@@ -2148,7 +2309,7 @@ void MainWindow::on_pushButtonSaveWindows_clicked()
 void MainWindow::on_pushButtonSaveDefaults_clicked()
 {
     setMyProjectConfigurationClass(TabDefaults);
-    mySqlDb->saveConfiguration();
+    myDbModal->saveConfiguration();
 }
 /************************************************
  * @brief set Messaging States.
@@ -2160,20 +2321,20 @@ void MainWindow::setMessagingStates(bool thisMessageState)
     if (thisMessageState)
     {
         isDebugMessage = true;
-        mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_IS_DEBUG_MESSAGE, "true");
-        mySqlDb->setDebugMessage(true);
-        mySqlDb->mySqlModel->setDebugMessage(true);
-        mySqlDb->mySqlModel->mySetting->setDebugMessage(true);
-        mySqlDb->mySqlModel->mySetting->myCrypto->setDebugMessage(true);
+        mySetting->writeSettings(mySetting->myConstants->MY_IS_DEBUG_MESSAGE, "true");
+        myDbModal->setDebugMessage(true);
+        myDbModal->mySqlModel->setDebugMessage(true);
+        mySetting->setDebugMessage(true);
+        mySetting->myCrypto->setDebugMessage(true);
     }
     else
     {
         isDebugMessage = false;
-        mySqlDb->mySqlModel->mySetting->writeSettings(mySqlDb->mySqlModel->mySetting->myConstants->MY_IS_DEBUG_MESSAGE, "false");
-        mySqlDb->setDebugMessage(false);
-        mySqlDb->mySqlModel->setDebugMessage(false);
-        mySqlDb->mySqlModel->mySetting->setDebugMessage(false);
-        mySqlDb->mySqlModel->mySetting->myCrypto->setDebugMessage(false);
+        mySetting->writeSettings(mySetting->myConstants->MY_IS_DEBUG_MESSAGE, "false");
+        myDbModal->setDebugMessage(false);
+        myDbModal->mySqlModel->setDebugMessage(false);
+        mySetting->setDebugMessage(false);
+        mySetting->myCrypto->setDebugMessage(false);
     }
 }
 /************************************************
