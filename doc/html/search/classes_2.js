@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['translationfiles_476',['TranslationFiles',['../classTranslationFiles.html',1,'']]]
+  ['translationfiles_0',['TranslationFiles',['../classTranslationFiles.html',1,'']]]
 ];

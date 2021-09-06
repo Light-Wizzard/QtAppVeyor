@@ -1,6 +1,6 @@
 var classMyDatatables =
 [
-    [ "MyDatatables", "classMyDatatables.html#abb4be128bc3720c930892218ca2adc8b", null ],
+    [ "MyDatatables", "classMyDatatables.html#a6910dee376e64104668f8449932e264a", null ],
     [ "~MyDatatables", "classMyDatatables.html#afddeb9099481eb82a8eb91367f316eef", null ],
     [ "addConfiguration", "classMyDatatables.html#aa28fcc7323e6e2e4a0d3b61ec4a6f792", null ],
     [ "addProject", "classMyDatatables.html#a76c17e9d4fdec4ae6f9caef470811f9a", null ],
@@ -35,5 +35,6 @@ var classMyDatatables =
     [ "setProjectName", "classMyDatatables.html#a0df58c4391f7931b3bc61aafef9b31c4", null ],
     [ "myConfigurationVariables", "classMyDatatables.html#a86778520ef82cad472cd5e26d450114c", null ],
     [ "myProject", "classMyDatatables.html#a3077b5e07e3b2bf897aae22bbcc64579", null ],
+    [ "mySetting", "classMyDatatables.html#ac6d75d7e3e748913513b3d963f93f6a5", null ],
     [ "mySqlModel", "classMyDatatables.html#a6cb2fc2336744cb67f33bc98b477fb95", null ]
 ];
