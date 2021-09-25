@@ -455,7 +455,7 @@
     <message>
         <location filename="../src/MainWindow.cpp" line="180"/>
         <source>SQL error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL error</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="181"/>
@@ -521,532 +521,532 @@
     <message>
         <location filename="../src/MyLocalization.cpp" line="786"/>
         <source>Afrikaans</source>
-        <translation type="unfinished"></translation>
+        <translation>Afrikaans</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="787"/>
         <source>Albanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Albanian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="788"/>
         <source>Amharic</source>
-        <translation type="unfinished"></translation>
+        <translation>Amharic</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="789"/>
         <source>Arabic</source>
-        <translation type="unfinished"></translation>
+        <translation>Arabic</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="790"/>
         <source>Armenian</source>
-        <translation type="unfinished"></translation>
+        <translation>Armenian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="791"/>
         <source>Azeerbaijani</source>
-        <translation type="unfinished"></translation>
+        <translation>Azeerbaijani</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="792"/>
         <source>Basque</source>
-        <translation type="unfinished"></translation>
+        <translation>Basque</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="793"/>
         <source>Bashkir</source>
-        <translation type="unfinished"></translation>
+        <translation>Bashkir</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="794"/>
         <source>Belarusian</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarusian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="795"/>
         <source>Bengali</source>
-        <translation type="unfinished"></translation>
+        <translation>Bengali</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="796"/>
         <source>Bosnian</source>
-        <translation type="unfinished"></translation>
+        <translation>Bosnian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="797"/>
         <source>Bulgarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulgarian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="798"/>
         <source>Catalan</source>
-        <translation type="unfinished"></translation>
+        <translation>Catalan</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="799"/>
         <source>Cantonese</source>
-        <translation type="unfinished"></translation>
+        <translation>Cantonese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="800"/>
         <source>Cebuano</source>
-        <translation type="unfinished"></translation>
+        <translation>Cebuano</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="801"/>
         <source>Chinese (Simplified)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinese (Simplified)</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="802"/>
         <source>Chinese (Traditional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinese (Traditional)</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="803"/>
         <source>Corsican</source>
-        <translation type="unfinished"></translation>
+        <translation>Corsican</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="804"/>
         <source>Croatian</source>
-        <translation type="unfinished"></translation>
+        <translation>Croatian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="805"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Czech</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="806"/>
         <source>Danish</source>
-        <translation type="unfinished"></translation>
+        <translation>Danish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="807"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dutch</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="808"/>
         <source>English</source>
-        <translation type="unfinished">English</translation>
+        <translation>English</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="809"/>
         <source>Esperanto</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperanto</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="810"/>
         <source>Estonian</source>
-        <translation type="unfinished"></translation>
+        <translation>Estonian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="811"/>
         <source>Fijian</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="812"/>
         <source>Filipino</source>
-        <translation type="unfinished"></translation>
+        <translation>Filipino</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="813"/>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>Finnish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="814"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>French</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="815"/>
         <source>Frisian</source>
-        <translation type="unfinished"></translation>
+        <translation>Frisian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="816"/>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>Galician</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="817"/>
         <source>Georgian</source>
-        <translation type="unfinished"></translation>
+        <translation>Georgian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="818"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>German</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="819"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>Greek</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="820"/>
         <source>Gujarati</source>
-        <translation type="unfinished"></translation>
+        <translation>Gujarati</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="822"/>
         <source>Hausa</source>
-        <translation type="unfinished"></translation>
+        <translation>Hausa</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="823"/>
         <source>Hawaiian</source>
-        <translation type="unfinished"></translation>
+        <translation>Hawaiian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="824"/>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation>Hebrew</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="826"/>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindi</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="828"/>
         <source>Hungarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Hungarian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="829"/>
         <source>Icelandic</source>
-        <translation type="unfinished"></translation>
+        <translation>Icelandic</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="830"/>
         <source>Igbo</source>
-        <translation type="unfinished"></translation>
+        <translation>Igbo</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="831"/>
         <source>Indonesian</source>
-        <translation type="unfinished"></translation>
+        <translation>Indonesian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="832"/>
         <source>Irish</source>
-        <translation type="unfinished"></translation>
+        <translation>Irish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="833"/>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="834"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japanese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="835"/>
         <source>Javanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Javanese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="836"/>
         <source>Kannada</source>
-        <translation type="unfinished"></translation>
+        <translation>Kannada</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="837"/>
         <source>Kazakh</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazakh</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="838"/>
         <source>Khmer</source>
-        <translation type="unfinished"></translation>
+        <translation>Khmer</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="839"/>
         <source>Kinyarwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinyarwanda</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="842"/>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation>Korean</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="843"/>
         <source>Kurdish</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurdish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="845"/>
         <source>Lao</source>
-        <translation type="unfinished"></translation>
+        <translation>Lao</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="846"/>
         <source>Latin</source>
-        <translation type="unfinished"></translation>
+        <translation>Latin</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="847"/>
         <source>Latvian</source>
-        <translation type="unfinished"></translation>
+        <translation>Latvian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="849"/>
         <source>Lithuanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Lithuanian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="850"/>
         <source>Luxembourgish</source>
-        <translation type="unfinished"></translation>
+        <translation>Luxembourgish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="851"/>
         <source>Macedonian</source>
-        <translation type="unfinished"></translation>
+        <translation>Macedonian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="852"/>
         <source>Malagasy</source>
-        <translation type="unfinished"></translation>
+        <translation>Malagasy</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="853"/>
         <source>Malay</source>
-        <translation type="unfinished"></translation>
+        <translation>Malay</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="854"/>
         <source>Malayalam</source>
-        <translation type="unfinished"></translation>
+        <translation>Malayalam</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="855"/>
         <source>Maltese</source>
-        <translation type="unfinished"></translation>
+        <translation>Maltese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="856"/>
         <source>Maori</source>
-        <translation type="unfinished"></translation>
+        <translation>Maori</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="857"/>
         <source>Marathi</source>
-        <translation type="unfinished"></translation>
+        <translation>Marathi</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="859"/>
         <source>Mongolian</source>
-        <translation type="unfinished"></translation>
+        <translation>Mongolian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="861"/>
         <source>Nepali</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepali</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="863"/>
         <source>Oriya</source>
-        <translation type="unfinished"></translation>
+        <translation>Oriya</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="865"/>
         <source>Papiamento</source>
-        <translation type="unfinished"></translation>
+        <translation>Papiamento</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="866"/>
         <source>Pashto</source>
-        <translation type="unfinished"></translation>
+        <translation>Pashto</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="867"/>
         <source>Persian</source>
-        <translation type="unfinished"></translation>
+        <translation>Persian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="868"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Polish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="869"/>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Portuguese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="870"/>
         <source>Punjabi</source>
-        <translation type="unfinished"></translation>
+        <translation>Punjabi</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="872"/>
         <source>Romanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Romanian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="873"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Russian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="874"/>
         <source>Samoan</source>
-        <translation type="unfinished"></translation>
+        <translation>Samoan</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="879"/>
         <source>Shona</source>
-        <translation type="unfinished"></translation>
+        <translation>Shona</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="880"/>
         <source>Sindhi</source>
-        <translation type="unfinished"></translation>
+        <translation>Sindhi</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="881"/>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinhala</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="882"/>
         <source>Slovak</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovak</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="883"/>
         <source>Slovenian</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovenian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="884"/>
         <source>Somali</source>
-        <translation type="unfinished"></translation>
+        <translation>Somali</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="885"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="886"/>
         <source>Sundanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Sundanese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="887"/>
         <source>Swahili</source>
-        <translation type="unfinished"></translation>
+        <translation>Swahili</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="888"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Swedish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="890"/>
         <source>Tahitian</source>
-        <translation type="unfinished"></translation>
+        <translation>Tahitian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="891"/>
         <source>Tajik</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajik</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="892"/>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamil</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="893"/>
         <source>Tatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tatar</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="894"/>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation>Telugu</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="895"/>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation>Thai</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="896"/>
         <source>Tongan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tongan</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="897"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="898"/>
         <source>Turkmen</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkmen</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="900"/>
         <source>Uighur</source>
-        <translation type="unfinished"></translation>
+        <translation>Uighur</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="901"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrainian</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="902"/>
         <source>Urdu</source>
-        <translation type="unfinished"></translation>
+        <translation>Urdu</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="903"/>
         <source>Uzbek</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzbek</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="904"/>
         <source>Vietnamese</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnamese</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="905"/>
         <source>Welsh</source>
-        <translation type="unfinished"></translation>
+        <translation>Welsh</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="906"/>
         <source>Xhosa</source>
-        <translation type="unfinished"></translation>
+        <translation>Xhosa</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="907"/>
         <source>Yiddish</source>
-        <translation type="unfinished"></translation>
+        <translation>Yiddish</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="908"/>
         <source>Yoruba</source>
-        <translation type="unfinished"></translation>
+        <translation>Yoruba</translation>
     </message>
     <message>
         <location filename="../src/MyLocalization.cpp" line="910"/>
         <source>Zulu</source>
-        <translation type="unfinished"></translation>
+        <translation>Zulu</translation>
     </message>
 </context>
 <context>
@@ -1079,12 +1079,12 @@
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="374"/>
         <source>Yes was clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Yes was clicked</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="379"/>
         <source>Yes was not clicked</source>
-        <translation type="unfinished"></translation>
+        <translation>Yes was not clicked</translation>
     </message>
     <message>
         <location filename="../src/MyOrgSettings.cpp" line="639"/>
@@ -1152,7 +1152,7 @@
         <location filename="../src/MainWindow.cpp" line="1458"/>
         <location filename="../src/MainWindow.cpp" line="1492"/>
         <source>SQL error</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL error</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="1262"/>
